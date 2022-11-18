@@ -1,6 +1,15 @@
 // CS30 Major Project
-// Michael Gao
-// 11/17/2022
+// Anjana Samarasinghe
+
+
+
+class player {
+  constructor(x , y) {
+    this.x = x; 
+    this.y = y; 
+    
+  }
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
