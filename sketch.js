@@ -10,7 +10,8 @@ class mainPlayer {
     this.dx = 5; 
     this.dy = 5;
     this.playerSpeed = 5;
-    this.playerRadius = 3; 
+    this.playerRadius = 100;
+    this.playerHp = 100; 
   }
   display() {
   fill("red");
@@ -33,15 +34,21 @@ class mainPlayer {
   }
 }
 
+let state; 
+
+
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  state = "fight"
   player1 =  new mainPlayer(100, 100); 
 }
 
 function draw() {
   background(220);
+  if (state === "fight"){
   player1.move(); 
-  player1.display(); 
-  
+  player1.display();
+  }
 }
 
