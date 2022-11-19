@@ -3,11 +3,12 @@
 
 
 
-class player {
+class mainPlayer {
   constructor(x , y) {
     this.x = x; 
-    this.y = y; 
-    
+    this.y = y;
+    this.dx = 5; 
+    this.dy = 5; 
   }
 }
 
