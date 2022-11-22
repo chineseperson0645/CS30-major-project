@@ -4,19 +4,19 @@
 
 
 class mainPlayer {
-  constructor(x , y) {
+  constructor(x , y, playerSpeed, playerHP) {
     this.x = 50; 
     this.y = 50;
     this.dx = 5; 
     this.dy = 5;
-    this.playerSpeed = 5;
+    this.playerSpeed = playerSpeed;
     this.playerRadius = 100;
-    this.playerHp = 100; 
+    this.playerHp = playerHP; 
   }
   display() {
-  fill("red");
-  noStroke();
-  circle(this.x , this.y, this.playerRadius*2);
+    fill("red");
+    noStroke();
+    circle(this.x , this.y, this.playerRadius*2);
   }
   move() {
     if (keyIsDown(87)) { //w
@@ -36,19 +36,19 @@ class mainPlayer {
 
 let state; 
 
-
+let player1 =  new mainPlayer(100, 100, 5, 100); 
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  state = "fight"
-  player1 =  new mainPlayer(100, 100); 
+  state = "fight"; 
+  
 }
 
 function draw() {
   background(220);
   if (state === "fight"){
-  player1.move(); 
-  player1.display();
+    player1.move(); 
+    player1.display();
   }
 }
 
