@@ -4,12 +4,12 @@
 
 
 class mainPlayer {
-  constructor(x , y, playerSpeed, playerHP) {
-    this.x = 50; 
-    this.y = 50;
+  constructor(x , y, playerSpeed, playerHP, pImg) {
+    this.x = x; 
+    this.y = y;
     this.dx = 5; 
     this.dy = 5;
-    this.playerSpeed = playerSpeed;
+    this.speed = playerSpeed;
     this.playerRadius = 100;
     this.playerHp = playerHP; 
   }
@@ -20,16 +20,16 @@ class mainPlayer {
   }
   move() {
     if (keyIsDown(87)) { //w
-      this.y -= this.playerSpeed;
+      this.y -= this.speed;
     }
     if (keyIsDown(83)) { //s
-      this.y += this.playerSpeed;
+      this.y += this.speed;
     }
     if (keyIsDown(68)) { //d
-      this.x += this.playerSpeed;
+      this.x += this.speed;
     }
     if (keyIsDown(65)) { //a
-      this.x -= this.playerSpeed;
+      this.x -= this.speed;
     }
   }
 }
