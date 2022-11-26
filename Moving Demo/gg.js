@@ -1,7 +1,3 @@
-// CS30 Major Project - Tattakai!
-// Michael Gao, Anjana Samarasinghe
-// 11/17/2022
-
 const ROWS = 40;
 const COLS = 40;
 let grid;
