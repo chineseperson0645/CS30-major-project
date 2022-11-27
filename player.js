@@ -8,16 +8,22 @@ class mainPlayer {
   } 
 
   display () {
-    image(this.img, this.x, this.y, playerWidth, playerHeight, frameX * playerWidth , this.y , playerWidth, playerHeight );
-    if (gameFrame % staggerFrames == 0){
-      if (frameX < 5){
-        frameX ++; 
+    animationStates.forEach((state, index) => {
+      let frames = {
+        loc: [],
       }
-      else {
-        frameX = 0; 
+      for ( let j = 0; j < state.frames; j++) {
+        let postionX = j * playerWidth;
+        let postionY = index * playerHeight;
+        frames.loc.push({x: postionX, y: postionY}); 
       }
+      playerAnimations[state.name] = frames; 
   
-    }
+    });
+
+    let postion = Math.floor(gameFrame / staggerFrames) % playerAnimations["run"].loc.length;
+    frameX = playerWidth * postion; 
+    image(this.img, this.x, this.y, playerWidth, playerHeight, frameX, this.y , playerWidth, playerHeight )
     gameFrame++; 
   }
 
