@@ -8,7 +8,17 @@ class mainPlayer {
   } 
 
   display () {
-    image(this.img, this.x, this.y); 
+    image(this.img, this.x, this.y, playerWidth, playerHeight, frameX * playerWidth , this.y , playerWidth, playerHeight );
+    if (gameFrame % staggerFrames == 0){
+      if (frameX < 5){
+        frameX ++; 
+      }
+      else {
+        frameX = 0; 
+      }
+  
+    }
+    gameFrame++; 
   }
 
   move() {
