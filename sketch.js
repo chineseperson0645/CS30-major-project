@@ -2,15 +2,29 @@
 // Anjana Samarasinghe
 
 
-let state; 
 
-let player1 =  new mainPlayer(100, 100, 5, 20, "assets/Run.png"); 
+
+let state; 
+let playerImg; 
+let player1; 
+
+
 
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   state = "fight";   
   }
+
+function preload() {
+  playerImg = loadImage("assets/Run.png")
+}
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  state = "fight";
+  player1 =  new mainPlayer(playerImg, 100, 100, 5, 100); 
+
   
 function draw() {
   background(220);
@@ -18,10 +32,5 @@ function draw() {
     player1.display();
   }
 }
-   
-  
-function drawCircle() {
-  fill("green");
-  circle(100,100, 50);
-}
 
+}
