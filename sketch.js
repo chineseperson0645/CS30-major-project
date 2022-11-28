@@ -16,7 +16,7 @@ let playerAnimations;
 let animationStates;
 
 function preload() {
-  playerImg = loadImage("assets/Run.png")
+  playerImg = loadImage("assets/Run.png"); 
 }
 
 function setup() {
@@ -40,6 +40,14 @@ function setup() {
 
 function draw() {
   background(220);
-  player1.move(); 
-  player1.display();
+  player1.move();
+  player1.display(); 
 }
+
+
+// function moveRight () {
+//   if (keyIsDown(RIGHT_ARROW)) {
+//     player1.move();
+//     player1.display(); 
+//   }
+// }
