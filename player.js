@@ -1,32 +1,43 @@
 class mainPlayer {
-  constructor(playerImage, x, y, playerSpeed, playerHp) {
+  constructor(runRight, idlePostion, x, y, playerSpeed, playerHp) {
     this.x = x; 
     this.y = y; 
-    this.img = playerImage; 
+    this.img = runRight;
+    this.img2 = idlePostion; 
     this.speed = playerSpeed; 
     this.hp = playerHp; 
   } 
 
-  display () {
-    animationStates.forEach((state, index) => {
-      let frames = {
-        loc: [],
-      };
-      for ( let j = 0; j < state.frames; j++) {
-        let postionX = j * playerWidth;
-        let postionY = index * playerHeight;
-        frames.loc.push({x: postionX, y: postionY}); 
+  runRight () {
+    image(this.img, this.x, this.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
+    if (gameFrame % staggerFrames ==0) {
+      if (frameX < 5) {
+        frameX++; 
       }
-      playerAnimations[state.name] = frames; 
-  
-    });
+      else {
+        frameX = 0; 
+      }
+    }
 
-    let postion = Math.floor(gameFrame / staggerFrames) % playerAnimations["run"].loc.length;
-    frameX = playerWidth * postion; 
-    image(this.img, this.x, this.y, playerWidth, playerHeight, frameX, this.y , playerWidth, playerHeight ); 
+    
+   
     gameFrame++; 
   }
 
+  idlePostion() {
+    image(this.img2, this.x, this.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
+    if (gameFrame % staggerFrames ==0) {
+      if (frameX < 5) {
+        frameX++; 
+      }
+      else {
+        frameX = 0; 
+      }
+    }
+   
+    gameFrame++; 
+
+  }
   move() {
     if (keyIsDown(87)) { //w
       this.y -= this.speed;
@@ -36,9 +47,16 @@ class mainPlayer {
     }
     if (keyIsDown(68)) { //d
       this.x += this.speed;
+      this.runRight(); 
     }
     if (keyIsDown(65)) { //a
       this.x -= this.speed;
     }
+    
+    else {
+      this.idlePostion(); 
+    }
+
   }
 }
+

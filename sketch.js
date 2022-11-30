@@ -2,52 +2,37 @@
 // Anjana Samarasinghe
 
 
-
-
-let states; 
-let playerImg; 
-let player1; 
-let playerWidth;
-let playerHeight;
+let runRight;
+let idlePos;  
+let playerHeight; 
+let playerWidth; 
 let frameX; 
-let gameFrame; 
-let staggerFrames;
-let playerAnimations;
-let animationStates;
+let frameY; 
+let player1;
+let gameFrame;
+let staggerFrames; 
+
+
 
 function preload() {
-  playerImg = loadImage("assets/Run.png"); 
+  runRight = loadImage("assets/Run.png");
+  idlePos = loadImage("assets/Idle.png"); 
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  states = "fight";
-  playerWidth = 96;
-  playerHeight = 96;
-  player1 =  new mainPlayer(playerImg, 0, 0, 5, 100);
-  frameX = 0;
-  gameFrame = 0;
-  staggerFrames = 6;
-  playerAnimations = [];
-  animationStates = [
-    {
-      name: "run",
-      frames: 6, 
-    }
-  ];
-
+  playerWidth = 96; 
+  playerHeight = 96; 
+  frameX = 0; 
+  frameY = 0;
+  gameFrame =0;
+  staggerFrames = 7; 
+  player1 = new mainPlayer(runRight,idlePos, 0,0,5,100); 
+  
 }
 
 function draw() {
   background(220);
   player1.move();
-  player1.display(); 
+   
 }
-
-
-// function moveRight () {
-//   if (keyIsDown(RIGHT_ARROW)) {
-//     player1.move();
-//     player1.display(); 
-//   }
-// }
