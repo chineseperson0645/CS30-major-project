@@ -4,11 +4,11 @@ A fighter game with solid combat skills. It might be an open-world game where yo
 
 ## Needs to Have List
 
-- Player will need to be able to:
-- engage in combat with entities (PVE)
-- have abilities (like POWER SLASH, or PEA SHOOTER)
-- engage with enviorment (i.e be able to eat mushroom, open chest, etc)
-- move around in open world enviorment
+    Player will need to be able to:
+    - engage in combat with entities (PVE)
+    - have abilities (like POWER SLASH, or PEA SHOOTER)
+    - engage with enviorment (i.e be able to eat mushroom, open chest, etc)
+    - move around in open world enviorment
 
 - Enviorment will need to be/have:
 - Open world
