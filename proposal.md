@@ -10,11 +10,11 @@ A fighter game with solid combat skills. It will be an open-world game where you
     - engage with enviorment (i.e be able to eat mushroom, open chest, etc)
     - move around in open world enviorment
 
-- Enviorment will need to be/have:
-- Open world
-- Generating entities (ethier set positions or randomly generated)
-- Have interactable items (like random mushroom that generate)
-- Have different locations (i.e town, boss mountain, feild, etc)
+    Enviorment will need to be/have:
+    - Open world
+    - Generating entities (ethier set positions)
+    - Have interactable items (like random mushroom that generate)
+    - Have different locations (Town, Forest, )
 
 - Game will need to:
 - Have entities (enemies and passives alike)
@@ -30,7 +30,7 @@ A fighter game with solid combat skills. It will be an open-world game where you
 - Final Boss
 - Dialogue with entities
 - Loading screen
-
+-randomly generated enemies 
 - Harder Things:
 - inventory system...(Possibly)
 
