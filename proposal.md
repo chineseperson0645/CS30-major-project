@@ -6,7 +6,7 @@ A fighter game with solid combat skills. It will be an open-world game where you
 
     Player will need to be able to:
     - engage in combat with entities (PVE)
-    - have abilities (like POWER SLASH, or PEA SHOOTER)
+    - have abilities (like POWER SLASH, Pocket Shot, Basic Stab); 
     - engage with enviorment (i.e be able to eat mushroom, open chest, etc)
     - move around in open world enviorment
 
