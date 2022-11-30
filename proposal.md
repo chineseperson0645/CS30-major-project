@@ -1,36 +1,42 @@
 # Proposal 
 
-A fighter game with solid combat skills. It will be an open-world game where you encounter various enemies and engage them in combat once you do. The enemy's difficulty will vary depending on their random move and mobility sets. Each adversary will present a unique challenge. There might or might not be a boss battle at the end, and every time you defeat an enemy, you might earn a new move or a benefit, like faster movement. It will be a pixelated game with a strong emphasis on the combat.
+A fighter game with solid combat skills. It will be an open-world game where you encounter various enemies and engage them in combat. The enemy's difficulty will vary depending on their random move and mobility sets. It will be a pixelated game with a strong emphasis on the combat.
 
 ## Needs to Have List
 
     Player will need to be able to:
-    - engage in combat with entities (PVE)
-    - have abilities (like POWER SLASH, Pocket Shot, Basic Stab); 
-    - engage with enviorment (i.e be able to eat mushroom, open chest, etc)
-    - move around in open world enviorment
+    - Engage in combat with entities (PVE)
+    - Engage with enviorment (Potions)
+    - Have abilities (Power Slash, Pocket Shot, Basic Stab) 
+    - Move around in open world enviorment
 
     Enviorment will need to be/have:
     - Open world
-    - Generating entities (ethier set positions)
-    - Have interactable items (like random mushroom that generate)
-    - Have different locations (Town, Forest, )
+    - Generating entities (Set Positions)
+    - Have interactable items (Random Postions)
+    - Have different locations (Village, Forest)
 
-- Game will need to:
-- Have entities (enemies and passives alike)
+    Game will need to:
+    - Have entities (enemies and passives alike)
+    - Starting Screen
+    - Ending Screen
 
 ## Nice to Have List
 
 - Easier Things:
-- Lvl/Progression system
+- Lvl/Progression system (Enemy and Player)
+- Custom Animated Charcter Engagement Screens
 - Walking animation
 - Fighting animation
-- Custom animated charcter engagement screens
 - Story/Lore
 - Final Boss
 - Dialogue with entities
-- Loading screen
--randomly generated enemies 
+- Loading Screen 
+- Pause Screen
+- Randomly Generated Enemies 
+- Road, Metropolitan Parts of Map
+- Voice Lines 
+
 - Harder Things:
-- inventory system...(Possibly)
+- Inventory System...
 
