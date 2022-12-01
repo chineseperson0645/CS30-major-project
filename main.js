@@ -1,9 +1,29 @@
-// CS30 Major Project - Tattakai!
+// CS30 Major Project - Tatakai!
 // Michael Gao, Anjana Samarasinghe
 // 11/17/2022
 
-const ROWS = 40;
-const COLS = 40;
+//Notes:
+//Could possibly use gifs for player and npc movement in 2d array mode.
+
+const ROWS = 25; //y axis (in reality)
+const COLS = 30; //x axis (in reality)
+
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+
 let grid;
 let cellWidth;
 let cellHeight;
@@ -22,7 +42,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   cellWidth = width/COLS;
   cellHeight = height/ROWS;
-  grid = createRandom2dArray(COLS, ROWS);
+  grid = create2dArray(COLS, ROWS);
   //place player in grid
   grid[playerY][playerX] = 9;
 }
@@ -115,6 +135,14 @@ function displayGrid(grid) {
   }
 }
 
+
+
+function teleportCheck(){
+  if (gird[x][y] === 1 && grid[playerY][playerX] === 1){
+
+  }
+}
+
 function create2dArray(COLS, ROWS) {
   let emptyArray = [];
   for (let y=0; y<ROWS; y++) {
@@ -126,18 +154,9 @@ function create2dArray(COLS, ROWS) {
   return emptyArray;
 }
 
-function createRandom2dArray(COLS, ROWS) {
-  let emptyArray = [];
-  for (let y=0; y<ROWS; y++) {
-    emptyArray.push([]);
-    for (let x=0; x<COLS; x++) {
-      if (random(100) < 50) {
-        emptyArray[y].push(0);
-      }
-      else {
-        emptyArray[y].push(1);
-      }
-    }
-  }
-  return emptyArray;
-}
+//78^10 (10 represents base 10)
+
+// 0   1  0  0 1 1 1 0 (78 represented in binary)
+
+//128 64 32 16 8 4 2 1
+//--- -- -- -- - - - - 
