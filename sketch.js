@@ -3,8 +3,11 @@
 
 
 let runRight;
+let runBack; 
 let idlePos;
-let jumpPos;  
+let jumpPos;
+let jumpPosB;  
+let crouch; 
 let playerHeight; 
 let playerWidth; 
 let frameX; 
@@ -16,10 +19,14 @@ let staggerFrames2;
 
 
 
+
 function preload() {
   runRight = loadImage("assets/Run.png");
   idlePos = loadImage("assets/Idle.png");
-  jumpPos = loadImage("assets/Jump.png"); 
+  jumpPos = loadImage("assets/Jump.png");
+  runBack = loadImage("assets/runB.png");
+  crouch = loadImage("assets/Disguise.png");
+  jumpPosB = loadImage("assets/jumpB.png"); 
 }
 
 function setup() {
@@ -31,7 +38,7 @@ function setup() {
   gameFrame =0;
   staggerFrames = 7;
   staggerFrames2 = 3; 
-  player1 = new mainPlayer(runRight,idlePos, jumpPos, 0,0,5,100); 
+  player1 = new mainPlayer(runRight,idlePos, jumpPos,runBack, crouch, jumpPosB, 0,0,5,100); 
   
 }
 
