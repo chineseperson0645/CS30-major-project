@@ -6,7 +6,7 @@
 //Could possibly use gifs for player and npc movement in 2d array mode.
 
 const ROWS = 25; //y axis (in reality)
-const COLS = 30; //x axis (in reality)
+const COLS = 35; //x axis (in reality)
 
 //0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 //0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -35,7 +35,8 @@ let grassImg, rockImg, horseImg;
 function preload() {
   grassImg = loadImage('grass.png');
   rockImg = loadImage('rock.png');
-  horseImg = loadImage('horse.png')
+  horseImg = loadImage('horse.png');
+  treeImg = loadImage('assests/poketree.png');
 }
 
 function setup() {
@@ -50,11 +51,13 @@ function setup() {
 function draw() {
   background(220);
   displayGrid(grid);
+  // passableChecker();
 }
 
+//Allows Horse to pass through (and draw over) a image
 function keyPressed() {
   if (keyCode === RIGHT_ARROW) {
-    if (grid[playerY][playerX+1] === 0) {
+    if (grid[playerY][playerX+1] === 0 || grid[playerY][playerX+1] === 2) {
       //reset old location to white
       grid[playerY][playerX] = 0;
       
@@ -67,7 +70,7 @@ function keyPressed() {
   }
 
   if (keyCode === LEFT_ARROW) {
-    if (grid[playerY][playerX-1] === 0) {
+    if (grid[playerY][playerX-1] === 0 || grid[playerY][playerX-1] === 2) {
       //reset old location to white
       grid[playerY][playerX] = 0;
       
@@ -80,7 +83,7 @@ function keyPressed() {
   }
 
   if (keyCode === UP_ARROW) {
-    if (grid[playerY-1][playerX] === 0) {
+    if (grid[playerY-1][playerX] === 0 || grid[playerY-1][playerX] === 2) {
       //reset old location to white
       grid[playerY][playerX] = 0;
       
@@ -93,7 +96,7 @@ function keyPressed() {
   }
 
   if (keyCode === DOWN_ARROW) {
-    if (grid[playerY+1][playerX] === 0) {
+    if (grid[playerY+1][playerX] === 0 || grid[playerY+1][playerX] === 2) {
       //reset old location to white
       grid[playerY][playerX] = 0;
       
@@ -114,6 +117,18 @@ function mousePressed() {
     grid[yPos][xPos] = 1;
   }
   else if (grid[yPos][xPos] === 1) {
+    grid[yPos][xPos] = 2;
+  }
+  else if (grid[yPos][xPos] === 2) {
+    grid[yPos][xPos] = 3;
+  }
+  else if (grid[yPos][xPos] === 3) {
+    grid[yPos][xPos] = 4;
+  }
+  else if (grid[yPos][xPos] === 4) {
+    grid[yPos][xPos] = 5;
+  }
+  else if (grid[yPos][xPos] === 5) {
     grid[yPos][xPos] = 0;
   }
 }
@@ -124,18 +139,37 @@ function displayGrid(grid) {
       if (grid[y][x] === 0) {
         image(rockImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      else if (grid[y][x] === 1) {
+      if (grid[y][x] === 1) {
         image(grassImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      else if (grid[y][x] === 9) {
+      if (grid[y][x] === 2) {
+        image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 3) {
+        image(grassImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 4) {
+        image(grassImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 5) {
+        image(grassImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 9) {
         image(rockImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+        image(horseImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 9) {
+        image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
         image(horseImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
     }
   }
 }
 
-
+function passableChecker(){
+  if (grid[y][x] === 2)
+    onPassable = true;
+}
 
 function teleportCheck(){
   if (gird[x][y] === 1 && grid[playerY][playerX] === 1){
