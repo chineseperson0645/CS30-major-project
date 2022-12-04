@@ -8,22 +8,6 @@
 const ROWS = 25; //y axis (in reality)
 const COLS = 35; //x axis (in reality)
 
-//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-
 let grid;
 let cellWidth;
 let cellHeight;
@@ -49,9 +33,8 @@ function setup() {
 }
 
 function draw() {
-  background(220);
+  background("white");
   displayGrid(grid);
-  // passableChecker();
 }
 
 //Allows Horse to pass through (and draw over) a image
@@ -120,24 +103,21 @@ function mousePressed() {
     grid[yPos][xPos] = 2;
   }
   else if (grid[yPos][xPos] === 2) {
-    grid[yPos][xPos] = 3;
-  }
-  else if (grid[yPos][xPos] === 3) {
-    grid[yPos][xPos] = 4;
-  }
-  else if (grid[yPos][xPos] === 4) {
-    grid[yPos][xPos] = 5;
-  }
-  else if (grid[yPos][xPos] === 5) {
     grid[yPos][xPos] = 0;
   }
 }
 
+
 function displayGrid(grid) {
+let playerAndTree = false;
+let onTree = false;
+let everythingElse = true;
+
   for (let y=0; y<ROWS; y++) {
     for (let x=0; x<COLS; x++) {
+
       if (grid[y][x] === 0) {
-        image(rockImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+        fill("white");
       }
       if (grid[y][x] === 1) {
         image(grassImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
@@ -145,37 +125,32 @@ function displayGrid(grid) {
       if (grid[y][x] === 2) {
         image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 3) {
-        image(grassImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-      }
-      if (grid[y][x] === 4) {
-        image(grassImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-      }
-      if (grid[y][x] === 5) {
-        image(grassImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-      }
       if (grid[y][x] === 9) {
-        image(rockImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+        fill("white");
         image(horseImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 9) {
-        image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-        image(horseImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      else if (grid[y][x] === 9) {
+        playerAndTree = true;
+        if (playerAndTree === true && onTree === true){
+          image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+          image(horseImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+        }
       }
     }
   }
-}
 
-function passableChecker(){
-  if (grid[y][x] === 2)
-    onPassable = true;
-}
+  if (playerAndTree === true){
+    onTree = true;
+  }
 
-function teleportCheck(){
-  if (gird[x][y] === 1 && grid[playerY][playerX] === 1){
-
+  if (everythingElse === false){
+    grid[y][x] = 2;
   }
 }
+
+//if pressing w, walking gif, if not pressing w, idle gif
+//For voice lines. Final boss should have voice lines timed every like 10-15 seconds.
+//Everytime it's a random voice line chosen from an array.
 
 function create2dArray(COLS, ROWS) {
   let emptyArray = [];
@@ -188,9 +163,63 @@ function create2dArray(COLS, ROWS) {
   return emptyArray;
 }
 
-//78^10 (10 represents base 10)
 
-// 0   1  0  0 1 1 1 0 (78 represented in binary)
 
-//128 64 32 16 8 4 2 1
-//--- -- -- -- - - - - 
+//Doodles
+
+//control + b to bring up sidebar
+
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+
+// function passableChecker(){
+//   if (grid[y][x] === 2)
+//     onPassable = true;
+// }
+
+// function teleportCheck(){
+//   if (gird[x][y] === 1 && grid[playerY][playerX] === 1){
+//     console.log("send em!");
+//   }
+// }
+
+// let drawJustTree = false;
+
+// function keepDrawing(){
+//   if (grid[y][x] === 2){
+//     drawJustTree = true;
+//   }
+//   if (drawJustTree === true){
+//     image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+//   }
+
+//   else if (grid[y][x] === 9){
+//     drawJustTree = false;
+
+//     if (drawJustTree = false && grid[y][x] === 9){
+//       alsoDrawHorse = true;
+//     }
+//     if (alsoDrawHorse === true && grid[y][x] === 9){
+//       image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+//       image(horseImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+//     }
+//     if (grid[y][x] === 2){
+//       alsoDrawHorse = false;
+//       drawJustTree = true;
+//     }
+//   }
+
+// }
