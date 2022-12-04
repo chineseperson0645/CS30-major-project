@@ -40,6 +40,7 @@ function draw() {
 //Allows Horse to pass through (and draw over) a image
 function keyPressed() {
   if (keyCode === RIGHT_ARROW) {
+  //SO IF this spot is blank (0) or a tree (2) update the player location (playerX++) that direction
     if (grid[playerY][playerX+1] === 0 || grid[playerY][playerX+1] === 2) {
       //reset old location to white
       grid[playerY][playerX] = 0;
@@ -111,7 +112,6 @@ function mousePressed() {
 function displayGrid(grid) {
 let playerAndTree = false;
 let onTree = false;
-let everythingElse = true;
 
   for (let y=0; y<ROWS; y++) {
     for (let x=0; x<COLS; x++) {
@@ -125,32 +125,41 @@ let everythingElse = true;
       if (grid[y][x] === 2) {
         image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
+
       if (grid[y][x] === 9) {
         fill("white");
         image(horseImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      else if (grid[y][x] === 9) {
-        playerAndTree = true;
-        if (playerAndTree === true && onTree === true){
-          image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-          image(horseImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-        }
+      else if (grid[y][x] === 9 && onTree === true) {
+        image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+        image(horseImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
     }
   }
-
-  if (playerAndTree === true){
+  
+  if (grid[playerY+1][playerX] === 2 && playerY++){
     onTree = true;
   }
-
-  if (everythingElse === false){
-    grid[y][x] = 2;
+  if (grid[playerY-1][playerX] === 2 && playerY--){
+    onTree = true;
+  }
+  if (grid[playerY][playerX-1] === 2 && playerX--){
+    onTree = true;
+  }
+  if (grid[playerY][playerX+1] === 2 && playerX++){
+    onTree = true;
   }
 }
 
-//if pressing w, walking gif, if not pressing w, idle gif
+  // if (grid[playerY+1][playerX] === 2 && playerY++ || grid[playerY-1][playerX] === 2 && playerY-- || grid[playerY][playerX-1] === 2 && playerX-- || grid[playerY][playerX+1] === 2 && playerX++){
+  //   onTree = true;
+  // }
+
+//if pressing w, walking gif, if not pressing w, idle gif (for mike)
 //For voice lines. Final boss should have voice lines timed every like 10-15 seconds.
 //Everytime it's a random voice line chosen from an array.
+//An array of sfx for swords clinging and chooses random number from that array. So that
+//If you swing and hit something. It plays a random sfx from that array
 
 function create2dArray(COLS, ROWS) {
   let emptyArray = [];
