@@ -21,7 +21,7 @@ function preload() {
   grassImg = loadImage('grass.png');
   rockImg = loadImage('rock.png');
   horseImg = loadImage('horse.png');
-  treeImg = loadImage('assests/poketree.png');
+  treeImg = loadImage('assests/bush-pixel.png');
 }
 
 function setup() {
