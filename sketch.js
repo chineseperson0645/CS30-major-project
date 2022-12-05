@@ -16,7 +16,8 @@ let player1;
 let gameFrame;
 let staggerFrames;
 let staggerFrames2;
-
+let bgImage;
+let bgImage2; 
 
 
 
@@ -27,6 +28,8 @@ function preload() {
   runBack = loadImage("assets/runB.png");
   crouch = loadImage("assets/Disguise.png");
   jumpPosB = loadImage("assets/jumpB.png"); 
+  bgImage = loadImage("assets/moutian-pixel.gif");
+  bgImage2 = loadImage("assets/city-pixle.gif"); 
 }
 
 function setup() {
@@ -44,6 +47,7 @@ function setup() {
 
 function draw() {
   background(220);
+  image(bgImage, 0, 0, width, height);
   player1.move();
    
 }
