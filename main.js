@@ -13,6 +13,7 @@ let cellWidth;
 let cellHeight;
 let playerX = 0;
 let playerY = 0;
+let onTree = false;
 
 let grassImg, rockImg, horseImg;
 
@@ -29,7 +30,7 @@ function setup() {
   cellHeight = height/ROWS;
   grid = create2dArray(COLS, ROWS);
   //place player in grid
-  grid[playerY][playerX] = 9;
+  grid[playerY+1][playerX+1] = 9;
 }
 
 function draw() {
@@ -44,7 +45,7 @@ function keyPressed() {
     if (grid[playerY][playerX+1] === 0 || grid[playerY][playerX+1] === 2) {
       //reset old location to white
       grid[playerY][playerX] = 0;
-      
+
       //move
       playerX++;
 
@@ -57,7 +58,8 @@ function keyPressed() {
     if (grid[playerY][playerX-1] === 0 || grid[playerY][playerX-1] === 2) {
       //reset old location to white
       grid[playerY][playerX] = 0;
-      
+      // onTree = true;
+
       //move
       playerX--;
 
@@ -70,7 +72,8 @@ function keyPressed() {
     if (grid[playerY-1][playerX] === 0 || grid[playerY-1][playerX] === 2) {
       //reset old location to white
       grid[playerY][playerX] = 0;
-      
+      // onTree = true;
+
       //move
       playerY--;
 
@@ -83,7 +86,8 @@ function keyPressed() {
     if (grid[playerY+1][playerX] === 0 || grid[playerY+1][playerX] === 2) {
       //reset old location to white
       grid[playerY][playerX] = 0;
-      
+      // onTree = true;
+
       //move
       playerY++;
 
@@ -110,7 +114,6 @@ function mousePressed() {
 
 
 function displayGrid(grid) {
-let playerAndTree = false;
 let onTree = false;
 
   for (let y=0; y<ROWS; y++) {
@@ -130,36 +133,21 @@ let onTree = false;
         fill("white");
         image(horseImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      else if (grid[y][x] === 9 && onTree === true) {
+      if (grid[y][x] === 9 && onTree === true) {
         image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
         image(horseImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
     }
   }
-  
-  if (grid[playerY+1][playerX] === 2 && playerY++){
-    onTree = true;
-  }
-  if (grid[playerY-1][playerX] === 2 && playerY--){
-    onTree = true;
-  }
-  if (grid[playerY][playerX-1] === 2 && playerX--){
-    onTree = true;
-  }
-  if (grid[playerY][playerX+1] === 2 && playerX++){
+  if (grid[playerY+1][playerX] === 2 && playerY++ || grid[playerY][playerX-1] === 2 && playerX-- || grid[playerY][playerX+1] === 2 && playerX++){
     onTree = true;
   }
 }
 
-  // if (grid[playerY+1][playerX] === 2 && playerY++ || grid[playerY-1][playerX] === 2 && playerY-- || grid[playerY][playerX-1] === 2 && playerX-- || grid[playerY][playerX+1] === 2 && playerX++){
-  //   onTree = true;
-  // }
-
-//if pressing w, walking gif, if not pressing w, idle gif (for mike)
-//For voice lines. Final boss should have voice lines timed every like 10-15 seconds.
-//Everytime it's a random voice line chosen from an array.
-//An array of sfx for swords clinging and chooses random number from that array. So that
-//If you swing and hit something. It plays a random sfx from that array
+//There is something spesifically wrong with
+// grid[playerY-1][playerX] === 2 && playerY--
+//Spesifically
+// [playerX] === 2 && playerY--
 
 function create2dArray(COLS, ROWS) {
   let emptyArray = [];
@@ -174,7 +162,7 @@ function create2dArray(COLS, ROWS) {
 
 
 
-//Doodles
+//Doodles/Notes
 
 //control + b to bring up sidebar
 
@@ -193,6 +181,12 @@ function create2dArray(COLS, ROWS) {
 //0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 //0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 //0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+
+//if pressing w, walking gif, if not pressing w, idle gif (for mike)
+//For voice lines. Final boss should have voice lines timed every like 10-15 seconds.
+//Everytime it's a random voice line chosen from an array.
+//An array of sfx for swords clinging and chooses random number from that array. So that
+//If you swing and hit something. It plays a random sfx from that array
 
 // function passableChecker(){
 //   if (grid[y][x] === 2)
