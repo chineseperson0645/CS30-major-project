@@ -48,6 +48,7 @@ function setup() {
 function draw() {
   background(220);
   image(bgImage, 0, 0, width, height);
+  player1.gravity(); 
   player1.move();
    
 }

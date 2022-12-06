@@ -141,7 +141,14 @@ class mainPlayer {
     else if (keyIsDown(68) != true && keyIsDown(83) != true && keyIsDown(87) != true &&keyIsDown(65) != true ) {
       this.idlePostion();
     }
-
   }
+  gravity() { 
+    if (this.y < height/1.5) {
+      this.y += 15; 
+    }
+  }
+
+
+
 }
 
