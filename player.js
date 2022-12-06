@@ -147,7 +147,9 @@ class mainPlayer {
       this.y += 15; 
     }
   }
-
+  restrictions() { 
+    ///
+  }
 
 
 }
