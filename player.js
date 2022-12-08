@@ -142,15 +142,5 @@ class mainPlayer {
       this.idlePostion();
     }
   }
-  gravity() { 
-    if (this.y < height/1.5) {
-      this.y += 15; 
-    }
-  }
-  restrictions() { 
-    ///
-  }
-
-
 }
 
