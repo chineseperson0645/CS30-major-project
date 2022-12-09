@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 class mainPlayer {
-  constructor(runRight, idlePostion, jumpPos, runBack, crouch, jumpPosB, x, y, playerSpeed, playerHp) {
+  constructor(runRight, idlePostion, jumpPos, runBack, crouch, jumpPosB, move1,  x, y, playerSpeed, playerHp) {
     this.x = x; 
     this.y = y; 
     this.runR = runRight;
@@ -10,7 +10,8 @@ class mainPlayer {
     this.runB = runBack;
     this.crouch = crouch;
     this.jumpPB = jumpPosB;   
-    this.speed = playerSpeed; 
+    this.speed = playerSpeed;
+    this.move1 = move1;  
     this.hp = playerHp;
   } 
 
@@ -142,5 +143,20 @@ class mainPlayer {
       this.idlePostion();
     }
   }
+
+    move1() { 
+      image(this.move1, this.x, this.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
+      if (gameFrame % staggerFrames2 == 0) {
+        if (frameX < 3) {
+          frameX++; 
+        }
+        else {
+          frameX = 0; 
+        }
+      }
+     
+      gameFrame++; 
+  
+    }
 }
 
