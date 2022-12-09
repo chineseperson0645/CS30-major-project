@@ -120,7 +120,7 @@ let onTree = false;
     for (let x=0; x<COLS; x++) {
 
       if (grid[y][x] === 0) {
-        fill("white");
+        image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
       if (grid[y][x] === 1) {
         image(grassImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
@@ -130,22 +130,26 @@ let onTree = false;
       }
 
       if (grid[y][x] === 9) {
-        fill("white");
-        image(horseImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-      }
-      if (grid[y][x] === 9 && onTree === true) {
         image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
         image(horseImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
+      // if (grid[y][x] === 9 && onTree === true) {
+      //   image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      //   image(horseImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      // }
     }
   }
-  if (grid[playerY+1][playerX] === 2 && playerY++ || grid[playerY][playerX-1] === 2 && playerX-- || grid[playerY][playerX+1] === 2 && playerX++){
-    onTree = true;
-  }
+  // if (grid[playerY+1][playerX] === 2 && playerY++ || grid[playerY][playerX-1] === 2 && playerX-- || grid[playerY][playerX+1] === 2 && playerX++){
+  //   onTree = true;
+  //   console.log("on tree!");
+  // }
 }
 
+//Detect keypressed first before drawing over the tree
+//if the right (or whatever direction) has tree.
+
 //There is something spesifically wrong with
-// grid[playerY-1][playerX] === 2 && playerY--
+//  || grid[playerY-1][playerX] === 2 && playerY--
 //Spesifically
 // [playerX] === 2 && playerY--
 
