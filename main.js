@@ -37,86 +37,72 @@ function setup() {
 function draw() {
   background("white");
   displayGrid(grid);
+  surroundingCheck();
 }
 
 //Allows Horse to pass through (and draw over) a image
 function keyPressed() {
   if (keyCode === RIGHT_ARROW) {
-  //SO IF this spot is blank (0) or a tree (2) update the player location (playerX++) that direction
-    if (grid[playerY][playerX+1] === 0 || grid[playerY][playerX+1] === 2) {
+  //SO IF this spot is blank (0) or a tree (2) update the player location (playerX++) draw in that direction with a horse
+    if (grid[playerY][playerX+1] === 0) {
       grid[playerY][playerX] = 0; //reset old location to white
       playerX++; //move
       grid[playerY][playerX] = 9; //set new player location
-        if (keyCode === RIGHT_ARROW ){
-
       }
     }
-  }
+    else if (onTree) {
+      grid[playerY][playerX] = 0; //reset old location to white
+      playerX++; //move
+      grid[playerY][playerX] = 10; //set new player location
+      onTree = false;
+      }
 
   if (keyCode === LEFT_ARROW) {
-    if (grid[playerY][playerX-1] === 0 || grid[playerY][playerX-1] === 2) {
-      //reset old location to white
-      grid[playerY][playerX] = 0;
-      // onTree = true;
-
-      //move
-      playerX--;
-
-      //set new player location
-      grid[playerY][playerX] = 9;
+    if (grid[playerY][playerX-1] === 0) {
+      grid[playerY][playerX] = 0; //reset old location to white
+      playerX--; //move
+      grid[playerY][playerX] = 9; //set new player location
+    }
+    else if (onTree) {
+      grid[playerY][playerX] = 0; //reset old location to white
+      playerX--; //move
+      grid[playerY][playerX] = 10; //set new player location
+      onTree = false;
     }
   }
 
   if (keyCode === UP_ARROW) {
-    if (grid[playerY-1][playerX] === 0 || grid[playerY-1][playerX] === 2) {
-      //reset old location to white
-      grid[playerY][playerX] = 0;
-      // onTree = true;
-
-      //move
-      playerY--;
-
-      //set new player location
-      grid[playerY][playerX] = 9;
+    if (grid[playerY-1][playerX] === 0) {
+      grid[playerY][playerX] = 0; //reset old location to white
+      playerY--; //move
+      grid[playerY][playerX] = 9; //set new player location
+    }
+    else if (onTree) {
+      grid[playerY][playerX] = 0; //reset old location to white
+      playerY--; //move
+      grid[playerY][playerX] = 10; //set new player location
+      onTree = false;
     }
   }
 
   if (keyCode === DOWN_ARROW) {
-    if (grid[playerY+1][playerX] === 0 || grid[playerY+1][playerX] === 2) {
-      //reset old location to white
-      grid[playerY][playerX] = 0;
-      // onTree = true;
-
-      //move
-      playerY++;
-
-      //set new player location
-      grid[playerY][playerX] = 9;
+    if (grid[playerY+1][playerX] === 0) {
+      grid[playerY][playerX] = 0; //reset old location to white
+      playerY++; //move
+      grid[playerY][playerX] = 9; //set new player location
+    }
+    else if (onTree) {
+      grid[playerY][playerX] = 0; //reset old location to white
+      playerY++; //move
+      grid[playerY][playerX] = 10; //set new player location
+      onTree = false;
     }
   }
 }
-
-//If moved into a certain grid position. Player X and Y are still tracked
+//If moved into a certain grid position. Player X and Y are still tracked.
 //But if onTree is true. Draw a 10 instead of a 9. (10 can just be a tree ontop of a tree)
 
-function mousePressed() {
-  let xPos = Math.floor(mouseX/cellWidth);
-  let yPos = Math.floor(mouseY/cellHeight);
-
-  if (grid[yPos][xPos] === 0) {
-    grid[yPos][xPos] = 1;
-  }
-  else if (grid[yPos][xPos] === 1) {
-    grid[yPos][xPos] = 2;
-  }
-  else if (grid[yPos][xPos] === 2) {
-    grid[yPos][xPos] = 0;
-  }
-}
-
-
 function displayGrid(grid) {
-let onTree = false;
 
   for (let y=0; y<ROWS; y++) {
     for (let x=0; x<COLS; x++) {
@@ -141,15 +127,40 @@ let onTree = false;
       }
     }
   }
-  if (grid[playerY+1][playerX] === 2 && playerY++ || grid[playerY][playerX-1] === 2 && playerX-- || grid[playerY][playerX+1] === 2 && playerX++){
+}
+
+function surroundingCheck(){
+  //  Down Arrow                        Left Arrow                        Right Arrow
+  if (grid[playerY+1][playerX] === 2 || grid[playerY][playerX-1] === 2 || grid[playerY][playerX+1] === 2){
     onTree = true;
+  }
+  else if (grid[playerY+1][playerX] === 0 || grid[playerY][playerX-1] === 0 || grid[playerY][playerX+1] === 0){
+    onTree
   }
 }
 
 //There is something spesifically wrong with
 // grid[playerY-1][playerX] === 2 && playerY--
+
 //Spesifically
 // [playerX] === 2 && playerY--
+
+
+
+function mousePressed() {
+  let xPos = Math.floor(mouseX/cellWidth);
+  let yPos = Math.floor(mouseY/cellHeight);
+
+  if (grid[yPos][xPos] === 0) {
+    grid[yPos][xPos] = 1;
+  }
+  else if (grid[yPos][xPos] === 1) {
+    grid[yPos][xPos] = 2;
+  }
+  else if (grid[yPos][xPos] === 2) {
+    grid[yPos][xPos] = 0;
+  }
+}
 
 function create2dArray(COLS, ROWS) {
   let emptyArray = [];
@@ -161,7 +172,6 @@ function create2dArray(COLS, ROWS) {
   }
   return emptyArray;
 }
-
 
 
 //Doodles/Notes
