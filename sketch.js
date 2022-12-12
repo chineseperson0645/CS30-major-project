@@ -16,7 +16,10 @@ let player1;
 let gameFrame;
 let staggerFrames;
 let staggerFrames2;
-
+let bgImage;
+let bgImage2;
+let timer;
+let move1; 
 
 
 
@@ -27,6 +30,9 @@ function preload() {
   runBack = loadImage("assets/runB.png");
   crouch = loadImage("assets/Disguise.png");
   jumpPosB = loadImage("assets/jumpB.png"); 
+  bgImage = loadImage("assets/moutian-pixel.gif");
+  bgImage2 = loadImage("assets/city-pixle.gif");
+  move1 = loadImage("assets/Attack_2.png"); 
 }
 
 function setup() {
@@ -35,15 +41,26 @@ function setup() {
   playerHeight = 96; 
   frameX = 0; 
   frameY = 0;
-  gameFrame =0;
+  gameFrame = 0;
   staggerFrames = 7;
   staggerFrames2 = 3; 
-  player1 = new mainPlayer(runRight,idlePos, jumpPos,runBack, crouch, jumpPosB, 0,0,5,100); 
-  
+  player1 = new mainPlayer(runRight,idlePos, jumpPos,runBack, crouch, jumpPosB, move1, 0,0,5,100); 
+  timer = 0;
+  move1 = true; 
 }
 
 function draw() {
   background(220);
+  image(bgImage, 0, 0, width, height);
   player1.move();
    
+}
+
+function cooldown1() { 
+  if (timer === 0) { 
+    timer = true; 
+  }
+  else {
+    timer = false;
+  }  
 }
