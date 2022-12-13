@@ -1,7 +1,7 @@
 // CS30 Major Project
 // Anjana Samarasinghe
 
-const gravity = 0.2;
+const gravity = 0.7;
 
 const keys = {
   a: {
@@ -79,6 +79,10 @@ function setup() {
   velocity: {
     x: 0, 
     y: 0
+  },
+  offset: {
+    x: 0 , 
+    y:0 
   }
 })
 
@@ -90,6 +94,12 @@ function setup() {
   velocity: {
     x: 0, 
     y: 0
+  },
+  color: "blue",
+  
+  offset: {
+    x: -50 , 
+    y:0 
   }
 })
 
@@ -109,19 +119,25 @@ function draw() {
 
   
   //mainPlayer Movement
-  if (keys.a.pressed === true && lastkey === "a") {
-    player1.velocity.x = -1; 
+  if (keys.a.pressed === true && player1.lastKeys === "a") {
+    player1.velocity.x = -5; 
   }
-  else if (keys.d.pressed === true && lastkey === "d"){
-    player1.velocity.x = 1; 
+  else if (keys.d.pressed === true && player1.lastKeys === "d"){
+    player1.velocity.x = 5; 
   }
 
   //enemy1 Movement 
   if (keys.ArrowLeft.pressed === true && enmey1.lastKeys === "ArrowLeft") {
-    enmey1.velocity.x = -1; 
+    enmey1.velocity.x = -5; 
   }
   else if (keys.ArrowRight.pressed === true && enmey1.lastKeys === "ArrowRight"){
-    enmey1.velocity.x = 1; 
+    enmey1.velocity.x = 5; 
+  }
+
+  // collision detection
+  if (rectCol({rectangle1: player1, rectangle2: enmey1}) && player1.isAttacking) {
+    player1.isAttacking = false; 
+    console.log("detection"); 
   }
 }
 
@@ -130,17 +146,21 @@ window.addEventListener('keydown', (event) => {
   switch (event.key) {
     case 'd':
       keys.d.pressed = true;
-      lastkey = "d"; 
+      player1.lastKeys = "d"; 
       break
       
     case 'a':
        keys.a.pressed = true;
-       lastkey = "a"; 
+       player1.lastKeys = "a"; 
       break
       
     case 'w':
-      player1.velocity.y = -10; 
+      player1.velocity.y = -20; 
     break 
+
+    case'e':
+      player1.attack();
+      break
 
     // Enemy Movement 
     case 'ArrowRight':
@@ -154,7 +174,7 @@ window.addEventListener('keydown', (event) => {
       break
       
     case 'ArrowUp':
-      enmey1.velocity.y = -10; 
+      enmey1.velocity.y = -20; 
     break 
   }
   
@@ -191,3 +211,6 @@ window.addEventListener('keyup', (event) => {
   console.log(event.key); 
 })
 
+function rectCol({rectangle1,rectangle2}) {
+  return (rectangle1.attackBox.postion.x + rectangle1.attackBox.width >= rectangle2.postion.x && rectangle1.attackBox.postion.x <= rectangle2.postion.x + rectangle2.width && rectangle1.attackBox.postion.y + rectangle1.attackBox.height >= rectangle2.postion.y && rectangle1.attackBox.postion.y <= rectangle2.postion.y + rectangle2.height); 
+}
