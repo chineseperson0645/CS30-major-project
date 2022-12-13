@@ -139,10 +139,14 @@ function draw() {
     player1.isAttacking = false; 
     console.log("detection"); 
   }
+  //enemy collsion
+  if (rectCol({rectangle1: enmey1, rectangle2: player1}) && enmey1.isAttacking) {
+    enmey1.isAttacking = false;
+    console.log("hazaa"); 
+  }
 }
 
 window.addEventListener('keydown', (event) => {
-  console.log(event.key); 
   switch (event.key) {
     case 'd':
       keys.d.pressed = true;
@@ -175,6 +179,10 @@ window.addEventListener('keydown', (event) => {
       
     case 'ArrowUp':
       enmey1.velocity.y = -20; 
+    break
+
+    case 'q':
+    enmey1.attack(); 
     break 
   }
   
@@ -207,8 +215,7 @@ window.addEventListener('keyup', (event) => {
       keys.ArrowUp.pressed = false;
       break
   }
-
-  console.log(event.key); 
+ 
 })
 
 function rectCol({rectangle1,rectangle2}) {

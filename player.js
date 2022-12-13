@@ -24,11 +24,11 @@ class mainPlayer {
     fill(this.color); 
     rect(this.postion.x, this.postion.y, this.width, this.height);
 
-    //attack box drawn
-    // if (this.isAttacking){
+    // attack box drawn
+    if (this.isAttacking){
     fill("green");
     rect(this.attackBox.postion.x, this.attackBox.postion.y, this.attackBox.width, this.attackBox.height); 
-    // }
+    }
   }
 
   update() {
