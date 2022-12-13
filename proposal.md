@@ -33,4 +33,5 @@ A fighter game with solid combat skills. It might be an open-world game where yo
 
 - Harder Things:
 - inventory system...(Possibly)
+- Testing
 
