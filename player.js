@@ -6,6 +6,7 @@ class mainPlayer {
     this.velocity = velocity;
     this.height = 150; 
     this.width = 50;
+    this.lastKeys; 
   }
 
   display() {
