@@ -1,6 +1,7 @@
 // CS30 Major Project
 // Anjana Samarasinghe
 
+const gravity = 0.7;  
 
 let runRight;
 let runBack; 
@@ -64,3 +65,5 @@ function cooldown1() {
     timer = false;
   }  
 }
+
+
