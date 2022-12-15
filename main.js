@@ -16,15 +16,15 @@ let playerY = 0;
 
 let nearTree = false;
 
-let grassImg, rockImg, horseImg, treeImg, zenImg;
+let grassImg, rockImg, horseImg, treeImg, zenImg, bottomtreeImg;
 
 function preload() {
   grassImg = loadImage('grass.png');
   rockImg = loadImage('rock.png');
   horseImg = loadImage('horse.png');
-  treeImg = loadImage('assests/bush-pixel.png');
+  treeImg = loadImage('assests/bush.png');
   zenImg = loadImage('assests/zen.gif');
-  grayImg = loadImage('assests/grayscale.png');
+  bottomtreeImg = loadImage('assests/bottomtree.png')
 }
 
 function setup() {
@@ -38,14 +38,10 @@ function setup() {
 
 function draw() {
   background("white");
-  image(grayImg, 0, 0, width, height);
+  // image(grayImg, 0, 0, width, height);
   displayGrid(grid);
   surroundingCheck();
 }
-
-// function allBlocks(){
-//   grid[playerY][playerX] = 0;
-// }
 
 //Allows Horse to pass through (and draw over) a image
 function keyPressed() {
@@ -124,6 +120,11 @@ function displayGrid(grid) {
       if (grid[y][x] === 2) {
         image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
+      if (grid[y][x] === 3){
+        image(bottomtreeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      
+
 
       if (grid[y][x] === 9) {
         fill("white");
@@ -163,6 +164,9 @@ function mousePressed() {
     grid[yPos][xPos] = 2;
   }
   else if (grid[yPos][xPos] === 2) {
+    grid[yPos][xPos] = 3;
+  }
+  else if (grid[yPos][xPos] === 3) {
     grid[yPos][xPos] = 0;
   }
 }
