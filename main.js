@@ -16,7 +16,7 @@ let playerY = 0;
 
 let nearTree = false;
 
-let grassImg, rockImg, horseImg;
+let grassImg, rockImg, horseImg, treeImg;
 
 function preload() {
   grassImg = loadImage('grass.png');
@@ -136,7 +136,7 @@ function displayGrid(grid) {
 
 function surroundingCheck(){
   //  Down Arrow                        Left Arrow                        Right Arrow
-  if (grid[playerY+1][playerX] === 2 || grid[playerY][playerX-1] === 2 || grid[playerY][playerX+1] === 2 || grid[playerY-1][playerX] === 2){
+  if (grid[playerY+1][playerX] === 2 || grid[playerY][playerX-1] === 2 || grid[playerY][playerX+1] === 2){
     nearTree = true;
   }
 }
