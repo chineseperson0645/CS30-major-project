@@ -3,6 +3,7 @@
 
 const gravity = 0.7;  
 
+let playerEx; 
 let runRight;
 let runBack; 
 let idlePos;
@@ -47,7 +48,9 @@ function setup() {
   staggerFrames2 = 3; 
   player1 = new mainPlayer(runRight,idlePos, jumpPos,runBack, crouch, jumpPosB, move1, 0,0,5,100); 
   timer = 0;
-  move1 = true; 
+  move1 = true;
+
+
 }
 
 function draw() {
