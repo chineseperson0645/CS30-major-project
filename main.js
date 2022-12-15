@@ -6,7 +6,7 @@
 //Could possibly use gifs for player and npc movement in 2d array mode.
 
 const ROWS = 25; //y axis (in reality)
-const COLS = 35; //x axis (in reality)
+const COLS = 40; //x axis (in reality)
 
 let grid;
 let cellWidth;
@@ -37,7 +37,8 @@ function setup() {
 }
 
 function draw() {
-  grayImg;
+  background("white");
+  image(grayImg, 0, 0, width, height);
   displayGrid(grid);
   surroundingCheck();
 }
