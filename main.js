@@ -16,13 +16,15 @@ let playerY = 0;
 
 let nearTree = false;
 
-let grassImg, rockImg, horseImg, treeImg;
+let grassImg, rockImg, horseImg, treeImg, zenImg;
 
 function preload() {
   grassImg = loadImage('grass.png');
   rockImg = loadImage('rock.png');
   horseImg = loadImage('horse.png');
   treeImg = loadImage('assests/bush-pixel.png');
+  zenImg = loadImage('assests/zen.gif');
+  grayImg = loadImage('assests/grayscale.png');
 }
 
 function setup() {
@@ -35,7 +37,7 @@ function setup() {
 }
 
 function draw() {
-  background("white");
+  grayImg;
   displayGrid(grid);
   surroundingCheck();
 }
@@ -124,11 +126,11 @@ function displayGrid(grid) {
 
       if (grid[y][x] === 9) {
         fill("white");
-        image(horseImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+        image(zenImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
       if (grid[y][x] === 10) {
         image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-        image(horseImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+        image(zenImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
     }
   }
@@ -174,7 +176,6 @@ function create2dArray(COLS, ROWS) {
   }
   return emptyArray;
 }
-
 
 //Doodles/Notes
 
