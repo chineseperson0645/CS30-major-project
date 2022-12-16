@@ -49,7 +49,17 @@ function setup() {
   player1 = new mainPlayer(runRight,idlePos, jumpPos,runBack, crouch, jumpPosB, move1, 0,0,5,100); 
   timer = 0;
   move1 = true;
+  playerEx = new Player({
+    velocity {
+      x: 0,
+      y:0
+  },
+  position {
+    x:0,
+    y:0
+  }
 
+})
 
 }
 
