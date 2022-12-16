@@ -1,6 +1,11 @@
 class Player {
-  constructor(velocity, postion){
+  constructor({velocity, postion}){
     this.velocity = velocity;
     this.postion = postion; 
+  }
+
+  display() {
+    
+
   }
 }

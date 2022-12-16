@@ -50,15 +50,14 @@ function setup() {
   timer = 0;
   move1 = true;
   playerEx = new Player({
-    velocity {
-      x: 0,
-      y:0
+    velocity: {
+    x: 0,
+    y: 0
   },
-  position {
-    x:0,
-    y:0
+  position: {
+    x: 0, 
+    y: 0
   }
-
 })
 
 }
