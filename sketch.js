@@ -1,6 +1,6 @@
 // CS30 Major Project
 // Anjana Samarasinghe
-
+//micheal gao is diff
 const gravity = 0.7;  
 
 let playerEx; 
