@@ -39,7 +39,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   cellWidth = width/COLS;
   cellHeight = height/ROWS;
-  grid = create2dArray(COLS, ROWS);
+  grid = createRandom2dArray(COLS, ROWS);
   //place player in grid
   grid[playerY][playerX] = 90;
 }
@@ -48,7 +48,7 @@ function draw() {
   background("white");
   // image(grayImg, 0, 0, width, height);
   displayGrid(grid);
-  surroundingCheck();
+  // surroundingCheck();
 }
 
 //Allows Horse to pass through (and draw over) a image
@@ -124,38 +124,41 @@ function displayGrid(grid) {
         image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
       if (grid[y][x] === 1) {
-        image(grassImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-      }
-      if (grid[y][x] === 2) {
-        image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-      }
-      if (grid[y][x] === 3){
         image(bottomtreeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 4){
-        image(houseTLImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-      }
-      if (grid[y][x] === 5){
-        image(houseTMImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-      }
-      if (grid[y][x] === 6){
-        image(houseTRImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-      }
-      if (grid[y][x] === 7){
-        image(houseBLImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-      }
-      if (grid[y][x] === 8){
-        image(houseBMImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-      }
-      if (grid[y][x] === 9){
-        image(houseBRImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-      }
-      if (grid[y][x] === 10){
+      if (grid[y][x] === 2) {
         image(path1Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 11){
+      if (grid[y][x] === 3){
         image(path2Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
+      if (grid[y][x] === 4){
+        image(path1Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 5){
+        image(path2Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+
+
+
+      // if (grid[y][x] === ){
+      //   image(houseTLImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      // }
+      // if (grid[y][x] === ){
+      //   image(houseTMImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      // }
+      // if (grid[y][x] === ){
+      //   image(houseTRImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      // }
+      // if (grid[y][x] === ){
+      //   image(houseBLImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      // }
+      // if (grid[y][x] === ){
+      //   image(houseBMImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      // }
+      // if (grid[y][x] === ){
+      //   image(houseBRImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      // }
 
 
 
@@ -241,6 +244,22 @@ function create2dArray(COLS, ROWS) {
     emptyArray.push([]);
     for (let x=0; x<COLS; x++) {
       emptyArray[y].push(0);
+    }
+  }
+  return emptyArray;
+}
+
+function createRandom2dArray(COLS, ROWS) {
+  let emptyArray = [];
+  for (let y=0; y<ROWS; y++) {
+    emptyArray.push([]);
+    for (let x=0; x<COLS; x++) {
+      if (random(100) < 50) {
+        emptyArray[y].push(0);
+      }
+      else {
+        emptyArray[y].push(1);
+      }
     }
   }
   return emptyArray;
