@@ -6,7 +6,7 @@
 //Could possibly use gifs for player and npc movement in 2d array mode.
 
 const ROWS = 25; //y axis (in reality)
-const COLS = 40; //x axis (in reality)
+const COLS = 35; //x axis (in reality)
 
 let grid;
 let cellWidth;
@@ -17,6 +17,7 @@ let playerY = 0;
 let nearTree = false;
 
 let grassImg, rockImg, horseImg, treeImg, zenImg, bottomtreeImg, houseTLImg, houseTMImg, houseTRImg, houseBLImg, houseBMImg, houseBRImg, path1, path2;
+let forestPathJSON;
 
 function preload() {
   grassImg = loadImage('grass.png');
@@ -33,6 +34,8 @@ function preload() {
   houseBRImg = loadImage('assests/houseBR.png');
   path1Img = loadImage('assests/path1.png');
   path2Img = loadImage('assests/path2.png');
+
+  forestPathJSON = loadJSON('JSON-Maps/random.json');
 }
 
 function setup() {
@@ -40,6 +43,8 @@ function setup() {
   cellWidth = width/COLS;
   cellHeight = height/ROWS;
   grid = createRandom2dArray(COLS, ROWS);
+  // grid = forestPathJSON;
+
   //place player in grid
   grid[playerY][playerX] = 90;
 }
@@ -50,6 +55,12 @@ function draw() {
   displayGrid(grid);
   // surroundingCheck();
 }
+
+
+function whateversHere(){
+  
+}
+
 
 //Allows Horse to pass through (and draw over) a image
 function keyPressed() {
@@ -96,7 +107,7 @@ function keyPressed() {
     }
   }
 
-  if (key === "s") {
+  if (key === "s" ) {
     if (grid[playerY+1][playerX] === 0) {
         grid[playerY][playerX] = 0; //reset old location to white
         playerY++; //move
