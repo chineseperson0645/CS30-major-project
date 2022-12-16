@@ -12,7 +12,7 @@ class Player {
   }
 
   update() {
-      this.postion.y += 0.7;
+
     if (this.postion.y + this.height + this.velocity.y >= height) {
       this.velocity.y = 0; 
     }
