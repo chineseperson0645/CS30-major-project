@@ -16,7 +16,7 @@ let playerY = 0;
 
 let nearTree = false;
 
-let grassImg, rockImg, horseImg, treeImg, zenImg, bottomtreeImg;
+let grassImg, rockImg, horseImg, treeImg, zenImg, bottomtreeImg, houseTLImg, houseTMImg, houseTRImg, houseBLImg, houseBMImg, houseBRImg, path1, path2;
 
 function preload() {
   grassImg = loadImage('grass.png');
@@ -24,7 +24,15 @@ function preload() {
   horseImg = loadImage('horse.png');
   treeImg = loadImage('assests/bush.png');
   zenImg = loadImage('assests/zen.gif');
-  bottomtreeImg = loadImage('assests/bottomtree.png')
+  bottomtreeImg = loadImage('assests/bottomtree.png');
+  houseTLImg = loadImage('assests/houseTL.png');
+  houseTMImg = loadImage('assests/houseTM.png');
+  houseTRImg = loadImage('assests/houseTR.png');
+  houseBLImg = loadImage('assests/houseBL.png');
+  houseBMImg = loadImage('assests/houseBM.png');
+  houseBRImg = loadImage('assests/houseBR.png');
+  path1Img = loadImage('assests/path1.png');
+  path2Img = loadImage('assests/path2.png');
 }
 
 function setup() {
@@ -33,7 +41,7 @@ function setup() {
   cellHeight = height/ROWS;
   grid = create2dArray(COLS, ROWS);
   //place player in grid
-  grid[playerY][playerX] = 9;
+  grid[playerY][playerX] = 90;
 }
 
 function draw() {
@@ -50,13 +58,13 @@ function keyPressed() {
     if (grid[playerY][playerX+1] === 0) {
         grid[playerY][playerX] = 0; //reset old location to white
         playerX++; //move
-        grid[playerY][playerX] = 9; //set new player location
+        grid[playerY][playerX] = 90; //set new player location
       }
     }
     else if (grid[playerY][playerX+1] === 0 && nearTree) {
       grid[playerY][playerX] = 0; //reset old location to white
       playerX++; //move
-      grid[playerY][playerX] = 10; //set new player location
+      grid[playerY][playerX] = 100; //set new player location
       nearTree = false;
       }
 
@@ -64,12 +72,12 @@ function keyPressed() {
     if (grid[playerY][playerX-1] === 0) {
         grid[playerY][playerX] = 0; //reset old location to white
         playerX--; //move
-        grid[playerY][playerX] = 9; //set new player location
+        grid[playerY][playerX] = 90; //set new player location
     }
     else if (grid[playerY][playerX-1] === 0 && nearTree) {
       grid[playerY][playerX] = 0; //reset old location to white
       playerX--; //move
-      grid[playerY][playerX] = 10; //set new player location
+      grid[playerY][playerX] = 100; //set new player location
       nearTree = false;
     }
   }
@@ -78,12 +86,12 @@ function keyPressed() {
     if (grid[playerY-1][playerX] === 0) {
         grid[playerY][playerX] = 0; //reset old location to white
         playerY--; //move
-        grid[playerY][playerX] = 9; //set new player location
+        grid[playerY][playerX] = 90; //set new player location
     }
     else if (grid[playerY-1][playerX] === 0 && nearTree) {
       grid[playerY][playerX] = 0; //reset old location to white
       playerY--; //move
-      grid[playerY][playerX] = 10; //set new player location
+      grid[playerY][playerX] = 100; //set new player location
       nearTree = false;
     }
   }
@@ -92,12 +100,12 @@ function keyPressed() {
     if (grid[playerY+1][playerX] === 0) {
         grid[playerY][playerX] = 0; //reset old location to white
         playerY++; //move
-        grid[playerY][playerX] = 9; //set new player location
+        grid[playerY][playerX] = 90; //set new player location
     } 
     else if (grid[playerY+1][playerX] === 0 && nearTree) {
       grid[playerY][playerX] = 0; //reset old location to white
       playerY++; //move
-      grid[playerY][playerX] = 10; //set new player location
+      grid[playerY][playerX] = 100; //set new player location
       nearTree = false;
     }
   }
@@ -113,6 +121,7 @@ function displayGrid(grid) {
 
       if (grid[y][x] === 0) {
         fill("white");
+        image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
       if (grid[y][x] === 1) {
         image(grassImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
@@ -123,14 +132,38 @@ function displayGrid(grid) {
       if (grid[y][x] === 3){
         image(bottomtreeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      
+      if (grid[y][x] === 4){
+        image(houseTLImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 5){
+        image(houseTMImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 6){
+        image(houseTRImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 7){
+        image(houseBLImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 8){
+        image(houseBMImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 9){
+        image(houseBRImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 10){
+        image(path1Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 11){
+        image(path2Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
 
 
-      if (grid[y][x] === 9) {
+
+      if (grid[y][x] === 90) {
         fill("white");
         image(zenImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 10) {
+      if (grid[y][x] === 100) {
         image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
         image(zenImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
@@ -157,19 +190,50 @@ function mousePressed() {
   let xPos = Math.floor(mouseX/cellWidth);
   let yPos = Math.floor(mouseY/cellHeight);
 
-  if (grid[yPos][xPos] === 0) {
-    grid[yPos][xPos] = 1;
-  }
-  else if (grid[yPos][xPos] === 1) {
-    grid[yPos][xPos] = 2;
-  }
-  else if (grid[yPos][xPos] === 2) {
-    grid[yPos][xPos] = 3;
-  }
-  else if (grid[yPos][xPos] === 3) {
-    grid[yPos][xPos] = 0;
-  }
-}
+    if (mouseButton === LEFT){
+        if (grid[yPos][xPos] === 0) {
+          grid[yPos][xPos] = 1;
+        }
+        else if (grid[yPos][xPos] === 1) {
+          grid[yPos][xPos] = 2;
+        }
+        else if (grid[yPos][xPos] === 2) {
+          grid[yPos][xPos] = 3;
+        }
+        else if (grid[yPos][xPos] === 3) {
+          grid[yPos][xPos] = 4;
+        }
+        else if (grid[yPos][xPos] === 4) {
+          grid[yPos][xPos] = 5;
+        }
+        else if (grid[yPos][xPos] === 5) {
+          grid[yPos][xPos] = 6;
+        }
+        else if (grid[yPos][xPos] === 6) {
+          grid[yPos][xPos] = 7;
+        }
+        else if (grid[yPos][xPos] === 7) {
+          grid[yPos][xPos] = 8;
+        }
+        else if (grid[yPos][xPos] === 8) {
+          grid[yPos][xPos] = 9;
+        }
+        else if (grid[yPos][xPos] === 9) {
+          grid[yPos][xPos] = 10;
+        }
+        else if (grid[yPos][xPos] === 10) {
+          grid[yPos][xPos] = 11;
+        }
+        else if (grid[yPos][xPos] === 11) {
+          grid[yPos][xPos] = 12;
+        }
+      }
+      
+    if (mouseButton === CENTER){
+        grid[yPos][xPos] = 0;
+      }
+    }
+
 
 function create2dArray(COLS, ROWS) {
   let emptyArray = [];
