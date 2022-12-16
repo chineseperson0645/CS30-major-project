@@ -15,6 +15,8 @@ let playerX = 0;
 let playerY = 0;
 
 let nearTree = false;
+let nearPath = false;
+normalExecution = false;
 
 let grassImg, rockImg, horseImg, treeImg, zenImg, bottomtreeImg, houseTLImg, houseTMImg, houseTRImg, houseBLImg, houseBMImg, houseBRImg, path1, path2;
 let forestPathJSON;
@@ -42,7 +44,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   cellWidth = width/COLS;
   cellHeight = height/ROWS;
-  grid = createRandom2dArray(COLS, ROWS);
+  grid = create2dArray(COLS, ROWS);
   // grid = forestPathJSON;
 
   //place player in grid
@@ -53,11 +55,21 @@ function draw() {
   background("white");
   // image(grayImg, 0, 0, width, height);
   displayGrid(grid);
-  // surroundingCheck();
+  surroundingCheck();
 }
 
+// function whichToExecuteCheck(){
+//   if (key === "d") {
+//     //SO IF this spot is blank (0) update the player location (playerX++) draw in that direction with a horse
+//       if (grid[playerY][playerX+1] === 0) {
+//         grid[playerY][playerX] = 0; //reset old location to white
+//         playerX++; //move
+//         grid[playerY][playerX] = 90; //set new player location
+//         }
+//       }
+//     }
 
-function whateversHere(){
+function whateverMoveableIsHere(){
   
 }
 
@@ -67,60 +79,90 @@ function keyPressed() {
   if (key === "d") {
   //SO IF this spot is blank (0) update the player location (playerX++) draw in that direction with a horse
     if (grid[playerY][playerX+1] === 0) {
-        grid[playerY][playerX] = 0; //reset old location to white
-        playerX++; //move
-        grid[playerY][playerX] = 90; //set new player location
+      normalExecution = true;
+      grid[playerY][playerX] = 0; //reset old location to white
+      playerX++; //move
+      grid[playerY][playerX] = 90; //set new player location
       }
+    if (grid[playerY][playerX+1] === 0 === false){
+      normalExecution = false;
+      console.log("not normal!")
     }
-    else if (grid[playerY][playerX+1] === 0 && nearTree) {
+    else if (grid[playerY][playerX+1] === 4 || grid[playerY][playerX+1] === 5 && nearPath && !normalExecution) {
       grid[playerY][playerX] = 0; //reset old location to white
       playerX++; //move
       grid[playerY][playerX] = 100; //set new player location
-      nearTree = false;
-      }
+      console.log("near path");
+      nearPath = false;
+      }  
+    }    
 
   if (key === "a") {
     if (grid[playerY][playerX-1] === 0) {
-        grid[playerY][playerX] = 0; //reset old location to white
-        playerX--; //move
-        grid[playerY][playerX] = 90; //set new player location
+      normalExecution = true;
+      grid[playerY][playerX] = 0; //reset old location to white
+      playerX--; //move
+      grid[playerY][playerX] = 90; //set new player location
     }
-    else if (grid[playerY][playerX-1] === 0 && nearTree) {
+    if (grid[playerY][playerX-1] === 0 === false){
+      normalExecution = false;
+      console.log("not normal!")
+    }
+    else if (grid[playerY][playerX-1] === 4 || grid[playerY][playerX-1] === 5 && nearPath && !normalExecution) {
       grid[playerY][playerX] = 0; //reset old location to white
       playerX--; //move
       grid[playerY][playerX] = 100; //set new player location
-      nearTree = false;
-    }
+      console.log("near path");
+      nearPath = false;
+    }  
   }
 
   if (key === "w") {
     if (grid[playerY-1][playerX] === 0) {
-        grid[playerY][playerX] = 0; //reset old location to white
-        playerY--; //move
-        grid[playerY][playerX] = 90; //set new player location
+      normalExecution = true;
+      grid[playerY][playerX] = 0; //reset old location to white
+      playerY--; //move
+      grid[playerY][playerX] = 90; //set new player location
     }
-    else if (grid[playerY-1][playerX] === 0 && nearTree) {
+    if (grid[playerY-1][playerX] === 0 === false){
+      normalExecution = false;
+      console.log("not normal!")
+    }
+    else if (grid[playerY-1][playerX] === 4 || grid[playerY-1][playerX] === 5 && nearPath && !normalExecution) {
       grid[playerY][playerX] = 0; //reset old location to white
       playerY--; //move
       grid[playerY][playerX] = 100; //set new player location
-      nearTree = false;
-    }
+      console.log("near path");
+      nearPath = false;
+    }  
   }
 
   if (key === "s" ) {
     if (grid[playerY+1][playerX] === 0) {
-        grid[playerY][playerX] = 0; //reset old location to white
-        playerY++; //move
-        grid[playerY][playerX] = 90; //set new player location
-    } 
-    else if (grid[playerY+1][playerX] === 0 && nearTree) {
+      normalExecution = true;
+      grid[playerY][playerX] = 0; //reset old location to white
+      playerY++; //move
+      grid[playerY][playerX] = 90; //set new player location
+    }
+    if (grid[playerY+1][playerX] === 0 === false){
+      normalExecution = false;
+      console.log("not normal!")
+    }
+    else if (grid[playerY+1][playerX] === 4 || grid[playerY+1][playerX] === 5 && nearPath && !normalExecution) {
       grid[playerY][playerX] = 0; //reset old location to white
       playerY++; //move
       grid[playerY][playerX] = 100; //set new player location
-      nearTree = false;
-    }
+      console.log("near path");
+      nearPath = false;
+    }  
   }
 }
+
+//if (grid[playerY][playerX+1] === 0 === false || grid[playerY][playerX+1] === 1 === false){
+//if (grid[playerY][playerX-1] === 0 === false || grid[playerY][playerX-1] === 1 === false){
+//if (grid[playerY-1][playerX] === 0 === false || grid[playerY-1][playerX] === 1 === false){
+//if (grid[playerY+1][playerX] === 0 === false || grid[playerY+1][playerX] === 1 === false){
+
 
 //Current problem is that it detects it nearTree (or near one) and adds the playerX or Y twice because it's also moving from whitespace.
 //If moved into a certain grid position. Player X and Y are still tracked.
@@ -135,18 +177,15 @@ function displayGrid(grid) {
         image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
       if (grid[y][x] === 1) {
-        image(bottomtreeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+        image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
       if (grid[y][x] === 2) {
-        image(path1Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+        image(bottomtreeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
       if (grid[y][x] === 3){
-        image(path2Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-      }
-      if (grid[y][x] === 4){
         image(path1Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 5){
+      if (grid[y][x] === 4){
         image(path2Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
 
@@ -186,9 +225,14 @@ function displayGrid(grid) {
 }
 
 function surroundingCheck(){
-  //  Down Arrow                        Left Arrow                        Right Arrow
-  if (grid[playerY+1][playerX] === 2 || grid[playerY][playerX-1] === 2 || grid[playerY][playerX+1] === 2){
-    nearTree = true;
+  if (grid[playerY][playerX+1] === 3 && playerX++ || grid[playerY][playerX+1] === 4 && playerX++){ // D
+    nearPath = true;
+  }
+  else if (grid[playerY+1][playerX] === 3 && playerY++ || grid[playerY+1][playerX] === 4 && playerY++){ // S  
+    nearPath = true;
+  }
+  else if (grid[playerY][playerX-1] === 3 && playerY-- || grid[playerY][playerX-1] === 4 && playerY--){ // A 
+    nearPath = true;
   }
 }
 
