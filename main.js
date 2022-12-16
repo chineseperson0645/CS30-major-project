@@ -48,7 +48,7 @@ function setup() {
   // grid = forestPathJSON;
 
   //place player in grid
-  grid[playerY][playerX] = 90;
+  grid[playerY+5][playerX+5] = 90;
 }
 
 function draw() {
@@ -73,6 +73,20 @@ function whateverMoveableIsHere(){
   
 }
 
+function surroundingCheck(){
+  if (grid[playerY][playerX+1] === 3 || grid[playerY][playerX+1] === 4){ // D
+    nearPath = true;
+  }
+  else if (grid[playerY+1][playerX] === 3 || grid[playerY+1][playerX] === 4){ // S  
+    nearPath = true;
+  }
+  else if (grid[playerY][playerX-1] === 3 || grid[playerY][playerX-1] === 4){ // A 
+    nearPath = true;
+  }
+  else if (grid[playerY-1][playerX] === 3 || grid[playerY-1][playerX] === 4){ // A 
+    nearPath = true;
+  }
+}
 
 //Allows Horse to pass through (and draw over) a image
 function keyPressed() {
@@ -84,7 +98,7 @@ function keyPressed() {
       playerX++; //move
       grid[playerY][playerX] = 90; //set new player location
       }
-    if (grid[playerY][playerX+1] === 0 === false){
+    if (grid[playerY][playerX+1] !== 0){
       normalExecution = false;
       console.log("not normal!")
     }
@@ -104,7 +118,7 @@ function keyPressed() {
       playerX--; //move
       grid[playerY][playerX] = 90; //set new player location
     }
-    if (grid[playerY][playerX-1] === 0 === false){
+    if (grid[playerY][playerX-1] !== 0){
       normalExecution = false;
       console.log("not normal!")
     }
@@ -124,7 +138,7 @@ function keyPressed() {
       playerY--; //move
       grid[playerY][playerX] = 90; //set new player location
     }
-    if (grid[playerY-1][playerX] === 0 === false){
+    if (grid[playerY-1][playerX] !== 0){
       normalExecution = false;
       console.log("not normal!")
     }
@@ -144,7 +158,7 @@ function keyPressed() {
       playerY++; //move
       grid[playerY][playerX] = 90; //set new player location
     }
-    if (grid[playerY+1][playerX] === 0 === false){
+    if (grid[playerY+1][playerX] !== 0){
       normalExecution = false;
       console.log("not normal!")
     }
@@ -224,17 +238,7 @@ function displayGrid(grid) {
   }
 }
 
-function surroundingCheck(){
-  if (grid[playerY][playerX+1] === 3 && playerX++ || grid[playerY][playerX+1] === 4 && playerX++){ // D
-    nearPath = true;
-  }
-  else if (grid[playerY+1][playerX] === 3 && playerY++ || grid[playerY+1][playerX] === 4 && playerY++){ // S  
-    nearPath = true;
-  }
-  else if (grid[playerY][playerX-1] === 3 && playerY-- || grid[playerY][playerX-1] === 4 && playerY--){ // A 
-    nearPath = true;
-  }
-}
+
 
 //There is something spesifically wrong with
 // grid[playerY-1][playerX] === 2 && playerY--
