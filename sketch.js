@@ -54,18 +54,23 @@ function setup() {
     x: 0,
     y: 0
   },
-  position: {
+  postion: {
     x: 0, 
     y: 0
-  }
+  },
 })
 
 }
 
 function draw() {
   background(220);
+
+  
   image(bgImage, 0, 0, width, height);
   player1.move();
+  playerEx.update(); 
+  playerEx.display();
+  
    
 }
 
