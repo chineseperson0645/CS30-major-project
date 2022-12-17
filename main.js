@@ -49,7 +49,6 @@ function setup() {
 
 function draw() {
   background("white");
-  // image(grayImg, 0, 0, width, height);
   displayGrid(grid);
   surroundingCheck();
 }
@@ -69,6 +68,7 @@ function draw() {
   
 // }
 
+//If near border or teleport blocks don't call not normal. Make teleport blocks just path images.
 
 let nearTree = false;
 let nearPath = false;
@@ -89,30 +89,45 @@ function surroundingCheck(){
   if (grid[playerY][playerX+1] === 3 || grid[playerY][playerX+1] === 4){ // D
     nearPathRight = true;
   }
-  else if (grid[playerY+1][playerX] === 3 || grid[playerY+1][playerX] === 4){ // S  
+  if (grid[playerY+1][playerX] === 3 || grid[playerY+1][playerX] === 4){ // S  
     nearPathDown = true;
   }
-  else if (grid[playerY][playerX-1] === 3 || grid[playerY][playerX-1] === 4){ // A 
+  if (grid[playerY][playerX-1] === 3 || grid[playerY][playerX-1] === 4){ // A 
     nearPathLeft = true;
   }
-  // else if (grid[playerY-1][playerX] === 3 || grid[playerY-1][playerX] === 4){ // A 
+  // if (grid[playerY-1][playerX] === 3 || grid[playerY-1][playerX] === 4){ // A 
   //   nearPathForward = true;
   // }
   if (grid[playerY][playerX+1] !== 0 || grid[playerY][playerX+1] !== 1){ //No longer going to just be trees around you.
     normalExecution = false;
     console.log("not normal!");
   }
+  else if (grid[playerY][playerX+1] === 0 || grid[playerY][playerX+1] === 1){ //No longer going to just be trees around you.
+    normalExecution = true;
+  }
+
   if (grid[playerY][playerX-1] !== 0 || grid[playerY][playerX-1] !== 1){
     normalExecution = false;
     console.log("not normal!");
   }
+  else if (grid[playerY][playerX-1] === 0 || grid[playerY][playerX-1] === 1){
+    normalExecution = true;
+  }
+
   // if (grid[playerY-1][playerX] !== 0 || grid[playerY-1][playerX] !== 1){
   //   normalExecution = false;
   //   console.log("not normal!");
   // }
+  // else if (grid[playerY-1][playerX] === 0 || grid[playerY-1][playerX] === 1){
+  //   normalExecution = true;
+  // }
+
   if (grid[playerY+1][playerX] !== 0 || grid[playerY+1][playerX] !== 1){
     normalExecution = false;
-    console.log("not normal!")
+    console.log("not normal!");
+  }
+  else if (grid[playerY+1][playerX] === 0 || grid[playerY+1][playerX] === 1){
+    normalExecution = true;
   }
 }
 
@@ -188,12 +203,6 @@ function keyPressed() {
   }
 }
 
-//if (grid[playerY][playerX+1] === 0 === false || grid[playerY][playerX+1] === 1 === false){
-//if (grid[playerY][playerX-1] === 0 === false || grid[playerY][playerX-1] === 1 === false){
-//if (grid[playerY-1][playerX] === 0 === false || grid[playerY-1][playerX] === 1 === false){
-//if (grid[playerY+1][playerX] === 0 === false || grid[playerY+1][playerX] === 1 === false){
-
-
 //Current problem is that it detects it nearTree (or near one) and adds the playerX or Y twice because it's also moving from whitespace.
 //If moved into a certain grid position. Player X and Y are still tracked.
 //But if nearTree is true. Draw a 10 instead of a 9. (10 can just be a tree ontop of a tree)
@@ -203,7 +212,6 @@ function displayGrid(grid) {
     for (let x=0; x<COLS; x++) {
 
       if (grid[y][x] === 0) {
-        fill("white");
         image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
       if (grid[y][x] === 1) {
@@ -253,7 +261,6 @@ function displayGrid(grid) {
     }
   }
 }
-
 
 
 //There is something spesifically wrong with
