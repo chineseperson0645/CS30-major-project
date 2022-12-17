@@ -14,10 +14,6 @@ let cellHeight;
 let playerX = 0;
 let playerY = 0;
 
-let nearTree = false;
-let nearPath = false;
-normalExecution = false;
-
 let grassImg, rockImg, horseImg, treeImg, zenImg, bottomtreeImg, houseTLImg, houseTMImg, houseTRImg, houseBLImg, houseBMImg, houseBRImg, path1, path2;
 let forestPathJSON;
 
@@ -48,7 +44,7 @@ function setup() {
   // grid = forestPathJSON;
 
   //place player in grid
-  grid[playerY+5][playerX+5] = 90;
+  grid[playerY][playerX] = 90;
 }
 
 function draw() {
@@ -69,22 +65,54 @@ function draw() {
 //       }
 //     }
 
-function whateverMoveableIsHere(){
+// function whateverMoveableIsHere(){
   
-}
+// }
+
+
+let nearTree = false;
+let nearPath = false;
+let normalExecution = false;
+
+let nearPathLeft;
+let nearPathDown;
+let nearPathRight;
+let nearPathForward;
+
+
+//not normal keeps being called, even though conditions seem to not be met (check synatx).
+//"Dead spots" keep appearing after you draw over images with player
+//W still is broken
+
 
 function surroundingCheck(){
   if (grid[playerY][playerX+1] === 3 || grid[playerY][playerX+1] === 4){ // D
-    nearPath = true;
+    nearPathRight = true;
   }
   else if (grid[playerY+1][playerX] === 3 || grid[playerY+1][playerX] === 4){ // S  
-    nearPath = true;
+    nearPathDown = true;
   }
   else if (grid[playerY][playerX-1] === 3 || grid[playerY][playerX-1] === 4){ // A 
-    nearPath = true;
+    nearPathLeft = true;
   }
-  else if (grid[playerY-1][playerX] === 3 || grid[playerY-1][playerX] === 4){ // A 
-    nearPath = true;
+  // else if (grid[playerY-1][playerX] === 3 || grid[playerY-1][playerX] === 4){ // A 
+  //   nearPathForward = true;
+  // }
+  if (grid[playerY][playerX+1] !== 0 || grid[playerY][playerX+1] !== 1){ //No longer going to just be trees around you.
+    normalExecution = false;
+    console.log("not normal!");
+  }
+  if (grid[playerY][playerX-1] !== 0 || grid[playerY][playerX-1] !== 1){
+    normalExecution = false;
+    console.log("not normal!");
+  }
+  // if (grid[playerY-1][playerX] !== 0 || grid[playerY-1][playerX] !== 1){
+  //   normalExecution = false;
+  //   console.log("not normal!");
+  // }
+  if (grid[playerY+1][playerX] !== 0 || grid[playerY+1][playerX] !== 1){
+    normalExecution = false;
+    console.log("not normal!")
   }
 }
 
@@ -92,22 +120,19 @@ function surroundingCheck(){
 function keyPressed() {
   if (key === "d") {
   //SO IF this spot is blank (0) update the player location (playerX++) draw in that direction with a horse
-    if (grid[playerY][playerX+1] === 0) {
+    if (grid[playerY][playerX+1] === 0) { //Allows walk over trees
       normalExecution = true;
       grid[playerY][playerX] = 0; //reset old location to white
       playerX++; //move
-      grid[playerY][playerX] = 90; //set new player location
-      }
-    if (grid[playerY][playerX+1] !== 0){
-      normalExecution = false;
-      console.log("not normal!")
+      grid[playerY][playerX] = 90; //set new player location (current)
     }
-    else if (grid[playerY][playerX+1] === 4 || grid[playerY][playerX+1] === 5 && nearPath && !normalExecution) {
+
+    else if (grid[playerY][playerX+1] === 3 && nearPathRight === true && normalExecution === false || grid[playerY][playerX+1] === 4 && nearPath === true && normalExecution === false) {
       grid[playerY][playerX] = 0; //reset old location to white
       playerX++; //move
-      grid[playerY][playerX] = 100; //set new player location
-      console.log("near path");
-      nearPath = false;
+      grid[playerY][playerX] = 100; //set new player location (current)
+      console.log("Right");
+      nearPathRight = false;
       }  
     }    
 
@@ -118,16 +143,13 @@ function keyPressed() {
       playerX--; //move
       grid[playerY][playerX] = 90; //set new player location
     }
-    if (grid[playerY][playerX-1] !== 0){
-      normalExecution = false;
-      console.log("not normal!")
-    }
-    else if (grid[playerY][playerX-1] === 4 || grid[playerY][playerX-1] === 5 && nearPath && !normalExecution) {
+
+    else if (grid[playerY][playerX-1] === 3 && nearPathLeft === true && normalExecution === false || grid[playerY][playerX-1] === 4 && nearPath === true && normalExecution === false) {
       grid[playerY][playerX] = 0; //reset old location to white
       playerX--; //move
       grid[playerY][playerX] = 100; //set new player location
-      console.log("near path");
-      nearPath = false;
+      console.log("Left");
+      nearPathLeft = false;
     }  
   }
 
@@ -138,16 +160,13 @@ function keyPressed() {
       playerY--; //move
       grid[playerY][playerX] = 90; //set new player location
     }
-    if (grid[playerY-1][playerX] !== 0){
-      normalExecution = false;
-      console.log("not normal!")
-    }
-    else if (grid[playerY-1][playerX] === 4 || grid[playerY-1][playerX] === 5 && nearPath && !normalExecution) {
+
+    else if (grid[playerY-1][playerX] === 3 && nearPathForward === true && normalExecution === false || grid[playerY-1][playerX] === 4 && nearPath === true && normalExecution === false) {
       grid[playerY][playerX] = 0; //reset old location to white
       playerY--; //move
       grid[playerY][playerX] = 100; //set new player location
-      console.log("near path");
-      nearPath = false;
+      console.log("Forward");
+      nearPathForward = false;
     }  
   }
 
@@ -158,16 +177,13 @@ function keyPressed() {
       playerY++; //move
       grid[playerY][playerX] = 90; //set new player location
     }
-    if (grid[playerY+1][playerX] !== 0){
-      normalExecution = false;
-      console.log("not normal!")
-    }
-    else if (grid[playerY+1][playerX] === 4 || grid[playerY+1][playerX] === 5 && nearPath && !normalExecution) {
+
+    else if (grid[playerY+1][playerX] === 3 && nearPathDown === true && normalExecution === false || grid[playerY+1][playerX] === 4 && nearPath === true && normalExecution === false) {
       grid[playerY][playerX] = 0; //reset old location to white
       playerY++; //move
       grid[playerY][playerX] = 100; //set new player location
-      console.log("near path");
-      nearPath = false;
+      console.log("Down");
+      nearPathDown = false;
     }  
   }
 }
