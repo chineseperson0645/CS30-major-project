@@ -4,6 +4,12 @@
 
 //Notes:
 //Could possibly use gifs for player and npc movement in 2d array mode.
+//If near border or teleport blocks don't call not normal. Make teleport blocks just path images.
+
+//For some odd reason (undetermined). Dead spots keep appearing occationally when player is around path
+//(usually one block gap between path and player, with a tree being in that one block gap being a dead spot ---> 3 - 0 - 90).
+//Dead spots are blocks where you cannot move into them via any direction (WASD)
+
 
 const ROWS = 25; //y axis (in reality)
 const COLS = 35; //x axis (in reality)
@@ -53,26 +59,9 @@ function draw() {
   surroundingCheck();
 }
 
-// function whichToExecuteCheck(){
-//   if (key === "d") {
-//     //SO IF this spot is blank (0) update the player location (playerX++) draw in that direction with a horse
-//       if (grid[playerY][playerX+1] === 0) {
-//         grid[playerY][playerX] = 0; //reset old location to white
-//         playerX++; //move
-//         grid[playerY][playerX] = 90; //set new player location
-//         }
-//       }
-//     }
-
 // function whateverMoveableIsHere(){
   
 // }
-
-//If near border or teleport blocks don't call not normal. Make teleport blocks just path images.
-
-let nearTree = false;
-let nearPath = false;
-let normalExecution = false;
 
 let nearPathLeft;
 let nearPathDown;
@@ -98,54 +87,21 @@ function surroundingCheck(){
   // if (grid[playerY-1][playerX] === 3 || grid[playerY-1][playerX] === 4){ // A 
   //   nearPathForward = true;
   // }
-  if (grid[playerY][playerX+1] !== 0 || grid[playerY][playerX+1] !== 1){ //No longer going to just be trees around you.
-    normalExecution = false;
-    console.log("not normal!");
-  }
-  else if (grid[playerY][playerX+1] === 0 || grid[playerY][playerX+1] === 1){ //No longer going to just be trees around you.
-    normalExecution = true;
-  }
-
-  if (grid[playerY][playerX-1] !== 0 || grid[playerY][playerX-1] !== 1){
-    normalExecution = false;
-    console.log("not normal!");
-  }
-  else if (grid[playerY][playerX-1] === 0 || grid[playerY][playerX-1] === 1){
-    normalExecution = true;
-  }
-
-  // if (grid[playerY-1][playerX] !== 0 || grid[playerY-1][playerX] !== 1){
-  //   normalExecution = false;
-  //   console.log("not normal!");
-  // }
-  // else if (grid[playerY-1][playerX] === 0 || grid[playerY-1][playerX] === 1){
-  //   normalExecution = true;
-  // }
-
-  if (grid[playerY+1][playerX] !== 0 || grid[playerY+1][playerX] !== 1){
-    normalExecution = false;
-    console.log("not normal!");
-  }
-  else if (grid[playerY+1][playerX] === 0 || grid[playerY+1][playerX] === 1){
-    normalExecution = true;
-  }
 }
 
-//Allows Horse to pass through (and draw over) a image
 function keyPressed() {
   if (key === "d") {
   //SO IF this spot is blank (0) update the player location (playerX++) draw in that direction with a horse
     if (grid[playerY][playerX+1] === 0) { //Allows walk over trees
-      normalExecution = true;
       grid[playerY][playerX] = 0; //reset old location to white
       playerX++; //move
       grid[playerY][playerX] = 90; //set new player location (current)
     }
 
-    else if (grid[playerY][playerX+1] === 3 && nearPathRight === true && normalExecution === false || grid[playerY][playerX+1] === 4 && nearPath === true && normalExecution === false) {
+    else if (grid[playerY][playerX+1] === 3 && nearPathRight === true || grid[playerY][playerX+1] === 4 && nearPathRight === true) {
       grid[playerY][playerX] = 0; //reset old location to white
       playerX++; //move
-      grid[playerY][playerX] = 100; //set new player location (current)
+      grid[playerY][playerX] = 91; //set new player location (current)
       console.log("Right");
       nearPathRight = false;
       }  
@@ -153,55 +109,88 @@ function keyPressed() {
 
   if (key === "a") {
     if (grid[playerY][playerX-1] === 0) {
-      normalExecution = true;
       grid[playerY][playerX] = 0; //reset old location to white
       playerX--; //move
       grid[playerY][playerX] = 90; //set new player location
     }
 
-    else if (grid[playerY][playerX-1] === 3 && nearPathLeft === true && normalExecution === false || grid[playerY][playerX-1] === 4 && nearPath === true && normalExecution === false) {
+    else if (grid[playerY][playerX-1] === 3 && nearPathLeft === true || grid[playerY][playerX-1] === 4 && nearPathLeft === true) {
       grid[playerY][playerX] = 0; //reset old location to white
       playerX--; //move
-      grid[playerY][playerX] = 100; //set new player location
+      grid[playerY][playerX] = 91; //set new player location
       console.log("Left");
       nearPathLeft = false;
     }  
   }
 
-  if (key === "w") {
+  if (key === "w") { //UP
     if (grid[playerY-1][playerX] === 0) {
-      normalExecution = true;
       grid[playerY][playerX] = 0; //reset old location to white
       playerY--; //move
       grid[playerY][playerX] = 90; //set new player location
     }
 
-    else if (grid[playerY-1][playerX] === 3 && nearPathForward === true && normalExecution === false || grid[playerY-1][playerX] === 4 && nearPath === true && normalExecution === false) {
+    else if (grid[playerY-1][playerX] === 3 && nearPathForward === true || grid[playerY-1][playerX] === 4 && nearPathForward === true) {
       grid[playerY][playerX] = 0; //reset old location to white
       playerY--; //move
-      grid[playerY][playerX] = 100; //set new player location
+      grid[playerY][playerX] = 91; //set new player location
       console.log("Forward");
       nearPathForward = false;
     }  
   }
 
-  if (key === "s" ) {
+  if (key === "s" ) { //DOWN
     if (grid[playerY+1][playerX] === 0) {
-      normalExecution = true;
       grid[playerY][playerX] = 0; //reset old location to white
       playerY++; //move
       grid[playerY][playerX] = 90; //set new player location
     }
-
-    else if (grid[playerY+1][playerX] === 3 && nearPathDown === true && normalExecution === false || grid[playerY+1][playerX] === 4 && nearPath === true && normalExecution === false) {
+    else if (grid[playerY+1][playerX] === 3 && nearPathDown === true) {
       grid[playerY][playerX] = 0; //reset old location to white
       playerY++; //move
-      grid[playerY][playerX] = 100; //set new player location
+      grid[playerY][playerX] = 91; //set new player location
       console.log("Down");
       nearPathDown = false;
-    }  
+    }
+    else if (grid[playerY+1][playerX] === 4 && nearPathDown === true){
+      grid[playerY][playerX] = 0; 
+      playerY++; 
+      grid[playerY][playerX] = 92; 
+      console.log("Down");
+      nearPathDown = false;
+    }
+
+  // check if s key is hit and if player was just on 91
+
+    else if (grid[playerY][playerX] === 91 && justOnPathBehindUs === true){ //When we hit the S key. Checks for if we have an image under us. If so, the following executes...
+      grid[playerY][playerX] = 3; 
+      playerY++; 
+      grid[playerY][playerX] = 90; //Current player location will change back to normal. Can add tree image under us in the future if wanted to (follow same logic as path images)
+      console.log("Down");
+      nearPathDown = false;
+    }
+    else if (grid[playerY][playerX] === 92 && justOnPathBehindUs === true){
+      grid[playerY][playerX] = 4;
+      playerY++; 
+      grid[playerY][playerX] = 90; 
+      console.log("Down");
+      nearPathDown = false;
+    }
   }
 }
+
+if (key === "s") {
+  if (grid[playerY-1][playerX] === 91){
+    
+  }
+}
+
+//We'll also need to make a else if statement to check if we're beside other paths I think and draw other paths instead of just us (90).
+//So when we hit the s key. I want to it to check simotaneously if we're going ontop of a path block or getting off one.
+//We may have to create another function to detect if we're off of the path block. I.e if we were just on grid[playerY+1][playerX] === 92. We need to make justOnPathBehindUs (or something) true.
+//Create another else if function where it sets the path image your on back into a normal path image (3 or 4)
+
+
 
 //Current problem is that it detects it nearTree (or near one) and adds the playerX or Y twice because it's also moving from whitespace.
 //If moved into a certain grid position. Player X and Y are still tracked.
@@ -220,10 +209,10 @@ function displayGrid(grid) {
       if (grid[y][x] === 2) {
         image(bottomtreeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 3){
+      if (grid[y][x] === 3) {
         image(path1Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 4){
+      if (grid[y][x] === 4) {
         image(path2Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
 
@@ -254,8 +243,12 @@ function displayGrid(grid) {
         fill("white");
         image(zenImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 100) {
-        image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      if (grid[y][x] === 91) {
+        image(path1Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+        image(zenImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 92) {
+        image(path2Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
         image(zenImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
     }
@@ -331,22 +324,6 @@ function create2dArray(COLS, ROWS) {
   return emptyArray;
 }
 
-function createRandom2dArray(COLS, ROWS) {
-  let emptyArray = [];
-  for (let y=0; y<ROWS; y++) {
-    emptyArray.push([]);
-    for (let x=0; x<COLS; x++) {
-      if (random(100) < 50) {
-        emptyArray[y].push(0);
-      }
-      else {
-        emptyArray[y].push(1);
-      }
-    }
-  }
-  return emptyArray;
-}
-
 //Doodles/Notes
 
 //control + b to bring up sidebar
@@ -411,3 +388,75 @@ function createRandom2dArray(COLS, ROWS) {
 //   }
 
 // }
+
+
+// not normal check (just do let normalExecution = false and add normalExecution as a needed requirment before entering onto a block)
+
+// let normalExecution = false;
+
+  // if (grid[playerY][playerX+1] !== 0 || grid[playerY][playerX+1] !== 1){ //No longer going to just be trees around you.
+  //   normalExecution = false;
+  //   console.log("not normal!");
+  // }
+  // else if (grid[playerY][playerX+1] === 0 || grid[playerY][playerX+1] === 1){ //No longer going to just be trees around you.
+  //   normalExecution = true;
+  // }
+
+  // if (grid[playerY][playerX-1] !== 0 || grid[playerY][playerX-1] !== 1){
+  //   normalExecution = false;
+  //   console.log("not normal!");
+  // }
+  // else if (grid[playerY][playerX-1] === 0 || grid[playerY][playerX-1] === 1){
+  //   normalExecution = true;
+  // }
+
+  // if (grid[playerY-1][playerX] !== 0 || grid[playerY-1][playerX] !== 1){
+  //   normalExecution = false;
+  //   console.log("not normal!");
+  // }
+  // else if (grid[playerY-1][playerX] === 0 || grid[playerY-1][playerX] === 1){
+  //   normalExecution = true;
+  // }
+
+  // if (grid[playerY+1][playerX] !== 0 || grid[playerY+1][playerX] !== 1){
+  //   normalExecution = false;
+  //   console.log("not normal!");
+  // }
+  // else if (grid[playerY+1][playerX] === 0 || grid[playerY+1][playerX] === 1){
+  //   normalExecution = true;
+  // }
+
+// function createRandom2dArray(COLS, ROWS) {
+//   let emptyArray = [];
+//   for (let y=0; y<ROWS; y++) {
+//     emptyArray.push([]);
+//     for (let x=0; x<COLS; x++) {
+//       if (random(100) < 50) {
+//         emptyArray[y].push(0);
+//       }
+//       else {
+//         emptyArray[y].push(1);
+//       }
+//     }
+//   }
+//   return emptyArray;
+// }
+
+//OG design with normalExecution detection
+// if (key === "d") {
+//   //SO IF this spot is blank (0) update the player location (playerX++) draw in that direction with a horse
+//     if (grid[playerY][playerX+1] === 0) { //Allows walk over trees
+//       normalExecution = true;
+//       grid[playerY][playerX] = 0; //reset old location to white
+//       playerX++; //move
+//       grid[playerY][playerX] = 90; //set new player location (current)
+//     }
+
+//     else if (grid[playerY][playerX+1] === 3 && nearPathRight === true || grid[playerY][playerX+1] === 4 && nearPathRight === true) {
+//       grid[playerY][playerX] = 0; //reset old location to white
+//       playerX++; //move
+//       grid[playerY][playerX] = 91; //set new player location (current)
+//       console.log("Right");
+//       nearPathRight = false;
+//       }  
+//     }  
