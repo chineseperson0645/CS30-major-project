@@ -18,6 +18,6 @@ class Player {
     }
     else {
       this.velocity.y += gravity; 
+    }
   }
-}
 }

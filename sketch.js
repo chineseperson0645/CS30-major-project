@@ -1,6 +1,5 @@
 // CS30 Major Project
 // Anjana Samarasinghe
-//micheal gao is diff
 const gravity = 0.7;  
 
 let playerEx; 
@@ -49,16 +48,16 @@ function setup() {
   player1 = new mainPlayer(runRight,idlePos, jumpPos,runBack, crouch, jumpPosB, move1, 0,0,5,100); 
   timer = 0;
   move1 = true;
-//   playerEx = new Player({
-//     velocity: {
-//     x: 0,
-//     y: 10
-//   },
-//   postion: {
-//     x: 0, 
-//     y: 0
-//   },
-// })
+  playerEx = new Player({
+    velocity: {
+      x: 0,
+      y: 10
+    },
+    postion: {
+      x: 0, 
+      y: 0
+    },
+  }); 
 
 }
 
@@ -68,8 +67,8 @@ function draw() {
   
   image(bgImage, 0, 0, width, height);
   player1.move();
-  // playerEx.update(); 
-  // playerEx.display();
+  playerEx.update(); 
+  playerEx.display();
   
    
 }
