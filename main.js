@@ -84,11 +84,13 @@ function surroundingCheck(){
   if (grid[playerY][playerX-1] === 3 || grid[playerY][playerX-1] === 4){ // A 
     nearPathLeft = true;
   }
-  // if (grid[playerY-1][playerX] === 3 || grid[playerY-1][playerX] === 4){ // A 
+  // if (grid[playerY-1][playerX] === 3 || grid[playerY-1][playerX] === 4){ // W
   //   nearPathForward = true;
   // }
 }
 
+
+//Check if the front of me still exists (Sanity check, example aviable on GOL ex.).
 function keyPressed() {
   if (key === "d") {
   //SO IF this spot is blank (0) update the player location (playerX++) draw in that direction with a horse
@@ -179,11 +181,7 @@ function keyPressed() {
   }
 }
 
-if (key === "s") {
-  if (grid[playerY-1][playerX] === 91){
-    
-  }
-}
+
 
 //We'll also need to make a else if statement to check if we're beside other paths I think and draw other paths instead of just us (90).
 //So when we hit the s key. I want to it to check simotaneously if we're going ontop of a path block or getting off one.
