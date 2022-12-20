@@ -181,6 +181,11 @@ function keyPressed() {
   }
 }
 
+for (let i = 0; i < ROWS; i++){
+  if (gird[playerX][playerY] === ){
+
+  }
+}
 
 
 //We'll also need to make a else if statement to check if we're beside other paths I think and draw other paths instead of just us (90).
