@@ -1,14 +1,16 @@
 class Player {
-  constructor({velocity, postion}){
+  constructor({velocity, postion}, idolePos){
     this.velocity = velocity;
     this.postion = postion;
     this.width = 50; 
     this.height = 150;
+    this.image = idolePos;
   }
 
   display() {
-    fill("blue"); 
-    rect(this.postion.x, this.postion.y, this.width, this.height); 
+    // fill("blue"); 
+    // rect(this.postion.x, this.postion.y, this.width, this.height);
+    image(this.image, this.postion.x, this.postion.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
   }
 
   update() {
@@ -16,7 +18,7 @@ class Player {
     this.postion.x += this.velocity.x; 
     this.postion.y += this.velocity.y;
 
-    if (this.postion.y + this.height + this.velocity.y >= height) {
+    if (this.postion.y + playerHeight + this.velocity.y >= height) {
       this.velocity.y = 0; 
     }
     else {
@@ -25,19 +27,8 @@ class Player {
   }
 
   // movement(){
-  //   window.addEventListener('keyup', (event) => {
-  //     switch (event.key) {
-  //       case 'ArrowRight':
-  //     keys.ArrowRight.pressed = false;
-  //     break
+   
     
-  //   case 'ArrowLeft':
-  //     keys.ArrowLeft.pressed = false;
-  //     break
-    
-  //   case 'ArrowUp':
-  //     keys.ArrowUp.pressed = false;
-  //     break
-  //     }
   // }
+
 }

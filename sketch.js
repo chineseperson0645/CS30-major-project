@@ -1,6 +1,27 @@
 // CS30 Major Project
 // Anjana Samarasinghe
-const gravity = 0.7;  
+const gravity = 0.7;
+
+const keys = {
+  a: {
+    pressed: false
+  },
+  d: {
+    pressed: false
+  },
+  w: {
+    pressed: false
+  },
+  ArrowRight: {
+    pressed: false
+  },
+  ArrowLeft: {
+    pressed: false
+  },
+  ArrowUp: {
+    pressed: false
+  }
+};
 
 let playerEx; 
 let runRight;
@@ -57,7 +78,7 @@ function setup() {
       x: 0, 
       y: 0
     },
-  }); 
+  },idlePos); 
 
 }
 
