@@ -149,6 +149,10 @@ function keyPressed() {
     }  
   }
 
+
+ // standingOn (swithc between values of walkable blocks everytime you move onto or off a block)
+ // So if on block, standingOn === 1 (player ontop for ex.), if move off of block, standing on === 2 (orginal block value)
+ // Constantly changing 
   if (key === "s" ) { //DOWN
     if (grid[playerY+1][playerX] === 0) {
       grid[playerY][playerX] = 0; //reset old location to white
@@ -161,6 +165,7 @@ function keyPressed() {
       grid[playerY][playerX] = 91; //set new player location
       console.log("Down");
       nearPathDown = false;
+      // standingOnDown = true;
     }
     else if (grid[playerY+1][playerX] === 4 && nearPathDown === true){
       grid[playerY][playerX] = 0; 
@@ -189,9 +194,13 @@ function keyPressed() {
   }
 }
 
-// for (let i = 0; i < ROWS; i++){
-//   if (gird[playerX][playerY] === 0){
-
+// function advanceDetection() {
+//   for (let y=0; y<ROWS; y++) {
+//     for (let x=0; x<COLS; x++) {
+//       if (gird[y][x] === 1){
+//         walkableW = true;
+//       }
+//     }
 //   }
 // }
 
@@ -286,7 +295,7 @@ function mousePressed() {
 
     if (mouseButton === LEFT){
         if (grid[yPos][xPos] === 0) {
-          grid[yPos][xPos] = 93;
+          grid[yPos][xPos] = 1;
         }
         else if (grid[yPos][xPos] === 1) {
           grid[yPos][xPos] = 2;
