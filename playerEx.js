@@ -26,9 +26,31 @@ class Player {
     }
   }
 
-  // movement(){
-   
-    
-  // }
+  movement(){
+    if (keys.a.pressed === true && player1.lastKeys === "a") {
+      player1.velocity.x = -5; 
+    }
+    else if (keys.d.pressed === true && player1.lastKeys === "d"){
+      player1.velocity.x = 5; 
+    }
+  
+    window.addEventListener('keydown', (event) => {
+      switch (event.key) {
+      case 'd':
+        keys.d.pressed = true;
+        player1.lastKeys = "d"; 
+        break;
+        
+      case 'a':
+        keys.a.pressed = true;
+        player1.lastKeys = "a"; 
+        break;
+        
+      case 'w':
+        player1.velocity.y = -20; 
+        break;  
+      }
+    });
 
+  }
 }
