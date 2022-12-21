@@ -2,6 +2,16 @@
 // Michael Gao, Anjana Samarasinghe
 // 11/17/2022
 
+
+//COMMIT DAILY WHEN THERES CLASS TIME
+//COMMIT DAILY WHEN THERES CLASS TIME
+//COMMIT DAILY WHEN THERES CLASS TIME
+//COMMIT DAILY WHEN THERES CLASS TIME
+//COMMIT DAILY WHEN THERES CLASS TIME
+//COMMIT DAILY WHEN THERES CLASS TIME
+//COMMIT DAILY WHEN THERES CLASS TIME
+//COMMIT DAILY WHEN THERES CLASS TIME
+
 //Notes:
 //Could possibly use gifs for player and npc movement in 2d array mode.
 //If near border or teleport blocks don't call not normal. Make teleport blocks just path images.
@@ -10,23 +20,20 @@
 //(usually one block gap between path and player, with a tree being in that one block gap being a dead spot ---> 3 - 0 - 90).
 //Dead spots are blocks where you cannot move into them via any direction (WASD)
 
-
 const ROWS = 25; //y axis (in reality)
 const COLS = 35; //x axis (in reality)
 
+// CHANGE PLAYER X AND Y TO CHANGE WHERE PLAYER SPAWS (COULD BE USEFUL FOR TELEPORTATION AND OTHERS IN FUTURE)
 let grid;
 let cellWidth;
 let cellHeight;
-let playerX = 0;
-let playerY = 0;
+let playerX = 1;
+let playerY = 1;
 
-let grassImg, rockImg, horseImg, treeImg, zenImg, bottomtreeImg, houseTLImg, houseTMImg, houseTRImg, houseBLImg, houseBMImg, houseBRImg, path1, path2;
-let forestPathJSON;
+let treeImg, zenImg, bottomtreeImg, houseTLImg, houseTMImg, houseTRImg, houseBLImg, houseBMImg, houseBRImg, path1, path2;
+let forestPathJSON, betaTestJSON;
 
 function preload() {
-  grassImg = loadImage('grass.png');
-  rockImg = loadImage('rock.png');
-  horseImg = loadImage('horse.png');
   treeImg = loadImage('assests/bush.png');
   zenImg = loadImage('assests/zen.gif');
   bottomtreeImg = loadImage('assests/bottomtree.png');
@@ -39,6 +46,7 @@ function preload() {
   path1Img = loadImage('assests/path1.png');
   path2Img = loadImage('assests/path2.png');
 
+  betaTestJSON = loadJSON('JSON-Maps/beta.json');
   forestPathJSON = loadJSON('JSON-Maps/random.json');
 }
 
@@ -47,7 +55,7 @@ function setup() {
   cellWidth = width/COLS;
   cellHeight = height/ROWS;
   grid = create2dArray(COLS, ROWS);
-  // grid = forestPathJSON;
+  grid = betaTestJSON;
 
   //place player in grid
   grid[playerY][playerX] = 90;
@@ -84,9 +92,9 @@ function surroundingCheck(){
   if (grid[playerY][playerX-1] === 3 || grid[playerY][playerX-1] === 4){ // A 
     nearPathLeft = true;
   }
-  // if (grid[playerY-1][playerX] === 3 || grid[playerY-1][playerX] === 4){ // W
-  //   nearPathForward = true;
-  // }
+  if (grid[playerY-1][playerX] === 3 || grid[playerY-1][playerX] === 4){ // W
+    nearPathForward = true;
+  }
 }
 
 
@@ -181,11 +189,11 @@ function keyPressed() {
   }
 }
 
-for (let i = 0; i < ROWS; i++){
-  if (gird[playerX][playerY] === ){
+// for (let i = 0; i < ROWS; i++){
+//   if (gird[playerX][playerY] === 0){
 
-  }
-}
+//   }
+// }
 
 
 //We'll also need to make a else if statement to check if we're beside other paths I think and draw other paths instead of just us (90).
@@ -218,6 +226,7 @@ function displayGrid(grid) {
       if (grid[y][x] === 4) {
         image(path2Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
+      
 
 
 
@@ -254,10 +263,14 @@ function displayGrid(grid) {
         image(path2Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
         image(zenImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
+      if (grid[y][x] === 93) { //BORDER!
+        image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
     }
   }
 }
-
+//IMPLEMENT GRID DETECTION INTO DISPLAYGRID FUNCTION BECAUSE X AND Y ARE ALREADY PRE DEFIEINED.
+//OR MAKE a seperate function following it's format (i.e y<ROWS)
 
 //There is something spesifically wrong with
 // grid[playerY-1][playerX] === 2 && playerY--
@@ -273,7 +286,7 @@ function mousePressed() {
 
     if (mouseButton === LEFT){
         if (grid[yPos][xPos] === 0) {
-          grid[yPos][xPos] = 1;
+          grid[yPos][xPos] = 93;
         }
         else if (grid[yPos][xPos] === 1) {
           grid[yPos][xPos] = 2;
