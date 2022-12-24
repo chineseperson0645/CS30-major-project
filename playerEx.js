@@ -28,11 +28,11 @@ class Player {
   }
 
   movement(){
-    if (keys.a.pressed === true && player1.lastKeys === "a") {
-      player1.velocity.x = -5; 
+    if (keys.a.pressed === true && this.lastKeys === "a") {
+      this.velocity.x = -5; 
     }
-    else if (keys.d.pressed === true && player1.lastKeys === "d"){
-      player1.velocity.x = 5; 
+    else if (keys.d.pressed === true && this.lastKeys === "d"){
+      this.velocity.x = 5; 
     }
   
     window.addEventListener('keydown', (event) => {
