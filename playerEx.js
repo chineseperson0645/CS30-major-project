@@ -5,6 +5,7 @@ class Player {
     this.width = 50; 
     this.height = 150;
     this.image = idolePos;
+    this.lastKeys = ""; 
   }
 
   display() {
@@ -38,16 +39,19 @@ class Player {
       switch (event.key) {
       case 'd':
         keys.d.pressed = true;
-        player1.lastKeys = "d"; 
+        
+        this.lastKeys = "d"; 
         break;
         
       case 'a':
         keys.a.pressed = true;
-        player1.lastKeys = "a"; 
+        
+        this.lastKeys = "a"; 
         break;
         
       case 'w':
-        player1.velocity.y = -20; 
+        
+      this.velocity.y = -20; 
         break;  
       }
     });
