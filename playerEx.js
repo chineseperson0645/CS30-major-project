@@ -54,7 +54,22 @@ class Player {
       this.velocity.y = -20; 
         break;  
       }
-    });
-
+    })
+    
+    window.addEventListener('keyup', (event) => {
+      switch (event.key) {
+        case 'd':
+          keys.d.pressed = false; 
+          break 
+          
+        case 'a':
+          keys.a.pressed = false; 
+          break
+        
+        case 'w':
+          keys.w.pressed = false; 
+          break
+      }
+    })
   }
 }

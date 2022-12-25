@@ -92,6 +92,7 @@ function draw() {
   playerEx.update(); 
   playerEx.display();
   
+
    
 }
 
