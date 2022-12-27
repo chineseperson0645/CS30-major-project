@@ -20,6 +20,10 @@
 //(usually one block gap between path and player, with a tree being in that one block gap being a dead spot ---> 3 - 0 - 90).
 //Dead spots are blocks where you cannot move into them via any direction (WASD)
 
+//Spacebar keycode is 32
+
+// Keep the beta.JSON and build all other maps as modified copies. (because theres a border)
+
 const ROWS = 25; //y axis (in reality)
 const COLS = 35; //x axis (in reality)
 
@@ -47,7 +51,6 @@ function preload() {
   path2Img = loadImage('assests/path2.png');
 
   betaTestJSON = loadJSON('JSON-Maps/beta.json');
-  forestPathJSON = loadJSON('JSON-Maps/random.json');
 }
 
 function setup() {
@@ -68,98 +71,199 @@ function draw() {
 }
 
 // function whateverMoveableIsHere(){
-  
+  //Essientially, if it's movable, allow player to move here.
 // }
 
-let nearPathLeft;
-let nearPathDown;
-let nearPathRight;
-let nearPathForward;
+let nearPathLeft, nearPathDown, nearPathRight, nearPathForward;
+let justOnPathLeftUs, justOnPathBehindUs, justOnPathRightUs, justOnPathFrontUs;
 
 
-//not normal keeps being called, even though conditions seem to not be met (check synatx).
 //"Dead spots" keep appearing after you draw over images with player
 //W still is broken
 
 
 function surroundingCheck(){
-  if (grid[playerY][playerX+1] === 3 || grid[playerY][playerX+1] === 4){ // D
+  if (grid[playerY][playerX+1] === 3 || grid[playerY][playerX+1] === 4){ // D (Opposite is A)
     nearPathRight = true;
+    if (keyPressed(65)){ //Calls once, so essientially if we move a tile off. 
+      justOnPathLeftUs = true;
+      console.log("Just on path Left of us");
+    }
+    else {
+      justOnPathLeftUs = false;
+    }
   }
-  if (grid[playerY+1][playerX] === 3 || grid[playerY+1][playerX] === 4){ // S  
+
+  if (grid[playerY+1][playerX] === 3 || grid[playerY+1][playerX] === 4){ // S (Behind is W)
     nearPathDown = true;
+    if (keyPressed(87)){ //Calls once, so essientially if we move a tile off. 
+      justOnPathFrontUs = true;
+      console.log("Just on path Front of us");
+    }
+    else {
+      justOnPathFrontUs = false;
+    }
   }
-  if (grid[playerY][playerX-1] === 3 || grid[playerY][playerX-1] === 4){ // A 
+
+  if (grid[playerY][playerX-1] === 3 || grid[playerY][playerX-1] === 4){ // A (Opposite is D)
     nearPathLeft = true;
+    if (keyPressed(68)){ //Calls once, so essientially if we move a tile off. 
+      justOnPathRightUs = true;
+      console.log("Just on path Right of us");
+    }
+    else {
+      justOnPathRightUs = false;
+    }
   }
-  if (grid[playerY-1][playerX] === 3 || grid[playerY-1][playerX] === 4){ // W
+
+  if (grid[playerY-1][playerX] === 3 || grid[playerY-1][playerX] === 4){ // W (Behind is S)
     nearPathForward = true;
+    if (keyPressed(83)){ //Calls once, so essientially if we move a tile off. 
+      justOnPathBehindUs = true;
+      console.log("Just on path Behind of us");
+    }
+    else {
+      justOnPathBehindUs = false;
+    }
   }
+
+//If in like a right state, give charcter all the movable charcteristics of movement in regards to going right.
+//Could prolly build into moving itself...
+//Build into first SurroundCheck Segmeent. 
+
+  if (grid[playerY][playerX+1] === 3 || grid[playerY][playerX+1] === 4){ // A 
+    justOnPathLeftUs = true;
+  }
+
+  if (grid[playerY+1][playerX] === 3 || grid[playerY+1][playerX] === 4){ // W
+    justOnPathFrontUs = true;
+  }
+
 }
 
+// 87 === W
+// 65 === A
+// 83 === S
+// 68 === D
 
 //Check if the front of me still exists (Sanity check, example aviable on GOL ex.).
 function keyPressed() {
-  if (key === "d") {
+  if (key === "d") { //D
   //SO IF this spot is blank (0) update the player location (playerX++) draw in that direction with a horse
     if (grid[playerY][playerX+1] === 0) { //Allows walk over trees
       grid[playerY][playerX] = 0; //reset old location to white
       playerX++; //move
       grid[playerY][playerX] = 90; //set new player location (current)
     }
-
-    else if (grid[playerY][playerX+1] === 3 && nearPathRight === true || grid[playerY][playerX+1] === 4 && nearPathRight === true) {
+    else if (grid[playerY][playerX+1] === 3 && nearPathRight === true){
       grid[playerY][playerX] = 0; //reset old location to white
       playerX++; //move
       grid[playerY][playerX] = 91; //set new player location (current)
       console.log("Right");
       nearPathRight = false;
-      }  
-    }    
+    }
+    else if (grid[playerY][playerX+1] === 4 && nearPathRight === true){
+      grid[playerY][playerX] = 0; //reset old location to white
+      playerX++; //move
+      grid[playerY][playerX] = 91; //set new player location (current)
+      console.log("Right");
+      nearPathRight = false;
+    }
+    else if (grid[playerY][playerX] === 91 && justOnPathRightUs === true){ //When we hit the key. Checks for if we have an image under us. If so, the following executes...
+      grid[playerY][playerX] = 3; 
+      playerX++; 
+      grid[playerY][playerX] = 90; //Current player location will change back to normal. Can add tree image under us in the future if wanted to (follow same logic as path images)
+      console.log("Right2");
+      nearPathRight = false;
+    }
+    else if (grid[playerY][playerX] === 92 && justOnPathRightUs === true){
+      grid[playerY][playerX] = 4;
+      playerX++; 
+      grid[playerY][playerX] = 90; 
+      console.log("Right2");
+      nearPathRight = false;
+    }           
+  }    
 
-  if (key === "a") {
+  if (key === "a") { //A
     if (grid[playerY][playerX-1] === 0) {
       grid[playerY][playerX] = 0; //reset old location to white
       playerX--; //move
       grid[playerY][playerX] = 90; //set new player location
     }
-
-    else if (grid[playerY][playerX-1] === 3 && nearPathLeft === true || grid[playerY][playerX-1] === 4 && nearPathLeft === true) {
+    else if (grid[playerY][playerX-1] === 3 && nearPathLeft === true){
       grid[playerY][playerX] = 0; //reset old location to white
       playerX--; //move
       grid[playerY][playerX] = 91; //set new player location
       console.log("Left");
       nearPathLeft = false;
-    }  
+    } 
+    else if (grid[playerY][playerX-1] === 4 && nearPathLeft === true){
+      grid[playerY][playerX] = 0; //reset old location to white
+      playerX--; //move
+      grid[playerY][playerX] = 91; //set new player location
+      console.log("Left");
+      nearPathLeft = false;
+    }   
+    else if (grid[playerY][playerX] === 91 && justOnPathLeftUs === true){ //When we hit the key. Checks for if we have an image under us. If so, the following executes...
+      grid[playerY][playerX] = 3; 
+      playerX--; 
+      grid[playerY][playerX] = 90; //Current player location will change back to normal. Can add tree image under us in the future if wanted to (follow same logic as path images)
+      console.log("Left2");
+      nearPathLeft = false;
+    }
+    else if (grid[playerY][playerX] === 92 && justOnPathLeftUs === true){
+      grid[playerY][playerX] = 4;
+      playerX--; 
+      grid[playerY][playerX] = 90; 
+      console.log("Left2");
+      nearPathLeft = false;
+    }
   }
 
-  if (key === "w") { //UP
+  if (key === "w") { //W
     if (grid[playerY-1][playerX] === 0) {
       grid[playerY][playerX] = 0; //reset old location to white
       playerY--; //move
       grid[playerY][playerX] = 90; //set new player location
     }
-
-    else if (grid[playerY-1][playerX] === 3 && nearPathForward === true || grid[playerY-1][playerX] === 4 && nearPathForward === true) {
+    else if (grid[playerY-1][playerX] === 3 && nearPathForward === true){
       grid[playerY][playerX] = 0; //reset old location to white
       playerY--; //move
       grid[playerY][playerX] = 91; //set new player location
       console.log("Forward");
       nearPathForward = false;
-    }  
+    }
+    else if (grid[playerY-1][playerX] === 4 && nearPathForward === true){
+      grid[playerY][playerX] = 0; 
+      playerY--;; 
+      grid[playerY][playerX] = 92; 
+      console.log("Forward");
+      nearPathForward = false;
+    }
+    else if (grid[playerY][playerX] === 91 && justOnPathFrontUs === true){ //When we hit the key. Checks for if we have an image under us. If so, the following executes...
+      grid[playerY][playerX] = 3; 
+      playerY--;; 
+      grid[playerY][playerX] = 90; //Current player location will change back to normal. Can add tree image under us in the future if wanted to (follow same logic as path images)
+      console.log("Forward2");
+      nearPathForward = false;
+    }
+    else if (grid[playerY][playerX] === 92 && justOnPathFrontUs === true){
+      grid[playerY][playerX] = 4;
+      playerY--;; 
+      grid[playerY][playerX] = 90; 
+      console.log("Forward2");
+      nearPathForward = false;
+    }
   }
 
-
- // standingOn (swithc between values of walkable blocks everytime you move onto or off a block)
- // So if on block, standingOn === 1 (player ontop for ex.), if move off of block, standing on === 2 (orginal block value)
- // Constantly changing 
-  if (key === "s" ) { //DOWN
+  if (key === "s") { //S
     if (grid[playerY+1][playerX] === 0) {
       grid[playerY][playerX] = 0; //reset old location to white
       playerY++; //move
       grid[playerY][playerX] = 90; //set new player location
     }
-    else if (grid[playerY+1][playerX] === 3 && nearPathDown === true) {
+    else if (grid[playerY+1][playerX] === 3 && nearPathDown === true){
       grid[playerY][playerX] = 0; //reset old location to white
       playerY++; //move
       grid[playerY][playerX] = 91; //set new player location
@@ -174,25 +278,51 @@ function keyPressed() {
       console.log("Down");
       nearPathDown = false;
     }
-
-  // check if s key is hit and if player was just on 91
-
-    else if (grid[playerY][playerX] === 91 && justOnPathBehindUs === true){ //When we hit the S key. Checks for if we have an image under us. If so, the following executes...
+    else if (grid[playerY][playerX] === 91 && justOnPathBehindUs === true){ //When we hit the key. Checks for if we have an image under us. If so, the following executes...
       grid[playerY][playerX] = 3; 
       playerY++; 
       grid[playerY][playerX] = 90; //Current player location will change back to normal. Can add tree image under us in the future if wanted to (follow same logic as path images)
-      console.log("Down");
+      console.log("Down2");
       nearPathDown = false;
     }
     else if (grid[playerY][playerX] === 92 && justOnPathBehindUs === true){
       grid[playerY][playerX] = 4;
       playerY++; 
       grid[playerY][playerX] = 90; 
-      console.log("Down");
+      console.log("Down2");
       nearPathDown = false;
     }
   }
 }
+
+// standingOn (swithch between values of walkable blocks everytime you move onto or off a block)
+// So if on block, standingOn === 1 (player ontop for ex.), if move off of block, standingOn === 2 (orginal block value)
+// Constantly changing 
+
+//  function switcherTest(){
+//   if (grid[playerX][playerY] === 1){
+
+//   }
+//  }
+
+ 
+  // check if s key is hit and if player was just on 91
+
+  //   else if (grid[playerY][playerX] === 91 && justOnPathBehindUs === true){ //When we hit the S key. Checks for if we have an image under us. If so, the following executes...
+  //     grid[playerY][playerX] = 3; 
+  //     playerY++; 
+  //     grid[playerY][playerX] = 90; //Current player location will change back to normal. Can add tree image under us in the future if wanted to (follow same logic as path images)
+  //     console.log("Down2");
+  //     nearPathDown = false;
+  //   }
+  //   else if (grid[playerY][playerX] === 92 && justOnPathBehindUs === true){
+  //     grid[playerY][playerX] = 4;
+  //     playerY++; 
+  //     grid[playerY][playerX] = 90; 
+  //     console.log("Down2");
+  //     nearPathDown = false;
+  //   }
+  // }
 
 // function advanceDetection() {
 //   for (let y=0; y<ROWS; y++) {
@@ -209,7 +339,6 @@ function keyPressed() {
 //So when we hit the s key. I want to it to check simotaneously if we're going ontop of a path block or getting off one.
 //We may have to create another function to detect if we're off of the path block. I.e if we were just on grid[playerY+1][playerX] === 92. We need to make justOnPathBehindUs (or something) true.
 //Create another else if function where it sets the path image your on back into a normal path image (3 or 4)
-
 
 
 //Current problem is that it detects it nearTree (or near one) and adds the playerX or Y twice because it's also moving from whitespace.
