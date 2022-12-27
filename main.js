@@ -96,48 +96,48 @@ function surroundingCheck(){
 
   if (grid[playerY+1][playerX] === 3 || grid[playerY+1][playerX] === 4){ // S (Behind is W)
     nearPathDown = true;
-    if (keyPressed(87)){ //Calls once, so essientially if we move a tile off. 
-      justOnPathFrontUs = true;
-      console.log("Just on path Front of us");
-    }
-    else {
-      justOnPathFrontUs = false;
-    }
+    // if (keyPressed(87)){ //Calls once, so essientially if we move a tile off. 
+    //   justOnPathFrontUs = true;
+    //   console.log("Just on path Front of us");
+    // }
+    // else {
+    //   justOnPathFrontUs = false;
+    // }
   }
 
   if (grid[playerY][playerX-1] === 3 || grid[playerY][playerX-1] === 4){ // A (Opposite is D)
     nearPathLeft = true;
-    if (keyPressed(68)){ //Calls once, so essientially if we move a tile off. 
-      justOnPathRightUs = true;
-      console.log("Just on path Right of us");
-    }
-    else {
-      justOnPathRightUs = false;
-    }
+    // if (keyPressed(68)){ //Calls once, so essientially if we move a tile off. 
+    //   justOnPathRightUs = true;
+    //   console.log("Just on path Right of us");
+    // }
+    // else {
+    //   justOnPathRightUs = false;
+    // }
   }
 
   if (grid[playerY-1][playerX] === 3 || grid[playerY-1][playerX] === 4){ // W (Behind is S)
     nearPathForward = true;
-    if (keyPressed(83)){ //Calls once, so essientially if we move a tile off. 
-      justOnPathBehindUs = true;
-      console.log("Just on path Behind of us");
-    }
-    else {
-      justOnPathBehindUs = false;
-    }
+    // if (keyPressed(83)){ //Calls once, so essientially if we move a tile off. 
+    //   justOnPathBehindUs = true;
+    //   console.log("Just on path Behind of us");
+    // }
+    // else {
+    //   justOnPathBehindUs = false;
+    // }
   }
 
 //If in like a right state, give charcter all the movable charcteristics of movement in regards to going right.
 //Could prolly build into moving itself...
 //Build into first SurroundCheck Segmeent. 
 
-  if (grid[playerY][playerX+1] === 3 || grid[playerY][playerX+1] === 4){ // A 
-    justOnPathLeftUs = true;
-  }
+  // if (grid[playerY][playerX+1] === 3 || grid[playerY][playerX+1] === 4){ // A 
+  //   justOnPathLeftUs = true;
+  // }
 
-  if (grid[playerY+1][playerX] === 3 || grid[playerY+1][playerX] === 4){ // W
-    justOnPathFrontUs = true;
-  }
+  // if (grid[playerY+1][playerX] === 3 || grid[playerY+1][playerX] === 4){ // W
+  //   justOnPathFrontUs = true;
+  // }
 
 }
 
@@ -184,6 +184,9 @@ function keyPressed() {
       nearPathRight = false;
     }           
   }    
+//Next step after fixing "getting off a block detection" is most likely changing it so instead of turning the object you get off onto into just our charcter (90). But also turning it 
+//into a block with an image under it (i.e 91)
+
 
   if (key === "a") { //A
     if (grid[playerY][playerX-1] === 0) {
