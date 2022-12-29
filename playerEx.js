@@ -11,12 +11,18 @@ class Player {
       width: 100, 
       height: 50
     }
+    this.isAttacking; 
   
   }
 
   display() {
     image(this.image, this.postion.x, this.postion.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
-    rect(this.attackBox.postion.x, this.attackBox.postion.y, this.attackBox.width, this.attackBox.height); 
+    
+    if (this.isAttacking) {
+      fill("green"); 
+    rect(this.attackBox.postion.x, this.attackBox.postion.y, this.attackBox.width, this.attackBox.height);
+    }
+     
   }
 
   update() {
@@ -30,6 +36,12 @@ class Player {
     else {
       this.velocity.y += gravity;
     }
+  }
+  attack() {
+    this.isAttacking = true;
+    setTimeout(() => {
+      this.isAttacking = false; 
+    }, 100);
   }
 
   movement(){
@@ -57,6 +69,9 @@ class Player {
       case 'w':
       this.velocity.y = -20; 
         break;
+
+      case "e":
+        this.attack(); 
       }
     })
     
