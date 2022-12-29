@@ -5,13 +5,18 @@ class Player {
     this.width = 50; 
     this.height = 150;
     this.image = idolePos;
-    this.lastKeys = ""; 
+    this.lastKeys;
+    this.attackBox = {
+      postion: this.postion,
+      width: 100, 
+      height: 50
+    }
+  
   }
 
   display() {
-    // fill("blue"); 
-    // rect(this.postion.x, this.postion.y, this.width, this.height);
     image(this.image, this.postion.x, this.postion.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
+    rect(this.attackBox.postion.x, this.attackBox.postion.y, this.attackBox.width, this.attackBox.height); 
   }
 
   update() {
@@ -50,20 +55,21 @@ class Player {
         break;
         
       case 'w':
-        
       this.velocity.y = -20; 
-        break;  
+        break;
       }
     })
     
     window.addEventListener('keyup', (event) => {
       switch (event.key) {
         case 'd':
+          this.velocity.x = 0; 
           keys.d.pressed = false; 
           break 
           
         case 'a':
-          keys.a.pressed = false; 
+          keys.a.pressed = false;
+          this.velocity.x = 0; 
           break
         
         case 'w':

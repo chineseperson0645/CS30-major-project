@@ -11,15 +11,6 @@ const keys = {
   },
   w: {
     pressed: false
-  },
-  ArrowRight: {
-    pressed: false
-  },
-  ArrowLeft: {
-    pressed: false
-  },
-  ArrowUp: {
-    pressed: false
   }
 };
 
@@ -72,7 +63,7 @@ function setup() {
   playerEx = new Player({
     velocity: {
       x: 0,
-      y: 10
+      y: 0
     },
     postion: {
       x: 0, 
