@@ -1,5 +1,5 @@
 class Player {
-  constructor({velocity, postion}, idolePos){
+  constructor({velocity, postion, offset}, idolePos){
     this.velocity = velocity;
     this.postion = postion;
     this.width = 50; 
@@ -7,8 +7,13 @@ class Player {
     this.image = idolePos;
     this.lastKeys;
     this.attackBox = {
-      postion: this.postion,
-      width: 100, 
+      postion: {
+        x: this.postion.x,
+        y: this.postion.y
+      },
+      
+      offset,
+      width: 50, 
       height: 50
     }
     this.isAttacking; 
@@ -26,6 +31,10 @@ class Player {
   }
 
   update() {
+
+    this.attackBox.postion.x = this.postion.x - this.attackBox.offset.x;
+    this.attackBox.postion.y = this.postion.y- - this.attackBox.offset.y; 
+
 
     this.postion.x += this.velocity.x; 
     this.postion.y += this.velocity.y;

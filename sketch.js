@@ -69,6 +69,11 @@ function setup() {
       x: 0, 
       y: 0
     },
+
+    offset: {
+      x:-50,
+      y:30
+    },
   },idlePos); 
 
 }
