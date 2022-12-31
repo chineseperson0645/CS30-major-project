@@ -68,6 +68,9 @@ function draw() {
   background("white");
   displayGrid(grid);
   surroundingCheck();
+  wPressedCheck();
+  aPressedCheck();
+  sPressedCheck();
   dPressedCheck();
 }
 
@@ -142,23 +145,86 @@ function surroundingCheck(){
 
 }
 
-let dPressed = false;
-
-function dPressedCheck(){
-  if (keyPressed(68)){
-    dPressed = true;
-    dPressed = false;
-  }
-}
-
 //It seems from this experiment that if keyPressed is called in the draw loop. It causes it to be called infinitely (not once)
 
 let wPressed = false;
+let wThreshold = 0;
+let wCount = 0;
+let aPressed = false;
+let aThreshold = 0;
+let aCount = 0;
+let sPressed = false;
+let sThreshold = 0;
+let sCount = 0;
+let dPressed = false;
+let dThreshold = 0;
+let dCount = 0;
+
+function PressCheck(){
+
+}
 
 function wPressedCheck(){
-  if (keyPressed(87)){
-    wPressed = true;
-    wPressed = false;
+  if (key === "w"){
+    wThreshold += 1;
+    if (wThreshold === 1){
+      wPressed = true;
+    }
+    if (wPressed === true){
+      wThreshold -= 1;
+      console.log("w");
+    }
+    if (wThreshold === 0){
+      wPressed = false;
+    }
+  }
+}
+
+function aPressedCheck(){
+  if (key === "a"){
+    aThreshold += 1;
+    if (aThreshold === 1){
+      aPressed = true;
+    }
+    if (aPressed === true){
+      aThreshold -= 1;
+      console.log("a");
+    }
+    if (aThreshold === 0){
+      aPressed = false;
+    }
+  }
+}
+
+function sPressedCheck(){
+  if (key === "s"){
+    sThreshold += 1;
+    if (sThreshold === 1){
+      sPressed = true;
+    }
+    if (sPressed === true){
+      sThreshold -= 1;
+      console.log("s");
+    }
+    if (sThreshold === 0){
+      sPressed = false;
+    }
+  }
+}
+
+function dPressedCheck(){
+  if (key === "d"){
+    dThreshold += 1;
+    if (dThreshold === 1){
+      dPressed = true;
+    }
+    if (dPressed === true){
+      dThreshold -= 1;
+      console.log("d");
+    }
+    if (dThreshold === 0){
+      dPressed = false;
+    }
   }
 }
 
