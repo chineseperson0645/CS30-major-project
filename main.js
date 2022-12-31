@@ -68,10 +68,6 @@ function draw() {
   background("white");
   displayGrid(grid);
   surroundingCheck();
-  wPressedCheck();
-  aPressedCheck();
-  sPressedCheck();
-  dPressedCheck();
 }
 
 // function whateverMoveableIsHere(){
@@ -145,88 +141,7 @@ function surroundingCheck(){
 
 }
 
-//It seems from this experiment that if keyPressed is called in the draw loop. It causes it to be called infinitely (not once)
-
-let wPressed = false;
-let wThreshold = 0;
-let wCount = 0;
-let aPressed = false;
-let aThreshold = 0;
-let aCount = 0;
-let sPressed = false;
-let sThreshold = 0;
-let sCount = 0;
-let dPressed = false;
-let dThreshold = 0;
-let dCount = 0;
-
-function PressCheck(){
-
-}
-
-function wPressedCheck(){
-  if (key === "w"){
-    wThreshold += 1;
-    if (wThreshold === 1){
-      wPressed = true;
-    }
-    if (wPressed === true){
-      wThreshold -= 1;
-      console.log("w");
-    }
-    if (wThreshold === 0){
-      wPressed = false;
-    }
-  }
-}
-
-function aPressedCheck(){
-  if (key === "a"){
-    aThreshold += 1;
-    if (aThreshold === 1){
-      aPressed = true;
-    }
-    if (aPressed === true){
-      aThreshold -= 1;
-      console.log("a");
-    }
-    if (aThreshold === 0){
-      aPressed = false;
-    }
-  }
-}
-
-function sPressedCheck(){
-  if (key === "s"){
-    sThreshold += 1;
-    if (sThreshold === 1){
-      sPressed = true;
-    }
-    if (sPressed === true){
-      sThreshold -= 1;
-      console.log("s");
-    }
-    if (sThreshold === 0){
-      sPressed = false;
-    }
-  }
-}
-
-function dPressedCheck(){
-  if (key === "d"){
-    dThreshold += 1;
-    if (dThreshold === 1){
-      dPressed = true;
-    }
-    if (dPressed === true){
-      dThreshold -= 1;
-      console.log("d");
-    }
-    if (dThreshold === 0){
-      dPressed = false;
-    }
-  }
-}
+//^ These functions above, check if a key is pressed.
 
 // function justOnPathRightUs(){
 //   if (grid[playerY][playerX] === "playerpath1" && nearPathRight){
@@ -253,17 +168,40 @@ function dPressedCheck(){
 
   // }
 
-
 // 87 === W
 // 65 === A
 // 83 === S
 // 68 === D
 
+let wPressed = false;
+let aPressed = false;
+let sPressed = false;
+let dPressed = false;
+
+
 //Check if the front of me still exists (Sanity check, example aviable on GOL ex.).
 function keyPressed() {
-  if (key === "d") { //D
+    if (key === "d") { //D
+      dPressed = true;
+      if (dPressed === true){
+        console.log("d");
+      }
   //SO IF this spot is blank (0) update the player location (playerX++) draw in that direction with a horse
-    if (grid[playerY][playerX+1] === 0) { //Allows walk over trees
+    if (grid[playerY][playerX] === "playerpath1" && dPressed === true){ //When we hit the key. Checks for if we have an image under us. If so, the following executes...
+      grid[playerY][playerX] = 3; 
+      playerX++; 
+      grid[playerY][playerX] = "player"; //Current player location will change back to normal. Can add tree image under us in the future if wanted to (follow same logic as path images)
+      console.log("Right2");
+      nearPathRight = false;
+    }
+    if (grid[playerY][playerX] === "playerpath2" && dPressed === true){
+      grid[playerY][playerX] = 4;
+      playerX++; 
+      grid[playerY][playerX] = "player"; 
+      console.log("Right2");
+      nearPathRight = false;
+    }
+    else if (grid[playerY][playerX+1] === 0) { //Allows walk over trees
       grid[playerY][playerX] = 0; //reset old location to white
       playerX++; //move
       grid[playerY][playerX] = "player"; //set new player location (current)
@@ -282,20 +220,7 @@ function keyPressed() {
       console.log("Right");
       nearPathRight = false;
     }
-    else if (grid[playerY][playerX] === "playerpath1" && justOnPathRightUs === true){ //When we hit the key. Checks for if we have an image under us. If so, the following executes...
-      grid[playerY][playerX] = 3; 
-      playerX++; 
-      grid[playerY][playerX] = "player"; //Current player location will change back to normal. Can add tree image under us in the future if wanted to (follow same logic as path images)
-      console.log("Right2");
-      nearPathRight = false;
-    }
-    else if (grid[playerY][playerX] === "playerpath2" && justOnPathRightUs === true){
-      grid[playerY][playerX] = 4;
-      playerX++; 
-      grid[playerY][playerX] = "player"; 
-      console.log("Right2");
-      nearPathRight = false;
-    }           
+    dPressed = false;
   }
 
 //This should detect if I'm ontop of a playerpath and if I'm beside a Right path. If so, it'll ask if I hit my D key
@@ -307,6 +232,11 @@ function keyPressed() {
 
 
   if (key === "a") { //A
+    aPressed = true;
+    if (aPressed === true){
+      console.log("a");
+      aPressed = false;
+    }
     if (grid[playerY][playerX-1] === 0) {
       grid[playerY][playerX] = 0; //reset old location to white
       playerX--; //move
@@ -342,10 +272,12 @@ function keyPressed() {
     }
   }
 
-
-
-
   if (key === "w") { //W
+    wPressed = true;
+    if (wPressed === true){
+      console.log("w");
+      wPressed = false;
+    }
     if (grid[playerY-1][playerX] === 0) {
       grid[playerY][playerX] = 0; //reset old location to white
       playerY--; //move
@@ -382,6 +314,11 @@ function keyPressed() {
   }
 
   if (key === "s") { //S
+    sPressed = true;
+    if (sPressed === true){
+      console.log("s");
+      sPressed = false;
+    }
     if (grid[playerY+1][playerX] === 0) {
       grid[playerY][playerX] = 0; //reset old location to white
       playerY++; //move
@@ -430,25 +367,8 @@ function switcherPath1To2(){
     }
   }
 }
- 
-  // check if s key is hit and if player was just on "playerpath1"
 
-  //   else if (grid[playerY][playerX] === "playerpath1" && justOnPathBehindUs === true){ //When we hit the S key. Checks for if we have an image under us. If so, the following executes...
-  //     grid[playerY][playerX] = 3; 
-  //     playerY++; 
-  //     grid[playerY][playerX] = "player"; //Current player location will change back to normal. Can add tree image under us in the future if wanted to (follow same logic as path images)
-  //     console.log("Down2");
-  //     nearPathDown = false;
-  //   }
-  //   else if (grid[playerY][playerX] === "playerpath2" && justOnPathBehindUs === true){
-  //     grid[playerY][playerX] = 4;
-  //     playerY++; 
-  //     grid[playerY][playerX] = "player"; 
-  //     console.log("Down2");
-  //     nearPathDown = false;
-  //   }
-  // }
-
+// check if s key is hit and if player was just on "playerpath1"
 // function advanceDetection() {
 //   for (let y=0; y<ROWS; y++) {
 //     for (let x=0; x<COLS; x++) {
@@ -532,16 +452,9 @@ function displayGrid(grid) {
     }
   }
 }
+
 //IMPLEMENT GRID DETECTION INTO DISPLAYGRID FUNCTION BECAUSE X AND Y ARE ALREADY PRE DEFIEINED.
 //OR MAKE a seperate function following it's format (i.e y<ROWS)
-
-//There is something spesifically wrong with
-// grid[playerY-1][playerX] === 2 && playerY--
-
-//Spesifically
-// [playerX] === 2 && playerY--
-
-
 
 function mousePressed() {
   let xPos = Math.floor(mouseX/cellWidth);
@@ -590,7 +503,6 @@ function mousePressed() {
         grid[yPos][xPos] = 0;
       }
     }
-
 
 function create2dArray(COLS, ROWS) {
   let emptyArray = [];
