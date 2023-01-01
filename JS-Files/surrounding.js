@@ -26,24 +26,26 @@ let wPressed = false;
 let aPressed = false;
 let sPressed = false;
 let dPressed = false;
-
+let pathFirst = false;
 
 //Check if the front of me still exists (Sanity check, example aviable on GOL ex.).
 function keyPressed() {
     if (key === "d") { //D
       dPressed = true;
       if (dPressed === true){
+        pathFirst = true;
         console.log("d");
+        pathfirst = false;
       }
   //SO IF this spot is blank (0) update the player location (playerX++) draw in that direction with a horse
-    if (grid[playerY][playerX] === "playerpath1" && dPressed === true){ //When we hit the key. Checks for if we have an image under us. If so, the following executes...
+    if (grid[playerY][playerX] === "playerpath1" && dPressed === true && pathFirst === true){ //When we hit the key. Checks for if we have an image under us. If so, the following executes...
       grid[playerY][playerX] = 3; 
       playerX++; 
       grid[playerY][playerX] = "player"; //Current player location will change back to normal. Can add tree image under us in the future if wanted to (follow same logic as path images)
       console.log("Right2");
       nearPathRight = false;
     }
-    if (grid[playerY][playerX] === "playerpath2" && dPressed === true){
+    if (grid[playerY][playerX] === "playerpath2" && dPressed === true && pathFirst === true){
       grid[playerY][playerX] = 4;
       playerX++; 
       grid[playerY][playerX] = "player"; 
@@ -62,7 +64,7 @@ function keyPressed() {
       console.log("Right");
       nearPathRight = false;
     }
-    else if (grid[playerY][playerX+1] === 4 && nearPathRight === true){
+    else if (grid[playerY][playerX+1] === 4 && nearPathRight === true && pathFirst === false){
       grid[playerY][playerX] = 0; //reset old location to white
       playerX++; //move
       grid[playerY][playerX] = "playerpath1"; //set new player location (current)

@@ -19,29 +19,23 @@ function mousePressed() {
           grid[yPos][xPos] = 5;
         }
         else if (grid[yPos][xPos] === 5) {
-          grid[yPos][xPos] = 6;
+          grid[yPos][xPos] = 93;
+          console.log("border");
         }
-        else if (grid[yPos][xPos] === 6) {
-          grid[yPos][xPos] = 7;
+        else if (grid[yPos][xPos] === 93) {
+          grid[yPos][xPos] = 94;
+          console.log("teleblock");
         }
-        else if (grid[yPos][xPos] === 7) {
-          grid[yPos][xPos] = 8;
+        else if (grid[yPos][xPos] === 94) {
+          grid[yPos][xPos] = 95;
+          console.log("teleblock");
         }
-        else if (grid[yPos][xPos] === 8) {
-          grid[yPos][xPos] = 9;
-        }
-        else if (grid[yPos][xPos] === 9) {
-          grid[yPos][xPos] = 10;
-        }
-        else if (grid[yPos][xPos] === 10) {
-          grid[yPos][xPos] = 11;
-        }
-        else if (grid[yPos][xPos] === 11) {
-          grid[yPos][xPos] = 12;
+        else if (grid[yPos][xPos] === 95) {
+          grid[yPos][xPos] = 0;
         }
       }
       
     if (mouseButton === CENTER){
-        grid[yPos][xPos] = 0;
+        grid[yPos][xPos] = 93; //Interchangable to create borders or teleport blocks, just place approriate #
       }
     }

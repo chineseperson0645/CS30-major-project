@@ -11,7 +11,7 @@ A fighter game with solid combat skills. It will be an open-world game where you
     - Move around in open world enviorment
 
     Enviorment will need to be/have:
-    - Open world
+    - Open world 
     - Generating entities (Set Positions)
     - Have interactable items (Random Postions)
     - Have different locations (Village, Forest)
@@ -25,9 +25,9 @@ A fighter game with solid combat skills. It will be an open-world game where you
 
 - Easier Things:
 - Lvl/Progression system (Enemy and Player)
-- Custom Animated Charcter Engagement Screens
-- Walking animation
-- Fighting animation
+- Custom Animated Charcter Engagement Screens 
+- Walking animation [/]
+- Fighting animation [/]
 - Story/Lore
 - Final Boss
 - Dialogue with entities
@@ -40,3 +40,5 @@ A fighter game with solid combat skills. It will be an open-world game where you
 - Harder Things:
 - Inventory System...
 
+Remember, other things may take longer than even implementing getting off and on certain images/blocks
+So try to distrubute time accordingly (namely, more evenly).

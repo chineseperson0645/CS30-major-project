@@ -24,7 +24,7 @@ let playerX = 1;
 let playerY = 1;
 // CHANGE PLAYER X AND Y TO CHANGE WHERE PLAYER SPAWS (COULD BE USEFUL FOR TELEPORTATION AND OTHERS IN FUTURE)
 
-let treeImg, zenImg, bottomtreeImg, houseTLImg, houseTMImg, houseTRImg, houseBLImg, houseBMImg, houseBRImg, path1, path2;
+let treeImg, zenImg, bottomtreeImg, houseTLImg, houseTMImg, houseTRImg, houseBLImg, houseBMImg, houseBRImg, path1Img, path2Img;
 let forestPathJSON, betaTestJSON;
 
 function preload() {
@@ -41,6 +41,7 @@ function preload() {
   path2Img = loadImage('assets/path2.png');
 
   betaTestJSON = loadJSON('JSON-Maps/beta.json');
+  forestPathJSON = loadJSON('JSON-Maps/Forestpath.json')
 }
 
 function setup() {
@@ -48,7 +49,7 @@ function setup() {
   cellWidth = width/COLS;
   cellHeight = height/ROWS;
   grid = create2dArray(COLS, ROWS);
-  grid = betaTestJSON;
+  grid = forestPathJSON;
 
   grid[playerY][playerX] = "player";
 }
@@ -62,7 +63,6 @@ function draw() {
 function displayGrid(grid) {
   for (let y=0; y<ROWS; y++) {
     for (let x=0; x<COLS; x++) {
-
       if (grid[y][x] === 0) {
         image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
@@ -117,6 +117,13 @@ function displayGrid(grid) {
       if (grid[y][x] === 93) { //BORDER!
         image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
+      if (grid[y][x] === 94) { //Teleport!
+        image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 95) { //Teleport!
+        image(path1Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+
+      }
     }
   }
 }
@@ -127,6 +134,22 @@ function create2dArray(COLS, ROWS) {
     emptyArray.push([]);
     for (let x=0; x<COLS; x++) {
       emptyArray[y].push(0);
+    }
+  }
+  return emptyArray;
+}
+
+function createRandom2dArray(COLS, ROWS) {
+  let emptyArray = [];
+  for (let y=0; y<ROWS; y++) {
+    emptyArray.push([]);
+    for (let x=0; x<COLS; x++) {
+      if (random(100) < 50) {
+        emptyArray[y].push(1);
+      }
+      else {
+        emptyArray[y].push(3);
+      }
     }
   }
   return emptyArray;
