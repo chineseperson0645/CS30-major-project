@@ -168,3 +168,94 @@
 //For some odd reason (undetermined). Dead spots keep appearing occationally when player is around path
 //(usually one block gap between path and player, with a tree being in that one block gap being a dead spot ---> 3 - 0 - "player").
 //Dead spots are blocks where you cannot move into them via any direction (WASD)
+
+
+
+// MARK IV
+// if (key === "s") { //S
+//   sPressed = true;
+//   if (sPressed === true){
+//     console.log("s");
+//     sPressed = false;
+//   }
+//SO IF this spot is blank (0) update the player location (playerX++) draw in that direction with a player
+//   if (grid[playerY+1][playerX] === 0) {
+//     grid[playerY][playerX] = 0; //reset old location to white
+//     playerY++; //move
+//     grid[playerY][playerX] = "player"; //set new player location
+//   }
+//   else if (grid[playerY+1][playerX] === 3 && nearPathDown === true){
+//     grid[playerY][playerX] = 0; //reset old location to white
+//     playerY++; //move
+//     grid[playerY][playerX] = "playerpath1"; //set new player location
+//     console.log("Down");
+//     nearPathDown = false;
+//     // standingOnDown = true;
+//   }
+//   else if (grid[playerY+1][playerX] === 4 && nearPathDown === true){
+//     grid[playerY][playerX] = 0; 
+//     playerY++; 
+//     grid[playerY][playerX] = "playerpath2"; 
+//     console.log("Down");
+//     nearPathDown = false;
+//   }
+//   else if (grid[playerY][playerX] === "playerpath1" && justOnPathBehindUs === true){ //When we hit the key. Checks for if we have an image under us. If so, the following executes...
+//     grid[playerY][playerX] = 3; 
+//     playerY++; 
+//     grid[playerY][playerX] = "player"; //Current player location will change back to normal. Can add tree image under us in the future if wanted to (follow same logic as path images)
+//     console.log("Down2");
+//     nearPathDown = false;
+//   }
+//   else if (grid[playerY][playerX] === "playerpath2" && justOnPathBehindUs === true){
+//     grid[playerY][playerX] = 4;
+//     playerY++; 
+//     grid[playerY][playerX] = "player"; 
+//     console.log("Down2");
+//     nearPathDown = false;
+//   }
+// }
+
+
+
+//MARK V
+// if (key === "d") { //D
+//   dPressed = true;
+// //SO IF this spot is blank (0) update the player location (playerX++) draw in that direction with a horse
+//   if (grid[playerY][playerX] === "playerpath1" && nearPathRight === true){ 
+//     if (dPressed === true){
+//       pathFirst = true;
+//       grid[playerY][playerX] = 3; 
+//       playerX++; 
+//       grid[playerY][playerX] = "player"; 
+//       console.log("Right2");
+//       nearPathRight = false;
+//       pathFirst = false;
+//     }
+//   }
+//   if (grid[playerY][playerX] === "playerpath2" && nearPathRight === true){
+//     if (dPressed === true){
+//       pathFirst = true;
+//       grid[playerY][playerX] = 4;
+//       playerX++; 
+//       grid[playerY][playerX] = "player"; 
+//       console.log("Right2");
+//       nearPathRight = false;
+//       pathFirst = false;
+//     }
+//   }
+//   else if (grid[playerY][playerX+1] === 3 && nearPathRight === true && pathFirst === false){
+//     grid[playerY][playerX] = 3; 
+//     playerX++; 
+//     grid[playerY][playerX] = "playerpath1";
+//     console.log("Right");
+//     nearPathRight = false;
+//   }
+//   else if (grid[playerY][playerX+1] === 4 && nearPathRight === true && pathFirst === false){
+//     grid[playerY][playerX] = 4; 
+//     playerX++; //move
+//     grid[playerY][playerX] = "playerpath1"; 
+//     console.log("Right");
+//     nearPathRight = false;
+//   }
+//   dPressed = false;
+// }

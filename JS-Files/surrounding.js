@@ -1,5 +1,8 @@
 // Surrounding.JS
 
+//Border blocks are broken again lol.
+//dPressed isnt being detected
+
 let nearPathLeft, nearPathDown, nearPathRight, nearPathForward;
 function surroundingCheck(){
   if (grid[playerY][playerX+1] === 3 || grid[playerY][playerX+1] === 4){ // D (Opposite is A)
@@ -28,53 +31,45 @@ let sPressed = false;
 let dPressed = false;
 let pathFirst = false;
 
-//Check if the front of me still exists (Sanity check, example aviable on GOL ex.).
 function keyPressed() {
-    if (key === "d") { //D
-      dPressed = true;
-      if (dPressed === true){
-        pathFirst = true;
-        console.log("d");
-        pathfirst = false;
-      }
+  if (key === "d") { //D
+    dPressed = true;
   //SO IF this spot is blank (0) update the player location (playerX++) draw in that direction with a horse
-    if (grid[playerY][playerX] === "playerpath1" && dPressed === true && pathFirst === true){ //When we hit the key. Checks for if we have an image under us. If so, the following executes...
+    if (grid[playerY][playerX] === "playerpath1" && nearPathRight === true){ 
       grid[playerY][playerX] = 3; 
       playerX++; 
-      grid[playerY][playerX] = "player"; //Current player location will change back to normal. Can add tree image under us in the future if wanted to (follow same logic as path images)
+      grid[playerY][playerX] = "player"; 
       console.log("Right2");
       nearPathRight = false;
     }
-    if (grid[playerY][playerX] === "playerpath2" && dPressed === true && pathFirst === true){
+    if (grid[playerY][playerX] === "playerpath2" && nearPathRight === true){
       grid[playerY][playerX] = 4;
       playerX++; 
       grid[playerY][playerX] = "player"; 
       console.log("Right2");
       nearPathRight = false;
     }
-    else if (grid[playerY][playerX+1] === 0) { //Allows walk over trees
-      grid[playerY][playerX] = 0; //reset old location to white
-      playerX++; //move
-      grid[playerY][playerX] = "player"; //set new player location (current)
-    }
     else if (grid[playerY][playerX+1] === 3 && nearPathRight === true){
-      grid[playerY][playerX] = 0; //reset old location to white
-      playerX++; //move
-      grid[playerY][playerX] = "playerpath1"; //set new player location (current)
+      grid[playerY][playerX] = 3; 
+      playerX++; 
+      grid[playerY][playerX] = "playerpath1";
       console.log("Right");
       nearPathRight = false;
     }
-    else if (grid[playerY][playerX+1] === 4 && nearPathRight === true && pathFirst === false){
-      grid[playerY][playerX] = 0; //reset old location to white
+    else if (grid[playerY][playerX+1] === 4 && nearPathRight === true){
+      grid[playerY][playerX] = 4; 
       playerX++; //move
-      grid[playerY][playerX] = "playerpath1"; //set new player location (current)
+      grid[playerY][playerX] = "playerpath1"; 
       console.log("Right");
       nearPathRight = false;
     }
-    dPressed = false;
+    if (grid[playerY][playerX+1] === 95){ //Teleport Detection
+      console.log("teleport");
+    }
   }
 
-//This should detect if I'm ontop of a playerpath and if I'm beside a Right path. If so, it'll ask if I hit my D key
+//This should detect if I'm ontop of a playerpath and if I'm beside a Right path. If so, it'll ask if I hit my D key and also which block I'm
+//moving onto.
 
 //Possibly use debug tool to see what's happening one step at a time.
 
@@ -83,100 +78,90 @@ function keyPressed() {
 
 
   if (key === "a") { //A
-    aPressed = true;
-    if (aPressed === true){
-      console.log("a");
-      aPressed = false;
+    if (grid[playerY][playerX] === "playerpath1" && nearPathLeft === true){
+      grid[playerY][playerX] = 3; 
+      playerX--; 
+      grid[playerY][playerX] = "player";
+      console.log("Left2");
+      nearPathLeft = false;
     }
-    if (grid[playerY][playerX-1] === 0) {
-      grid[playerY][playerX] = 0; //reset old location to white
-      playerX--; //move
-      grid[playerY][playerX] = "player"; //set new player location
+    if (grid[playerY][playerX] === "playerpath2" && nearPathLeft === true){
+      grid[playerY][playerX] = 4; 
+      playerX--; 
+      grid[playerY][playerX] = "player";
+      console.log("Left2");
+      nearPathLeft = false;
     }
     else if (grid[playerY][playerX-1] === 3 && nearPathLeft === true){
-      grid[playerY][playerX] = 0; //reset old location to white
+      grid[playerY][playerX] = 3; //reset old location to white
       playerX--; //move
       grid[playerY][playerX] = "playerpath1"; //set new player location
       console.log("Left");
       nearPathLeft = false;
     } 
     else if (grid[playerY][playerX-1] === 4 && nearPathLeft === true){
-      grid[playerY][playerX] = 0; //reset old location to white
+      grid[playerY][playerX] = 4; //reset old location to white
       playerX--; //move
       grid[playerY][playerX] = "playerpath1"; //set new player location
       console.log("Left");
       nearPathLeft = false;
     }   
-    else if (grid[playerY][playerX] === "playerpath1" && justOnPathLeftUs === true){ //When we hit the key. Checks for if we have an image under us. If so, the following executes...
-      grid[playerY][playerX] = 3; 
-      playerX--; 
-      grid[playerY][playerX] = "player"; //Current player location will change back to normal. Can add tree image under us in the future if wanted to (follow same logic as path images)
-      console.log("Left2");
-      nearPathLeft = false;
-    }
-    else if (grid[playerY][playerX] === "playerpath2" && justOnPathLeftUs === true){
-      grid[playerY][playerX] = 4;
-      playerX--; 
-      grid[playerY][playerX] = "player"; 
-      console.log("Left2");
-      nearPathLeft = false;
+    if (grid[playerY][playerX-1] === 95){ //Teleport Detection
+      console.log("teleport");
     }
   }
 
   if (key === "w") { //W
-    wPressed = true;
-    if (wPressed === true){
-      console.log("w");
-      wPressed = false;
+    if (grid[playerY][playerX] === "playerpath1" && nearPathForward){ 
+      grid[playerY][playerX] = 3; 
+      playerY--;; 
+      grid[playerY][playerX] = "player";
+      console.log("Forward2");
+      nearPathForward = false;
     }
-    if (grid[playerY-1][playerX] === 0) {
-      grid[playerY][playerX] = 0; //reset old location to white
-      playerY--; //move
-      grid[playerY][playerX] = "player"; //set new player location
+    if (grid[playerY][playerX] === "playerpath2" && nearPathForward){
+      grid[playerY][playerX] = 4;
+      playerY--;; 
+      grid[playerY][playerX] = "player"; 
+      console.log("Forward2");
+      nearPathForward = false;
     }
     else if (grid[playerY-1][playerX] === 3 && nearPathForward === true){
-      grid[playerY][playerX] = 0; //reset old location to white
+      grid[playerY][playerX] = 3; //reset old location to white
       playerY--; //move
       grid[playerY][playerX] = "playerpath1"; //set new player location
       console.log("Forward");
       nearPathForward = false;
     }
     else if (grid[playerY-1][playerX] === 4 && nearPathForward === true){
-      grid[playerY][playerX] = 0; 
+      grid[playerY][playerX] = 4; 
       playerY--;; 
       grid[playerY][playerX] = "playerpath2"; 
       console.log("Forward");
       nearPathForward = false;
     }
-    else if (grid[playerY][playerX] === "playerpath1" && justOnPathFrontUs === true){ //When we hit the key. Checks for if we have an image under us. If so, the following executes...
-      grid[playerY][playerX] = 3; 
-      playerY--;; 
-      grid[playerY][playerX] = "player"; //Current player location will change back to normal. Can add tree image under us in the future if wanted to (follow same logic as path images)
-      console.log("Forward2");
-      nearPathForward = false;
-    }
-    else if (grid[playerY][playerX] === "playerpath2" && justOnPathFrontUs === true){
-      grid[playerY][playerX] = 4;
-      playerY--;; 
-      grid[playerY][playerX] = "player"; 
-      console.log("Forward2");
-      nearPathForward = false;
+    if (grid[playerY-1][playerX] === 95){ //Teleport Detection
+      console.log("teleport");
     }
   }
 
   if (key === "s") { //S
-    sPressed = true;
-    if (sPressed === true){
-      console.log("s");
-      sPressed = false;
+    if (grid[playerY][playerX] === "playerpath1" && nearPathDown === true){ //When we hit the key. Checks for if we have an image under us. If so, the following executes...
+      grid[playerY][playerX] = 3; 
+      playerY++; 
+      grid[playerY][playerX] = "player"; //Current player location will change back to normal. Can add tree image under us in the future if wanted to (follow same logic as path images)
+      console.log("Down2");
+      nearPathDown = false;
     }
-    if (grid[playerY+1][playerX] === 0) {
-      grid[playerY][playerX] = 0; //reset old location to white
-      playerY++; //move
-      grid[playerY][playerX] = "player"; //set new player location
+    if (grid[playerY][playerX] === "playerpath2" && nearPathDown === true){
+      grid[playerY][playerX] = 4;
+      playerY++; 
+      grid[playerY][playerX] = "player"; 
+      console.log("Down2");
+      nearPathDown = false;
     }
     else if (grid[playerY+1][playerX] === 3 && nearPathDown === true){
-      grid[playerY][playerX] = 0; //reset old location to white
+      grid[playerY][playerX] = 3; //reset old location to white
       playerY++; //move
       grid[playerY][playerX] = "playerpath1"; //set new player location
       console.log("Down");
@@ -184,28 +169,23 @@ function keyPressed() {
       // standingOnDown = true;
     }
     else if (grid[playerY+1][playerX] === 4 && nearPathDown === true){
-      grid[playerY][playerX] = 0; 
+      grid[playerY][playerX] = 4; 
       playerY++; 
       grid[playerY][playerX] = "playerpath2"; 
       console.log("Down");
       nearPathDown = false;
     }
-    else if (grid[playerY][playerX] === "playerpath1" && justOnPathBehindUs === true){ //When we hit the key. Checks for if we have an image under us. If so, the following executes...
-      grid[playerY][playerX] = 3; 
-      playerY++; 
-      grid[playerY][playerX] = "player"; //Current player location will change back to normal. Can add tree image under us in the future if wanted to (follow same logic as path images)
-      console.log("Down2");
-      nearPathDown = false;
-    }
-    else if (grid[playerY][playerX] === "playerpath2" && justOnPathBehindUs === true){
-      grid[playerY][playerX] = 4;
-      playerY++; 
-      grid[playerY][playerX] = "player"; 
-      console.log("Down2");
-      nearPathDown = false;
+    if (grid[playerY+1][playerX] === 95){ //Teleport Detection
+      console.log("teleport");
     }
   }
 }
+
+// else if (grid[playerY][playerX+1] === 0) { //Allows walk over trees
+//   grid[playerY][playerX] = 0; //reset old location to white
+//   playerX++; //move
+//   grid[playerY][playerX] = "player"; //set new player location (current)
+// }
 
 // standingOn (swithch between values of walkable blocks everytime you move onto or off a block)
 // So if on block, standingOn === 1 (player ontop for ex.), if move off of block, standingOn === 2 (orginal block value)

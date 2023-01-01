@@ -10,9 +10,17 @@
 // If near border or teleport blocks don't call not normal. Make teleport blocks just path images.
 // Keep the beta.JSON and build all other maps as modified copies. (because theres a border)
 // control + b to bring up sidebar
+//May need to make a sanity check: Check if the front of me still exists (Sanity check, example aviable on GOL ex.).
 
 // To Incorperate fight scenes. We could do, if the player is about to move onto a fight scene and keyPressed w or whatever
 // Play a transition video, and then go into the fight.
+
+//To implement interactables. We're going to have to do
+//Something like if one block away from potion or whatever
+//And if mousePressed. Consume potion (or health mushroom).
+//Well also have to be able to track player health globally
+//If we want to do health potions or mushrooms.
+//(Both in grid and in fight scene)
 
 const ROWS = 25; //y axis (in reality)
 const COLS = 35; //x axis (in reality)
@@ -21,7 +29,7 @@ let grid;
 let cellWidth;
 let cellHeight;
 let playerX = 1;
-let playerY = 1;
+let playerY = 8;
 // CHANGE PLAYER X AND Y TO CHANGE WHERE PLAYER SPAWS (COULD BE USEFUL FOR TELEPORTATION AND OTHERS IN FUTURE)
 
 let treeImg, zenImg, bottomtreeImg, houseTLImg, houseTMImg, houseTRImg, houseBLImg, houseBMImg, houseBRImg, path1Img, path2Img;
@@ -122,7 +130,6 @@ function displayGrid(grid) {
       }
       if (grid[y][x] === 95) { //Teleport!
         image(path1Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-
       }
     }
   }
