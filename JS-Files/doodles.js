@@ -259,3 +259,9 @@
 //   }
 //   dPressed = false;
 // }
+
+// let wPressed = false;
+// let aPressed = false;
+// let sPressed = false;
+// let dPressed = false;
+// let pathFirst = false;

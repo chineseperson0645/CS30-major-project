@@ -8,7 +8,7 @@ A fighter game with solid combat skills. It will be an open-world game where you
     - Engage in combat with entities (PVE)
     - Engage with enviorment (Potions)
     - Have abilities (Power Slash, Pocket Shot, Basic Stab) 
-    - Move around in open world enviorment
+    - Move around in open world enviorment [/]
 
     Enviorment will need to be/have:
     - Open world 

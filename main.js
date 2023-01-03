@@ -57,8 +57,7 @@ function setup() {
   cellWidth = width/COLS;
   cellHeight = height/ROWS;
   grid = create2dArray(COLS, ROWS);
-  grid = forestPathJSON;
-
+  // grid = forestPathJSON;
   grid[playerY][playerX] = "player";
 }
 
@@ -66,6 +65,25 @@ function draw() {
   background("white");
   displayGrid(grid);
   surroundingCheck();
+  // whichMap();
+}
+
+let forestPath;
+let ninjaVillage;
+
+function whichMap(){
+  if (grid === forestPathJSON){
+    forestPath = true;
+  }
+  else if (grid ==! forestPathJSON){
+    forestPath = false;
+  }
+  if (grid === ninjaVillageJSON){
+    ninjaVillage = true;
+  }
+  if (grid ==! ninjaVillageJSON){
+    ninjaVillage = false;
+  }
 }
 
 function displayGrid(grid) {
@@ -140,7 +158,7 @@ function create2dArray(COLS, ROWS) {
   for (let y=0; y<ROWS; y++) {
     emptyArray.push([]);
     for (let x=0; x<COLS; x++) {
-      emptyArray[y].push(0);
+      emptyArray[y].push(3);
     }
   }
   return emptyArray;

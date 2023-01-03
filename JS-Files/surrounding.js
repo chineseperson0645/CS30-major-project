@@ -1,21 +1,35 @@
 // Surrounding.JS
 
-//Border blocks are broken again lol.
-//dPressed isnt being detected
+//Border blocks are broken again lol. Player can eat them.
 
 let nearPathLeft, nearPathDown, nearPathRight, nearPathForward;
 function surroundingCheck(){
   if (grid[playerY][playerX+1] === 3 || grid[playerY][playerX+1] === 4){ // D (Opposite is A)
     nearPathRight = true;
   }
+  else if (grid[playerY][playerX+1] ==! 3 || grid[playerY][playerX+1] ==! 4){ // D (Opposite is A)
+    nearPathRight = false;
+  }
+
   if (grid[playerY+1][playerX] === 3 || grid[playerY+1][playerX] === 4){ // S (Behind is W)
     nearPathDown = true;
   }
+  else if (grid[playerY+1][playerX] ==! 3 || grid[playerY+1][playerX] ==! 4){ // S (Behind is W)
+    nearPathDown = false;
+  }
+
   if (grid[playerY][playerX-1] === 3 || grid[playerY][playerX-1] === 4){ // A (Opposite is D)
     nearPathLeft = true;
   }
+  else if (grid[playerY][playerX-1] ==! 3 || grid[playerY][playerX-1] ==! 4){ // A (Opposite is D)
+    nearPathLeft = false;
+  }
+
   if (grid[playerY-1][playerX] === 3 || grid[playerY-1][playerX] === 4){ // W (Behind is S)
     nearPathForward = true;
+  }
+  else if (grid[playerY-1][playerX] ==! 3 || grid[playerY-1][playerX] ==! 4){ // W (Behind is S)
+    nearPathForward = false;
   }
 }
 
@@ -25,48 +39,52 @@ function surroundingCheck(){
 // 68 === D
 // Spacebar === 32
 
-let wPressed = false;
-let aPressed = false;
-let sPressed = false;
-let dPressed = false;
-let pathFirst = false;
-
 function keyPressed() {
   if (key === "d") { //D
-    dPressed = true;
   //SO IF this spot is blank (0) update the player location (playerX++) draw in that direction with a horse
+  //last grid[px][py] is to make sure we can't eat a tree (or something) because this if statement is too general 
+  //(only conditions that needed to be met before were just if your ontop a path and if the right, or whatever direction, block is moveable.)
+
+  //So theortically, it's now, if your on a path block, if you can move onto the near path block... X
+  //NVM stratch that. The surroundCheck function should already do that for us...
+
     if (grid[playerY][playerX] === "playerpath1" && nearPathRight === true){ 
       grid[playerY][playerX] = 3; 
       playerX++; 
       grid[playerY][playerX] = "player"; 
-      console.log("Right2");
+      console.log("Right23");
       nearPathRight = false;
     }
-    if (grid[playerY][playerX] === "playerpath2" && nearPathRight === true){
+    if (grid[playerY][playerX] === "playerpath2" && nearPathRight === true){ 
       grid[playerY][playerX] = 4;
       playerX++; 
       grid[playerY][playerX] = "player"; 
-      console.log("Right2");
+      console.log("Right24");
       nearPathRight = false;
     }
     else if (grid[playerY][playerX+1] === 3 && nearPathRight === true){
       grid[playerY][playerX] = 3; 
       playerX++; 
       grid[playerY][playerX] = "playerpath1";
-      console.log("Right");
+      console.log("Right3");
       nearPathRight = false;
     }
     else if (grid[playerY][playerX+1] === 4 && nearPathRight === true){
       grid[playerY][playerX] = 4; 
       playerX++; //move
-      grid[playerY][playerX] = "playerpath1"; 
-      console.log("Right");
+      grid[playerY][playerX] = "playerpath2"; 
+      console.log("Right4");
       nearPathRight = false;
     }
-    if (grid[playerY][playerX+1] === 95){ //Teleport Detection
+    if (grid[playerY][playerX+1] === 95 && forestPath){ //Teleport Detection
       console.log("teleport");
+      grid = newJSON;
+      playerX = 2;
+      playerY = 5;
     }
   }
+  //To save game data. We can run saveJSON(grid, "temp forest path")
+  //And if gameOver, gameDeath, or exit. Delete "temp forest path".
 
 //This should detect if I'm ontop of a playerpath and if I'm beside a Right path. If so, it'll ask if I hit my D key and also which block I'm
 //moving onto.
@@ -102,7 +120,7 @@ function keyPressed() {
     else if (grid[playerY][playerX-1] === 4 && nearPathLeft === true){
       grid[playerY][playerX] = 4; //reset old location to white
       playerX--; //move
-      grid[playerY][playerX] = "playerpath1"; //set new player location
+      grid[playerY][playerX] = "playerpath2"; //set new player location
       console.log("Left");
       nearPathLeft = false;
     }   
