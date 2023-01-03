@@ -39,17 +39,32 @@ function preload() {
   treeImg = loadImage('assets/bush.png');
   zenImg = loadImage('assets/zen.gif');
   bottomtreeImg = loadImage('assets/bottomtree.png');
+
   houseTLImg = loadImage('assets/houseTL.png');
   houseTMImg = loadImage('assets/houseTM.png');
-  houseTRImg = loadImage('assets/houseTR.png');
+  houseTRImg = loadImage('assets/houseTR2.png');
   houseBLImg = loadImage('assets/houseBL.png');
   houseBMImg = loadImage('assets/houseBM.png');
-  houseBRImg = loadImage('assets/houseBR.png');
+  houseBRImg = loadImage('assets/houseBR2.png');
+
   path1Img = loadImage('assets/path1.png');
   path2Img = loadImage('assets/path2.png');
 
+  fenceAMImg = loadImage('assets/fenceAM.png');
+  fenceAM2Img = loadImage('assets/fenceAM2.png');
+
+  fenceDLImg = loadImage('assets/fenceDL.png');
+  fenceDRImg = loadImage('assets/fenceDR.png');
+
+  fenceBRImg = loadImage('assets/fenceBL.png');
+  fenceBLImg = loadImage('assets/fenceBR.png');
+
+  fenceTLImg = loadImage('assets/fenceTL.png');
+  fenceTRImg = loadImage('assets/fenceTR.png');
+
   betaTestJSON = loadJSON('JSON-Maps/beta.json');
-  forestPathJSON = loadJSON('JSON-Maps/Forestpath.json')
+  forestPathJSON = loadJSON('JSON-Maps/Forestpath.json');
+  ninjaVillageJSON = loadJSON('JSON-Maps/ninja.json')
 }
 
 function setup() {
@@ -57,7 +72,7 @@ function setup() {
   cellWidth = width/COLS;
   cellHeight = height/ROWS;
   grid = create2dArray(COLS, ROWS);
-  // grid = forestPathJSON;
+  grid = ninjaVillageJSON;
   grid[playerY][playerX] = "player";
 }
 
@@ -104,28 +119,57 @@ function displayGrid(grid) {
       if (grid[y][x] === 4) {
         image(path2Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-
-
-
-      // if (grid[y][x] === ){
-      //   image(houseTLImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-      // }
-      // if (grid[y][x] === ){
-      //   image(houseTMImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-      // }
-      // if (grid[y][x] === ){
-      //   image(houseTRImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-      // }
-      // if (grid[y][x] === ){
-      //   image(houseBLImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-      // }
-      // if (grid[y][x] === ){
-      //   image(houseBMImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-      // }
-      // if (grid[y][x] === ){
-      //   image(houseBRImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-      // }
-
+      if (grid[y][x] === 5){
+        image(houseTLImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 6){
+        image(houseTMImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 7){
+        image(houseTRImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 8){
+        image(houseBLImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 9){
+        image(houseBMImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 10){
+        image(houseBRImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 11){
+        image(fenceTLImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 12){
+        image(fenceAMImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 13){
+        image(fenceAM2Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 14){
+        image(fenceTRImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 15){
+        image(fenceDRImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 16){
+        image(fenceBRImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 17){
+        image(fenceAMImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 18){
+        image(fenceAM2Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 19){
+        image(fenceBLImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 20){
+        image(fenceDLImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 21){
+        image(fenceDLImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
 
       
       if (grid[y][x] === "player") {
@@ -141,9 +185,6 @@ function displayGrid(grid) {
         image(zenImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
       if (grid[y][x] === 93) { //BORDER!
-        image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-      }
-      if (grid[y][x] === 94) { //Teleport!
         image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
       if (grid[y][x] === 95) { //Teleport!

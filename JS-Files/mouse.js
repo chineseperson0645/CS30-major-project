@@ -21,14 +21,61 @@ function mousePressed() {
           grid[yPos][xPos] = 4;
         }
         else if (grid[yPos][xPos] === 4) {
+          grid[yPos][xPos] = 5;
+        }
+        else if (grid[yPos][xPos] === 5) {
+          grid[yPos][xPos] = 6;
+        }
+        else if (grid[yPos][xPos] === 6) {
+          grid[yPos][xPos] = 7;
+        }
+        else if (grid[yPos][xPos] === 7) {
+          grid[yPos][xPos] = 8;
+        }
+        else if (grid[yPos][xPos] === 8) {
+          grid[yPos][xPos] = 9;
+        }
+        else if (grid[yPos][xPos] === 9) {
+          grid[yPos][xPos] = 10;
+        }
+        else if (grid[yPos][xPos] === 10) {
+          grid[yPos][xPos] = 11;
+        }
+        else if (grid[yPos][xPos] === 11) {
+          grid[yPos][xPos] = 12;
+        }
+        else if (grid[yPos][xPos] === 12) {
+          grid[yPos][xPos] = 13;
+        }
+        else if (grid[yPos][xPos] === 13) {
+          grid[yPos][xPos] = 14;
+        }
+        else if (grid[yPos][xPos] === 14) {
+          grid[yPos][xPos] = 15;
+        }
+        else if (grid[yPos][xPos] === 15) {
+          grid[yPos][xPos] = 16;
+        }
+        else if (grid[yPos][xPos] === 16) {
+          grid[yPos][xPos] = 17;
+        }
+        else if (grid[yPos][xPos] === 17) {
+          grid[yPos][xPos] = 18;
+        }
+        else if (grid[yPos][xPos] === 18) {
+          grid[yPos][xPos] = 19;
+        }
+        else if (grid[yPos][xPos] === 19) {
+          grid[yPos][xPos] = 20;
+        }
+        else if (grid[yPos][xPos] === 20) {
+          grid[yPos][xPos] = 21;
+        }
+        else if (grid[yPos][xPos] === 21) {
           grid[yPos][xPos] = 93;
           console.log("border");
         }
         else if (grid[yPos][xPos] === 93) {
-          grid[yPos][xPos] = 94;
-          console.log("teleblock");
-        }
-        else if (grid[yPos][xPos] === 94) {
           grid[yPos][xPos] = 95;
           console.log("teleblock");
         }
