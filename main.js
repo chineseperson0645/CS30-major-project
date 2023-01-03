@@ -33,7 +33,7 @@ let playerY = 8;
 // CHANGE PLAYER X AND Y TO CHANGE WHERE PLAYER SPAWS (COULD BE USEFUL FOR TELEPORTATION AND OTHERS IN FUTURE)
 
 let treeImg, zenImg, bottomtreeImg, houseTLImg, houseTMImg, houseTRImg, houseBLImg, houseBMImg, houseBRImg, path1Img, path2Img;
-let forestPathJSON, betaTestJSON;
+let forestPathJSON, ninjaVillageJSON, betaTestJSON;
 
 function preload() {
   treeImg = loadImage('assets/bush.png');
@@ -63,8 +63,8 @@ function preload() {
   fenceTRImg = loadImage('assets/fenceTR.png');
 
   betaTestJSON = loadJSON('JSON-Maps/beta.json');
-  forestPathJSON = loadJSON('JSON-Maps/Forestpath.json');
-  ninjaVillageJSON = loadJSON('JSON-Maps/ninja.json')
+  forestPathJSON = loadJSON('JSON-Maps/forestpath.json');
+  ninjaVillageJSON = loadJSON('JSON-Maps/ninja2.json')
 }
 
 function setup() {
@@ -72,7 +72,7 @@ function setup() {
   cellWidth = width/COLS;
   cellHeight = height/ROWS;
   grid = create2dArray(COLS, ROWS);
-  grid = ninjaVillageJSON;
+  grid = forestPathJSON;
   grid[playerY][playerX] = "player";
 }
 
@@ -80,7 +80,7 @@ function draw() {
   background("white");
   displayGrid(grid);
   surroundingCheck();
-  // whichMap();
+  whichMap();
 }
 
 let forestPath;
@@ -173,7 +173,6 @@ function displayGrid(grid) {
 
       
       if (grid[y][x] === "player") {
-        fill("white");
         image(zenImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
       if (grid[y][x] === "playerpath1") {

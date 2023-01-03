@@ -265,3 +265,20 @@
 // let sPressed = false;
 // let dPressed = false;
 // let pathFirst = false;
+
+// Karar is suggesting to use math to detect distance (in pixels) between enemey and player. (utilize distance formula)
+// (I suggest that the movements start off random for the enemy then move to detection)
+
+// i.e
+// if (enemyLocationFromPlayer > 200 pixels){
+//   enemyCantAttackYet = true;
+//   move enemeyX++ (or enemyX-- towards player respectivly.)
+// }
+
+// Then another if statement that detects if player is close enough 
+// For enemy to enter into attack state, so...
+// i.e 
+// if (enemyLocationFromPlayer <= 100 pixels){
+//   enemyCantAttackYet = false;
+//   dartShot; (or whatever attack).
+// }

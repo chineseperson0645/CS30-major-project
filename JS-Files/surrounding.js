@@ -4,6 +4,8 @@
 
 let nearPathLeft, nearPathDown, nearPathRight, nearPathForward;
 function surroundingCheck(){
+
+  //Checks surrounding
   if (grid[playerY][playerX+1] === 3 || grid[playerY][playerX+1] === 4){ // D (Opposite is A)
     nearPathRight = true;
   }
@@ -66,7 +68,7 @@ function keyPressed() {
       grid[playerY][playerX] = 3; 
       playerX++; 
       grid[playerY][playerX] = "playerpath1";
-      console.log("Right3");
+      console.log("Right3 d");
       nearPathRight = false;
     }
     else if (grid[playerY][playerX+1] === 4 && nearPathRight === true){
@@ -76,13 +78,18 @@ function keyPressed() {
       console.log("Right4");
       nearPathRight = false;
     }
-    if (grid[playerY][playerX+1] === 95 && forestPath){ //Teleport Detection
-      console.log("teleport");
-      grid = newJSON;
-      playerX = 2;
-      playerY = 5;
+    else if (grid[playerY][playerX+1] === 95 && forestPath === true){
+      console.log("teleport d");
+      grid[playerY][playerX] = 3;
+      grid = ninjaVillageJSON;
+      playerX = 1;
+      playerY = 21;
+      grid[playerY][playerX] = "player";
     }
   }
+
+  //There is a tp block in front of us.
+
   //To save game data. We can run saveJSON(grid, "temp forest path")
   //And if gameOver, gameDeath, or exit. Delete "temp forest path".
 
@@ -123,9 +130,14 @@ function keyPressed() {
       grid[playerY][playerX] = "playerpath2"; //set new player location
       console.log("Left");
       nearPathLeft = false;
-    }   
-    if (grid[playerY][playerX-1] === 95){ //Teleport Detection
-      console.log("teleport");
+    }  
+    else if (grid[playerY][playerX-1] === 95 && ninjaVillage === true){
+      console.log("teleport complete");
+      grid[playerY][playerX] = 3;
+      grid = forestPath;
+      playerX = 23;
+      playerY = 23;
+      grid[playerY][playerX] = "player";
     }
   }
 

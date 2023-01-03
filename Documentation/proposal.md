@@ -11,7 +11,7 @@ A fighter game with solid combat skills. It will be an open-world game where you
     - Move around in open world enviorment [/]
 
     Enviorment will need to be/have:
-    - Open world 
+    - Open world [/]
     - Generating entities (Set Positions)
     - Have interactable items (Random Postions)
     - Have different locations (Village, Forest)
