@@ -38,6 +38,7 @@ let forestPathJSON, ninjaVillageJSON, betaTestJSON;
 function preload() {
   treeImg = loadImage('assets/bush.png');
   zenImg = loadImage('assets/zen.gif');
+  ninjaImg = loadImage('assets/ninja.gif');
   bottomtreeImg = loadImage('assets/bottomtree.png');
 
   houseTLImg = loadImage('assets/houseTL.png');
@@ -52,15 +53,13 @@ function preload() {
 
   fenceAMImg = loadImage('assets/fenceAM.png');
   fenceAM2Img = loadImage('assets/fenceAM2.png');
-
   fenceDLImg = loadImage('assets/fenceDL.png');
   fenceDRImg = loadImage('assets/fenceDR.png');
-
   fenceBRImg = loadImage('assets/fenceBL.png');
   fenceBLImg = loadImage('assets/fenceBR.png');
-
   fenceTLImg = loadImage('assets/fenceTL.png');
   fenceTRImg = loadImage('assets/fenceTR.png');
+
 
   betaTestJSON = loadJSON('JSON-Maps/beta.json');
   forestPathJSON = loadJSON('JSON-Maps/forestpath.json');
@@ -185,6 +184,9 @@ function displayGrid(grid) {
       }
       if (grid[y][x] === 93) { //BORDER!
         image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 94) { //Ninja
+        image(ninjaImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
       if (grid[y][x] === 95) { //Teleport!
         image(path1Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
