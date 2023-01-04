@@ -14,7 +14,7 @@ A fighter game with solid combat skills. It will be an open-world game where you
     - Open world [/]
     - Generating entities (Set Positions)
     - Have interactable items (Random Postions)
-    - Have different locations (Village, Forest)
+    - Have different locations (Village, Forest) [/]
 
     Game will need to:
     - Have entities (enemies and passives alike)

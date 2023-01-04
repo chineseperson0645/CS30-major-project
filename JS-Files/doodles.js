@@ -217,7 +217,7 @@
 
 
 
-//MARK V
+// MARK V
 // if (key === "d") { //D
 //   dPressed = true;
 // //SO IF this spot is blank (0) update the player location (playerX++) draw in that direction with a horse
@@ -259,6 +259,100 @@
 //   }
 //   dPressed = false;
 // }
+
+// MARK VI
+// if (key === "a") { //A
+//   if (grid[playerY][playerX] === "playerpath1" && nearPathLeft === true){
+//     grid[playerY][playerX] = 3; 
+//     playerX--; 
+//     grid[playerY][playerX] = "playerpath1";
+//     console.log("Left2");
+//     nearPathLeft = false;
+//   }
+//   if (grid[playerY][playerX] === "playerpath2" && nearPathLeft === true){
+//     grid[playerY][playerX] = 4; 
+//     playerX--; 
+//     grid[playerY][playerX] = "playerpath2";
+//     console.log("Left2");
+//     nearPathLeft = false;
+//   }
+//   else if (grid[playerY][playerX-1] === 3 && nearPathLeft === true){
+//     grid[playerY][playerX] = 3; //reset old location to white
+//     playerX--; //move
+//     grid[playerY][playerX] = "playerpath1"; //set new player location
+//     console.log("Left");
+//     nearPathLeft = false;
+//   } 
+//   else if (grid[playerY][playerX-1] === 4 && nearPathLeft === true){
+//     grid[playerY][playerX] = 4; //reset old location to white
+//     playerX--; //move
+//     grid[playerY][playerX] = "playerpath2"; //set new player location
+//     console.log("Left");
+//     nearPathLeft = false;
+//   }  
+//   else if (grid[playerY][playerX-1] === 95 && ninjaVillage === true){
+//     console.log("teleport complete");
+//     grid[playerY][playerX] = 3;
+//     grid = forestPathJSON;
+//     playerX = 33;
+//     playerY = 20;
+//     grid[playerY][playerX] = "player";
+//   }
+// }
+
+// MARK VII (problems, skips blocks)
+  // if (key === "d") { //D
+  //   if (grid[playerY][playerX] === "playerpath1" && grid[playerY][playerX+1] === 3){ 
+  //     hopOffDXPP3();
+  //     console.log("Right23");
+  //   }
+  //   if (grid[playerY][playerX] === "playerpath2" && grid[playerY][playerX+1] === 4){ 
+  //     hopOffDXPP4();
+  //     console.log("Right24");
+  //   }
+  //   else if (grid[playerY][playerX+1] === 3 && nearPathRight){
+  //     hopOffDXPP3();
+  //     console.log("Right3");
+  //   }
+  //   else if (grid[playerY][playerX+1] === 4 && nearPathRight){
+  //     hopOffDXPP4();
+  //     console.log("Right4");
+  //   }
+  //   else if (grid[playerY][playerX+1] === 95 && forestPath === true){
+  //     console.log("teleport D");
+  //     grid[playerY][playerX] = 3;
+  //     grid = ninjaVillageJSON;
+  //     playerX = 1;
+  //     playerY = 21;
+  //     grid[playerY][playerX] = "playerpath1";
+  //   }
+  // }
+
+// MARK VIII
+  // if (key === "s") { //S
+  //   if (grid[playerY][playerX] === "playerpath1" && nearPathDown === true){ //When we hit the key. Checks for if we have an image under us. If so, the following executes...
+  //     hopOffSYNN3();
+  //     console.log("Down2");
+  //   }
+  //   if (grid[playerY][playerX] === "playerpath2" && nearPathDown === true){
+  //     hopOffSYNN4();
+  //     console.log("Down2");
+  //   }
+  //   else if (grid[playerY+1][playerX] === 3 && nearPathDown === true){
+  //     hopOffSYNN3();
+  //     console.log("Down");
+  //   }
+  //   else if (grid[playerY+1][playerX] === 4 && nearPathDown === true){
+  //     hopOffSYNN4();
+  //     console.log("Down");
+  //   }
+  //   if (grid[playerY+1][playerX] === 95){ //Teleport Detection
+  //     console.log("teleport S");
+  //   }
+  // }
+
+  // SAMPLE //
+  //if (grid[playerY][playerX] === "playerpath1" && nearPathLeft === true){ //When we hit the key. Checks for if we have an image under us. If so, the following executes...
 
 // let wPressed = false;
 // let aPressed = false;

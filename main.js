@@ -64,7 +64,7 @@ function preload() {
 
   betaTestJSON = loadJSON('JSON-Maps/beta.json');
   forestPathJSON = loadJSON('JSON-Maps/forestpath.json');
-  ninjaVillageJSON = loadJSON('JSON-Maps/ninja2.json')
+  ninjaVillageJSON = loadJSON('JSON-Maps/ninja.json')
 }
 
 function setup() {

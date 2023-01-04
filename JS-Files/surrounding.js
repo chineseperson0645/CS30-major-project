@@ -41,8 +41,6 @@ function surroundingCheck(){
 // 68 === D
 // Spacebar === 32
 
-function keyPressed() {
-  if (key === "d") { //D
   //SO IF this spot is blank (0) update the player location (playerX++) draw in that direction with a horse
   //last grid[px][py] is to make sure we can't eat a tree (or something) because this if statement is too general 
   //(only conditions that needed to be met before were just if your ontop a path and if the right, or whatever direction, block is moveable.)
@@ -50,36 +48,73 @@ function keyPressed() {
   //So theortically, it's now, if your on a path block, if you can move onto the near path block... X
   //NVM stratch that. The surroundCheck function should already do that for us...
 
-    if (grid[playerY][playerX] === "playerpath1" && nearPathRight === true){ 
-      grid[playerY][playerX] = 3; 
-      playerX++; 
-      grid[playerY][playerX] = "player"; 
-      console.log("Right23");
-      nearPathRight = false;
+  //To save game data. We can run saveJSON(grid, "temp forest path")
+  //And if gameOver, gameDeath, or exit. Delete "temp forest path".
+  //Possibly use debug tool to see what's happening one step at a time.
+
+
+//Future Goal is to make all player related blocks just that block and the player (not player alone). i.e playerpath1 or 2. (starting charcter and drawn charcter)
+
+function hopOffDXPP3(){ //D
+  grid[playerY][playerX] = 3; 
+  playerX++; 
+  grid[playerY][playerX] = "player"; 
+}
+function hopOffDXPP4(){
+  grid[playerY][playerX] = 4; 
+  playerX++; 
+  grid[playerY][playerX] = "player"; 
+}
+
+function hopOffAXNN3(){ //A
+  grid[playerY][playerX] = 3; 
+  playerX--; 
+  grid[playerY][playerX] = "player";
+}
+function hopOffAXNN4(){
+  grid[playerY][playerX] = 4; 
+  playerX--; 
+  grid[playerY][playerX] = "player";
+}
+
+function hopOffWYNN3(){ //W
+  grid[playerY][playerX] = 3; 
+  playerY--;; 
+  grid[playerY][playerX] = "player";
+}
+function hopOffWYNN4(){
+  grid[playerY][playerX] = 4;
+  playerY--;; 
+  grid[playerY][playerX] = "player"; 
+}
+
+function hopOffSYNN3(){ // S
+  grid[playerY][playerX] = 3; 
+  playerY++; 
+  grid[playerY][playerX] = "player"; 
+}
+function hopOffSYNN4(){
+  grid[playerY][playerX] = 4;
+  playerY++; 
+  grid[playerY][playerX] = "player"; 
+}
+
+//"dFirst" was implemented so that our first if statement would be called first.
+
+let dFirst = true;
+
+function keyPressed() {
+  if (key === "d") { //D
+    if (grid[playerY][playerX+1] === 3 && nearPathRight == true){
+      hopOffDXPP3();
+      console.log("Right3");
     }
-    if (grid[playerY][playerX] === "playerpath2" && nearPathRight === true){ 
-      grid[playerY][playerX] = 4;
-      playerX++; 
-      grid[playerY][playerX] = "player"; 
-      console.log("Right24");
-      nearPathRight = false;
-    }
-    else if (grid[playerY][playerX+1] === 3 && nearPathRight === true){
-      grid[playerY][playerX] = 3; 
-      playerX++; 
-      grid[playerY][playerX] = "playerpath1";
-      console.log("Right3 d");
-      nearPathRight = false;
-    }
-    else if (grid[playerY][playerX+1] === 4 && nearPathRight === true){
-      grid[playerY][playerX] = 4; 
-      playerX++; //move
-      grid[playerY][playerX] = "playerpath2"; 
+    else if (grid[playerY][playerX+1] === 4 && nearPathRight == true){
+      hopOffDXPP4();
       console.log("Right4");
-      nearPathRight = false;
     }
     else if (grid[playerY][playerX+1] === 95 && forestPath === true){
-      console.log("teleport d");
+      console.log("teleport D");
       grid[playerY][playerX] = 3;
       grid = ninjaVillageJSON;
       playerX = 1;
@@ -89,127 +124,59 @@ function keyPressed() {
   }
 
   //There is a tp block in front of us.
-
-  //To save game data. We can run saveJSON(grid, "temp forest path")
-  //And if gameOver, gameDeath, or exit. Delete "temp forest path".
-
-//This should detect if I'm ontop of a playerpath and if I'm beside a Right path. If so, it'll ask if I hit my D key and also which block I'm
-//moving onto.
-
-//Possibly use debug tool to see what's happening one step at a time.
-
-//Next step after fixing "getting off a block detection" is most likely changing it so instead of turning the object you get off onto into just our charcter ("player"). But also turning it 
-//into a block with an image under it (i.e "playerpath1")
-
+  //This should detect if I'm ontop of a playerpath and if I'm beside a Right path. If so, it'll ask if I hit my D key and also which block I'm
+  //moving onto.
 
   if (key === "a") { //A
-    if (grid[playerY][playerX] === "playerpath1" && nearPathLeft === true){
-      grid[playerY][playerX] = 3; 
-      playerX--; 
-      grid[playerY][playerX] = "player";
-      console.log("Left2");
-      nearPathLeft = false;
-    }
-    if (grid[playerY][playerX] === "playerpath2" && nearPathLeft === true){
-      grid[playerY][playerX] = 4; 
-      playerX--; 
-      grid[playerY][playerX] = "player";
-      console.log("Left2");
-      nearPathLeft = false;
-    }
-    else if (grid[playerY][playerX-1] === 3 && nearPathLeft === true){
-      grid[playerY][playerX] = 3; //reset old location to white
-      playerX--; //move
-      grid[playerY][playerX] = "playerpath1"; //set new player location
+    if (grid[playerY][playerX-1] === 3 && nearPathLeft === true){
+      hopOffAXNN3();
       console.log("Left");
-      nearPathLeft = false;
     } 
     else if (grid[playerY][playerX-1] === 4 && nearPathLeft === true){
-      grid[playerY][playerX] = 4; //reset old location to white
-      playerX--; //move
-      grid[playerY][playerX] = "playerpath2"; //set new player location
+      hopOffAXNN4();
       console.log("Left");
-      nearPathLeft = false;
     }  
     else if (grid[playerY][playerX-1] === 95 && ninjaVillage === true){
-      console.log("teleport complete");
+      console.log("teleport A");
       grid[playerY][playerX] = 3;
-      grid = forestPath;
-      playerX = 23;
-      playerY = 23;
+      grid = forestPathJSON;
+      playerX = 33;
+      playerY = 20;
       grid[playerY][playerX] = "player";
     }
   }
 
   if (key === "w") { //W
-    if (grid[playerY][playerX] === "playerpath1" && nearPathForward){ 
-      grid[playerY][playerX] = 3; 
-      playerY--;; 
-      grid[playerY][playerX] = "player";
-      console.log("Forward2");
-      nearPathForward = false;
-    }
-    if (grid[playerY][playerX] === "playerpath2" && nearPathForward){
-      grid[playerY][playerX] = 4;
-      playerY--;; 
-      grid[playerY][playerX] = "player"; 
-      console.log("Forward2");
-      nearPathForward = false;
-    }
-    else if (grid[playerY-1][playerX] === 3 && nearPathForward === true){
-      grid[playerY][playerX] = 3; //reset old location to white
-      playerY--; //move
-      grid[playerY][playerX] = "playerpath1"; //set new player location
+    if (grid[playerY-1][playerX] === 3 && nearPathForward === true){
+      hopOffWYNN3();
       console.log("Forward");
-      nearPathForward = false;
     }
     else if (grid[playerY-1][playerX] === 4 && nearPathForward === true){
-      grid[playerY][playerX] = 4; 
-      playerY--;; 
-      grid[playerY][playerX] = "playerpath2"; 
+      hopOffWYNN4();
       console.log("Forward");
-      nearPathForward = false;
     }
     if (grid[playerY-1][playerX] === 95){ //Teleport Detection
-      console.log("teleport");
+      console.log("teleport W");
     }
   }
 
   if (key === "s") { //S
-    if (grid[playerY][playerX] === "playerpath1" && nearPathDown === true){ //When we hit the key. Checks for if we have an image under us. If so, the following executes...
-      grid[playerY][playerX] = 3; 
-      playerY++; 
-      grid[playerY][playerX] = "player"; //Current player location will change back to normal. Can add tree image under us in the future if wanted to (follow same logic as path images)
-      console.log("Down2");
-      nearPathDown = false;
-    }
-    if (grid[playerY][playerX] === "playerpath2" && nearPathDown === true){
-      grid[playerY][playerX] = 4;
-      playerY++; 
-      grid[playerY][playerX] = "player"; 
-      console.log("Down2");
-      nearPathDown = false;
-    }
-    else if (grid[playerY+1][playerX] === 3 && nearPathDown === true){
-      grid[playerY][playerX] = 3; //reset old location to white
-      playerY++; //move
-      grid[playerY][playerX] = "playerpath1"; //set new player location
+    if (grid[playerY+1][playerX] === 3 && nearPathDown === true){
+      hopOffSYNN3();
       console.log("Down");
-      nearPathDown = false;
-      // standingOnDown = true;
     }
     else if (grid[playerY+1][playerX] === 4 && nearPathDown === true){
-      grid[playerY][playerX] = 4; 
-      playerY++; 
-      grid[playerY][playerX] = "playerpath2"; 
+      hopOffSYNN4();
       console.log("Down");
-      nearPathDown = false;
     }
     if (grid[playerY+1][playerX] === 95){ //Teleport Detection
-      console.log("teleport");
+      console.log("teleport S");
     }
   }
 }
+
+// SAMPLE //
+//if (grid[playerY][playerX] === "playerpath1" && nearPathDown === true){ //When we hit the key. Checks for if we have an image under us. If so, the following executes...
 
 // else if (grid[playerY][playerX+1] === 0) { //Allows walk over trees
 //   grid[playerY][playerX] = 0; //reset old location to white
