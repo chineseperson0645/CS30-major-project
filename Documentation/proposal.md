@@ -13,7 +13,7 @@ A fighter game with solid combat skills. It will be an open-world game where you
     Enviorment will need to be/have:
     - Open world [/]
     - Generating entities (Set Positions)
-    - Have interactable items (Random Postions)
+    - Have interactable items (Random Postions) //Ask if we can change to set locations.
     - Have different locations (Village, Forest) [/]
 
     Game will need to:

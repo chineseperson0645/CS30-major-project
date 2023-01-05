@@ -101,8 +101,6 @@ function hopOffSYNN4(){
 
 //"dFirst" was implemented so that our first if statement would be called first.
 
-let dFirst = true;
-
 function keyPressed() {
   if (key === "d") { //D
     if (grid[playerY][playerX+1] === 3 && nearPathRight == true){
@@ -114,7 +112,9 @@ function keyPressed() {
       console.log("Right4");
     }
     else if (grid[playerY][playerX+1] === 95 && forestPath === true){
-      console.log("teleport D");
+      forestPath = false;
+      ninjaVillage = true;
+      console.log("Ninja Village (D)");
       grid[playerY][playerX] = 3;
       grid = ninjaVillageJSON;
       playerX = 1;
@@ -135,9 +135,11 @@ function keyPressed() {
     else if (grid[playerY][playerX-1] === 4 && nearPathLeft === true){
       hopOffAXNN4();
       console.log("Left");
-    }  
+    } 
     else if (grid[playerY][playerX-1] === 95 && ninjaVillage === true){
-      console.log("teleport A");
+      ninjaVillage = false;
+      forestPath = true;
+      console.log("Forest Path (A)");
       grid[playerY][playerX] = 3;
       grid = forestPathJSON;
       playerX = 33;
@@ -155,8 +157,14 @@ function keyPressed() {
       hopOffWYNN4();
       console.log("Forward");
     }
-    if (grid[playerY-1][playerX] === 95){ //Teleport Detection
-      console.log("teleport W");
+    if (grid[playerY-1][playerX] === 9 && ninjaVillage === true){ //Door Detection
+      ninjaVillage = false;
+      insideNinjaHouse = true;
+      grid[playerY][playerX] = 3;
+      grid = houseJSON;
+      playerX = 17;
+      playerY = 16;
+      grid[playerY][playerX] = "player";
     }
   }
 
@@ -169,8 +177,15 @@ function keyPressed() {
       hopOffSYNN4();
       console.log("Down");
     }
-    if (grid[playerY+1][playerX] === 95){ //Teleport Detection
-      console.log("teleport S");
+    if (grid[playerY+1][playerX] === 25 && insideNinjaHouse === true){ //Teleport Detection
+      insideNinjahouse = false;
+      ninjaVillage = true;
+      grid[playerY][playerX] = 23;
+      grid = ninjaVillage;
+      playerX = 1; //Our cuplrit. // "Cannot set properties of undefined (setting '3')"
+      playerY = 1;
+      grid[playerY][playerX] = "player"; //Our cuplrit. // Red underlining.
+      console.log("Outside Ninja House (S)");
     }
   }
 }

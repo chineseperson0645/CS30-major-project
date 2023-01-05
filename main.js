@@ -37,9 +37,11 @@ let forestPathJSON, ninjaVillageJSON, betaTestJSON;
 
 function preload() {
   treeImg = loadImage('assets/bush.png');
+  bottomtreeImg = loadImage('assets/bottomtree.png');
+
   zenImg = loadImage('assets/zen.gif');
   ninjaImg = loadImage('assets/ninja.gif');
-  bottomtreeImg = loadImage('assets/bottomtree.png');
+  potionImg = loadImage('assets/potion.gif');
 
   houseTLImg = loadImage('assets/houseTL.png');
   houseTMImg = loadImage('assets/houseTM.png');
@@ -60,10 +62,15 @@ function preload() {
   fenceTLImg = loadImage('assets/fenceTL.png');
   fenceTRImg = loadImage('assets/fenceTR.png');
 
+  floorImg = loadImage('assets/floor.png');
+  wallImg = loadImage('assets/wall.png');
+  blackImg = loadImage('assets/black.png');
+  openDoorImg = loadImage('assets/opendoor.png');
 
   betaTestJSON = loadJSON('JSON-Maps/beta.json');
   forestPathJSON = loadJSON('JSON-Maps/forestpath.json');
-  ninjaVillageJSON = loadJSON('JSON-Maps/ninja.json')
+  ninjaVillageJSON = loadJSON('JSON-Maps/ninja.json');
+  houseJSON = loadJSON('JSON-Maps/house.json');
 }
 
 function setup() {
@@ -79,26 +86,11 @@ function draw() {
   background("white");
   displayGrid(grid);
   surroundingCheck();
-  whichMap();
 }
 
-let forestPath;
-let ninjaVillage;
-
-function whichMap(){
-  if (grid === forestPathJSON){
-    forestPath = true;
-  }
-  else if (grid ==! forestPathJSON){
-    forestPath = false;
-  }
-  if (grid === ninjaVillageJSON){
-    ninjaVillage = true;
-  }
-  if (grid ==! ninjaVillageJSON){
-    ninjaVillage = false;
-  }
-}
+let forestPath = true;
+let ninjaVillage = false;
+let insideNinjaHouse = false;
 
 function displayGrid(grid) {
   for (let y=0; y<ROWS; y++) {
@@ -130,7 +122,7 @@ function displayGrid(grid) {
       if (grid[y][x] === 8){
         image(houseBLImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 9){
+      if (grid[y][x] === 9){ //Ninja Village DOOR
         image(houseBMImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
       if (grid[y][x] === 10){
@@ -169,6 +161,20 @@ function displayGrid(grid) {
       if (grid[y][x] === 21){
         image(fenceDLImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
+      if (grid[y][x] === 22){
+        image(blackImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 23){
+        image(floorImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 24){
+        image(wallImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 25){
+        image(openDoorImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+
+
 
       
       if (grid[y][x] === "player") {
@@ -185,11 +191,16 @@ function displayGrid(grid) {
       if (grid[y][x] === 93) { //BORDER!
         image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 94) { //Ninja
-        image(ninjaImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
-      }
       if (grid[y][x] === 95) { //Teleport!
         image(path1Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 96) { //Ninja
+        image(path1Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+        image(ninjaImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 97) { //Ninja
+        image(path1Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+        image(potionImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
     }
   }
@@ -200,7 +211,7 @@ function create2dArray(COLS, ROWS) {
   for (let y=0; y<ROWS; y++) {
     emptyArray.push([]);
     for (let x=0; x<COLS; x++) {
-      emptyArray[y].push(3);
+      emptyArray[y].push(22);
     }
   }
   return emptyArray;
