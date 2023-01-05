@@ -28,49 +28,51 @@ const COLS = 35; //x axis (in reality)
 let grid;
 let cellWidth;
 let cellHeight;
-let playerX = 1;
-let playerY = 8;
+// let playerX = 1;
+// let playerY = 8;
+let playerX = 17;
+let playerY = 16;
 // CHANGE PLAYER X AND Y TO CHANGE WHERE PLAYER SPAWS (COULD BE USEFUL FOR TELEPORTATION AND OTHERS IN FUTURE)
 
 let treeImg, zenImg, bottomtreeImg, houseTLImg, houseTMImg, houseTRImg, houseBLImg, houseBMImg, houseBRImg, path1Img, path2Img;
 let forestPathJSON, ninjaVillageJSON, betaTestJSON;
 
 function preload() {
-  treeImg = loadImage('assets/bush.png');
-  bottomtreeImg = loadImage('assets/bottomtree.png');
+  treeImg = loadImage('assets(world)/bush.png');
+  bottomtreeImg = loadImage('assets(world)/bottomtree.png');
 
-  zenImg = loadImage('assets/zen.gif');
-  ninjaImg = loadImage('assets/ninja.gif');
-  potionImg = loadImage('assets/potion.gif');
+  zenImg = loadImage('assets(world)/zen.gif');
+  ninjaImg = loadImage('assets(world)/ninja.gif');
+  potionImg = loadImage('assets(world)/potion.gif');
 
-  houseTLImg = loadImage('assets/houseTL.png');
-  houseTMImg = loadImage('assets/houseTM.png');
-  houseTRImg = loadImage('assets/houseTR2.png');
-  houseBLImg = loadImage('assets/houseBL.png');
-  houseBMImg = loadImage('assets/houseBM.png');
-  houseBRImg = loadImage('assets/houseBR2.png');
+  houseTLImg = loadImage('assets(world)/houseTL.png');
+  houseTMImg = loadImage('assets(world)/houseTM.png');
+  houseTRImg = loadImage('assets(world)/houseTR2.png');
+  houseBLImg = loadImage('assets(world)/houseBL.png');
+  houseBMImg = loadImage('assets(world)/houseBM.png');
+  houseBRImg = loadImage('assets(world)/houseBR2.png');
 
-  path1Img = loadImage('assets/path1.png');
-  path2Img = loadImage('assets/path2.png');
+  path1Img = loadImage('assets(world)/path1.png');
+  path2Img = loadImage('assets(world)/path2.png');
 
-  fenceAMImg = loadImage('assets/fenceAM.png');
-  fenceAM2Img = loadImage('assets/fenceAM2.png');
-  fenceDLImg = loadImage('assets/fenceDL.png');
-  fenceDRImg = loadImage('assets/fenceDR.png');
-  fenceBRImg = loadImage('assets/fenceBL.png');
-  fenceBLImg = loadImage('assets/fenceBR.png');
-  fenceTLImg = loadImage('assets/fenceTL.png');
-  fenceTRImg = loadImage('assets/fenceTR.png');
+  fenceAMImg = loadImage('assets(world)/fenceAM.png');
+  fenceAM2Img = loadImage('assets(world)/fenceAM2.png');
+  fenceDLImg = loadImage('assets(world)/fenceDL.png');
+  fenceDRImg = loadImage('assets(world)/fenceDR.png');
+  fenceBRImg = loadImage('assets(world)/fenceBL.png');
+  fenceBLImg = loadImage('assets(world)/fenceBR.png');
+  fenceTLImg = loadImage('assets(world)/fenceTL.png');
+  fenceTRImg = loadImage('assets(world)/fenceTR.png');
 
-  floorImg = loadImage('assets/floor.png');
-  wallImg = loadImage('assets/wall.png');
-  blackImg = loadImage('assets/black.png');
-  openDoorImg = loadImage('assets/opendoor.png');
+  floorImg = loadImage('assets(world)/floor.png');
+  wallImg = loadImage('assets(world)/wall.png');
+  blackImg = loadImage('assets(world)/black.png');
+  openDoorImg = loadImage('assets(world)/opendoor.png');
 
-  betaTestJSON = loadJSON('JSON-Maps/beta.json');
-  forestPathJSON = loadJSON('JSON-Maps/forestpath.json');
-  ninjaVillageJSON = loadJSON('JSON-Maps/ninja.json');
-  houseJSON = loadJSON('JSON-Maps/house.json');
+  betaTestJSON = loadJSON('JSON-Maps(world)/beta.json');
+  forestPathJSON = loadJSON('JSON-Maps(world)/forestpath.json');
+  ninjaVillageJSON = loadJSON('JSON-Maps(world)/ninja.json');
+  houseJSON = loadJSON('JSON-Maps(world)/house.json');
 }
 
 function setup() {
@@ -78,8 +80,9 @@ function setup() {
   cellWidth = width/COLS;
   cellHeight = height/ROWS;
   grid = create2dArray(COLS, ROWS);
-  grid = forestPathJSON;
-  grid[playerY][playerX] = "player";
+  grid = houseJSON;
+  grid[playerY][playerX] = "player"; 
+  //Do not do [playerY+#][playerX+#] or whatever #. It messes up movement keys.
 }
 
 function draw() {
@@ -188,6 +191,10 @@ function displayGrid(grid) {
         image(path2Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
         image(zenImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
+      if (grid[y][x] === "playerfloor") {
+        image(floorImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+        image(zenImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
       if (grid[y][x] === 93) { //BORDER!
         image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
@@ -198,8 +205,8 @@ function displayGrid(grid) {
         image(path1Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
         image(ninjaImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 97) { //Ninja
-        image(path1Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      if (grid[y][x] === 97) { //POTION
+        image(floorImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
         image(potionImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
     }

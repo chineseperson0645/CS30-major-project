@@ -101,6 +101,22 @@ function hopOffSYNN4(){
 
 //"dFirst" was implemented so that our first if statement would be called first.
 
+
+// Orginal Design
+// else if (grid[playerY][playerX+1] === 23){
+//   grid[playerY][playerX] = 23; 
+//   playerX++; 
+//   grid[playerY][playerX] = "playerfloor"; 
+//   console.log("floor D");
+// }
+// else if (grid[playerY+1][playerX] === 97){
+//   grid[playerY][playerX] = 23; 
+//   playerY++; 
+//   grid[playerY][playerX] = "playerfloor"; 
+//   console.log("nom");
+// }
+
+
 function keyPressed() {
   if (key === "d") { //D
     if (grid[playerY][playerX+1] === 3 && nearPathRight == true){
@@ -110,6 +126,19 @@ function keyPressed() {
     else if (grid[playerY][playerX+1] === 4 && nearPathRight == true){
       hopOffDXPP4();
       console.log("Right4");
+    }
+    else if (grid[playerY][playerX+1] === 23 || grid[playerY][playerX+1] === 97){
+      grid[playerY][playerX] = 23; 
+      playerX++; 
+      grid[playerY][playerX] = "playerfloor"; 
+      console.log("floor D");
+    }
+    else if (grid[playerY][playerX+1] === 97){
+      grid[playerY][playerX] = 23; 
+      playerX++; 
+      grid[playerY][playerX] = "playerfloor"; 
+      console.log("nom");
+      //Then do like globalHealth++; or something...
     }
     else if (grid[playerY][playerX+1] === 95 && forestPath === true){
       forestPath = false;
@@ -136,6 +165,18 @@ function keyPressed() {
       hopOffAXNN4();
       console.log("Left");
     } 
+    else if (grid[playerY][playerX-1] === 23){
+      grid[playerY][playerX] = 23; 
+      playerX--; 
+      grid[playerY][playerX] = "playerfloor"; 
+      console.log("floor A");
+    }
+    else if (grid[playerY][playerX-1] === 97){
+      grid[playerY][playerX] = 23; 
+      playerX--; 
+      grid[playerY][playerX] = "playerfloor"; 
+      console.log("nom");
+    }
     else if (grid[playerY][playerX-1] === 95 && ninjaVillage === true){
       ninjaVillage = false;
       forestPath = true;
@@ -157,7 +198,19 @@ function keyPressed() {
       hopOffWYNN4();
       console.log("Forward");
     }
-    if (grid[playerY-1][playerX] === 9 && ninjaVillage === true){ //Door Detection
+    else if (grid[playerY-1][playerX] === 23){
+      grid[playerY][playerX] = 23; 
+      playerY--; 
+      grid[playerY][playerX] = "playerfloor"; 
+      console.log("floor D");
+    }
+    else if (grid[playerY-1][playerX] === 97){
+      grid[playerY][playerX] = 23; 
+      playerY--; 
+      grid[playerY][playerX] = "playerfloor"; 
+      console.log("nom");
+    }
+    else if (grid[playerY-1][playerX] === 9 && ninjaVillage === true){ //Door Detection
       ninjaVillage = false;
       insideNinjaHouse = true;
       grid[playerY][playerX] = 3;
@@ -177,14 +230,26 @@ function keyPressed() {
       hopOffSYNN4();
       console.log("Down");
     }
+    else if (grid[playerY+1][playerX] === 23){
+      grid[playerY][playerX] = 23; 
+      playerY++; 
+      grid[playerY][playerX] = "playerfloor"; 
+      console.log("floor D");
+    }
+    else if (grid[playerY+1][playerX] === 97){ 
+      grid[playerY][playerX] = 23; 
+      playerY++; 
+      grid[playerY][playerX] = "playerfloor"; 
+      console.log("nom");
+    }
     if (grid[playerY+1][playerX] === 25 && insideNinjaHouse === true){ //Teleport Detection
-      insideNinjahouse = false;
+      insideNinjaHouse = false;
       ninjaVillage = true;
       grid[playerY][playerX] = 23;
-      grid = ninjaVillage;
-      playerX = 1; //Our cuplrit. // "Cannot set properties of undefined (setting '3')"
-      playerY = 1;
-      grid[playerY][playerX] = "player"; //Our cuplrit. // Red underlining.
+      grid = ninjaVillageJSON; //REMEBER TO PUT JSON AT THE END!
+      playerX = 14; 
+      playerY = 6;
+      grid[playerY][playerX] = "player"; 
       console.log("Outside Ninja House (S)");
     }
   }

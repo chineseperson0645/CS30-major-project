@@ -103,6 +103,6 @@ function mousePressed() {
       }
       
     if (mouseButton === CENTER){
-        grid[yPos][xPos] = 25; //Interchangable to create borders or teleport blocks, just place approriate #
+        grid[yPos][xPos] = 97; //Interchangable to create borders or teleport blocks, just place approriate #
       }
     }
