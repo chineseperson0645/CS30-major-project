@@ -91,14 +91,3 @@ function draw() {
 
    
 }
-
-function cooldown1() { 
-  if (timer === 0) { 
-    timer = true; 
-  }
-  else {
-    timer = false;
-  }  
-}
-
-

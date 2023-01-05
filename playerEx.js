@@ -103,3 +103,39 @@ class Player {
     })
   }
 }
+
+
+
+
+
+
+
+
+class Sprite {
+  constructor({postion, imageSrc, framesMax = 1}){
+    this.postion = postion;
+    this.width = 96; 
+    this.height = 96;
+    this.image = new Image();
+    this.image.src = imageSrc; 
+    this.framesMax = framesMax;
+    this.framesCurrent = 0;
+    this.framesElapsed = 0;
+    this.framesHold = 1; 
+  }
+
+  display() {
+      image(this.image, this.framesCurrent * (this.image.width / this.framesMax), 0, this.image.width / this.framesMax, this.image.height, this.postion.x, this.postion.y, this.image.width / this.framesMax, this.height); 
+    }
+     
+
+  update() {
+        this.framesElapsed ++; 
+        if (this.framesCurrent < this.framesMax - 1) {
+          this.framesCurrent++; 
+        }
+        else {
+          this.framesCurrent = 0; 
+        }
+    }
+}
