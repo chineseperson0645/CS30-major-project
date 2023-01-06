@@ -60,6 +60,7 @@ function setup() {
   player1 = new mainPlayer(runRight,idlePos, jumpPos,runBack, crouch, jumpPosB, move1, 0,0,5,100); 
   timer = 0;
   move1 = true;
+  
   playerEx = new Player({
     velocity: {
       x: 0,
@@ -74,7 +75,22 @@ function setup() {
       x:-50,
       y:30
     },
-  },idlePos); 
+    imageSrc: idlePos,
+    
+    sprites: {
+      idle :{
+        imageSrc: idlePos,
+        framesMax: 6
+      },
+      
+      run:{
+        imageSrc: runRight,
+        framesMax: 6
+      }
+
+
+    }
+  }); 
 
 }
 

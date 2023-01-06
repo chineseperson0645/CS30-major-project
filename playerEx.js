@@ -1,11 +1,58 @@
-class Player {
-  constructor({velocity, postion, offset}, idolePos){
-    this.velocity = velocity;
+class Sprite {
+  constructor({postion, imageSrc, framesMax = 1}){
     this.postion = postion;
+    this.width = 96; 
+    this.height = 96;
+    this.nimage = new Image();
+    this.nimage.src = imageSrc; 
+    this.framesMax = framesMax;
+    this.framesCurrent = 0;
+    this.framesElapsed = 0;
+    this.framesHold = 1; 
+  }
+
+  display() {
+      // image(this.nimage, this.framesCurrent * (this.nimage.width / this.framesMax), 0, this.nimage.width / this.framesMax, this.nimage.height, this.postion.x, this.postion.y, this.nimage.width / this.framesMax, this.height); 
+    }
+     
+
+  update() {
+        this.framesElapsed ++;
+        if (this.framesElapsed % this.framesHold === 0 ) {
+          if (this.framesCurrent < this.framesMax - 1) {
+            this.framesCurrent++; 
+          }
+          else {
+            this.framesCurrent = 0; 
+          }
+        }
+        
+    }
+}
+
+
+
+
+class Player extends Sprite {
+  constructor({velocity, postion, offset, imageSrc, framesMax = 1}){
+    super({postion, imageSrc, framesMax, sprites})
+
+    this.framesCurrent = 0;
+    this.framesElapsed = 0;
+    this.framesHold = 1; 
+    this.velocity = velocity;
+    this.image = imageSrc;
+    this.sprites = sprites; 
     this.width = 50; 
     this.height = 150;
-    this.image = idolePos;
     this.lastKeys;
+    for (let sprite in this.sprites) {
+      sprites[sprite].image = new Image();
+      sprties[sprite].image.src = sprties[sprite].imageSrc;
+    }
+    console.log(this.sprite);
+
+
     this.attackBox = {
       postion: {
         x: this.postion.x,
@@ -111,31 +158,4 @@ class Player {
 
 
 
-class Sprite {
-  constructor({postion, imageSrc, framesMax = 1}){
-    this.postion = postion;
-    this.width = 96; 
-    this.height = 96;
-    this.image = new Image();
-    this.image.src = imageSrc; 
-    this.framesMax = framesMax;
-    this.framesCurrent = 0;
-    this.framesElapsed = 0;
-    this.framesHold = 1; 
-  }
 
-  display() {
-      image(this.image, this.framesCurrent * (this.image.width / this.framesMax), 0, this.image.width / this.framesMax, this.image.height, this.postion.x, this.postion.y, this.image.width / this.framesMax, this.height); 
-    }
-     
-
-  update() {
-        this.framesElapsed ++; 
-        if (this.framesCurrent < this.framesMax - 1) {
-          this.framesCurrent++; 
-        }
-        else {
-          this.framesCurrent = 0; 
-        }
-    }
-}
