@@ -80,7 +80,7 @@ function setup() {
   cellWidth = width/COLS;
   cellHeight = height/ROWS;
   grid = create2dArray(COLS, ROWS);
-  grid = houseJSON;
+  grid = forestPathJSON;
   grid[playerY][playerX] = "player"; 
   //Do not do [playerY+#][playerX+#] or whatever #. It messes up movement keys.
 }
