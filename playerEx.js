@@ -35,22 +35,22 @@ class Sprite {
 
 class Player extends Sprite {
   constructor({velocity, postion, offset, imageSrc, framesMax = 1}){
-    super({postion, imageSrc, framesMax, sprites})
+    super({postion, imageSrc, framesMax});
 
     this.framesCurrent = 0;
     this.framesElapsed = 0;
     this.framesHold = 1; 
     this.velocity = velocity;
     this.image = imageSrc;
-    this.sprites = sprites; 
+    // this.sprites = sprites; 
     this.width = 50; 
     this.height = 150;
     this.lastKeys;
-    for (let sprite in this.sprites) {
-      sprites[sprite].image = new Image();
-      sprties[sprite].image.src = sprties[sprite].imageSrc;
-    }
-    console.log(this.sprite);
+    // for (let sprite in this.sprites) {
+    //   sprites[sprite].image = new Image();
+    //   sprties[sprite].image.src = sprties[sprite].imageSrc;
+    // }
+    // console.log(this.sprite);
 
 
     this.attackBox = {
