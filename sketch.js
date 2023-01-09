@@ -1,7 +1,18 @@
 // CS30 Major Project
 // Anjana Samarasinghe
+const gravity = 0.7;
 
-const gravity = 0.7;  
+const keys = {
+  a: {
+    pressed: false
+  },
+  d: {
+    pressed: false
+  },
+  w: {
+    pressed: false
+  }
+};
 
 let playerEx; 
 let runRight;
@@ -49,16 +60,37 @@ function setup() {
   player1 = new mainPlayer(runRight,idlePos, jumpPos,runBack, crouch, jumpPosB, move1, 0,0,5,100); 
   timer = 0;
   move1 = true;
-//   playerEx = new Player({
-//     velocity: {
-//     x: 0,
-//     y: 10
-//   },
-//   postion: {
-//     x: 0, 
-//     y: 0
-//   },
-// })
+  
+  playerEx = new Player({
+    velocity: {
+      x: 0,
+      y: 0
+    },
+    postion: {
+      x: 0, 
+      y: 0
+    },
+
+    offset: {
+      x:-50,
+      y:30
+    },
+    imageSrc: idlePos,
+    
+    sprites: {
+      idle :{
+        imageSrc: idlePos,
+        framesMax: 6
+      },
+      
+      run:{
+        imageSrc: runRight,
+        framesMax: 6
+      }
+
+
+    }
+  }); 
 
 }
 
@@ -68,19 +100,10 @@ function draw() {
   
   image(bgImage, 0, 0, width, height);
   player1.move();
-  // playerEx.update(); 
-  // playerEx.display();
+  playerEx.movement(); 
+  playerEx.update(); 
+  playerEx.display();
   
+
    
 }
-
-function cooldown1() { 
-  if (timer === 0) { 
-    timer = true; 
-  }
-  else {
-    timer = false;
-  }  
-}
-
-
