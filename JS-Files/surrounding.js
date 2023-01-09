@@ -219,6 +219,15 @@ function keyPressed() {
       playerY = 16;
       grid[playerY][playerX] = "player";
     }
+    else if (grid[playerY-1][playerX] === 9 && ninjaVillage === true){ //Change ninjaVillage to like bossRoom
+      ninjaVillage = false;
+      insideNinjaHouse = true;
+      grid[playerY][playerX] = 3;
+      grid = houseJSON;
+      playerX = 17;
+      playerY = 16;
+      grid[playerY][playerX] = "player";
+    }
   }
 
   if (key === "s") { //S
