@@ -87,8 +87,6 @@ function setup() {
         imageSrc: runRight,
         framesMax: 6
       }
-
-
     }
   }); 
 
@@ -99,7 +97,7 @@ function draw() {
 
   
   image(bgImage, 0, 0, width, height);
-  player1.move();
+  // player1.move();
   playerEx.movement(); 
   playerEx.update(); 
   playerEx.display();

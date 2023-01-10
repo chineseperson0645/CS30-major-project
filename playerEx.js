@@ -8,49 +8,51 @@ class Sprite {
     this.framesMax = framesMax;
     this.framesCurrent = 0;
     this.framesElapsed = 0;
-    this.framesHold = 1; 
+    this.framesHold = 1;
+    
   }
 
   display() {
-      // image(this.nimage, this.framesCurrent * (this.nimage.width / this.framesMax), 0, this.nimage.width / this.framesMax, this.nimage.height, this.postion.x, this.postion.y, this.nimage.width / this.framesMax, this.height); 
-    }
+    // image(this.nimage, this.framesCurrent * (this.nimage.width / this.framesMax), 0, this.nimage.width / this.framesMax, this.nimage.height, this.postion.x, this.postion.y, this.nimage.width / this.framesMax, this.height); 
+  }
      
 
   update() {
-        this.framesElapsed ++;
-        if (this.framesElapsed % this.framesHold === 0 ) {
-          if (this.framesCurrent < this.framesMax - 1) {
-            this.framesCurrent++; 
-          }
-          else {
-            this.framesCurrent = 0; 
-          }
-        }
-        
-    }
+    this.framesElapsed ++;
+    if (this.framesElapsed % this.framesHold === 0 ) {
+      if (this.framesCurrent < this.framesMax - 1) {
+        this.framesCurrent++; 
+      }
+      else {
+        this.framesCurrent = 0; 
+      }
+    }       
+  }
 }
 
 
 
 
 class Player extends Sprite {
-  constructor({velocity, postion, offset, imageSrc, framesMax = 1}){
-    super({postion, imageSrc, framesMax});
+  constructor({velocity, postion, offset, imageSrc, framesMax = 1, sprite}){
+    
+    super({postion, imageSrc, framesMax, sprite});
 
     this.framesCurrent = 0;
     this.framesElapsed = 0;
     this.framesHold = 1; 
     this.velocity = velocity;
     this.image = imageSrc;
-    // this.sprites = sprites; 
+    this.sprites = sprite; 
     this.width = 50; 
     this.height = 150;
     this.lastKeys;
-    // for (let sprite in this.sprites) {
-    //   sprites[sprite].image = new Image();
-    //   sprties[sprite].image.src = sprties[sprite].imageSrc;
-    // }
-    // console.log(this.sprite);
+    
+    for (let sprite in this.sprites) {
+      sprites[sprite].image = new Image();
+      sprties[sprite].image.src = sprties[sprite].imageSrc;
+    }
+    console.log(this.sprite);
 
 
     this.attackBox = {
@@ -62,7 +64,7 @@ class Player extends Sprite {
       offset,
       width: 50, 
       height: 50
-    }
+    };
     this.isAttacking; 
   
   }
@@ -72,7 +74,7 @@ class Player extends Sprite {
     
     if (this.isAttacking) {
       fill("green"); 
-    rect(this.attackBox.postion.x, this.attackBox.postion.y, this.attackBox.width, this.attackBox.height);
+      rect(this.attackBox.postion.x, this.attackBox.postion.y, this.attackBox.width, this.attackBox.height);
     }
      
   }
@@ -123,31 +125,31 @@ class Player extends Sprite {
         break;
         
       case 'w':
-      this.velocity.y = -20; 
+        this.velocity.y = -20; 
         break;
 
       case "e":
         this.attack(); 
       }
-    })
+    });
     
     window.addEventListener('keyup', (event) => {
       switch (event.key) {
-        case 'd':
-          this.velocity.x = 0; 
-          keys.d.pressed = false; 
-          break 
+      case 'd':
+        this.velocity.x = 0; 
+        keys.d.pressed = false; 
+        break 
           
-        case 'a':
-          keys.a.pressed = false;
-          this.velocity.x = 0; 
-          break
+      case 'a':
+        keys.a.pressed = false;
+        this.velocity.x = 0; 
+        break
         
-        case 'w':
-          keys.w.pressed = false; 
-          break
+      case 'w':
+        keys.w.pressed = false; 
+        break
       }
-    })
+    });
   }
 }
 
