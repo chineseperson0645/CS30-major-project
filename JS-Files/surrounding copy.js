@@ -116,8 +116,20 @@ function hopOffSYNN4(){
 //   console.log("nom");
 // }
 
+//have all other keys set to just turning a direction (rotate) and then just build all functions into w (to move forward)
+//if (direction === "left" && grid[playerY][playerX+1])
+//Should theortically remove the need for surroundCheck and save a lot of code. Since all functionalities will be bound to w.
+
+// rotate(PI / 3.0);
+
 function keyPressed() {
   if (key === "d") { //D
+    direction = "left";
+    rotate(PI / 3.0);
+    
+
+
+
     if (grid[playerY][playerX+1] === 3 && nearPathRight == true){
       hopOffDXPP3();
       console.log("Right3");
@@ -295,13 +307,13 @@ function keyPressed() {
 // So if on block, standingOn === 1 (player ontop for ex.), if move off of block, standingOn === 2 (orginal block value)
 // Constantly changing 
 
-// function switcherPath1To2(){
-//   if (grid[playerX][playerY] === 1){
-//     if (dPressed === true){
-//       //That means playerX + 1
-//     }
-//   }
-// }
+function switcherPath1To2(){
+  if (grid[playerX][playerY] === 1){
+    if (dPressed === true){
+      //That means playerX + 1
+    }
+  }
+}
 
 // function whateverMoveableIsHere(){
   //Essientially, if it's movable, allow player to move here.

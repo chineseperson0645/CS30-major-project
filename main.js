@@ -6,6 +6,10 @@
 //COMMIT DAILY WHEN THERES CLASS TIME
 //COMMIT DAILY WHEN THERES CLASS TIME
 
+
+//Something to consider for viewers, we used fewer functions in our grid to improve performance and instead built them directly into the control functions (WASD)
+//So that they are only called once everytime a key is pressed instead of constantly being checked for in the draw loop. Hopefully saving performance.
+
 //Notes:
 // If near border or teleport blocks don't call not normal. Make teleport blocks just path images.
 // Keep the beta.JSON and build all other maps as modified copies. (because theres a border)
@@ -28,10 +32,10 @@ const COLS = 35; //x axis (in reality)
 let grid;
 let cellWidth;
 let cellHeight;
-// let playerX = 1;
-// let playerY = 8;
-let playerX = 17;
-let playerY = 16;
+let playerX = 2;
+let playerY = 8;
+let globalPlayerHealth;
+let direction;
 // CHANGE PLAYER X AND Y TO CHANGE WHERE PLAYER SPAWS (COULD BE USEFUL FOR TELEPORTATION AND OTHERS IN FUTURE)
 
 let treeImg, zenImg, bottomtreeImg, houseTLImg, houseTMImg, houseTRImg, houseBLImg, houseBMImg, houseBRImg, path1Img, path2Img;
@@ -76,6 +80,8 @@ function preload() {
 }
 
 function setup() {
+  globalPlayerHealth = random(59, 92);
+  Math.floor(globalPlayerHealth);
   createCanvas(windowWidth, windowHeight);
   cellWidth = width/COLS;
   cellHeight = height/ROWS;
@@ -84,6 +90,7 @@ function setup() {
   grid[playerY][playerX] = "player"; 
   //Do not do [playerY+#][playerX+#] or whatever #. It messes up movement keys.
 }
+
 
 function draw() {
   background("white");
