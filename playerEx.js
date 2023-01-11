@@ -3,8 +3,8 @@ class Sprite {
     this.postion = postion;
     this.width = 96; 
     this.height = 96;
-    this.nimage = new Image();
-    this.nimage.src = imageSrc; 
+    this.image = new Image();
+    this.image.src = imageSrc; 
     this.framesMax = framesMax;
     this.framesCurrent = 0;
     this.framesElapsed = 0;
@@ -80,6 +80,8 @@ class Player extends Sprite {
   }
 
   update() {
+
+   
      
     this.attackBox.postion.x = this.postion.x - this.attackBox.offset.x;
     this.attackBox.postion.y = this.postion.y- - this.attackBox.offset.y; 
@@ -104,7 +106,7 @@ class Player extends Sprite {
 
   movement(){
     if (keys.a.pressed === true && this.lastKeys === "a") {
-      this.velocity.x = -5; 
+      this.velocity.x = -5;
     }
     else if (keys.d.pressed === true && this.lastKeys === "d"){
       this.velocity.x = 5; 
