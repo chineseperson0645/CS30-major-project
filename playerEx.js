@@ -70,8 +70,10 @@ class Player extends Sprite {
   }
 
   display() {
-    image(this.image, this.postion.x, this.postion.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
+    // image(this.image, this.postion.x, this.postion.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
     
+    // image(this.image, this.framesCurrent * (this.image.width / this.framesMax), 0, this.image.width / this.framesMax, this.image.height, this.postion.x, this.postion.y, this.image.width / this.framesMax, this.height); 
+
     if (this.isAttacking) {
       fill("green"); 
       rect(this.attackBox.postion.x, this.attackBox.postion.y, this.attackBox.width, this.attackBox.height);
@@ -81,7 +83,16 @@ class Player extends Sprite {
 
   update() {
 
-   
+    image(this.image, this.postion.x, this.postion.y, playerWidth, playerHeight, this.framesCurrent * playerWidth , this.framesCurrent * playerHeight , playerWidth, playerHeight);
+    
+    if (this.framesElapsed % this.framesHold === 0 ) {
+      if (this.framesCurrent < this.framesMax - 1) {
+        this.framesCurrent++;  
+      }
+      else {
+        this.framesCurrent = 0; 
+      }
+    }
      
     this.attackBox.postion.x = this.postion.x - this.attackBox.offset.x;
     this.attackBox.postion.y = this.postion.y- - this.attackBox.offset.y; 

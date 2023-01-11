@@ -32,7 +32,8 @@ let staggerFrames2;
 let bgImage;
 let bgImage2;
 let timer;
-let move1; 
+let move1;
+let state; 
 
 
 
@@ -50,6 +51,7 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  state = "fight"; 
   playerWidth = 96; 
   playerHeight = 96; 
   frameX = 0; 
@@ -93,15 +95,14 @@ function setup() {
 }
 
 function draw() {
-  background(220);
-
-  
-  image(bgImage, 0, 0, width, height);
-  // player1.move();
-  playerEx.movement(); 
-  playerEx.update(); 
-  playerEx.display();
-  
-
-   
+  if (state === "fight") {
+    background(220);
+    image(bgImage, 0, 0, width, height);
+    // player1.move();
+    playerEx.movement(); 
+    playerEx.update(); 
+    playerEx.display();
+  }
 }
+   
+
