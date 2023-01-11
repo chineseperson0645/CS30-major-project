@@ -34,25 +34,25 @@ class Sprite {
 
 
 class Player extends Sprite {
-  constructor({velocity, postion, offset, imageSrc, framesMax = 1, sprite}){
+  constructor({velocity, postion, offset, imageSrc, framesMax = 1, sprites}){
     
-    super({postion, imageSrc, framesMax, sprite});
+    super({postion, imageSrc, framesMax, sprites});
 
     this.framesCurrent = 0;
     this.framesElapsed = 0;
     this.framesHold = 1; 
     this.velocity = velocity;
     this.image = imageSrc;
-    this.sprites = sprite; 
+    this.sprites = sprites; 
     this.width = 50; 
     this.height = 150;
     this.lastKeys;
     
     for (let sprite in this.sprites) {
       sprites[sprite].image = new Image();
-      sprties[sprite].image.src = sprties[sprite].imageSrc;
+      sprites[sprite].image.src = sprites[sprite].imageSrc;
     }
-    console.log(this.sprite);
+    console.log(this.sprites);
 
 
     this.attackBox = {
@@ -80,7 +80,7 @@ class Player extends Sprite {
   }
 
   update() {
-
+     
     this.attackBox.postion.x = this.postion.x - this.attackBox.offset.x;
     this.attackBox.postion.y = this.postion.y- - this.attackBox.offset.y; 
 
