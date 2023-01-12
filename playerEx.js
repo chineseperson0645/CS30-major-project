@@ -12,10 +12,6 @@ class Sprite {
     
   }
 
-  display() {
-    // image(this.nimage, this.framesCurrent * (this.nimage.width / this.framesMax), 0, this.nimage.width / this.framesMax, this.nimage.height, this.postion.x, this.postion.y, this.nimage.width / this.framesMax, this.height); 
-  }
-     
 
   update() {
     this.framesElapsed ++;
@@ -47,6 +43,12 @@ class Player extends Sprite {
     this.width = 50; 
     this.height = 150;
     this.lastKeys;
+    this.playerWidth = 96; 
+    this.playerHeight = 96; 
+    this.frameX = 0; 
+    this.frameY = 0;
+    this.gameFrame = 0;
+    this.staggerFrames = 7; 
     
     for (let sprite in this.sprites) {
       sprites[sprite].image = new Image();
@@ -70,9 +72,6 @@ class Player extends Sprite {
   }
 
   display() {
-    // image(this.image, this.postion.x, this.postion.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
-    
-    // image(this.image, this.framesCurrent * (this.image.width / this.framesMax), 0, this.image.width / this.framesMax, this.image.height, this.postion.x, this.postion.y, this.image.width / this.framesMax, this.height); 
 
     if (this.isAttacking) {
       fill("green"); 
@@ -82,17 +81,26 @@ class Player extends Sprite {
   }
 
   update() {
-
-    image(this.image, this.postion.x, this.postion.y, playerWidth, playerHeight, this.framesCurrent * playerWidth , this.framesCurrent * playerHeight , playerWidth, playerHeight);
-    
-    if (this.framesElapsed % this.framesHold === 0 ) {
-      if (this.framesCurrent < this.framesMax - 1) {
-        this.framesCurrent++;  
+    image(this.image, this.postion.x, this.postion.y, this.playerWidth, this.playerHeight, this.frameX * this.playerWidth , this.frameY * this.playerHeight , this.playerWidth, this.playerHeight );
+    if (this.gameFrame % this.staggerFrames === 0) {
+      if (this.frameX < this.framesMax) {
+        this.frameX++; 
       }
       else {
-        this.framesCurrent = 0; 
+        this.frameX = 0; 
       }
     }
+    this.gameFrame++
+
+    
+    // if (this.framesElapsed % this.framesHold === 0 ) {
+    //   if (this.framesCurrent < this.framesMax - 1) {
+    //     this.framesCurrent++;  
+    //   }
+    //   else {
+    //     this.framesCurrent = 0; 
+    //   }
+    // }
      
     this.attackBox.postion.x = this.postion.x - this.attackBox.offset.x;
     this.attackBox.postion.y = this.postion.y- - this.attackBox.offset.y; 
@@ -101,7 +109,7 @@ class Player extends Sprite {
     this.postion.x += this.velocity.x; 
     this.postion.y += this.velocity.y;
 
-    if (this.postion.y + playerHeight + this.velocity.y >= height) {
+    if (this.postion.y + this.playerHeight + this.velocity.y >= height) {
       this.velocity.y = 0; 
     }
     else {

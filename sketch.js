@@ -52,12 +52,12 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   state = "fight"; 
-  playerWidth = 96; 
-  playerHeight = 96; 
-  frameX = 0; 
-  frameY = 0;
-  gameFrame = 0;
-  staggerFrames = 7;
+  // playerWidth = 96; 
+  // playerHeight = 96; 
+  // frameX = 0; 
+  // frameY = 0;
+  // gameFrame = 0;
+  // staggerFrames = 7;
   staggerFrames2 = 3; 
   player1 = new mainPlayer(runRight,idlePos, jumpPos,runBack, crouch, jumpPosB, move1, 0,0,5,100); 
   timer = 0;
