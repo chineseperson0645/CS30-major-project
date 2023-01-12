@@ -83,7 +83,7 @@ class Player extends Sprite {
   update() {
     image(this.image, this.postion.x, this.postion.y, this.playerWidth, this.playerHeight, this.frameX * this.playerWidth , this.frameY * this.playerHeight , this.playerWidth, this.playerHeight );
     if (this.gameFrame % this.staggerFrames === 0) {
-      if (this.frameX < this.framesMax) {
+      if (this.frameX < 5) {
         this.frameX++; 
       }
       else {

@@ -82,7 +82,7 @@ function setup() {
     sprites: {
       idle :{
         imageSrc: idlePos,
-        framesMax: 6
+        framesMax: 5
       },
       
       run:{
