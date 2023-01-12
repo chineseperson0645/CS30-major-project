@@ -5,19 +5,19 @@ A fighter game with solid combat skills. It will be an open-world game where you
 ## Needs to Have List
 
     Player will need to be able to:
-    - Engage in combat with entities (PVE)
-    - Engage with enviorment (Potions)
+    - Engage in combat with entities (PVE) 
+    - Engage with enviorment (Potions) [/]
     - Have abilities (Power Slash, Pocket Shot, Basic Stab) 
     - Move around in open world enviorment [/]
 
     Enviorment will need to be/have:
     - Open world [/]
-    - Generating entities (Set Positions)
-    - Have interactable items (Random Postions) //Ask if we can change to set locations.
+    - Generating entities (Set Positions) 
+    - Have interactable items (Set Postions)[/]
     - Have different locations (Village, Forest) [/]
 
     Game will need to:
-    - Have entities (enemies and passives alike)
+    - Have entities (enemies and passives alike) //Ask if wwe can change to a singular boss.
     - Starting Screen
     - Ending Screen
 
@@ -36,7 +36,7 @@ A fighter game with solid combat skills. It will be an open-world game where you
 - Randomly Generated Enemies 
 - Road, Metropolitan Parts of Map
 - Voice Lines 
-
+//Ask if we can add soundfx an bg music?
 - Harder Things:
 - Inventory System...
 
