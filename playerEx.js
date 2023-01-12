@@ -48,7 +48,8 @@ class Player extends Sprite {
     this.frameX = 0; 
     this.frameY = 0;
     this.gameFrame = 0;
-    this.staggerFrames = 7; 
+    this.staggerFrames = 7;
+    
     
     for (let sprite in this.sprites) {
       sprites[sprite].image = new Image();
@@ -81,16 +82,18 @@ class Player extends Sprite {
   }
 
   update() {
+
     image(this.image, this.postion.x, this.postion.y, this.playerWidth, this.playerHeight, this.frameX * this.playerWidth , this.frameY * this.playerHeight , this.playerWidth, this.playerHeight );
+    
     if (this.gameFrame % this.staggerFrames === 0) {
-      if (this.frameX < 5) {
+      if (this.frameX < this.sprites.idle.framesMax) {
         this.frameX++; 
       }
       else {
         this.frameX = 0; 
       }
     }
-    this.gameFrame++
+    this.gameFrame++; 
 
     
     // if (this.framesElapsed % this.framesHold === 0 ) {
@@ -159,16 +162,16 @@ class Player extends Sprite {
       case 'd':
         this.velocity.x = 0; 
         keys.d.pressed = false; 
-        break 
+        break ;
           
       case 'a':
         keys.a.pressed = false;
         this.velocity.x = 0; 
-        break
+        break;
         
       case 'w':
         keys.w.pressed = false; 
-        break
+        break;
       }
     });
   }
