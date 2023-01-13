@@ -21,18 +21,8 @@ let idlePos;
 let jumpPos;
 let jumpPosB;  
 let crouch; 
-// let playerHeight; 
-// let playerWidth; 
-// let frameX; 
-// let frameY; 
-// let player1;
-// let gameFrame;
-// let staggerFrames;
-// let staggerFrames2;
 let bgImage;
 let bgImage2;
-// let timer;
-// let move1;
 let state;
 let lastKeys; 
 
@@ -47,22 +37,13 @@ function preload() {
   jumpPosB = loadImage("assets/jumpB.png"); 
   bgImage = loadImage("assets/moutian-pixel.gif");
   bgImage2 = loadImage("assets/city-pixle.gif");
-  move1 = loadImage("assets/Attack_2.png"); 
+
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   state = "fight"; 
-  // playerWidth = 96; 
-  // playerHeight = 96; 
-  // frameX = 0; 
-  // frameY = 0;
-  // gameFrame = 0;
-  // staggerFrames = 7;
-  // staggerFrames2 = 3; 
-  // player1 = new mainPlayer(runRight,idlePos, jumpPos,runBack, crouch, jumpPosB, move1, 0,0,5,100); 
-  // timer = 0;
-  // move1 = true;
+ 
   
   playerEx = new Player({
     velocity: {
@@ -105,8 +86,6 @@ function draw() {
   if (state === "fight") {
     background(220);
     image(bgImage, 0, 0, width, height);
-    // player1.move();
-    // playerEx.movement(); 
     playerEx.update(); 
     playerEx.display();
 
@@ -126,55 +105,51 @@ function draw() {
 
     }
 
-    window.addEventListener('keydown', (event) => {
-      // playerEx.image = playerEx.sprites.idle.imageSrc; 
-
-      switch (event.key) {
-      case 'd':
-        keys.d.pressed = true;
-        lastKeys = "d";
-        // playerEx.image = playerEx.sprites.run.imageSrc; 
-        break;
-        
-      case 'a':
-        keys.a.pressed = true;
-        lastKeys = "a"; 
-        // playerEx.image = playerEx.sprites.runback.imageSrc; 
-
-        break;
-        
-      case 'w':
-        playerEx.velocity.y = -20; 
-        break;
-
-      case "e":
-        playerEx.attack(); 
-      }
-    });
-    
-    window.addEventListener('keyup', (event) => {
-      // playerEx.image = playerEx.sprites.idle.imageSrc; 
-
-      switch (event.key) {
-      case 'd':
-        playerEx.velocity.x = 0; 
-        keys.d.pressed = false; 
-        break ;
-          
-      case 'a':
-        keys.a.pressed = false;
-        playerEx.velocity.x = 0; 
-        break;
-        
-      case 'w':
-        keys.w.pressed = false; 
-        break;
-      }
-    });
   }
-  // console.log(playerEx.gameFrame);
-
 }
 
-   
+//Movement
+
+window.addEventListener('keydown', (event) => {
+
+  switch (event.key) {
+  case 'd':
+    keys.d.pressed = true;
+    lastKeys = "d";
+    break;
+    
+  case 'a':
+    keys.a.pressed = true;
+    lastKeys = "a"; 
+
+    break;
+    
+  case 'w':
+    playerEx.velocity.y = -20; 
+    break;
+
+  case "e":
+    playerEx.attack(); 
+  }
+});
+
+window.addEventListener('keyup', (event) => {
+
+  switch (event.key) {
+  case 'd':
+    playerEx.velocity.x = 0; 
+    keys.d.pressed = false; 
+    break ;
+      
+  case 'a':
+    keys.a.pressed = false;
+    playerEx.velocity.x = 0; 
+    break;
+    
+  case 'w':
+    keys.w.pressed = false; 
+    break;
+  }
+});
+
 

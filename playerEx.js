@@ -1,5 +1,5 @@
 class Sprite {
-  constructor({postion, imageSrc, framesMax = 1}){
+  constructor({postion, imageSrc, framesMax = 1, sprites}){
     this.postion = postion;
     this.width = 96; 
     this.height = 96;
@@ -68,7 +68,7 @@ class Player extends Sprite {
       sprites[sprite].image = new Image();
       sprites[sprite].image.src = sprites[sprite].imageSrc;
     }
-    console.log(this.sprites);
+
 
 
     this.attackBox = {
@@ -101,19 +101,7 @@ class Player extends Sprite {
 
     image(this.image, this.postion.x, this.postion.y, this.playerWidth, this.playerHeight, this.frameX * this.playerWidth , this.frameY * this.playerHeight , this.playerWidth, this.playerHeight );
     
-    // this.animateFrames(); 
-
-
-    
-    // if (this.framesElapsed % this.framesHold === 0 ) {
-    //   if (this.framesCurrent < this.framesMax - 1) {
-    //     this.framesCurrent++;  
-    //   }
-    //   else {
-    //     this.framesCurrent = 0; 
-    //   }
-    // }
-     
+   
     this.attackBox.postion.x = this.postion.x - this.attackBox.offset.x;
     this.attackBox.postion.y = this.postion.y- - this.attackBox.offset.y; 
 
@@ -135,55 +123,7 @@ class Player extends Sprite {
     }, 100);
   }
 
-  movement(){
-    if (keys.a.pressed === true && this.lastKeys === "a") {
-      this.velocity.x = -5;
-    }
-    else if (keys.d.pressed === true && this.lastKeys === "d"){
-      this.velocity.x = 5; 
-    }
   
-    window.addEventListener('keydown', (event) => {
-      switch (event.key) {
-      case 'd':
-        keys.d.pressed = true;
-        
-        this.lastKeys = "d"; 
-        break;
-        
-      case 'a':
-        keys.a.pressed = true;
-        
-        this.lastKeys = "a"; 
-        break;
-        
-      case 'w':
-        this.velocity.y = -20; 
-        break;
-
-      case "e":
-        this.attack(); 
-      }
-    });
-    
-    window.addEventListener('keyup', (event) => {
-      switch (event.key) {
-      case 'd':
-        this.velocity.x = 0; 
-        keys.d.pressed = false; 
-        break ;
-          
-      case 'a':
-        keys.a.pressed = false;
-        this.velocity.x = 0; 
-        break;
-        
-      case 'w':
-        keys.w.pressed = false; 
-        break;
-      }
-    });
-  }
 }
 
 
