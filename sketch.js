@@ -33,7 +33,8 @@ let bgImage;
 let bgImage2;
 let timer;
 let move1;
-let state; 
+let state;
+let lastKeys; 
 
 
 
@@ -78,6 +79,7 @@ function setup() {
       y:30
     },
     imageSrc: idlePos,
+    framesMax: 5, 
     
     sprites: {
       idle :{
@@ -87,8 +89,13 @@ function setup() {
       
       run:{
         imageSrc: runRight,
-        framesMax: 6
+        framesMax: 5
+      },
+      runback: {
+        imageSrc: runBack, 
+        framesMax: 5
       }
+
     }
   }); 
 
@@ -99,10 +106,65 @@ function draw() {
     background(220);
     image(bgImage, 0, 0, width, height);
     // player1.move();
-    playerEx.movement(); 
+    // playerEx.movement(); 
     playerEx.update(); 
     playerEx.display();
+
+
+    if (keys.a.pressed === true && lastKeys === "a") {
+      playerEx.velocity.x = -5;
+    }
+    else if (keys.d.pressed === true && lastKeys === "d"){
+      playerEx.velocity.x = 5; 
+    }
+
+    window.addEventListener('keydown', (event) => {
+      playerEx.image = playerEx.sprites.idle.imageSrc; 
+
+      switch (event.key) {
+      case 'd':
+        keys.d.pressed = true;
+        lastKeys = "d";
+        playerEx.image = playerEx.sprites.run.imageSrc; 
+        break;
+        
+      case 'a':
+        playerEx.image = playerEx.sprites.runback.imageSrc; 
+        keys.a.pressed = true;
+        lastKeys = "a"; 
+
+        break;
+        
+      case 'w':
+        playerEx.velocity.y = -20; 
+        break;
+
+      case "e":
+        playerEx.attack(); 
+      }
+    });
+    
+    window.addEventListener('keyup', (event) => {
+      playerEx.image = playerEx.sprites.idle.imageSrc; 
+
+      switch (event.key) {
+      case 'd':
+        playerEx.velocity.x = 0; 
+        keys.d.pressed = false; 
+        break ;
+          
+      case 'a':
+        keys.a.pressed = false;
+        playerEx.velocity.x = 0; 
+        break;
+        
+      case 'w':
+        keys.w.pressed = false; 
+        break;
+      }
+    });
   }
 }
+
    
 

@@ -11,9 +11,22 @@ class Sprite {
     this.framesHold = 1;
     
   }
-
+  animateFrames () {
+    if (this.gameFrame % this.staggerFrames === 0) {
+      if (this.frameX < this.framesMax) {
+        this.frameX++; 
+      }
+      else {
+        this.frameX = 0; 
+      }
+    }
+    this.gameFrame++; 
+  }
 
   update() {
+
+
+    
     this.framesElapsed ++;
     if (this.framesElapsed % this.framesHold === 0 ) {
       if (this.framesCurrent < this.framesMax - 1) {
@@ -71,6 +84,7 @@ class Player extends Sprite {
     this.isAttacking; 
   
   }
+ 
 
   display() {
 
@@ -85,15 +99,8 @@ class Player extends Sprite {
 
     image(this.image, this.postion.x, this.postion.y, this.playerWidth, this.playerHeight, this.frameX * this.playerWidth , this.frameY * this.playerHeight , this.playerWidth, this.playerHeight );
     
-    if (this.gameFrame % this.staggerFrames === 0) {
-      if (this.frameX < this.sprites.idle.framesMax) {
-        this.frameX++; 
-      }
-      else {
-        this.frameX = 0; 
-      }
-    }
-    this.gameFrame++; 
+    this.animateFrames(); 
+
 
     
     // if (this.framesElapsed % this.framesHold === 0 ) {
