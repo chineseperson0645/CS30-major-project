@@ -1,164 +1,164 @@
-/* eslint-disable */
+// /* eslint-disable */
 
-class mainPlayer {
-  constructor(runRight, idlePostion, jumpPos, runBack, crouch, jumpPosB, move1,  x, y, playerSpeed, playerHp) {
-    this.x = x; 
-    this.y = y; 
-    this.runR = runRight;
-    this.idleP = idlePostion;
-    this.jumpP = jumpPos;
-    this.runB = runBack;
-    this.crouch = crouch;
-    this.jumpPB = jumpPosB;   
-    this.speed = playerSpeed;
-    this.move1 = move1;  
-    this.hp = playerHp;
-  } 
+// class mainPlayer {
+//   constructor(runRight, idlePostion, jumpPos, runBack, crouch, jumpPosB, move1,  x, y, playerSpeed, playerHp) {
+//     this.x = x; 
+//     this.y = y; 
+//     this.runR = runRight;
+//     this.idleP = idlePostion;
+//     this.jumpP = jumpPos;
+//     this.runB = runBack;
+//     this.crouch = crouch;
+//     this.jumpPB = jumpPosB;   
+//     this.speed = playerSpeed;
+//     this.move1 = move1;  
+//     this.hp = playerHp;
+//   } 
 
-  runRight () {
-    image(this.runR, this.x, this.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
-    if (gameFrame % staggerFrames ==0) {
-      if (frameX < 5) {
-        frameX++; 
-      }
-      else {
-        frameX = 0; 
-      }
-    }
-    gameFrame++; 
-  }
+//   runRight () {
+//     image(this.runR, this.x, this.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
+//     if (gameFrame % staggerFrames ==0) {
+//       if (frameX < 5) {
+//         frameX++; 
+//       }
+//       else {
+//         frameX = 0; 
+//       }
+//     }
+//     gameFrame++; 
+//   }
 
-  idlePostion() {
-    image(this.idleP, this.x, this.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
-    if (gameFrame % staggerFrames ==0) {
-      if (frameX < 5) {
-        frameX++; 
-      }
-      else {
-        frameX = 0; 
-      }
-    }
+//   idlePostion() {
+//     image(this.idleP, this.x, this.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
+//     if (gameFrame % staggerFrames ==0) {
+//       if (frameX < 5) {
+//         frameX++; 
+//       }
+//       else {
+//         frameX = 0; 
+//       }
+//     }
    
-    gameFrame++; 
+//     gameFrame++; 
 
-  }
+//   }
 
-  jumpPostion() {
-    image(this.jumpP, this.x, this.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
-    if (gameFrame % staggerFrames2 == 0) {
-      if (frameX < 7) {
-        frameX++; 
-      }
-      else {
-        frameX = 0; 
-      }
-    }
+//   jumpPostion() {
+//     image(this.jumpP, this.x, this.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
+//     if (gameFrame % staggerFrames2 == 0) {
+//       if (frameX < 7) {
+//         frameX++; 
+//       }
+//       else {
+//         frameX = 0; 
+//       }
+//     }
    
-    gameFrame++; 
+//     gameFrame++; 
 
-  }
+//   }
 
 
-  runBackwards() {
-    image(this.runB, this.x, this.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
-    if (gameFrame % staggerFrames ==0) {
-      if (frameX < 5) {
-        frameX++; 
-      }
-      else {
-        frameX = 0; 
-      }
-    }
+//   runBackwards() {
+//     image(this.runB, this.x, this.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
+//     if (gameFrame % staggerFrames ==0) {
+//       if (frameX < 5) {
+//         frameX++; 
+//       }
+//       else {
+//         frameX = 0; 
+//       }
+//     }
    
-    gameFrame++; 
+//     gameFrame++; 
 
-  }
+//   }
 
-  crouchDown() {
-    image(this.crouch, this.x, this.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
-    if (gameFrame % staggerFrames ==0) {
-      if (frameX < 8) {
-        frameX++; 
-      }
-      else {
-        frameX = 0; 
-      }
-    }
+//   crouchDown() {
+//     image(this.crouch, this.x, this.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
+//     if (gameFrame % staggerFrames ==0) {
+//       if (frameX < 8) {
+//         frameX++; 
+//       }
+//       else {
+//         frameX = 0; 
+//       }
+//     }
    
-    gameFrame++; 
+//     gameFrame++; 
 
-  }
+//   }
 
-  jumpPostionB() {
-    image(this.jumpPB, this.x, this.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
-    if (gameFrame % staggerFrames2 == 0) {
-      if (frameX < 7) {
-        frameX++; 
-      }
-      else {
-        frameX = 0; 
-      }
-    }
+//   jumpPostionB() {
+//     image(this.jumpPB, this.x, this.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
+//     if (gameFrame % staggerFrames2 == 0) {
+//       if (frameX < 7) {
+//         frameX++; 
+//       }
+//       else {
+//         frameX = 0; 
+//       }
+//     }
    
-    gameFrame++; 
+//     gameFrame++; 
 
-  }
+//   }
 
 
-  move() {
-    //Player Movement Checks 
-    if (keyIsDown(87) === true && keyIsDown(68) === true) { 
-      this.y -= this.speed;
-      this.x += this.speed;
-      this.jumpPostion(); 
-    }
+//   move() {
+//     //Player Movement Checks 
+//     if (keyIsDown(87) === true && keyIsDown(68) === true) { 
+//       this.y -= this.speed;
+//       this.x += this.speed;
+//       this.jumpPostion(); 
+//     }
     
-    else if (keyIsDown(87) === true && keyIsDown(65)) { 
-      this.y -= this.speed;
-      this.x -= this.speed;
-      this.jumpPostionB(); 
-    }
+//     else if (keyIsDown(87) === true && keyIsDown(65)) { 
+//       this.y -= this.speed;
+//       this.x -= this.speed;
+//       this.jumpPostionB(); 
+//     }
 
 
 
-    else if (keyIsDown(87)) { //w
-      this.y -= this.speed;
-      this.jumpPostion(); 
-    }
-    else if (keyIsDown(83)) { //s
-      this.y += this.speed;
-      this.crouchDown(); 
-    }
-    else if (keyIsDown(68)) { //d
-      this.x += this.speed;
-      this.runRight(); 
+//     else if (keyIsDown(87)) { //w
+//       this.y -= this.speed;
+//       this.jumpPostion(); 
+//     }
+//     else if (keyIsDown(83)) { //s
+//       this.y += this.speed;
+//       this.crouchDown(); 
+//     }
+//     else if (keyIsDown(68)) { //d
+//       this.x += this.speed;
+//       this.runRight(); 
        
-    }
-    else if (keyIsDown(65)) { //a
-      this.x -= this.speed;
-      this.runBackwards(); 
-    }
+//     }
+//     else if (keyIsDown(65)) { //a
+//       this.x -= this.speed;
+//       this.runBackwards(); 
+//     }
     
-    else if (keyIsDown(68) != true && keyIsDown(83) != true && keyIsDown(87) != true &&keyIsDown(65) != true ) {
-      this.idlePostion();
-    }
-  }
+//     else if (keyIsDown(68) != true && keyIsDown(83) != true && keyIsDown(87) != true &&keyIsDown(65) != true ) {
+//       this.idlePostion();
+//     }
+//   }
 
-    move1() { 
-      image(this.move1, this.x, this.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
-      if (gameFrame % staggerFrames2 == 0) {
-        if (frameX < 3) {
-          frameX++; 
-        }
-        else {
-          frameX = 0; 
-        }
-      }
+//     move1() { 
+//       image(this.move1, this.x, this.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
+//       if (gameFrame % staggerFrames2 == 0) {
+//         if (frameX < 3) {
+//           frameX++; 
+//         }
+//         else {
+//           frameX = 0; 
+//         }
+//       }
      
-      gameFrame++; 
+//       gameFrame++; 
   
-    }
+//     }
 
   
-}
+// }
 

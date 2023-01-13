@@ -59,10 +59,10 @@ function setup() {
   // frameY = 0;
   // gameFrame = 0;
   // staggerFrames = 7;
-  staggerFrames2 = 3; 
-  player1 = new mainPlayer(runRight,idlePos, jumpPos,runBack, crouch, jumpPosB, move1, 0,0,5,100); 
-  timer = 0;
-  move1 = true;
+  // staggerFrames2 = 3; 
+  // player1 = new mainPlayer(runRight,idlePos, jumpPos,runBack, crouch, jumpPosB, move1, 0,0,5,100); 
+  // timer = 0;
+  // move1 = true;
   
   playerEx = new Player({
     velocity: {
@@ -89,11 +89,11 @@ function setup() {
       
       run:{
         imageSrc: runRight,
-        framesMax: 5
+        framesMax: 6
       },
       runback: {
         imageSrc: runBack, 
-        framesMax: 5
+        framesMax: 6
       }
 
     }
@@ -110,28 +110,36 @@ function draw() {
     playerEx.update(); 
     playerEx.display();
 
+    playerEx.image = playerEx.sprites.idle.imageSrc; 
+
 
     if (keys.a.pressed === true && lastKeys === "a") {
       playerEx.velocity.x = -5;
+      playerEx.image = playerEx.sprites.runback.imageSrc; 
+
+
     }
     else if (keys.d.pressed === true && lastKeys === "d"){
-      playerEx.velocity.x = 5; 
+      playerEx.velocity.x = 5;
+      playerEx.image = playerEx.sprites.run.imageSrc; 
+
+
     }
 
     window.addEventListener('keydown', (event) => {
-      playerEx.image = playerEx.sprites.idle.imageSrc; 
+      // playerEx.image = playerEx.sprites.idle.imageSrc; 
 
       switch (event.key) {
       case 'd':
         keys.d.pressed = true;
         lastKeys = "d";
-        playerEx.image = playerEx.sprites.run.imageSrc; 
+        // playerEx.image = playerEx.sprites.run.imageSrc; 
         break;
         
       case 'a':
-        playerEx.image = playerEx.sprites.runback.imageSrc; 
         keys.a.pressed = true;
         lastKeys = "a"; 
+        // playerEx.image = playerEx.sprites.runback.imageSrc; 
 
         break;
         
@@ -145,7 +153,7 @@ function draw() {
     });
     
     window.addEventListener('keyup', (event) => {
-      playerEx.image = playerEx.sprites.idle.imageSrc; 
+      // playerEx.image = playerEx.sprites.idle.imageSrc; 
 
       switch (event.key) {
       case 'd':
@@ -164,6 +172,8 @@ function draw() {
       }
     });
   }
+  // console.log(playerEx.gameFrame);
+
 }
 
    

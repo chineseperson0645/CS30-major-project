@@ -13,11 +13,11 @@ class Sprite {
   }
   animateFrames () {
     if (this.gameFrame % this.staggerFrames === 0) {
-      if (this.frameX < this.framesMax) {
+      if (this.frameX < this.framesMax - 1) {
         this.frameX++; 
       }
       else {
-        this.frameX = 0; 
+        this.frameX = 0;
       }
     }
     this.gameFrame++; 
@@ -27,15 +27,15 @@ class Sprite {
 
 
     
-    this.framesElapsed ++;
-    if (this.framesElapsed % this.framesHold === 0 ) {
-      if (this.framesCurrent < this.framesMax - 1) {
-        this.framesCurrent++; 
-      }
-      else {
-        this.framesCurrent = 0; 
-      }
-    }       
+    // this.framesElapsed ++;
+    // if (this.framesElapsed % this.framesHold === 0 ) {
+    //   if (this.framesCurrent < this.framesMax - 1) {
+    //     this.framesCurrent++; 
+    //   }
+    //   else {
+    //     this.framesCurrent = 0; 
+    //   }
+    // }       
   }
 }
 
