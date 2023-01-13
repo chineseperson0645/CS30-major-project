@@ -28,18 +28,24 @@
 
 const ROWS = 25; //y axis (in reality)
 const COLS = 35; //x axis (in reality)
-
 let grid;
 let cellWidth;
 let cellHeight;
+
+let state = "grid";
+
+// CHANGE PLAYER X AND Y TO CHANGE WHERE PLAYER SPAWS (COULD BE USEFUL FOR TELEPORTATION AND OTHERS IN FUTURE)
 let playerX = 2;
 let playerY = 8;
 let globalPlayerHealth;
-let direction;
-// CHANGE PLAYER X AND Y TO CHANGE WHERE PLAYER SPAWS (COULD BE USEFUL FOR TELEPORTATION AND OTHERS IN FUTURE)
+
+let forestPath = true;
+let ninjaVillage = false;
+let insideNinjaHouse = false;
 
 let treeImg, zenImg, bottomtreeImg, houseTLImg, houseTMImg, houseTRImg, houseBLImg, houseBMImg, houseBRImg, path1Img, path2Img;
 let forestPathJSON, ninjaVillageJSON, betaTestJSON;
+let startVideo, startVideo2;
 
 function preload() {
   treeImg = loadImage('assets(world)/bush.png');
@@ -79,28 +85,36 @@ function preload() {
   houseJSON = loadJSON('JSON-Maps(world)/house.json');
 }
 
-function setup() {
-  globalPlayerHealth = random(59, 92);
-  Math.floor(globalPlayerHealth);
-  createCanvas(windowWidth, windowHeight);
-  cellWidth = width/COLS;
-  cellHeight = height/ROWS;
-  grid = create2dArray(COLS, ROWS);
-  grid = forestPathJSON;
-  grid[playerY][playerX] = "player"; 
-  //Do not do [playerY+#][playerX+#] or whatever #. It messes up movement keys.
-}
+let videoFinished = false;
 
+function setup() {
+  if (state === "start1"){
+    startVideo = createVideo("assets(world)/SET.mp4");
+    //once video finishes, videoFinished = true;
+  }
+  if (state === "start2" && videoFinished === true){
+    startVideo2 = createVideo("assets(world)/SET(LOOP).mp4");
+  }
+
+  if (state === "grid"){
+    globalPlayerHealth = random(59, 92);
+    createCanvas(windowWidth, windowHeight);
+    cellWidth = width/COLS;
+    cellHeight = height/ROWS;
+    grid = create2dArray(COLS, ROWS);
+    grid = forestPathJSON;
+    grid[playerY][playerX] = "player"; 
+    //Do not do [playerY+#][playerX+#] or whatever #. It messes up movement keys.
+  }
+}
 
 function draw() {
-  background("white");
-  displayGrid(grid);
-  surroundingCheck();
+  if (state === "grid"){
+    background("white");
+    displayGrid(grid);
+    surroundingCheck();
+  }
 }
-
-let forestPath = true;
-let ninjaVillage = false;
-let insideNinjaHouse = false;
 
 function displayGrid(grid) {
   for (let y=0; y<ROWS; y++) {

@@ -1,7 +1,5 @@
 // Surrounding.JS
 
-//Border blocks are broken again lol. Player can eat them.
-
 let nearPathLeft, nearPathDown, nearPathRight, nearPathForward;
 function surroundingCheck(){
 
@@ -100,7 +98,6 @@ function hopOffSYNN4(){
 }
 
 //"dFirst" was implemented so that our first if statement would be called first.
-
 
 // Orginal Design
 // else if (grid[playerY][playerX+1] === 23){
