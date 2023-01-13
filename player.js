@@ -144,20 +144,20 @@
 //     }
 //   }
 
-//     move1() { 
-//       image(this.move1, this.x, this.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
-//       if (gameFrame % staggerFrames2 == 0) {
-//         if (frameX < 3) {
-//           frameX++; 
-//         }
-//         else {
-//           frameX = 0; 
-//         }
-//       }
+//     // move1() { 
+//     //   image(this.move1, this.x, this.y, playerWidth, playerHeight, frameX * playerWidth , frameY * playerHeight , playerWidth, playerHeight );
+//     //   if (gameFrame % staggerFrames2 == 0) {
+//     //     if (frameX < 3) {
+//     //       frameX++; 
+//     //     }
+//     //     else {
+//     //       frameX = 0; 
+//     //     }
+//     //   }
      
-//       gameFrame++; 
+//     //   gameFrame++; 
   
-//     }
+//     // }
 
   
 // }
