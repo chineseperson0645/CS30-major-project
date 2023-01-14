@@ -6,7 +6,6 @@
 //COMMIT DAILY WHEN THERES CLASS TIME
 //COMMIT DAILY WHEN THERES CLASS TIME
 
-
 //Highlight everything and hit tab to move over
 //Highlight everything and hold shift then hit tab to move things in
 
@@ -34,8 +33,7 @@ const COLS = 35; //x axis (in reality)
 let grid;
 let cellWidth;
 let cellHeight;
-
-let state = "start1";
+// p5.disableFriendlyErrors = true; //for performance, activate at launch
 
 // CHANGE PLAYER X AND Y TO CHANGE WHERE PLAYER SPAWS (COULD BE USEFUL FOR TELEPORTATION AND OTHERS IN FUTURE)
 let playerX = 2;
@@ -46,9 +44,10 @@ let forestPath = true;
 let ninjaVillage = false;
 let insideNinjaHouse = false;
 
-let treeImg, zenImg, bottomtreeImg, houseTLImg, houseTMImg, houseTRImg, houseBLImg, houseBMImg, houseBRImg, path1Img, path2Img;
+let treeImg, zenImg, bottomtreeImg, houseTLImg, houseTMImg, houseTRImg, houseBLImg, houseBMImg, houseBRImg, path1Img, path2Img, fenceAMImg, fenceAM2Img, fenceDLImg, fenceDRImg, fenceBRImg, fenceBLImg,
+fenceTLImg, fenceTRImg, floorImg, wallImg, blackImg, openDoorImg;
 let forestPathJSON, ninjaVillageJSON, betaTestJSON;
-let startVideo, startVideo2;
+let startVideo, transitionImg, startVideo2;
 
 function preload() {
   treeImg = loadImage('assets(world)/bush.png');
@@ -86,29 +85,39 @@ function preload() {
   forestPathJSON = loadJSON('JSON-Maps(world)/forestpath.json');
   ninjaVillageJSON = loadJSON('JSON-Maps(world)/ninja.json');
   houseJSON = loadJSON('JSON-Maps(world)/house.json');
+
+  transitionImg = loadImage('assets(world)/SET.png');
 }
 
-let videoFinished = false;
+let state = "start1";
 
 function startVideoLoad() {
-  startVideo.loop();
+  startVideo.size(1820, 960);
+  startVideo.noLoop();
   startVideo.volume();
+  startVideo.duration();
+  startVideo.autoplay(false);
+  console.log(startVideo.duration());
+}
+function startVideoLoad2() {
+  startVideo2.size(1820, 960);
+  startVideo2.loop();
+  startVideo2.autoplay();
+}
+function loopedStartVideo(){
+  startVideo.remove();
+  startVideo2 = createVideo(["assets(world)/SET(LOOP).mp4"], startVideoLoad2);
+  state = "none";
 }
 
-
-
 function setup() {
-  if (keyIsPressed && state === "start1"){
-    startVideo = createVideo(['assets(world)/SET.mp4'], //add additional lines seperated with a comma to add sound, i.e ('assets(world)/SET.mp4, assets(world)/startmusic.wav')
-      startVideoLoad
-    );
-    //once video finishes, videoFinished = true;
+  if (state === "start1"){ //Loads the starting sequence. keyPressed calls it.
+    startVideo = createVideo(['assets(world)/SET.mp4'], startVideoLoad); 
+    // hit = ();
+    startVideo.onended(loopedStartVideo) //onended calls a callback function at the end of the duration of the media.
+    // transitionImg;
+    // console.log("reached");
   }
-
-  if (state === "start2" && videoFinished === true){
-    startVideo2 = createVideo("assets(world)/SET(LOOP).mp4");
-  }
-
   if (state === "grid"){
     globalPlayerHealth = random(59, 92);
     createCanvas(windowWidth, windowHeight);
@@ -123,11 +132,11 @@ function setup() {
 
 function draw() {
   if (state === "grid"){
-    background("white");
     displayGrid(grid);
-    surroundingCheck();
   }
 }
+
+//add additional lines seperated with a comma to add sound, i.e ['assets(world)/SET.mp4, assets(world)/startmusic.wav']
 
 function displayGrid(grid) {
   for (let y=0; y<ROWS; y++) {
@@ -258,18 +267,18 @@ function create2dArray(COLS, ROWS) {
   return emptyArray;
 }
 
-function createRandom2dArray(COLS, ROWS) {
-  let emptyArray = [];
-  for (let y=0; y<ROWS; y++) {
-    emptyArray.push([]);
-    for (let x=0; x<COLS; x++) {
-      if (random(100) < 50) {
-        emptyArray[y].push(1);
-      }
-      else {
-        emptyArray[y].push(3);
-      }
-    }
-  }
-  return emptyArray;
-}
+// function createRandom2dArray(COLS, ROWS) {
+//   let emptyArray = [];
+//   for (let y=0; y<ROWS; y++) {
+//     emptyArray.push([]);
+//     for (let x=0; x<COLS; x++) {
+//       if (random(100) < 50) {
+//         emptyArray[y].push(1);
+//       }
+//       else {
+//         emptyArray[y].push(3);
+//       }
+//     }
+//   }
+//   return emptyArray;
+// }

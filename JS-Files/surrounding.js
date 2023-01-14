@@ -1,9 +1,8 @@
 // Surrounding.JS
 
 let nearPathLeft, nearPathDown, nearPathRight, nearPathForward;
-function surroundingCheck(){
 
-  //Checks surrounding
+function surroundingCheck(){
   if (grid[playerY][playerX+1] === 3 || grid[playerY][playerX+1] === 4){ // D (Opposite is A)
     nearPathRight = true;
   }
@@ -97,8 +96,6 @@ function hopOffSYNN4(){
   grid[playerY][playerX] = "player"; 
 }
 
-
-
 //"dFirst" was implemented so that our first if statement would be called first.
 
 // Orginal Design
@@ -116,7 +113,12 @@ function hopOffSYNN4(){
 // }
 
 function keyPressed() {
+  if (state === "start1"){
+    startVideo.play();
+    state = "start2";
+  }
   if (state === "grid"){
+    surroundingCheck();
       if (key === "d") { //D
         if (grid[playerY][playerX+1] === 3 && nearPathRight == true){
           hopOffDXPP3();

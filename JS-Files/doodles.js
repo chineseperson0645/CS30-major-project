@@ -376,3 +376,19 @@
 //   enemyCantAttackYet = false;
 //   dartShot; (or whatever attack).
 // }
+
+//By adding brackets to the end of your function. You cause it to be called at the same time as other functions (it seems)
+// if (state === "start1"){
+//   startVideo = createVideo(['assets(world)/SET.mp4'], startVideoLoad); 
+//   startVideo.showControls();
+//   startVideo.addCue(13.5, loopedStartVideo()) //adds an event scheuler at the end of the length of the video. Duration figured out by the duration function.
+// }
+
+//This one without brackets at loopedStartVideo will call at 13.5 seconds into your video (aka the end).
+// if (state === "start1"){
+//   startVideo = createVideo(['assets(world)/SET.mp4'], startVideoLoad); 
+//   startVideo.showControls();
+//   startVideo.addCue(13.5, loopedStartVideo) //adds an event scheuler at the end of the length of the video. Duration figured out by the duration function.
+// }
+
+// startVideo.showControls(); //Shows play button, sound, timeline, etc. Litterally shows video controls.
