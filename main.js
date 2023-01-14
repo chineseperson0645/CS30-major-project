@@ -7,6 +7,9 @@
 //COMMIT DAILY WHEN THERES CLASS TIME
 
 
+//Highlight everything and hit tab to move over
+//Highlight everything and hold shift then hit tab to move things in
+
 //Something to consider for viewers, we used fewer functions in our grid to improve performance and instead built them directly into the control functions (WASD)
 //So that they are only called once everytime a key is pressed instead of constantly being checked for in the draw loop. Hopefully saving performance.
 
@@ -32,7 +35,7 @@ let grid;
 let cellWidth;
 let cellHeight;
 
-let state = "grid";
+let state = "start1";
 
 // CHANGE PLAYER X AND Y TO CHANGE WHERE PLAYER SPAWS (COULD BE USEFUL FOR TELEPORTATION AND OTHERS IN FUTURE)
 let playerX = 2;
@@ -87,11 +90,21 @@ function preload() {
 
 let videoFinished = false;
 
+function startVideoLoad() {
+  startVideo.loop();
+  startVideo.volume();
+}
+
+
+
 function setup() {
-  if (state === "start1"){
-    startVideo = createVideo("assets(world)/SET.mp4");
+  if (keyIsPressed && state === "start1"){
+    startVideo = createVideo(['assets(world)/SET.mp4'], //add additional lines seperated with a comma to add sound, i.e ('assets(world)/SET.mp4, assets(world)/startmusic.wav')
+      startVideoLoad
+    );
     //once video finishes, videoFinished = true;
   }
+
   if (state === "start2" && videoFinished === true){
     startVideo2 = createVideo("assets(world)/SET(LOOP).mp4");
   }

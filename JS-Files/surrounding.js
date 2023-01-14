@@ -97,6 +97,8 @@ function hopOffSYNN4(){
   grid[playerY][playerX] = "player"; 
 }
 
+
+
 //"dFirst" was implemented so that our first if statement would be called first.
 
 // Orginal Design
@@ -114,170 +116,172 @@ function hopOffSYNN4(){
 // }
 
 function keyPressed() {
-  if (key === "d") { //D
-    if (grid[playerY][playerX+1] === 3 && nearPathRight == true){
-      hopOffDXPP3();
-      console.log("Right3");
-    }
-    else if (grid[playerY][playerX+1] === 4 && nearPathRight == true){
-      hopOffDXPP4();
-      console.log("Right4");
-    }
-    else if (grid[playerY][playerX+1] === 23){ //Inside ninja house
-      grid[playerY][playerX] = 23; 
-      playerX++; 
-      grid[playerY][playerX] = "playerfloor"; 
-      console.log("floor D");
-    }
-    else if (grid[playerY][playerX+1] === 97){ //When eats a potion
-      grid[playerY][playerX] = 23; 
-      playerX++; 
-      grid[playerY][playerX] = "playerfloor"; 
-      globalPlayerHealth += 20;
-      console.log("added");
-      if (globalPlayerHealth > 100){
-        globalPlayerHealth = 100;
-        console.log("cap");
+  if (state === "grid"){
+      if (key === "d") { //D
+        if (grid[playerY][playerX+1] === 3 && nearPathRight == true){
+          hopOffDXPP3();
+          console.log("Right3");
+        }
+        else if (grid[playerY][playerX+1] === 4 && nearPathRight == true){
+          hopOffDXPP4();
+          console.log("Right4");
+        }
+        else if (grid[playerY][playerX+1] === 23){ //Inside ninja house
+          grid[playerY][playerX] = 23; 
+          playerX++; 
+          grid[playerY][playerX] = "playerfloor"; 
+          console.log("floor D");
+        }
+        else if (grid[playerY][playerX+1] === 97){ //When eats a potion
+          grid[playerY][playerX] = 23; 
+          playerX++; 
+          grid[playerY][playerX] = "playerfloor"; 
+          globalPlayerHealth += 20;
+          console.log("added");
+          if (globalPlayerHealth > 100){
+            globalPlayerHealth = 100;
+            console.log("cap");
+          }
+        }
+        else if (grid[playerY][playerX+1] === 95 && forestPath === true){ //Teleport from forest path to ninja village
+          forestPath = false;
+          ninjaVillage = true;
+          console.log("Ninja Village (D)");
+          grid[playerY][playerX] = 3;
+          grid = ninjaVillageJSON;
+          playerX = 1;
+          playerY = 21;
+          grid[playerY][playerX] = "player";
+        }
+      }
+    
+      //There is a tp block in front of us.
+      //This should detect if I'm ontop of a playerpath and if I'm beside a Right path. If so, it'll ask if I hit my D key and also which block I'm
+      //moving onto.
+    
+      if (key === "a") { //A
+        if (grid[playerY][playerX-1] === 3 && nearPathLeft === true){
+          hopOffAXNN3();
+          console.log("Left");
+        } 
+        else if (grid[playerY][playerX-1] === 4 && nearPathLeft === true){
+          hopOffAXNN4();
+          console.log("Left");
+        } 
+        else if (grid[playerY][playerX-1] === 23){
+          grid[playerY][playerX] = 23; 
+          playerX--; 
+          grid[playerY][playerX] = "playerfloor"; 
+          console.log("floor A");
+        }
+        else if (grid[playerY][playerX-1] === 97){
+          grid[playerY][playerX] = 23; 
+          playerX--; 
+          grid[playerY][playerX] = "playerfloor"; 
+          globalPlayerHealth += 20;
+          console.log("added");
+          if (globalPlayerHealth > 100){
+            globalPlayerHealth = 100;
+            console.log("cap");
+          }
+        }
+        else if (grid[playerY][playerX-1] === 95 && ninjaVillage === true){
+          ninjaVillage = false;
+          forestPath = true;
+          console.log("Forest Path (A)");
+          grid[playerY][playerX] = 3;
+          grid = forestPathJSON;
+          playerX = 33;
+          playerY = 20;
+          grid[playerY][playerX] = "player";
+        }
+      }
+    
+      if (key === "w") { //W
+        if (grid[playerY-1][playerX] === 3 && nearPathForward === true){
+          hopOffWYNN3();
+          console.log("Forward");
+        }
+        else if (grid[playerY-1][playerX] === 4 && nearPathForward === true){
+          hopOffWYNN4();
+          console.log("Forward");
+        }
+        else if (grid[playerY-1][playerX] === 23){
+          grid[playerY][playerX] = 23; 
+          playerY--; 
+          grid[playerY][playerX] = "playerfloor"; 
+          console.log("floor D");
+        }
+        else if (grid[playerY-1][playerX] === 97){
+          grid[playerY][playerX] = 23; 
+          playerY--; 
+          grid[playerY][playerX] = "playerfloor"; 
+          globalPlayerHealth += 20;
+          console.log("added");
+          if (globalPlayerHealth > 100){
+            globalPlayerHealth = 100;
+            console.log("cap");
+          }
+        }
+        else if (grid[playerY-1][playerX] === 9 && ninjaVillage === true){ //Door Detection
+          ninjaVillage = false;
+          insideNinjaHouse = true;
+          grid[playerY][playerX] = 3;
+          grid = houseJSON;
+          playerX = 17;
+          playerY = 16;
+          grid[playerY][playerX] = "player";
+        }
+        else if (grid[playerY-1][playerX] === 9 && ninjaVillage === true){ //Change ninjaVillage to like bossRoom
+          ninjaVillage = false;
+          insideNinjaHouse = true;
+          grid[playerY][playerX] = 3;
+          grid = houseJSON;
+          playerX = 17;
+          playerY = 16;
+          grid[playerY][playerX] = "player";
+        }
+      }
+    
+      if (key === "s") { //S
+        if (grid[playerY+1][playerX] === 3 && nearPathDown === true){
+          hopOffSYNN3();
+          console.log("Down");
+        }
+        else if (grid[playerY+1][playerX] === 4 && nearPathDown === true){
+          hopOffSYNN4();
+          console.log("Down");
+        }
+        else if (grid[playerY+1][playerX] === 23){
+          grid[playerY][playerX] = 23; 
+          playerY++;
+          grid[playerY][playerX] = "playerfloor"; 
+          console.log("floor D");
+        }
+        else if (grid[playerY+1][playerX] === 97){ 
+          grid[playerY][playerX] = 23; 
+          playerY++; 
+          grid[playerY][playerX] = "playerfloor"; 
+          globalPlayerHealth += 20;
+          console.log("added");
+          if (globalPlayerHealth > 100){
+            globalPlayerHealth = 100;
+            console.log("cap");
+          }
+        }
+        if (grid[playerY+1][playerX] === 25 && insideNinjaHouse === true){ //Teleport Detection
+          insideNinjaHouse = false;
+          ninjaVillage = true;
+          grid[playerY][playerX] = 23;
+          grid = ninjaVillageJSON; //REMEBER TO PUT JSON AT THE END!
+          playerX = 14; 
+          playerY = 6;
+          grid[playerY][playerX] = "player"; 
+          console.log("Outside Ninja House (S)");
+        }
       }
     }
-    else if (grid[playerY][playerX+1] === 95 && forestPath === true){ //Teleport from forest path to ninja village
-      forestPath = false;
-      ninjaVillage = true;
-      console.log("Ninja Village (D)");
-      grid[playerY][playerX] = 3;
-      grid = ninjaVillageJSON;
-      playerX = 1;
-      playerY = 21;
-      grid[playerY][playerX] = "player";
-    }
   }
-
-  //There is a tp block in front of us.
-  //This should detect if I'm ontop of a playerpath and if I'm beside a Right path. If so, it'll ask if I hit my D key and also which block I'm
-  //moving onto.
-
-  if (key === "a") { //A
-    if (grid[playerY][playerX-1] === 3 && nearPathLeft === true){
-      hopOffAXNN3();
-      console.log("Left");
-    } 
-    else if (grid[playerY][playerX-1] === 4 && nearPathLeft === true){
-      hopOffAXNN4();
-      console.log("Left");
-    } 
-    else if (grid[playerY][playerX-1] === 23){
-      grid[playerY][playerX] = 23; 
-      playerX--; 
-      grid[playerY][playerX] = "playerfloor"; 
-      console.log("floor A");
-    }
-    else if (grid[playerY][playerX-1] === 97){
-      grid[playerY][playerX] = 23; 
-      playerX--; 
-      grid[playerY][playerX] = "playerfloor"; 
-      globalPlayerHealth += 20;
-      console.log("added");
-      if (globalPlayerHealth > 100){
-        globalPlayerHealth = 100;
-        console.log("cap");
-      }
-    }
-    else if (grid[playerY][playerX-1] === 95 && ninjaVillage === true){
-      ninjaVillage = false;
-      forestPath = true;
-      console.log("Forest Path (A)");
-      grid[playerY][playerX] = 3;
-      grid = forestPathJSON;
-      playerX = 33;
-      playerY = 20;
-      grid[playerY][playerX] = "player";
-    }
-  }
-
-  if (key === "w") { //W
-    if (grid[playerY-1][playerX] === 3 && nearPathForward === true){
-      hopOffWYNN3();
-      console.log("Forward");
-    }
-    else if (grid[playerY-1][playerX] === 4 && nearPathForward === true){
-      hopOffWYNN4();
-      console.log("Forward");
-    }
-    else if (grid[playerY-1][playerX] === 23){
-      grid[playerY][playerX] = 23; 
-      playerY--; 
-      grid[playerY][playerX] = "playerfloor"; 
-      console.log("floor D");
-    }
-    else if (grid[playerY-1][playerX] === 97){
-      grid[playerY][playerX] = 23; 
-      playerY--; 
-      grid[playerY][playerX] = "playerfloor"; 
-      globalPlayerHealth += 20;
-      console.log("added");
-      if (globalPlayerHealth > 100){
-        globalPlayerHealth = 100;
-        console.log("cap");
-      }
-    }
-    else if (grid[playerY-1][playerX] === 9 && ninjaVillage === true){ //Door Detection
-      ninjaVillage = false;
-      insideNinjaHouse = true;
-      grid[playerY][playerX] = 3;
-      grid = houseJSON;
-      playerX = 17;
-      playerY = 16;
-      grid[playerY][playerX] = "player";
-    }
-    else if (grid[playerY-1][playerX] === 9 && ninjaVillage === true){ //Change ninjaVillage to like bossRoom
-      ninjaVillage = false;
-      insideNinjaHouse = true;
-      grid[playerY][playerX] = 3;
-      grid = houseJSON;
-      playerX = 17;
-      playerY = 16;
-      grid[playerY][playerX] = "player";
-    }
-  }
-
-  if (key === "s") { //S
-    if (grid[playerY+1][playerX] === 3 && nearPathDown === true){
-      hopOffSYNN3();
-      console.log("Down");
-    }
-    else if (grid[playerY+1][playerX] === 4 && nearPathDown === true){
-      hopOffSYNN4();
-      console.log("Down");
-    }
-    else if (grid[playerY+1][playerX] === 23){
-      grid[playerY][playerX] = 23; 
-      playerY++;
-      grid[playerY][playerX] = "playerfloor"; 
-      console.log("floor D");
-    }
-    else if (grid[playerY+1][playerX] === 97){ 
-      grid[playerY][playerX] = 23; 
-      playerY++; 
-      grid[playerY][playerX] = "playerfloor"; 
-      globalPlayerHealth += 20;
-      console.log("added");
-      if (globalPlayerHealth > 100){
-        globalPlayerHealth = 100;
-        console.log("cap");
-      }
-    }
-    if (grid[playerY+1][playerX] === 25 && insideNinjaHouse === true){ //Teleport Detection
-      insideNinjaHouse = false;
-      ninjaVillage = true;
-      grid[playerY][playerX] = 23;
-      grid = ninjaVillageJSON; //REMEBER TO PUT JSON AT THE END!
-      playerX = 14; 
-      playerY = 6;
-      grid[playerY][playerX] = "player"; 
-      console.log("Outside Ninja House (S)");
-    }
-  }
-}
 
 // SAMPLE //
 //if (grid[playerY][playerX] === "playerpath1" && nearPathDown === true){ //When we hit the key. Checks for if we have an image under us. If so, the following executes...
