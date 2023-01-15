@@ -62,7 +62,7 @@ function preload() {
   houseTRImg = loadImage('assets(world)/houseTR2.png');
   houseBLImg = loadImage('assets(world)/houseBL.png');
   houseBMImg = loadImage('assets(world)/houseBM.png');
-  houseBRImg = loadImage('assets(world)/houseBR2.png');
+  houseBRImg = loadImage('assets(world)/houseBR2.png'); 
 
   path1Img = loadImage('assets(world)/path1.png');
   path2Img = loadImage('assets(world)/path2.png');
@@ -90,37 +90,42 @@ function preload() {
 }
 
 let state = "start1";
+let hit;
 
-function startVideoLoad() {
-  startVideo.size(1820, 960);
-  startVideo.noLoop();
-  startVideo.volume();
-  startVideo.duration();
-  startVideo.autoplay(false);
-  console.log(startVideo.duration());
-}
-function startVideoLoad2() {
-  startVideo2.size(1820, 960);
-  startVideo2.loop();
-  startVideo2.autoplay();
-}
-function loopedStartVideo(){
-  startVideo.remove();
-  startVideo2 = createVideo(["assets(world)/SET(LOOP).mp4"], startVideoLoad2);
-  state = "none";
+function startScreen(){
+  function startVideoLoad() {
+    startVideo.size(1920, 1080);
+    startVideo.noLoop();
+    startVideo.volume();
+    startVideo.duration();
+    startVideo.autoplay(false);
+    console.log(startVideo.duration());
+  }
+  function imgHolder(){
+    transitionImg;
+  }
+  // function startVideoLoad2() {
+  //   startVideo2.size(1920, 1080);
+  //   startVideo2.loop();
+  //   startVideo2.autoplay();
+  // }
+  // function loopedStartVideo(){
+  //   startVideo.remove();
+  //   startVideo2 = createVideo(["assets(world)/SET(LOOP).mp4"], startVideoLoad2);
+  //   state = "none";
+  // }
+
+  if (state === "start1"){ //Loads the starting sequence. keyPressed calls it.
+    startVideo = createVideo(['assets(world)/SET.mp4'], startVideoLoad); 
+    startVideo.onended(imgHolder) //onended calls a callback function at the end of the duration of the media.
+  }
 }
 
 function setup() {
-  if (state === "start1"){ //Loads the starting sequence. keyPressed calls it.
-    startVideo = createVideo(['assets(world)/SET.mp4'], startVideoLoad); 
-    // hit = ();
-    startVideo.onended(loopedStartVideo) //onended calls a callback function at the end of the duration of the media.
-    // transitionImg;
-    // console.log("reached");
-  }
+  startScreen();
   if (state === "grid"){
+    createCanvas(1920, 1076);
     globalPlayerHealth = random(59, 92);
-    createCanvas(windowWidth, windowHeight);
     cellWidth = width/COLS;
     cellHeight = height/ROWS;
     grid = create2dArray(COLS, ROWS);
@@ -131,6 +136,14 @@ function setup() {
 }
 
 function draw() {
+  background("white");
+  // rectMode(CENTER);
+  // fill(255, 255, 0);
+  // rect(200, 200, 100, 150);
+  // hit = collidePointRect(mouseX, mouseY, 200, 200, 100, 150);
+  // if (hit){
+  //   console.log("hit");
+  // }
   if (state === "grid"){
     displayGrid(grid);
   }
