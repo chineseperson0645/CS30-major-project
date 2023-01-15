@@ -24,7 +24,8 @@ let crouch;
 let bgImage;
 let bgImage2;
 let state;
-let lastKeys; 
+let lastKeys;
+let defaultAttack; 
 
 
 
@@ -37,7 +38,7 @@ function preload() {
   jumpPosB = loadImage("assets/jumpB.png"); 
   bgImage = loadImage("assets/moutian-pixel.gif");
   bgImage2 = loadImage("assets/city-pixle.gif");
-
+  defaultAttack = loadImage("assets/Attack_2.png"); 
 }
 
 function setup() {
@@ -75,6 +76,11 @@ function setup() {
       runback: {
         imageSrc: runBack, 
         framesMax: 6
+      },
+
+      defaultAttack1: {
+        imageSrc: defaultAttack, 
+        framesMax: 3
       }
 
     }
@@ -89,7 +95,7 @@ function draw() {
     playerEx.update(); 
     playerEx.display();
 
-    playerEx.image = playerEx.sprites.idle.imageSrc; 
+    // playerEx.image = playerEx.sprites.idle.imageSrc; 
 
 
     if (keys.a.pressed === true && lastKeys === "a") {
@@ -129,7 +135,9 @@ window.addEventListener('keydown', (event) => {
     break;
 
   case "e":
-    playerEx.attack(); 
+    playerEx.attack();
+    playerEx.image = playerEx.sprites.defaultAttack1.imageSrc; 
+
   }
 });
 
@@ -138,12 +146,16 @@ window.addEventListener('keyup', (event) => {
   switch (event.key) {
   case 'd':
     playerEx.velocity.x = 0; 
-    keys.d.pressed = false; 
+    keys.d.pressed = false;
+    playerEx.image = playerEx.sprites.idle.imageSrc; 
+
     break ;
       
   case 'a':
     keys.a.pressed = false;
     playerEx.velocity.x = 0; 
+    playerEx.image = playerEx.sprites.idle.imageSrc; 
+
     break;
     
   case 'w':
