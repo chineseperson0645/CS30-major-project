@@ -124,7 +124,7 @@ function startScreen(){
 function setup() {
   startScreen();
   if (state === "grid"){
-    createCanvas(1920, 1076);
+    createCanvas(1920, 1076); //Optimized for 1920x1080 screens.
     globalPlayerHealth = random(59, 92);
     cellWidth = width/COLS;
     cellHeight = height/ROWS;
