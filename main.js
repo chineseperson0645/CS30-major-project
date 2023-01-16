@@ -86,11 +86,17 @@ function preload() {
   ninjaVillageJSON = loadJSON('JSON-Maps(world)/ninja.json');
   houseJSON = loadJSON('JSON-Maps(world)/house.json');
 
-  transitionImg = loadImage('assets(world)/SET.png');
+  transitionImg = loadImage('assets(world)/SET(IMG).png');
 }
 
-let state = "start1";
+let state = "image";
 let hit;
+
+function imgHolder(){ //put back into startScreen once done later
+  // startVideo.remove();
+  image(transitionImg, 0, 0, width, height);
+  console.log("asdaasdasd");
+}
 
 function startScreen(){
   function startVideoLoad() {
@@ -101,9 +107,8 @@ function startScreen(){
     startVideo.autoplay(false);
     console.log(startVideo.duration());
   }
-  function imgHolder(){
-    transitionImg;
-  }
+
+
   // function startVideoLoad2() {
   //   startVideo2.size(1920, 1080);
   //   startVideo2.loop();
@@ -111,18 +116,22 @@ function startScreen(){
   // }
   // function loopedStartVideo(){
   //   startVideo.remove();
-  //   startVideo2 = createVideo(["assets(world)/SET(LOOP).mp4"], startVideoLoad2);
+  //   startVideo2 = createVideo(["assets(world)/SET(LOOP).mp4"], startVideoLoad2); //maybe put createVideo in setup. and call as a seperate thing like startingVideo;
   //   state = "none";
   // }
 
   if (state === "start1"){ //Loads the starting sequence. keyPressed calls it.
     startVideo = createVideo(['assets(world)/SET.mp4'], startVideoLoad); 
-    startVideo.onended(imgHolder) //onended calls a callback function at the end of the duration of the media.
+    startVideo.onended(imgHolder); //onended calls a callback function at the end of the duration of the media.
   }
 }
 
 function setup() {
+  createCanvas(1920, 1080);
   startScreen();
+  if (state === "image"){
+    imgHolder();
+  }
   if (state === "grid"){
     createCanvas(1920, 1076); //Optimized for 1920x1080 screens.
     globalPlayerHealth = random(59, 92);
@@ -136,7 +145,7 @@ function setup() {
 }
 
 function draw() {
-  background("white");
+
   // rectMode(CENTER);
   // fill(255, 255, 0);
   // rect(200, 200, 100, 150);
