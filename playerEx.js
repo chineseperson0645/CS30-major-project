@@ -40,7 +40,7 @@ class Sprite {
 
 
 class Player extends Sprite {
-  constructor({velocity, postion, offset, imageSrc, framesMax = 1 , sprites}){
+  constructor({velocity, postion, offset, imageSrc, framesMax =1 , sprites}){
     
     super({postion, imageSrc, framesMax, sprites});
 

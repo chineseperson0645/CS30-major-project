@@ -95,7 +95,7 @@ function draw() {
     playerEx.update(); 
     playerEx.display();
     // console.log(playerEx.framesMax);
-    console.log(lastKeys); 
+    // console.log(lastKeys); 
 
 
     playerEx.image = playerEx.sprites.idle.imageSrc;
@@ -110,7 +110,11 @@ function draw() {
       playerEx.velocity.x = 5;
       playerEx.image = playerEx.sprites.run.imageSrc; 
     }
-
+    // else if (lastKeys === 'e') {
+    //   playerEx.image = playerEx.sprites.defaultAttack1.imageSrc; 
+    //   playerEx.framesMax = playerEx.sprites.defaultAttack1.framesMax;
+    // }
+    //need to find how to make the full animation frame for attack animation 
   }
 }
 
