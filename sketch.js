@@ -61,7 +61,7 @@ function setup() {
       y:30
     },
     imageSrc: idlePos,
-    framesMax: 5, 
+    // framesMax: 5, 
     
     sprites: {
       idle :{
@@ -94,27 +94,30 @@ function draw() {
     image(bgImage, 0, 0, width, height);
     playerEx.update(); 
     playerEx.display();
+    // console.log(playerEx.framesMax);
+    console.log(lastKeys); 
 
-    // playerEx.image = playerEx.sprites.idle.imageSrc; 
 
+    playerEx.image = playerEx.sprites.idle.imageSrc;
+    playerEx.framesMax = playerEx.sprites.idle.framesMax;
 
     if (keys.a.pressed === true && lastKeys === "a") {
       playerEx.velocity.x = -5;
       playerEx.image = playerEx.sprites.runback.imageSrc; 
 
-
     }
     else if (keys.d.pressed === true && lastKeys === "d"){
       playerEx.velocity.x = 5;
       playerEx.image = playerEx.sprites.run.imageSrc; 
-
-
     }
 
   }
 }
 
-//Movement
+//Movement 
+
+
+
 
 window.addEventListener('keydown', (event) => {
 
@@ -122,39 +125,44 @@ window.addEventListener('keydown', (event) => {
   case 'd':
     keys.d.pressed = true;
     lastKeys = "d";
+    playerEx.image = playerEx.sprites.run.imageSrc;
+    playerEx.framesMax = playerEx.sprites.run.framesMax;   
     break;
     
   case 'a':
     keys.a.pressed = true;
-    lastKeys = "a"; 
+    lastKeys = "a";
+    playerEx.image = playerEx.sprites.runback.imageSrc;
+    playerEx.framesMax = playerEx.sprites.runback.framesMax;   
 
     break;
     
   case 'w':
-    playerEx.velocity.y = -20; 
+    playerEx.velocity.y = -20;
     break;
 
   case "e":
     playerEx.attack();
     playerEx.image = playerEx.sprites.defaultAttack1.imageSrc; 
-
+    playerEx.framesMax = playerEx.sprites.defaultAttack1.framesMax;
+    lastKeys = "e"; 
   }
 });
 
 window.addEventListener('keyup', (event) => {
-
   switch (event.key) {
   case 'd':
     playerEx.velocity.x = 0; 
     keys.d.pressed = false;
-    playerEx.image = playerEx.sprites.idle.imageSrc; 
+    
 
     break ;
       
   case 'a':
     keys.a.pressed = false;
     playerEx.velocity.x = 0; 
-    playerEx.image = playerEx.sprites.idle.imageSrc; 
+    
+
 
     break;
     

@@ -6,9 +6,6 @@ class Sprite {
     this.image = new Image();
     this.image.src = imageSrc; 
     this.framesMax = framesMax;
-    this.framesCurrent = 0;
-    this.framesElapsed = 0;
-    this.framesHold = 1;
     
   }
   animateFrames () {
@@ -43,13 +40,11 @@ class Sprite {
 
 
 class Player extends Sprite {
-  constructor({velocity, postion, offset, imageSrc, framesMax = 1, sprites}){
+  constructor({velocity, postion, offset, imageSrc, framesMax = 1 , sprites}){
     
     super({postion, imageSrc, framesMax, sprites});
 
-    this.framesCurrent = 0;
-    this.framesElapsed = 0;
-    this.framesHold = 1; 
+  
     this.velocity = velocity;
     this.image = imageSrc;
     this.sprites = sprites; 
