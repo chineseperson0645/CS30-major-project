@@ -46,7 +46,7 @@ let insideNinjaHouse = false;
 
 let treeImg, zenImg, bottomtreeImg, houseTLImg, houseTMImg, houseTRImg, houseBLImg, houseBMImg, houseBRImg, path1Img, path2Img, fenceAMImg, fenceAM2Img, fenceDLImg, fenceDRImg, fenceBRImg, fenceBLImg,
 fenceTLImg, fenceTRImg, floorImg, wallImg, blackImg, openDoorImg;
-let forestPathJSON, ninjaVillageJSON, betaTestJSON;
+let forestPathJSON, ninjaVillageJSON, betaTestJSON, craterJSON, bossJSON;
 let startVideo, transitionImg, startVideo2;
 
 function preload() {
@@ -80,34 +80,37 @@ function preload() {
   wallImg = loadImage('assets(world)/wall.png');
   blackImg = loadImage('assets(world)/black.png');
   openDoorImg = loadImage('assets(world)/opendoor.png');
+  fireImg = loadImage('assets(world)/fire.gif');
 
   betaTestJSON = loadJSON('JSON-Maps(world)/beta.json');
   forestPathJSON = loadJSON('JSON-Maps(world)/forestpath.json');
   ninjaVillageJSON = loadJSON('JSON-Maps(world)/ninja.json');
   houseJSON = loadJSON('JSON-Maps(world)/house.json');
+  // bossJSON = loadJSON('JSON-Maps(world)/boss.json');
+  craterJSON = loadJSON('JSON-Maps(world)/crater.json');
 
   transitionImg = loadImage('assets(world)/SET(IMG).png');
 }
 
-let state = "image";
+let state = "grid";
 let hit;
 
-function imgHolder(){ //put back into startScreen once done later
+
+//Ask why there is just a white line at the bottom?
+function startImage(){ //put back into startScreen once done later
+  background(41);
   // startVideo.remove();
-  image(transitionImg, 0, 0, width, height);
-  console.log("asdaasdasd");
+  image(transitionImg, 0, 0, 1920, 1076);
+  console.log("Image should be here");
 }
 
 function startScreen(){
   function startVideoLoad() {
-    startVideo.size(1920, 1080);
+    startVideo.size(1920, 1076);
     startVideo.noLoop();
     startVideo.volume();
-    startVideo.duration();
     startVideo.autoplay(false);
-    console.log(startVideo.duration());
   }
-
 
   // function startVideoLoad2() {
   //   startVideo2.size(1920, 1080);
@@ -119,33 +122,31 @@ function startScreen(){
   //   startVideo2 = createVideo(["assets(world)/SET(LOOP).mp4"], startVideoLoad2); //maybe put createVideo in setup. and call as a seperate thing like startingVideo;
   //   state = "none";
   // }
-
   if (state === "start1"){ //Loads the starting sequence. keyPressed calls it.
     startVideo = createVideo(['assets(world)/SET.mp4'], startVideoLoad); 
-    startVideo.onended(imgHolder); //onended calls a callback function at the end of the duration of the media.
+    startVideo.onended(startImage); //onended calls a callback function at the end of the duration of the media.
   }
 }
 
 function setup() {
-  createCanvas(1920, 1080);
+  createCanvas(1920, 1076);
   startScreen();
-  if (state === "image"){
-    imgHolder();
-  }
   if (state === "grid"){
     createCanvas(1920, 1076); //Optimized for 1920x1080 screens.
     globalPlayerHealth = random(59, 92);
     cellWidth = width/COLS;
     cellHeight = height/ROWS;
     grid = create2dArray(COLS, ROWS);
-    grid = forestPathJSON;
+    grid = craterJSON;
     grid[playerY][playerX] = "player"; 
     //Do not do [playerY+#][playerX+#] or whatever #. It messes up movement keys.
+  }
+  if (state === "img"){
+    startImage();
   }
 }
 
 function draw() {
-
   // rectMode(CENTER);
   // fill(255, 255, 0);
   // rect(200, 200, 100, 150);
@@ -274,6 +275,9 @@ function displayGrid(grid) {
         image(floorImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
         image(potionImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
+      if (grid[y][x] === 98) { //Fire
+        image(fireImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
     }
   }
 }
@@ -283,7 +287,7 @@ function create2dArray(COLS, ROWS) {
   for (let y=0; y<ROWS; y++) {
     emptyArray.push([]);
     for (let x=0; x<COLS; x++) {
-      emptyArray[y].push(22);
+      emptyArray[y].push(0);
     }
   }
   return emptyArray;

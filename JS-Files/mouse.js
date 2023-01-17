@@ -1,5 +1,5 @@
 function mousePressed() {
-  if (state === "state1"){
+  if (state === "start1"){
     hit = collidePointRect(mouseX, mouseY, 200, 200, 100, 150);
     if (hit){
       console.log("hit");
@@ -17,11 +17,11 @@ function mousePressed() {
   
       if (mouseButton === LEFT){
         if (grid[yPos][xPos] === 0) {
-          grid[yPos][xPos] = 1;
-        }
-        else if (grid[yPos][xPos] === 1) {
           grid[yPos][xPos] = 2;
         }
+        // else if (grid[yPos][xPos] === 1) {
+        //   grid[yPos][xPos] = 2;
+        // }
         else if (grid[yPos][xPos] === 2) {
           grid[yPos][xPos] = 3;
         }
@@ -91,6 +91,7 @@ function mousePressed() {
         else if (grid[yPos][xPos] === 24) {
           grid[yPos][xPos] = 25;
         }
+
         else if (grid[yPos][xPos] === 25) {
           grid[yPos][xPos] = 93;
           console.log("border");
@@ -106,12 +107,18 @@ function mousePressed() {
           grid[yPos][xPos] = 97;
         }
         else if (grid[yPos][xPos] === 97) {
+          grid[yPos][xPos] = 98;
+        }
+        else if (grid[yPos][xPos] === 98) {
+          grid[yPos][xPos] = 99;
+        }
+        else if (grid[yPos][xPos] === 99) {
           grid[yPos][xPos] = 0;
         }
       }
         
       if (mouseButton === CENTER){
-          grid[yPos][xPos] = 97; //Interchangable to create borders or teleport blocks, just place approriate #
+          grid[yPos][xPos] = 96; //Interchangable to create borders or teleport blocks, just place approriate #
         }
       }
   }
