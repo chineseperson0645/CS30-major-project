@@ -61,7 +61,7 @@ function setup() {
       y:30
     },
     imageSrc: idlePos,
-    // framesMax: 5, 
+    framesMax: 5, 
     
     sprites: {
       idle :{
@@ -78,6 +78,7 @@ function setup() {
         framesMax: 6
       },
 
+      
       defaultAttack1: {
         imageSrc: defaultAttack, 
         framesMax: 3
@@ -94,78 +95,78 @@ function draw() {
     image(bgImage, 0, 0, width, height);
     playerEx.update(); 
     playerEx.display();
-    // console.log(playerEx.framesMax);
-    // console.log(lastKeys); 
+    console.log(playerEx.framesMax); 
 
-
-    playerEx.image = playerEx.sprites.idle.imageSrc;
-    playerEx.framesMax = playerEx.sprites.idle.framesMax;
+    // playerEx.image = playerEx.sprites.idle.imageSrc; 
+    // playerEx.framesMax = playerEx.sprites.idle.framesMax; 
 
     if (keys.a.pressed === true && lastKeys === "a") {
       playerEx.velocity.x = -5;
-      playerEx.image = playerEx.sprites.runback.imageSrc; 
+      // playerEx.image = playerEx.sprites.runback.imageSrc; 
+
 
     }
     else if (keys.d.pressed === true && lastKeys === "d"){
       playerEx.velocity.x = 5;
-      playerEx.image = playerEx.sprites.run.imageSrc; 
+      // playerEx.image = playerEx.sprites.run.imageSrc; 
+
+
     }
-    // else if (lastKeys === 'e') {
-    //   playerEx.image = playerEx.sprites.defaultAttack1.imageSrc; 
-    //   playerEx.framesMax = playerEx.sprites.defaultAttack1.framesMax;
-    // }
-    //need to find how to make the full animation frame for attack animation 
   }
 }
-
-//Movement 
-
-
-
-
+  
+//Movement
+  
 window.addEventListener('keydown', (event) => {
 
   switch (event.key) {
   case 'd':
     keys.d.pressed = true;
     lastKeys = "d";
-    playerEx.image = playerEx.sprites.run.imageSrc;
-    playerEx.framesMax = playerEx.sprites.run.framesMax;   
+    playerEx.framesMax = playerEx.sprites.run.framesMax;
+    playerEx.image = playerEx.sprites.run.imageSrc; 
+
     break;
     
   case 'a':
     keys.a.pressed = true;
-    lastKeys = "a";
-    playerEx.image = playerEx.sprites.runback.imageSrc;
-    playerEx.framesMax = playerEx.sprites.runback.framesMax;   
+    lastKeys = "a"; 
+    playerEx.framesMax = playerEx.sprites.runback.framesMax;
+    playerEx.image = playerEx.sprites.runback.imageSrc; 
 
     break;
     
   case 'w':
-    playerEx.velocity.y = -20;
+    playerEx.velocity.y = -20; 
     break;
 
   case "e":
     playerEx.attack();
-    playerEx.image = playerEx.sprites.defaultAttack1.imageSrc; 
-    playerEx.framesMax = playerEx.sprites.defaultAttack1.framesMax;
-    lastKeys = "e"; 
+    playerEx.image = playerEx.sprites.defaultAttack1.imageSrc;
+    playerEx.framesMax = playerEx.sprites.defaultAttack1.framesMax; 
+
   }
 });
 
 window.addEventListener('keyup', (event) => {
+  playerEx.image = playerEx.sprites.idle.imageSrc;
+  playerEx.framesMax = playerEx.sprites.idle.framesMax; 
+
   switch (event.key) {
   case 'd':
     playerEx.velocity.x = 0; 
     keys.d.pressed = false;
-    
+    // playerEx.image = playerEx.sprites.idle.imageSrc;
+    // playerEx.framesMax = playerEx.sprites.idle.framesMax; 
+
 
     break ;
       
   case 'a':
     keys.a.pressed = false;
     playerEx.velocity.x = 0; 
-    
+    // playerEx.image = playerEx.sprites.idle.imageSrc;
+    // playerEx.framesMax = playerEx.sprites.idle.framesMax; 
 
 
     break;
