@@ -17,7 +17,7 @@ A fighter game with solid combat skills. It will be an open-world game where you
     - Have different locations (Village, Forest) [/]
 
     Game will need to:
-    - Have entities (enemies and passives alike) //Ask if wwe can change to a singular boss.
+    - Have entities (Singular boss and passives alike) 
     - Starting Screen
     - Ending Screen
 
