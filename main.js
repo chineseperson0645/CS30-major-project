@@ -6,6 +6,16 @@
 //COMMIT DAILY WHEN THERES CLASS TIME
 //COMMIT DAILY WHEN THERES CLASS TIME
 
+//Ask why there is just a white line at the bottom?
+//Ask why there is just a white line at the bottom?
+//Ask why there is just a white line at the bottom?
+//Ask why there is just a white line at the bottom?
+//Ask why there is just a white line at the bottom?
+//Ask why there is just a white line at the bottom?
+//Ask why there is just a white line at the bottom?
+//(VIDEO)
+
+
 //Highlight everything and hit tab to move over
 //Highlight everything and hold shift then hit tab to move things in
 
@@ -98,7 +108,6 @@ let hit;
 
 //Ask why there is just a white line at the bottom?
 function startImage(){ //put back into startScreen once done later
-  background(41);
   // startVideo.remove();
   image(transitionImg, 0, 0, 1920, 1076);
   console.log("Image should be here");
@@ -111,17 +120,6 @@ function startScreen(){
     startVideo.volume();
     startVideo.autoplay(false);
   }
-
-  // function startVideoLoad2() {
-  //   startVideo2.size(1920, 1080);
-  //   startVideo2.loop();
-  //   startVideo2.autoplay();
-  // }
-  // function loopedStartVideo(){
-  //   startVideo.remove();
-  //   startVideo2 = createVideo(["assets(world)/SET(LOOP).mp4"], startVideoLoad2); //maybe put createVideo in setup. and call as a seperate thing like startingVideo;
-  //   state = "none";
-  // }
   if (state === "start1"){ //Loads the starting sequence. keyPressed calls it.
     startVideo = createVideo(['assets(world)/SET.mp4'], startVideoLoad); 
     startVideo.onended(startImage); //onended calls a callback function at the end of the duration of the media.
@@ -147,13 +145,9 @@ function setup() {
 }
 
 function draw() {
-  // rectMode(CENTER);
-  // fill(255, 255, 0);
-  // rect(200, 200, 100, 150);
-  // hit = collidePointRect(mouseX, mouseY, 200, 200, 100, 150);
-  // if (hit){
-  //   console.log("hit");
-  // }
+  if (hit){
+    console.log("hit");
+  }
   if (state === "grid"){
     displayGrid(grid);
   }

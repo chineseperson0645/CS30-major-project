@@ -392,3 +392,14 @@
 // }
 
 // startVideo.showControls(); //Shows play button, sound, timeline, etc. Litterally shows video controls.
+
+  // function startVideoLoad2() {
+  //   startVideo2.size(1920, 1080);
+  //   startVideo2.loop();
+  //   startVideo2.autoplay();
+  // }
+  // function loopedStartVideo(){
+  //   startVideo.remove();
+  //   startVideo2 = createVideo(["assets(world)/SET(LOOP).mp4"], startVideoLoad2); //maybe put createVideo in setup. and call as a seperate thing like startingVideo;
+  //   state = "none";
+  // }

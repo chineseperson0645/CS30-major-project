@@ -1,10 +1,14 @@
 function mousePressed() {
-  if (state === "start1"){
-    hit = collidePointRect(mouseX, mouseY, 200, 200, 100, 150);
+  if (state === "img"){
+    rectMode(CENTER);
+    hit = collidePointRect(mouseX, mouseY, 580, 460, 760, 240);
     if (hit){
       console.log("hit");
+      hit = false;
     }
   }
+
+//collidePointRect(pointX, pointY, x, y, width, height)
 
   if (state === "grid"){
     let xPos = Math.floor(mouseX/cellWidth);

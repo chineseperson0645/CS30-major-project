@@ -52,6 +52,8 @@ function surroundingCheck(){
 
 //Future Goal is to make all player related blocks just that block and the player (not player alone). i.e playerpath1 or 2. (starting charcter and drawn charcter)
 
+// camera.x = player.x;
+
 function hopOffDXPP3(){ //D
   grid[playerY][playerX] = 3; 
   playerX++; 
@@ -133,6 +135,9 @@ function keyPressed() {
           playerX++; 
           grid[playerY][playerX] = "playerfloor"; 
           console.log("floor D");
+        }
+        else if (grid[playerY][playerX+1] === 96){ //Ninja Interact
+          
         }
         else if (grid[playerY][playerX+1] === 97){ //When eats a potion
           grid[playerY][playerX] = 23; 
