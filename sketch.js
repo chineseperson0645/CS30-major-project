@@ -1,9 +1,20 @@
 
 
-
-
-
-
+let player = new Player ({
+	position: {
+		x: 0,
+		y:0
+	},
+	velocity: {
+		x: 0, 
+		y:0 
+	},
+	images : {
+		img1: 'Assets/Run.png',
+		img2: 'Assets/runB.png',
+		img3: 'Assets/idle.png'
+	}
+}); 
 
 let runAnimation;
 
@@ -15,8 +26,9 @@ function setup() {
 }
 
 function draw() {
-    
 	clear();
-	animation(runAnimation, 96, 96); 
+	animation(runAnimation, 96, 96);
+	// player.display(); 
+	
 
 }
