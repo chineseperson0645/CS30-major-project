@@ -46,8 +46,8 @@ let cellHeight;
 // p5.disableFriendlyErrors = true; //for performance, activate at launch
 
 // CHANGE PLAYER X AND Y TO CHANGE WHERE PLAYER SPAWS (COULD BE USEFUL FOR TELEPORTATION AND OTHERS IN FUTURE)
-let playerX = 2;
-let playerY = 8;
+let playerX = 16;
+let playerY = 14;
 let globalPlayerHealth;
 
 let forestPath = true;
@@ -57,7 +57,7 @@ let insideNinjaHouse = false;
 let treeImg, zenImg, bottomtreeImg, houseTLImg, houseTMImg, houseTRImg, houseBLImg, houseBMImg, houseBRImg, path1Img, path2Img, fenceAMImg, fenceAM2Img, fenceDLImg, fenceDRImg, fenceBRImg, fenceBLImg,
 fenceTLImg, fenceTRImg, floorImg, wallImg, blackImg, openDoorImg;
 let forestPathJSON, ninjaVillageJSON, betaTestJSON, craterJSON, bossJSON;
-let startVideo, transitionImg, startVideo2;
+let startVideo, transitionImg, startVideo2, startAfter;
 
 function preload() {
   treeImg = loadImage('assets(world)/bush.png');
@@ -105,13 +105,7 @@ function preload() {
 let state = "grid";
 let hit;
 
-
 //Ask why there is just a white line at the bottom?
-function startImage(){ //put back into startScreen once done later
-  // startVideo.remove();
-  image(transitionImg, 0, 0, 1920, 1076);
-  console.log("Image should be here");
-}
 
 function startScreen(){
   function startVideoLoad() {
@@ -119,6 +113,12 @@ function startScreen(){
     startVideo.noLoop();
     startVideo.volume();
     startVideo.autoplay(false);
+  }
+  function startImage(){ //put back into startScreen once done later
+    image(transitionImg, 0, 0, 1920, 1076);
+    startVideo.remove();
+    state = "img";
+    console.log("Image should be here");
   }
   if (state === "start1"){ //Loads the starting sequence. keyPressed calls it.
     startVideo = createVideo(['assets(world)/SET.mp4'], startVideoLoad); 
@@ -130,24 +130,11 @@ function setup() {
   createCanvas(1920, 1076);
   startScreen();
   if (state === "grid"){
-    createCanvas(1920, 1076); //Optimized for 1920x1080 screens.
-    globalPlayerHealth = random(59, 92);
-    cellWidth = width/COLS;
-    cellHeight = height/ROWS;
-    grid = create2dArray(COLS, ROWS);
-    grid = craterJSON;
-    grid[playerY][playerX] = "player"; 
-    //Do not do [playerY+#][playerX+#] or whatever #. It messes up movement keys.
-  }
-  if (state === "img"){
-    startImage();
+    gameGrid();
   }
 }
 
 function draw() {
-  if (hit){
-    console.log("hit");
-  }
   if (state === "grid"){
     displayGrid(grid);
   }

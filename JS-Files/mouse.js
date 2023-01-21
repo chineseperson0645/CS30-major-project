@@ -1,9 +1,35 @@
+
+function gameGrid(){
+state = "grid";
+  if (state === "grid"){
+    console.log("here");
+    // startAfter.remove(); //Put back if not in state = "grid" (manually)
+    createCanvas(1920, 1076); //Optimized for 1920x1080 screens.
+    globalPlayerHealth = random(59, 92);
+    cellWidth = width/COLS;
+    cellHeight = height/ROWS;
+    grid = create2dArray(COLS, ROWS);
+    grid = craterJSON;
+    grid[playerY][playerX] = "player"; 
+    //Do not do [playerY+#][playerX+#] or whatever #. It messes up movement keys.
+  }
+}
+
+function startAfterLoad(){
+  startAfter.size(1920, 1076);
+  startAfter.noLoop();
+  startAfter.volume(1);
+  startAfter.autoplay(false);
+}
+
 function mousePressed() {
   if (state === "img"){
-    rectMode(CENTER);
     hit = collidePointRect(mouseX, mouseY, 580, 460, 760, 240);
     if (hit){
       console.log("hit");
+      startAfter = createVideo(['assets(world)/SET(AFTER).mp4'], startAfterLoad);
+      startAfter.play();
+      startAfter.onended(gameGrid); //onended calls a callback function at the end of the duration of the media.
       hit = false;
     }
   }

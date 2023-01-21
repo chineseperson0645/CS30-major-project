@@ -114,10 +114,17 @@ function hopOffSYNN4(){
 //   console.log("nom");
 // }
 
+function startAfterLoad(){
+  startAfter.size(1920, 1076);
+  startAfter.noLoop();
+  startAfter.volume(1);
+  startAfter.autoplay(false);
+}
+
 function keyPressed() {
   if (state === "start1"){
     startVideo.play();
-    state = "start2";
+    state = "none";
   }
   if (state === "grid"){
     surroundingCheck();
@@ -137,7 +144,9 @@ function keyPressed() {
           console.log("floor D");
         }
         else if (grid[playerY][playerX+1] === 96){ //Ninja Interact
-          
+          ninjaVideo = createVideo(['assets(world)/SET(AFTER).mp4'], startAfterLoad);
+          ninjaVideo.play();
+          ninjaVideo.onended(gameGrid); //onended calls a callback function at the end of the duration of the media.
         }
         else if (grid[playerY][playerX+1] === 97){ //When eats a potion
           grid[playerY][playerX] = 23; 
