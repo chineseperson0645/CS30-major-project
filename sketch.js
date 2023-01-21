@@ -26,8 +26,8 @@ let bgImage2;
 let state;
 let lastKeys;
 let defaultAttack; 
-
-
+let aniState; 
+let idleb; 
 
 function preload() {
   runRight = loadImage("assets/Run.png");
@@ -38,7 +38,8 @@ function preload() {
   jumpPosB = loadImage("assets/jumpB.png"); 
   bgImage = loadImage("assets/moutian-pixel.gif");
   bgImage2 = loadImage("assets/city-pixle.gif");
-  defaultAttack = loadImage("assets/Attack_2.png"); 
+  defaultAttack = loadImage("assets/Attack_2.png");
+  idleb = loadImage("assets/idle.b.png"); 
 }
 
 function setup() {
@@ -82,6 +83,10 @@ function setup() {
       defaultAttack1: {
         imageSrc: defaultAttack, 
         framesMax: 3
+      },
+      idleback: {
+        imageSrc:idleb, 
+        framesMax: 5
       }
 
     }
@@ -97,20 +102,27 @@ function draw() {
     playerEx.display();
     console.log(playerEx.framesMax); 
 
-    // playerEx.image = playerEx.sprites.idle.imageSrc; 
-    // playerEx.framesMax = playerEx.sprites.idle.framesMax; 
+
 
     if (keys.a.pressed === true && lastKeys === "a") {
       playerEx.velocity.x = -5;
-      // playerEx.image = playerEx.sprites.runback.imageSrc; 
-
-
     }
     else if (keys.d.pressed === true && lastKeys === "d"){
       playerEx.velocity.x = 5;
-      // playerEx.image = playerEx.sprites.run.imageSrc; 
+    }
+    
+    if (playerEx.velocity.x === 0 && playerEx.velocity.y === 0) {
+      playerEx.framesMax = playerEx.sprites.idle.framesMax;
+      if (lastKeys === 'a') {
+        playerEx.image = playerEx.sprites.idleback.imageSrc;      }
 
-
+      else {
+        
+        playerEx.image = playerEx.sprites.idle.imageSrc;
+      }
+      
+      
+  
     }
   }
 }
@@ -124,7 +136,8 @@ window.addEventListener('keydown', (event) => {
     keys.d.pressed = true;
     lastKeys = "d";
     playerEx.framesMax = playerEx.sprites.run.framesMax;
-    playerEx.image = playerEx.sprites.run.imageSrc; 
+    playerEx.image = playerEx.sprites.run.imageSrc;
+
 
     break;
     
@@ -132,7 +145,9 @@ window.addEventListener('keydown', (event) => {
     keys.a.pressed = true;
     lastKeys = "a"; 
     playerEx.framesMax = playerEx.sprites.runback.framesMax;
-    playerEx.image = playerEx.sprites.runback.imageSrc; 
+    playerEx.image = playerEx.sprites.runback.imageSrc;
+ 
+
 
     break;
     
@@ -143,21 +158,20 @@ window.addEventListener('keydown', (event) => {
   case "e":
     playerEx.attack();
     playerEx.image = playerEx.sprites.defaultAttack1.imageSrc;
-    playerEx.framesMax = playerEx.sprites.defaultAttack1.framesMax; 
+    playerEx.framesMax = playerEx.sprites.defaultAttack1.framesMax;
+
 
   }
 });
 
 window.addEventListener('keyup', (event) => {
-  playerEx.image = playerEx.sprites.idle.imageSrc;
-  playerEx.framesMax = playerEx.sprites.idle.framesMax; 
+  
 
   switch (event.key) {
   case 'd':
     playerEx.velocity.x = 0; 
     keys.d.pressed = false;
-    // playerEx.image = playerEx.sprites.idle.imageSrc;
-    // playerEx.framesMax = playerEx.sprites.idle.framesMax; 
+    
 
 
     break ;
@@ -165,8 +179,7 @@ window.addEventListener('keyup', (event) => {
   case 'a':
     keys.a.pressed = false;
     playerEx.velocity.x = 0; 
-    // playerEx.image = playerEx.sprites.idle.imageSrc;
-    // playerEx.framesMax = playerEx.sprites.idle.framesMax; 
+    
 
 
     break;
