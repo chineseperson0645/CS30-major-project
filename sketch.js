@@ -27,7 +27,8 @@ let state;
 let lastKeys;
 let defaultAttack; 
 let aniState; 
-let idleb; 
+let idleb;
+let attackstate; 
 
 function preload() {
   runRight = loadImage("assets/Run.png");
@@ -39,7 +40,8 @@ function preload() {
   bgImage = loadImage("assets/moutian-pixel.gif");
   bgImage2 = loadImage("assets/city-pixle.gif");
   defaultAttack = loadImage("assets/Attack_2.png");
-  idleb = loadImage("assets/idle.b.png"); 
+  idleb = loadImage("assets/idle.b.png");
+  jumpup = loadImage("assets/Up.png"); 
 }
 
 function setup() {
@@ -62,7 +64,7 @@ function setup() {
       y:30
     },
     imageSrc: idlePos,
-    framesMax: 5, 
+    framesMax: 5,
     
     sprites: {
       idle :{
@@ -87,6 +89,11 @@ function setup() {
       idleback: {
         imageSrc:idleb, 
         framesMax: 5
+      },
+
+      jumpUp: {
+        imageSrc: jumpup, 
+        framesMax: 2
       }
 
     }
@@ -100,7 +107,7 @@ function draw() {
     image(bgImage, 0, 0, width, height);
     playerEx.update(); 
     playerEx.display();
-    console.log(playerEx.framesMax); 
+    console.log(playerEx.velocity.y); 
 
 
 
@@ -111,6 +118,7 @@ function draw() {
       playerEx.velocity.x = 5;
     }
     
+    //idle postion animation
     if (playerEx.velocity.x === 0 && playerEx.velocity.y === 0) {
       playerEx.framesMax = playerEx.sprites.idle.framesMax;
       if (lastKeys === 'a') {
@@ -120,9 +128,12 @@ function draw() {
         
         playerEx.image = playerEx.sprites.idle.imageSrc;
       }
-      
-      
-  
+    }
+
+    //Jump animation trigger
+    if (playerEx.velocity.y < 0) {
+      playerEx.image = playerEx.sprites.jumpUp.imageSrc;
+      playerEx.framesMax = playerEx.sprites.jumpUp.framesMax;
     }
   }
 }
@@ -157,9 +168,9 @@ window.addEventListener('keydown', (event) => {
 
   case "e":
     playerEx.attack();
+    
     playerEx.image = playerEx.sprites.defaultAttack1.imageSrc;
     playerEx.framesMax = playerEx.sprites.defaultAttack1.framesMax;
-
 
   }
 });
