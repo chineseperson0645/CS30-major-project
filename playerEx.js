@@ -98,15 +98,74 @@ class Player extends Sprite {
     }
   }
   attack() {
+    this.switchSprite('attack1'); 
     this.isAttacking = true;
     setTimeout(() => {
       this.isAttacking = false; 
     }, 100);
   }
+  
+  switchSprite(sprite) {
+    if (this.image === this.sprites.defaultAttack1.imageSrc && this.frameX < this.sprites.defaultAttack1.framesMax - 1) {
+      return; 
+    }
+    switch (sprite) {
+      case 'idle':
+        if (this.image !== this.sprites.idle.imageSrc) {
+          this.image = this.sprites.idle.imageSrc;
+          this.framesMax = this.sprites.idle.framesMax;
+          this.frameX = 0; 
 
+        }
+        break;
+    
+      case 'run':
+        if (this.image !== this.sprites.run.imageSrc) {
+          this.image = this.sprites.run.imageSrc;
+          this.framesMax = this.sprites.run.framesMax;
+
+        }
+
+        break;
+
+      case 'Up':
+        if (this.image !== this.sprites.jumpUp.imageSrc) {
+        this.image = this.sprites.jumpUp.imageSrc;
+        this.framesMax = this.sprites.jumpUp.framesMax;
+        this.frameX = 0;
+        }
+        break;
+      
+        case 'runback':
+        if (this.image !== this.sprites.runback.imageSrc) {
+          this.image = this.sprites.runback.imageSrc;
+          this.framesMax = this.sprites.runback.framesMax;
+          this.frameX = 0; 
+        }
+        break;
+      
+        case 'Down':
+          if (this.image !== this.sprites.fallDown.imageSrc) {
+        this.image = this.sprites.fallDown.imageSrc;
+        this.framesMax = this.sprites.fallDown.framesMax;
+        this.frameX = 0;
+          }
+        
+        break;
+
+        case 'attack1':
+          if (this.image !== this.sprites.defaultAttack1.imageSrc) {
+            this.image = this.sprites.defaultAttack1.imageSrc;
+            this.framesMax = this.sprites.defaultAttack1.framesMax;
+            this.frameX = 0;
+          break; 
+    }
+  }
+
+
+  }
   
 }
-
 
 
 

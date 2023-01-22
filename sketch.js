@@ -41,7 +41,9 @@ function preload() {
   bgImage2 = loadImage("assets/city-pixle.gif");
   defaultAttack = loadImage("assets/Attack_2.png");
   idleb = loadImage("assets/idle.b.png");
-  jumpup = loadImage("assets/Up.png"); 
+  jumpup = loadImage("assets/Up.png");
+  jumpDown = loadImage("assets/Down.png"); 
+ 
 }
 
 function setup() {
@@ -93,7 +95,12 @@ function setup() {
 
       jumpUp: {
         imageSrc: jumpup, 
-        framesMax: 2
+        framesMax: 1
+      },
+      
+      fallDown: {
+        imageSrc: jumpDown,
+        framesMax: 1
       }
 
     }
@@ -110,30 +117,39 @@ function draw() {
     console.log(playerEx.velocity.y); 
 
 
-
     if (keys.a.pressed === true && lastKeys === "a") {
       playerEx.velocity.x = -5;
+      playerEx.switchSprite('runback'); 
+    
     }
     else if (keys.d.pressed === true && lastKeys === "d"){
       playerEx.velocity.x = 5;
+      playerEx.switchSprite('run'); 
+    }
+    else {
+      playerEx.switchSprite('idle'); 
     }
     
     //idle postion animation
-    if (playerEx.velocity.x === 0 && playerEx.velocity.y === 0) {
-      playerEx.framesMax = playerEx.sprites.idle.framesMax;
-      if (lastKeys === 'a') {
-        playerEx.image = playerEx.sprites.idleback.imageSrc;      }
-
-      else {
-        
-        playerEx.image = playerEx.sprites.idle.imageSrc;
-      }
-    }
+    // if (playerEx.velocity.x === 0 && playerEx.velocity.y === 0) {
+    //   // playerEx.framesMax = playerEx.sprites.idle.framesMax;
+    //   if (lastKeys === 'a') {
+    //     // playerEx.image = playerEx.sprites.idleback.imageSrc;      }
+    //     playerEx.switchSprite('idleback');
+    //   }
+    //   else {
+    //     playerEx.switchSprite('idle');
+    //   }
+    // }
 
     //Jump animation trigger
     if (playerEx.velocity.y < 0) {
-      playerEx.image = playerEx.sprites.jumpUp.imageSrc;
-      playerEx.framesMax = playerEx.sprites.jumpUp.framesMax;
+      // playerEx.image = playerEx.sprites.jumpUp.imageSrc;
+      // playerEx.framesMax = playerEx.sprites.jumpUp.framesMax;
+      playerEx.switchSprite('Up'); 
+    }
+    else if (playerEx.velocity.y > 0) {
+      playerEx.switchSprite('Down'); 
     }
   }
 }
@@ -146,8 +162,9 @@ window.addEventListener('keydown', (event) => {
   case 'd':
     keys.d.pressed = true;
     lastKeys = "d";
-    playerEx.framesMax = playerEx.sprites.run.framesMax;
-    playerEx.image = playerEx.sprites.run.imageSrc;
+    // playerEx.framesMax = playerEx.sprites.run.framesMax;
+    // playerEx.image = playerEx.sprites.run.imageSrc;
+    // playerEx.switchSprite('run'); 
 
 
     break;
@@ -155,8 +172,10 @@ window.addEventListener('keydown', (event) => {
   case 'a':
     keys.a.pressed = true;
     lastKeys = "a"; 
-    playerEx.framesMax = playerEx.sprites.runback.framesMax;
-    playerEx.image = playerEx.sprites.runback.imageSrc;
+    // playerEx.framesMax = playerEx.sprites.runback.framesMax;
+    // playerEx.image = playerEx.sprites.runback.imageSrc;
+    // playerEx.switchSprite('runback'); 
+    
  
 
 
@@ -169,8 +188,8 @@ window.addEventListener('keydown', (event) => {
   case "e":
     playerEx.attack();
     
-    playerEx.image = playerEx.sprites.defaultAttack1.imageSrc;
-    playerEx.framesMax = playerEx.sprites.defaultAttack1.framesMax;
+    // playerEx.image = playerEx.sprites.defaultAttack1.imageSrc;
+    // playerEx.framesMax = playerEx.sprites.defaultAttack1.framesMax;
 
   }
 });
