@@ -403,3 +403,114 @@
   //   startVideo2 = createVideo(["assets(world)/SET(LOOP).mp4"], startVideoLoad2); //maybe put createVideo in setup. and call as a seperate thing like startingVideo;
   //   state = "none";
   // }
+
+//"dFirst" was implemented so that our first if statement would be called first.
+
+// Orginal Design
+// else if (grid[playerY][playerX+1] === 23){
+//   grid[playerY][playerX] = 23; 
+//   playerX++; 
+//   grid[playerY][playerX] = "playerfloor"; 
+//   console.log("floor D");
+// }
+// else if (grid[playerY+1][playerX] === 97){
+//   grid[playerY][playerX] = 23; 
+//   playerY++; 
+//   grid[playerY][playerX] = "playerfloor"; 
+//   console.log("nom");
+// }
+
+
+  // else if (grid[yPos][xPos] === 2) {
+  //   grid[yPos][xPos] = 3;
+  // }
+  // else if (grid[yPos][xPos] === 3) {
+  //   grid[yPos][xPos] = 4;
+  // }
+  // else if (grid[yPos][xPos] === 4) {
+  //   grid[yPos][xPos] = 5;
+  // }
+  // else if (grid[yPos][xPos] === 5) {
+  //   grid[yPos][xPos] = 6;
+  // }
+  // else if (grid[yPos][xPos] === 6) {
+  //   grid[yPos][xPos] = 7;
+  // }
+  // else if (grid[yPos][xPos] === 7) {
+  //   grid[yPos][xPos] = 8;
+  // }
+  // else if (grid[yPos][xPos] === 8) {
+  //   grid[yPos][xPos] = 9;
+  // }
+  // else if (grid[yPos][xPos] === 9) {
+  //   grid[yPos][xPos] = 10;
+  // }
+  // else if (grid[yPos][xPos] === 10) {
+  //   grid[yPos][xPos] = 11;
+  // }
+  // else if (grid[yPos][xPos] === 11) {
+  //   grid[yPos][xPos] = 12;
+  // }
+  // else if (grid[yPos][xPos] === 12) {
+  //   grid[yPos][xPos] = 13;
+  // }
+  // else if (grid[yPos][xPos] === 13) {
+  //   grid[yPos][xPos] = 14;
+  // }
+  // else if (grid[yPos][xPos] === 14) {
+  //   grid[yPos][xPos] = 15;
+  // }
+  // else if (grid[yPos][xPos] === 15) {
+  //   grid[yPos][xPos] = 16;
+  // }
+  // else if (grid[yPos][xPos] === 16) {
+  //   grid[yPos][xPos] = 17;
+  // }
+  // else if (grid[yPos][xPos] === 17) {
+  //   grid[yPos][xPos] = 18;
+  // }
+  // else if (grid[yPos][xPos] === 18) {
+  //   grid[yPos][xPos] = 19;
+  // }
+  // else if (grid[yPos][xPos] === 19) {
+  //   grid[yPos][xPos] = 20;
+  // }
+  // else if (grid[yPos][xPos] === 20) {
+  //   grid[yPos][xPos] = 21;
+  // }
+  // else if (grid[yPos][xPos] === 21) {
+  //   grid[yPos][xPos] = 22;
+  // }
+  // else if (grid[yPos][xPos] === 22) {
+  //   grid[yPos][xPos] = 23;
+  // }
+  // else if (grid[yPos][xPos] === 23) {
+  //   grid[yPos][xPos] = 24;
+  // }
+  // else if (grid[yPos][xPos] === 24) {
+  //   grid[yPos][xPos] = 25;
+  // }
+
+  // else if (grid[yPos][xPos] === 25) {
+  //   grid[yPos][xPos] = 93;
+  //   console.log("border");
+  // }
+  // else if (grid[yPos][xPos] === 93) {
+  //   grid[yPos][xPos] = 95;
+  //   console.log("teleblock");
+  // }
+  // else if (grid[yPos][xPos] === 95) {
+  //   grid[yPos][xPos] = 96;
+  // }
+  // else if (grid[yPos][xPos] === 96) {
+  //   grid[yPos][xPos] = 97;
+  // }
+  // else if (grid[yPos][xPos] === 97) {
+  //   grid[yPos][xPos] = 98;
+  // }
+  // else if (grid[yPos][xPos] === 98) {
+  //   grid[yPos][xPos] = 99;
+  // }
+  // else if (grid[yPos][xPos] === 99) {
+  //   grid[yPos][xPos] = 0;
+  // }

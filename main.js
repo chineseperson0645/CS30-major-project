@@ -16,6 +16,15 @@
 //(VIDEO)
 
 
+//GOALS FOR TONITE:
+
+//GET MOST SOUNDS AND MUSIC!
+//FINISH BOSS ROOM and BOSS DETECTION and BOSS ANIMATED ENGAGEMENT SCREEN.
+//GET ALL TO RUN PROPERLY (BE ABLE TO RUN THROUGH ALL SEQUENCES)!
+
+//PUT IN DIRT AND DETAIL AT THE START
+//POSSIBLY ADD MORE DETAIL TO MAP
+
 //Highlight everything and hit tab to move over
 //Highlight everything and hold shift then hit tab to move things in
 
@@ -50,14 +59,19 @@ let playerX = 16;
 let playerY = 14;
 let globalPlayerHealth;
 
-let forestPath = true;
+
+let forestPath = false;
 let ninjaVillage = false;
 let insideNinjaHouse = false;
+let boss = false;
+let crater = false;
+let forestPath2 = false;
 
 let treeImg, zenImg, bottomtreeImg, houseTLImg, houseTMImg, houseTRImg, houseBLImg, houseBMImg, houseBRImg, path1Img, path2Img, fenceAMImg, fenceAM2Img, fenceDLImg, fenceDRImg, fenceBRImg, fenceBLImg,
-fenceTLImg, fenceTRImg, floorImg, wallImg, blackImg, openDoorImg;
-let forestPathJSON, ninjaVillageJSON, betaTestJSON, craterJSON, bossJSON;
-let startVideo, transitionImg, startVideo2, startAfter;
+fenceTLImg, fenceTRImg, floorImg, wallImg, blackImg, openDoorImg, fridgeImg;
+
+let forestPathJSON, ninjaVillageJSON, betaTestJSON, craterJSON, forestPath2JSON, bossJSON;
+
 
 function preload() {
   treeImg = loadImage('assets(world)/bush.png');
@@ -66,6 +80,8 @@ function preload() {
   zenImg = loadImage('assets(world)/zen.gif');
   ninjaImg = loadImage('assets(world)/ninja.gif');
   potionImg = loadImage('assets(world)/potion.gif');
+  teacherImg = loadImage('assets(world)/Sensei.gif');
+  whiteImg = loadImage('assets(world)/white.png');
 
   houseTLImg = loadImage('assets(world)/houseTL.png');
   houseTMImg = loadImage('assets(world)/houseTM.png');
@@ -92,8 +108,11 @@ function preload() {
   openDoorImg = loadImage('assets(world)/opendoor.png');
   fireImg = loadImage('assets(world)/fire.gif');
 
+  fridgeImg = loadImage('assets(world)/fridge.png');
+
   betaTestJSON = loadJSON('JSON-Maps(world)/beta.json');
   forestPathJSON = loadJSON('JSON-Maps(world)/forestpath.json');
+  forestPath2JSON = loadJSON('JSON-Maps(world)/forestpath2.json');
   ninjaVillageJSON = loadJSON('JSON-Maps(world)/ninja.json');
   houseJSON = loadJSON('JSON-Maps(world)/house.json');
   // bossJSON = loadJSON('JSON-Maps(world)/boss.json');
@@ -103,32 +122,9 @@ function preload() {
 }
 
 let state = "grid";
-let hit;
-
-//Ask why there is just a white line at the bottom?
-
-function startScreen(){
-  function startVideoLoad() {
-    startVideo.size(1920, 1076);
-    startVideo.noLoop();
-    startVideo.volume();
-    startVideo.autoplay(false);
-  }
-  function startImage(){ //put back into startScreen once done later
-    image(transitionImg, 0, 0, 1920, 1076);
-    startVideo.remove();
-    state = "img";
-    console.log("Image should be here");
-  }
-  if (state === "start1"){ //Loads the starting sequence. keyPressed calls it.
-    startVideo = createVideo(['assets(world)/SET.mp4'], startVideoLoad); 
-    startVideo.onended(startImage); //onended calls a callback function at the end of the duration of the media.
-  }
-}
 
 function setup() {
   createCanvas(1920, 1076);
-  startScreen();
   if (state === "grid"){
     gameGrid();
   }
@@ -258,6 +254,16 @@ function displayGrid(grid) {
       }
       if (grid[y][x] === 98) { //Fire
         image(fireImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 99) { //Sensei
+        image(whiteImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+        image(teacherImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 100) { //White
+        image(whiteImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 101) { //White
+        image(fridgeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
     }
   }

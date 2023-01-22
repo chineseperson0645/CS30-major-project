@@ -1,4 +1,5 @@
 # CS30-major-project
+
 This entire repository is dedicated towards our CS30 Major Project.
 
 All portions of this work is dedicated towards education uses/purposes ONLY and EXCLUSIVELY.
@@ -13,4 +14,4 @@ your use of this work. The entirety of this work is provided "AS IS" and we make
 The song "Guren no Yumiya Tv Size Ver." by "Linked Horizon" is used in the opening introduction of the game.
 Used under Fair Dealing for educational purposes only in a "not for profit" academic context.
 
-All portions of this work is intented to be displayed in a "not for profit" academic context ONLY. All other usages are prohibted.
+All portions of this work is intented to be displayed and used in a "not for profit" academic context ONLY. All other usages are prohibted.

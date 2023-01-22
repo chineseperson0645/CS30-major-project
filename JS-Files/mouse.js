@@ -1,37 +1,61 @@
+//mouse.js
+
+let secondTime = false;
+let secondAttemptStatus;
+let startAfterStatus;
 
 function gameGrid(){
 state = "grid";
+console.log("gameGrid, grid")
   if (state === "grid"){
     console.log("here");
-    // startAfter.remove(); //Put back if not in state = "grid" (manually)
+    if (startAfterStatus === true){
+      startAfter.remove(); //Put back if not in state = "grid" (manually)
+      startAfterStatus = false;
+    }
+    if (secondAttemptStatus === true){
+      attemp2Video.remove(); //Put back if not in state = "grid" (manually)
+      secondAttemptStatus = false
+    }
     createCanvas(1920, 1076); //Optimized for 1920x1080 screens.
-    globalPlayerHealth = random(59, 92);
+    // globalPlayerHealth = random(59, 92);
     cellWidth = width/COLS;
     cellHeight = height/ROWS;
     grid = create2dArray(COLS, ROWS);
+    crater = true; //Change if you change JSON
     grid = craterJSON;
     grid[playerY][playerX] = "player"; 
     //Do not do [playerY+#][playerX+#] or whatever #. It messes up movement keys.
   }
 }
 
-function startAfterLoad(){
-  startAfter.size(1920, 1076);
-  startAfter.noLoop();
-  startAfter.volume(1);
-  startAfter.autoplay(false);
-}
+//Once interact with Wiskers, change JSON to one without ninjas
 
+globalPlayerHealth = 10;
 function mousePressed() {
+  globalPlayerHealth = 0;
+  if (globalPlayerHealth === 0 && state === "death"){ //For death screen. Do like if in fight state and globalPlayerHealth === 0.
+    diedVideo.play();
+  }
+  
+let hit = collidePointRect(mouseX, mouseY, 580, 460, 760, 240);;
   if (state === "img"){
-    hit = collidePointRect(mouseX, mouseY, 580, 460, 760, 240);
-    if (hit){
+    if (hit && secondTime === true){
+      console.log("hit");
+      attemp2Video = createVideo(['assets(world)/attempt2.mp4'], startAfterLoad);
+      attemp2Video.play();
+      attemp2Video.onended(gameGrid); //onended calls a callback function at the end of the duration of the media.
+      secondAttemptStatus = true;
+      hit = false;
+    }
+    if (hit && secondTime === false){
       console.log("hit");
       startAfter = createVideo(['assets(world)/SET(AFTER).mp4'], startAfterLoad);
       startAfter.play();
       startAfter.onended(gameGrid); //onended calls a callback function at the end of the duration of the media.
+      startAfterStatus = true;
       hit = false;
-    }
+    }    
   }
 
 //collidePointRect(pointX, pointY, x, y, width, height)
@@ -40,115 +64,33 @@ function mousePressed() {
     let xPos = Math.floor(mouseX/cellWidth);
     let yPos = Math.floor(mouseY/cellHeight);
   
-    //Does not go in order nessisarily. 
-    //Just if this block is this (i.e 3), then if I mousePress this block will now be 4.
-    //Thus, this doesn't mean it iterates through the entire time
-    //Rather starts from the block you changed (mousePressed at 3 --> 4, itll start iterating with every mousePress from 4).
-  
       if (mouseButton === LEFT){
         if (grid[yPos][xPos] === 0) {
           grid[yPos][xPos] = 2;
         }
-        // else if (grid[yPos][xPos] === 1) {
-        //   grid[yPos][xPos] = 2;
-        // }
         else if (grid[yPos][xPos] === 2) {
           grid[yPos][xPos] = 3;
         }
         else if (grid[yPos][xPos] === 3) {
-          grid[yPos][xPos] = 4;
-        }
-        else if (grid[yPos][xPos] === 4) {
-          grid[yPos][xPos] = 5;
-        }
-        else if (grid[yPos][xPos] === 5) {
-          grid[yPos][xPos] = 6;
-        }
-        else if (grid[yPos][xPos] === 6) {
-          grid[yPos][xPos] = 7;
-        }
-        else if (grid[yPos][xPos] === 7) {
-          grid[yPos][xPos] = 8;
-        }
-        else if (grid[yPos][xPos] === 8) {
-          grid[yPos][xPos] = 9;
-        }
-        else if (grid[yPos][xPos] === 9) {
-          grid[yPos][xPos] = 10;
-        }
-        else if (grid[yPos][xPos] === 10) {
-          grid[yPos][xPos] = 11;
-        }
-        else if (grid[yPos][xPos] === 11) {
-          grid[yPos][xPos] = 12;
-        }
-        else if (grid[yPos][xPos] === 12) {
-          grid[yPos][xPos] = 13;
-        }
-        else if (grid[yPos][xPos] === 13) {
-          grid[yPos][xPos] = 14;
-        }
-        else if (grid[yPos][xPos] === 14) {
-          grid[yPos][xPos] = 15;
-        }
-        else if (grid[yPos][xPos] === 15) {
-          grid[yPos][xPos] = 16;
-        }
-        else if (grid[yPos][xPos] === 16) {
-          grid[yPos][xPos] = 17;
-        }
-        else if (grid[yPos][xPos] === 17) {
-          grid[yPos][xPos] = 18;
-        }
-        else if (grid[yPos][xPos] === 18) {
-          grid[yPos][xPos] = 19;
-        }
-        else if (grid[yPos][xPos] === 19) {
-          grid[yPos][xPos] = 20;
-        }
-        else if (grid[yPos][xPos] === 20) {
-          grid[yPos][xPos] = 21;
-        }
-        else if (grid[yPos][xPos] === 21) {
-          grid[yPos][xPos] = 22;
-        }
-        else if (grid[yPos][xPos] === 22) {
-          grid[yPos][xPos] = 23;
-        }
-        else if (grid[yPos][xPos] === 23) {
-          grid[yPos][xPos] = 24;
-        }
-        else if (grid[yPos][xPos] === 24) {
-          grid[yPos][xPos] = 25;
-        }
-
-        else if (grid[yPos][xPos] === 25) {
-          grid[yPos][xPos] = 93;
-          console.log("border");
-        }
-        else if (grid[yPos][xPos] === 93) {
-          grid[yPos][xPos] = 95;
-          console.log("teleblock");
-        }
-        else if (grid[yPos][xPos] === 95) {
           grid[yPos][xPos] = 96;
         }
         else if (grid[yPos][xPos] === 96) {
-          grid[yPos][xPos] = 97;
+          grid[yPos][xPos] = 100;
         }
-        else if (grid[yPos][xPos] === 97) {
-          grid[yPos][xPos] = 98;
-        }
-        else if (grid[yPos][xPos] === 98) {
-          grid[yPos][xPos] = 99;
-        }
-        else if (grid[yPos][xPos] === 99) {
+        else if (grid[yPos][xPos] === 101) {
           grid[yPos][xPos] = 0;
         }
+
       }
         
       if (mouseButton === CENTER){
-          grid[yPos][xPos] = 96; //Interchangable to create borders or teleport blocks, just place approriate #
+          grid[yPos][xPos] = 101; //Interchangable to create borders or teleport blocks, just place approriate #
         }
       }
   }
+
+    
+//Does not go in order nessisarily. 
+//Just if this block is this (i.e 3), then if I mousePress this block will now be 4.
+//Thus, this doesn't mean it iterates through the entire time
+//Rather starts from the block you changed (mousePressed at 3 --> 4, itll start iterating with every mousePress from 4).

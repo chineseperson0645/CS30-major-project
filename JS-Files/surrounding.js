@@ -98,28 +98,14 @@ function hopOffSYNN4(){
   grid[playerY][playerX] = "player"; 
 }
 
-//"dFirst" was implemented so that our first if statement would be called first.
-
-// Orginal Design
-// else if (grid[playerY][playerX+1] === 23){
-//   grid[playerY][playerX] = 23; 
-//   playerX++; 
-//   grid[playerY][playerX] = "playerfloor"; 
-//   console.log("floor D");
-// }
-// else if (grid[playerY+1][playerX] === 97){
-//   grid[playerY][playerX] = 23; 
-//   playerY++; 
-//   grid[playerY][playerX] = "playerfloor"; 
-//   console.log("nom");
+//Health Bar
+// if (potionInteract === true){
+//   globalPlayerHealth + 20;
+//   displayImg(globalPlayerHealth)
 // }
 
-function startAfterLoad(){
-  startAfter.size(1920, 1076);
-  startAfter.noLoop();
-  startAfter.volume(1);
-  startAfter.autoplay(false);
-}
+let haventInteract1 = true;
+let haventInteractWiskers = true;
 
 function keyPressed() {
   if (state === "start1"){
@@ -143,11 +129,6 @@ function keyPressed() {
           grid[playerY][playerX] = "playerfloor"; 
           console.log("floor D");
         }
-        else if (grid[playerY][playerX+1] === 96){ //Ninja Interact
-          ninjaVideo = createVideo(['assets(world)/SET(AFTER).mp4'], startAfterLoad);
-          ninjaVideo.play();
-          ninjaVideo.onended(gameGrid); //onended calls a callback function at the end of the duration of the media.
-        }
         else if (grid[playerY][playerX+1] === 97){ //When eats a potion
           grid[playerY][playerX] = 23; 
           playerX++; 
@@ -159,18 +140,45 @@ function keyPressed() {
             console.log("cap");
           }
         }
-        else if (grid[playerY][playerX+1] === 95 && forestPath === true){ //Teleport from forest path to ninja village
-          forestPath = false;
-          ninjaVillage = true;
-          console.log("Ninja Village (D)");
-          grid[playerY][playerX] = 3;
-          grid = ninjaVillageJSON;
-          playerX = 1;
-          playerY = 21;
-          grid[playerY][playerX] = "player";
+        else if (grid[playerY][playerX+1] === 96 && haventInteract1 === true && crater === true){ //Ninja Interact
+          ninjaVideo = createVideo(['assets(world)/Ninja.mp4'], startAfterLoad);
+          ninjaVideo.play();
+          ninjaVideo.onended(removeNinjaVideo); //onended calls a callback function at the end of the duration of the media.
+          haventInteract1 = false;
+        }
+        else if (grid[playerY][playerX+1] === 99 && haventInteractWiskers === true){ //Wisker's Interaction Screen
+          wiskerVideo = createVideo(['assets(world)/wiskers.mp4'], wiskerVideoLoad);
+          wiskerVideo.play();
+          wiskerVideo.onended(removeWiskerVideo); //onended calls a callback function at the end of the duration of the media.
+          haventInteractWiskers = false;
+          //Place Transparent Image of Tasks and then like if potion interact xImg.remove(); or if that doesn't work, draw over with transparent img if possible
+        }
+        if (grid[playerY][playerX+1] === 95){ //Placed some teleporting situations into one if statement of if near a path teleport block (95) to improve performance (possibly).
+          if (forestPath === true){
+            forestPath = false;
+            ninjaVillage = true;
+            console.log("Ninja Village (D)");
+            grid[playerY][playerX] = 3;
+            grid = ninjaVillageJSON;
+            playerX = 1;
+            playerY = 21;
+            grid[playerY][playerX] = "player";
+          }
+          else if (crater === true){
+            crater = false;
+            forestPath = true;
+            console.log("Forest Path (D)");
+            grid[playerY][playerX] = 3;
+            grid = forestPathJSON;
+            playerX = 1; //I believe I had looked at some of Khan Vin's code to figure out updating playerX and Y for JSONS
+            playerY = 8;
+            grid[playerY][playerX] = "player";
+          }
         }
       }
-    
+
+
+
       //There is a tp block in front of us.
       //This should detect if I'm ontop of a playerpath and if I'm beside a Right path. If so, it'll ask if I hit my D key and also which block I'm
       //moving onto.
@@ -201,15 +209,37 @@ function keyPressed() {
             console.log("cap");
           }
         }
-        else if (grid[playerY][playerX-1] === 95 && ninjaVillage === true){
-          ninjaVillage = false;
-          forestPath = true;
-          console.log("Forest Path (A)");
-          grid[playerY][playerX] = 3;
-          grid = forestPathJSON;
-          playerX = 33;
-          playerY = 20;
-          grid[playerY][playerX] = "player";
+        if (grid[playerY][playerX-1] === 95){
+          if (haventInteractWiskers === false && ninjaVillage === true){ //Wisker's Interaction Screen
+            ninjaVillage = false;
+            forestPath2 = true;
+            console.log("Forest Path 2");
+            grid[playerY][playerX] = 3;
+            grid = forestPath2JSON;
+            playerX = 33;
+            playerY = 20;
+            grid[playerY][playerX] = "player";
+          }
+          else if (ninjaVillage === true){
+            ninjaVillage = false;
+            forestPath = true;
+            console.log("Forest Path (A)");
+            grid[playerY][playerX] = 3;
+            grid = forestPathJSON;
+            playerX = 33;
+            playerY = 20;
+            grid[playerY][playerX] = "player";
+          }
+          else if (forestPath === true){
+            crater = true;
+            forestPath = false;
+            console.log("Forest Path (D)");
+            grid[playerY][playerX] = 3;
+            grid = craterJSON;
+            playerX = 33;
+            playerY = 8;
+            grid[playerY][playerX] = "player";
+          }
         }
       }
     
@@ -248,13 +278,13 @@ function keyPressed() {
           playerY = 16;
           grid[playerY][playerX] = "player";
         }
-        else if (grid[playerY-1][playerX] === 9 && ninjaVillage === true){ //Change ninjaVillage to like bossRoom
-          ninjaVillage = false;
-          insideNinjaHouse = true;
+        else if (grid[playerY-1][playerX] === 95 && forestPath2 === true){ //Change ninjaVillage to like bossRoom
+          forestPath2 = false;
+          bossRoom = true;
           grid[playerY][playerX] = 3;
-          grid = houseJSON;
+          // grid = bossRoomJSON;
           playerX = 17;
-          playerY = 16;
+          playerY = 23;
           grid[playerY][playerX] = "player";
         }
       }
