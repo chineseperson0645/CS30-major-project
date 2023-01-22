@@ -43,6 +43,7 @@ function preload() {
   idleb = loadImage("assets/idle.b.png");
   jumpup = loadImage("assets/Up.png");
   jumpDown = loadImage("assets/Down.png"); 
+  jumpupb = loadImage("assets/Upb.png"); 
  
 }
 
@@ -88,11 +89,7 @@ function setup() {
         imageSrc: defaultAttack, 
         framesMax: 3
       },
-      idleback: {
-        imageSrc:idleb, 
-        framesMax: 5
-      },
-
+      
       jumpUp: {
         imageSrc: jumpup, 
         framesMax: 1
@@ -101,7 +98,10 @@ function setup() {
       fallDown: {
         imageSrc: jumpDown,
         framesMax: 1
-      }
+      },
+
+     
+      
 
     }
   }); 
@@ -127,7 +127,10 @@ function draw() {
       playerEx.switchSprite('run'); 
     }
     else {
-      playerEx.switchSprite('idle'); 
+      
+        playerEx.switchSprite('idle'); 
+
+      
     }
     
     //idle postion animation
@@ -146,13 +149,15 @@ function draw() {
     if (playerEx.velocity.y < 0) {
       // playerEx.image = playerEx.sprites.jumpUp.imageSrc;
       // playerEx.framesMax = playerEx.sprites.jumpUp.framesMax;
+      
       playerEx.switchSprite('Up'); 
     }
     else if (playerEx.velocity.y > 0) {
       playerEx.switchSprite('Down'); 
     }
+
+
   }
-}
   
 //Movement
   
@@ -220,4 +225,5 @@ window.addEventListener('keyup', (event) => {
   }
 });
 
+}
 

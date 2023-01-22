@@ -158,8 +158,9 @@ class Player extends Sprite {
             this.image = this.sprites.defaultAttack1.imageSrc;
             this.framesMax = this.sprites.defaultAttack1.framesMax;
             this.frameX = 0;
-          break; 
-    }
+          break;
+        }
+
   }
 
 
