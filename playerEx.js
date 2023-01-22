@@ -71,7 +71,7 @@ class Player extends Sprite {
 
     if (this.isAttacking) {
       fill("green"); 
-      rect(this.attackBox.postion.x, this.attackBox.postion.y, this.attackBox.width, this.attackBox.height);
+      // rect(this.attackBox.postion.x, this.attackBox.postion.y, this.attackBox.width, this.attackBox.height);
     }
      
   }
@@ -84,7 +84,7 @@ class Player extends Sprite {
     
    
     this.attackBox.postion.x = this.postion.x - this.attackBox.offset.x;
-    this.attackBox.postion.y = this.postion.y- - this.attackBox.offset.y; 
+    this.attackBox.postion.y = this.postion.y - this.attackBox.offset.y; 
 
 
     this.postion.x += this.velocity.x; 
