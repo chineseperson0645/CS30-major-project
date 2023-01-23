@@ -45,7 +45,15 @@ function preload() {
   idleb = loadImage("assets/idle.b.png");
   jumpup = loadImage("assets/Up.png");
   jumpDown = loadImage("assets/Down.png"); 
-  jumpupb = loadImage("assets/Upb.png"); 
+  jumpupb = loadImage("assets/Upb.png");
+
+  enemeyIdle = loadImage("assetsE/Idle.png"); 
+  
+
+
+
+
+
 }
 
 function setup() {
@@ -64,7 +72,7 @@ function setup() {
     },
 
     offset: {
-      x:-50,
+      x: -50,
       y: -30
     },
     imageSrc: idlePos,
@@ -107,22 +115,57 @@ function setup() {
     }
   });
 
+
+  
   shinso = new Enemy({
-    position: {
-      x: 500,
-      y: 0
-    }, 
-    
     velocity: {
-      x:0, 
-      y:0
-    }, 
+      x: 0,
+      y: 0
+    },
+    position: {
+      x: 0, 
+      y: 0
+    },
 
     offset: {
-      x: 150,
-      y: 150
+      x:-50,
+      y: -30
+    },
+    imageSrc: enemeyIdle,
+    framesMax: 9,
+    
+    animations: {
+      idle :{
+        imageSrc: enemeyIdle,
+        framesMax: 9
+      },
+      
+      run:{
+        imageSrc: runRight,
+        framesMax: 6
+      },
+      runback: {
+        imageSrc: runBack, 
+        framesMax: 6
+      },
+
+      
+      defaultAttack1: {
+        imageSrc: defaultAttack, 
+        framesMax: 3
+      },
+      
+      jumpUp: {
+        imageSrc: jumpup, 
+        framesMax: 1
+      },
+      
+      fallDown: {
+        imageSrc: jumpDown,
+        framesMax: 1
+      },
     }
-  })
+  });
 
 }
 
@@ -135,6 +178,7 @@ function draw() {
     //Class Class
     playerEx.update(); 
     playerEx.display();
+
     shinso.update(); 
     shinso.display();
     
