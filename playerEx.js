@@ -71,8 +71,9 @@ class Player extends Sprite {
   display() {
 
     if (this.isAttacking) {
-      fill("green"); 
-      // rect(this.attackBox.postion.x, this.attackBox.postion.y, this.attackBox.width, this.attackBox.height);
+      noStroke(); 
+      noFill(); 
+      rect(this.attackBox.postion.x, this.attackBox.postion.y, this.attackBox.width, this.attackBox.height);
     }
      
   }

@@ -65,7 +65,7 @@ function setup() {
 
     offset: {
       x:-50,
-      y:30
+      y: -30
     },
     imageSrc: idlePos,
     framesMax: 5,
@@ -130,6 +130,8 @@ function draw() {
   if (state === "fight") {
     background(220);
     image(bgImage, 0, 0, width, height);
+    
+    
     //Class Class
     playerEx.update(); 
     playerEx.display();
