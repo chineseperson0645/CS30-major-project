@@ -33,23 +33,30 @@ let shinso;
 let followDistance;
 
 function preload() {
+  //Player Sprite Sheets
   runRight = loadImage("assets/Run.png");
   idlePos = loadImage("assets/Idle.png");
   jumpPos = loadImage("assets/Jump.png");
   runBack = loadImage("assets/runB.png");
   crouch = loadImage("assets/Disguise.png");
   jumpPosB = loadImage("assets/jumpB.png"); 
-  bgImage = loadImage("assets/moutian-pixel.gif");
-  bgImage2 = loadImage("assets/city-pixle.gif");
   defaultAttack = loadImage("assets/Attack_2.png");
   idleb = loadImage("assets/idle.b.png");
   jumpup = loadImage("assets/Up.png");
   jumpDown = loadImage("assets/Down.png"); 
   jumpupb = loadImage("assets/Upb.png");
 
-  enemeyIdle = loadImage("assetsE/Idle.png"); 
+  //Enemy Sprite Sheets 
+  enemeyIdle = loadImage("assetsE/Idle.png");
+  enemyRun = loadImage("assetsE/Run.png"); 
+  enemyJump = loadImage("assetsE/Jumpup.png");
+  enemyAttack1 = loadImage("assetsE/Attack_2.png");
+  enemyFall = loadImage("assetsE/Fall.png");
+  enemyRunback = loadImage("assetsE/Runback.png")
   
-
+  //Background Gifs 
+  bgImage = loadImage("assets/moutian-pixel.gif");
+  bgImage2 = loadImage("assets/city-pixle.gif");
 
 
 
@@ -123,7 +130,7 @@ function setup() {
       y: 0
     },
     position: {
-      x: 0, 
+      x: width - 128, 
       y: 0
     },
 
@@ -141,27 +148,27 @@ function setup() {
       },
       
       run:{
-        imageSrc: runRight,
-        framesMax: 6
+        imageSrc: enemyRunback,
+        framesMax: 8
       },
       runback: {
-        imageSrc: runBack, 
-        framesMax: 6
+        imageSrc: enemyRun, 
+        framesMax: 8
       },
 
       
       defaultAttack1: {
-        imageSrc: defaultAttack, 
-        framesMax: 3
+        imageSrc: enemyAttack1, 
+        framesMax: 8
       },
       
       jumpUp: {
-        imageSrc: jumpup, 
+        imageSrc: enemyJump, 
         framesMax: 1
       },
       
       fallDown: {
-        imageSrc: jumpDown,
+        imageSrc: enemyFall,
         framesMax: 1
       },
     }
@@ -208,6 +215,14 @@ function draw() {
     else if (playerEx.velocity.y > 0) {
       playerEx.switchSprite('Down'); 
     }
+    
+    // if (shinso.velocity.y < 0) {
+    //   shinso.switchanimation('Up'); 
+    // }
+    // else if (shinso.velocity.y > 0) {
+    //   shinso.switchanimation('Down'); 
+    // }
+
 
     // collision detection
   if (rectCol({rectangle1: playerEx, rectangle2: shinso}) && playerEx.isAttacking) {
@@ -245,6 +260,10 @@ window.addEventListener('keydown', (event) => {
   case "e":
     playerEx.attack();
     break;
+
+  case "f": 
+    shinso.attack(); 
+    break; 
   }
 });
 
