@@ -28,7 +28,9 @@ let lastKeys;
 let defaultAttack; 
 let aniState; 
 let idleb;
-let attackstate; 
+let attackstate;
+let shinso;
+let followDistance;
 
 function preload() {
   runRight = loadImage("assets/Run.png");
@@ -44,7 +46,6 @@ function preload() {
   jumpup = loadImage("assets/Up.png");
   jumpDown = loadImage("assets/Down.png"); 
   jumpupb = loadImage("assets/Upb.png"); 
- 
 }
 
 function setup() {
@@ -104,7 +105,24 @@ function setup() {
       
 
     }
-  }); 
+  });
+
+  shinso = new Enemy({
+    position: {
+      x: 500,
+      y: 0
+    }, 
+    
+    velocity: {
+      x:0, 
+      y:0
+    }, 
+
+    offset: {
+      x: 150,
+      y: 150
+    }
+  })
 
 }
 
@@ -112,10 +130,13 @@ function draw() {
   if (state === "fight") {
     background(220);
     image(bgImage, 0, 0, width, height);
+    //Class Class
     playerEx.update(); 
     playerEx.display();
-    console.log(playerEx.velocity.y); 
-
+    shinso.update(); 
+    shinso.display();
+    
+  
 
     if (keys.a.pressed === true && lastKeys === "a") {
       playerEx.velocity.x = -5;
@@ -133,31 +154,20 @@ function draw() {
       
     }
     
-    //idle postion animation
-    // if (playerEx.velocity.x === 0 && playerEx.velocity.y === 0) {
-    //   // playerEx.framesMax = playerEx.sprites.idle.framesMax;
-    //   if (lastKeys === 'a') {
-    //     // playerEx.image = playerEx.sprites.idleback.imageSrc;      }
-    //     playerEx.switchSprite('idleback');
-    //   }
-    //   else {
-    //     playerEx.switchSprite('idle');
-    //   }
-    // }
+
 
     //Jump animation trigger
     if (playerEx.velocity.y < 0) {
-      // playerEx.image = playerEx.sprites.jumpUp.imageSrc;
-      // playerEx.framesMax = playerEx.sprites.jumpUp.framesMax;
-      
       playerEx.switchSprite('Up'); 
     }
+
     else if (playerEx.velocity.y > 0) {
       playerEx.switchSprite('Down'); 
     }
 
 
   }
+}
   
 //Movement
   
@@ -167,23 +177,11 @@ window.addEventListener('keydown', (event) => {
   case 'd':
     keys.d.pressed = true;
     lastKeys = "d";
-    // playerEx.framesMax = playerEx.sprites.run.framesMax;
-    // playerEx.image = playerEx.sprites.run.imageSrc;
-    // playerEx.switchSprite('run'); 
-
-
     break;
     
   case 'a':
     keys.a.pressed = true;
     lastKeys = "a"; 
-    // playerEx.framesMax = playerEx.sprites.runback.framesMax;
-    // playerEx.image = playerEx.sprites.runback.imageSrc;
-    // playerEx.switchSprite('runback'); 
-    
- 
-
-
     break;
     
   case 'w':
@@ -192,31 +190,21 @@ window.addEventListener('keydown', (event) => {
 
   case "e":
     playerEx.attack();
-    
-    // playerEx.image = playerEx.sprites.defaultAttack1.imageSrc;
-    // playerEx.framesMax = playerEx.sprites.defaultAttack1.framesMax;
-
+    break;
   }
 });
 
 window.addEventListener('keyup', (event) => {
   
-
   switch (event.key) {
   case 'd':
     playerEx.velocity.x = 0; 
     keys.d.pressed = false;
-    
-
-
     break ;
       
   case 'a':
     keys.a.pressed = false;
     playerEx.velocity.x = 0; 
-    
-
-
     break;
     
   case 'w':
@@ -225,5 +213,12 @@ window.addEventListener('keyup', (event) => {
   }
 });
 
+function getDistance(x1,y1,x2,y2) {
+   xdiff = x1-x2;
+   ydiff = y1-y2; 
+
+   return Math.sqrt(xdiff * xdiff + ydiff * ydiff); 
 }
+
+
 

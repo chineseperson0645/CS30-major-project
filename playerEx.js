@@ -7,6 +7,7 @@ class Sprite {
     this.image.src = imageSrc; 
     this.framesMax = framesMax;
     
+    
   }
   animateFrames () {
     if (this.gameFrame % this.staggerFrames === 0) {
@@ -167,6 +168,7 @@ class Player extends Sprite {
   }
   
 }
+
 
 
 
