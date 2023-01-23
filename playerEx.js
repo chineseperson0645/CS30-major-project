@@ -35,8 +35,8 @@ class Player extends Sprite {
     this.velocity = velocity;
     this.image = imageSrc;
     this.sprites = sprites; 
-    this.width = 50; 
-    this.height = 150;
+    this.width = 96; 
+    this.height = 96;
     this.lastKeys;
     this.playerWidth = 96; 
     this.playerHeight = 96; 
