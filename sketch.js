@@ -85,7 +85,7 @@ function preload() {
   bgImage = loadImage("assets/moutian-pixel.gif");
   bgImage2 = loadImage("assets/city-pixle.gif");
  
-  // michaels Images
+  //Images for Grid
   treeImg = loadImage('assets(world)/bush.png');
   bottomtreeImg = loadImage('assets(world)/bottomtree.png');
 
@@ -124,7 +124,11 @@ function preload() {
   fireImg = loadImage('assets(world)/fire.gif');
 
   fridgeImg = loadImage('assets(world)/fridge.png');
+  transitionImg = loadImage('assets(world)/SET(IMG).png');
+  lastImg = loadImage("assets(world)/ajface.png")
 
+
+  //JSON's for Grid
   betaTestJSON = loadJSON('JSON-Maps(world)/beta.json');
   forestPathJSON = loadJSON('JSON-Maps(world)/forestpath.json');
   forestPath2JSON = loadJSON('JSON-Maps(world)/forestpath2.json');
@@ -132,21 +136,15 @@ function preload() {
   houseJSON = loadJSON('JSON-Maps(world)/house.json');
   bossJSON = loadJSON('JSON-Maps(world)/boss.json');
   craterJSON = loadJSON('JSON-Maps(world)/crater.json');
-
-  transitionImg = loadImage('assets(world)/SET(IMG).png');
-  lastImg = loadImage("assets(world)/ajface.png")
-
-
-
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  state = "fight"; 
+  state = "grid"; 
 
-  // if (state === "grid"){
-  //   gameGrid();
-  // } 
+  if (state === "grid"){
+    gameGrid();
+  } 
 
   globalPlayerHealth = random(59, 92);
   createCanvas(1920, 1076);
@@ -396,91 +394,88 @@ function healthBar(health, maxHealth) {
 }
 
 
-//Michaels Code 
+//Display's Grid
 function displayGrid(grid) {
   for (let y=0; y<ROWS; y++) {
     for (let x=0; x<COLS; x++) {
-      if (grid[y][x] === 0) {
+      if (grid[y][x] === 0) { //Tree Top Image
         image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 1) {
+      if (grid[y][x] === 1) { //Tree Top Image 
         image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 2) {
+      if (grid[y][x] === 2) { //Tree Bottom Image
         image(bottomtreeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 3) {
+      if (grid[y][x] === 3) { //First Path Type Image
         image(path1Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 4) {
+      if (grid[y][x] === 4) { //Second Path Type Image
         image(path2Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 5){
+      if (grid[y][x] === 5){ //House (follow abreviation)
         image(houseTLImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 6){
+      if (grid[y][x] === 6){ //House (follow abreviation)
         image(houseTMImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 7){
+      if (grid[y][x] === 7){ //House (follow abreviation)
         image(houseTRImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 8){
+      if (grid[y][x] === 8){ //House (follow abreviation)
         image(houseBLImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 9){ //Ninja Village DOOR
+      if (grid[y][x] === 9){ //House (follow abreviation)
         image(houseBMImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 10){
+      if (grid[y][x] === 10){ //House (follow abreviation) 
         image(houseBRImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 11){
+      if (grid[y][x] === 11){ //Fence (follow abreviation)
         image(fenceTLImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 12){
+      if (grid[y][x] === 12){ //Fence (follow abreviation)
         image(fenceAMImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 13){
+      if (grid[y][x] === 13){ //Fence (follow abreviation)
         image(fenceAM2Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 14){
+      if (grid[y][x] === 14){ //Fence (follow abreviation)
         image(fenceTRImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 15){
+      if (grid[y][x] === 15){ //Fence (follow abreviation)
         image(fenceDRImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 16){
+      if (grid[y][x] === 16){ //Fence (follow abreviation)
         image(fenceBRImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 17){
+      if (grid[y][x] === 17){ //Fence (follow abreviation)
         image(fenceAMImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 18){
+      if (grid[y][x] === 18){ //Fence (follow abreviation)
         image(fenceAM2Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 19){
+      if (grid[y][x] === 19){ //Fence (follow abreviation)
         image(fenceBLImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 20){
+      if (grid[y][x] === 20){ //Fence (follow abreviation)
         image(fenceDLImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 21){
+      if (grid[y][x] === 21){ //Fence (follow abreviation)
         image(fenceDLImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 22){
+      if (grid[y][x] === 22){ //Black Image
         image(blackImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 23){
+      if (grid[y][x] === 23){ //Floor
         image(floorImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 24){
+      if (grid[y][x] === 24){ //Wall
         image(wallImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 25){
+      if (grid[y][x] === 25){ //Open Door
         image(openDoorImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-
-
-
       if (grid[y][x] === 70) { //Boss 1
         image(path1Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
         image(boss1Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
@@ -489,28 +484,25 @@ function displayGrid(grid) {
         image(path1Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
         image(boss2Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-
-      
-      
-      if (grid[y][x] === "player") {
+      if (grid[y][x] === "player") { //Player
         image(zenImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === "playerpath1") {
+      if (grid[y][x] === "playerpath1") { //Player on Path1
         image(path1Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
         image(zenImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === "playerpath2") {
+      if (grid[y][x] === "playerpath2") { //Player on Path2
         image(path2Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
         image(zenImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === "playerfloor") {
+      if (grid[y][x] === "playerfloor") { //Player on Floor
         image(floorImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
         image(zenImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 93) { //BORDER!
+      if (grid[y][x] === 93) { //BORDER Block!
         image(treeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 95) { //Teleport!
+      if (grid[y][x] === 95) { //Teleport Block!
         image(path1Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
       if (grid[y][x] === 96) { //Ninja
@@ -531,13 +523,14 @@ function displayGrid(grid) {
       if (grid[y][x] === 100) { //White
         image(whiteImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
-      if (grid[y][x] === 101) { //White
+      if (grid[y][x] === 101) { //Fridge
         image(fridgeImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
     }
   }
 }
 
+//Creates 2D Array - Based off Demo.
 function create2dArray(COLS, ROWS) {
   let emptyArray = [];
   for (let y=0; y<ROWS; y++) {

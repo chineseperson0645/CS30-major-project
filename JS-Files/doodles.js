@@ -547,6 +547,88 @@
 //If we want to do health potions or mushrooms.
 //(Both in grid and in fight scene)
 
+// 87 === W
+// 65 === A
+// 83 === S
+// 68 === D
+// Spacebar === 32
+
+// let nearPathLeft, nearPathDown, nearPathRight, nearPathForward;
+
+// function surroundingCheck(){
+//   if (grid[playerY][playerX+1] === 3 || grid[playerY][playerX+1] === 4){ // D 
+//     nearPathRight = true;
+//   }
+//   else if (grid[playerY][playerX+1] ==! 3 || grid[playerY][playerX+1] ==! 4){ // D 
+//     nearPathRight = false;
+//   }
+
+//   if (grid[playerY+1][playerX] === 3 || grid[playerY+1][playerX] === 4){ // S 
+//     nearPathDown = true;
+//   }
+//   else if (grid[playerY+1][playerX] ==! 3 || grid[playerY+1][playerX] ==! 4){ // S 
+//     nearPathDown = false;
+//   }
+
+//   if (grid[playerY][playerX-1] === 3 || grid[playerY][playerX-1] === 4){ // A 
+//     nearPathLeft = true;
+//   }
+//   else if (grid[playerY][playerX-1] ==! 3 || grid[playerY][playerX-1] ==! 4){ // A 
+//     nearPathLeft = false;
+//   }
+
+//   if (grid[playerY-1][playerX] === 3 || grid[playerY-1][playerX] === 4){ // W 
+//     nearPathForward = true;
+//   }
+//   else if (grid[playerY-1][playerX] ==! 3 || grid[playerY-1][playerX] ==! 4){ // W 
+//     nearPathForward = false;
+//   }
+// }
+
+// function hopOffDXPP3(){ //D
+//   grid[playerY][playerX] = 3; 
+//   playerX++; 
+//   grid[playerY][playerX] = "player"; 
+// }
+// function hopOffDXPP4(){
+//   grid[playerY][playerX] = 4; 
+//   playerX++; 
+//   grid[playerY][playerX] = "player"; 
+// }
+
+// function hopOffAXNN3(){ //A
+//   grid[playerY][playerX] = 3; 
+//   playerX--; 
+//   grid[playerY][playerX] = "player";
+// }
+// function hopOffAXNN4(){
+//   grid[playerY][playerX] = 4; 
+//   playerX--; 
+//   grid[playerY][playerX] = "player";
+// }
+
+// function hopOffWYNN3(){ //W
+//   grid[playerY][playerX] = 3; 
+//   playerY--;; 
+//   grid[playerY][playerX] = "player";
+// }
+// function hopOffWYNN4(){
+//   grid[playerY][playerX] = 4;
+//   playerY--;; 
+//   grid[playerY][playerX] = "player"; 
+// }
+
+// function hopOffSYNN3(){ // S
+//   grid[playerY][playerX] = 3; 
+//   playerY++; 
+//   grid[playerY][playerX] = "player"; 
+// }
+// function hopOffSYNN4(){
+//   grid[playerY][playerX] = 4;
+//   playerY++; 
+//   grid[playerY][playerX] = "player"; 
+// }
+
   // else if (grid[yPos][xPos] === 2) {
   //   grid[yPos][xPos] = 3;
   // }
@@ -640,3 +722,5 @@
   // else if (grid[yPos][xPos] === 99) {
   //   grid[yPos][xPos] = 0;
   // }
+
+//Test if we can go back to ninja village and such after forestPath2

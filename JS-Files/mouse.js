@@ -16,9 +16,7 @@ console.log("gameGrid, grid")
       attemp2Video.remove(); //Put back if not in state = "grid" (manually)
       secondAttemptStatus = false
     }
-
     createCanvas(1920, 1076); //Optimized for 1920x1080 screens.
-
     cellWidth = width/COLS;
     cellHeight = height/ROWS;
     grid = create2dArray(COLS, ROWS);
@@ -28,9 +26,6 @@ console.log("gameGrid, grid")
     //Do not do [playerY+#][playerX+#] or whatever #. It messes up movement keys.
   }
 }
-
-//Once interact with Wiskers, change JSON to one without ninjas
-
 
 function mousePressed() {
   globalPlayerHealth = 0;
@@ -57,35 +52,25 @@ function mousePressed() {
       hit = false;
     }    
   }
-
+  
 //collidePointRect(pointX, pointY, x, y, width, height)
 
-  if (state === "grid"){
-    let xPos = Math.floor(mouseX/cellWidth);
-    let yPos = Math.floor(mouseY/cellHeight);
-  
-      if (mouseButton === LEFT){
-        if (grid[yPos][xPos] === 0) {
-          grid[yPos][xPos] = 2;
-        }
-        else if (grid[yPos][xPos] === 2) {
-          grid[yPos][xPos] = 3;
-        }
-        else if (grid[yPos][xPos] === 3) {
-          grid[yPos][xPos] = 70;
-        }
-        else if (grid[yPos][xPos] === 70) {
-          grid[yPos][xPos] = 71;
-        }
-        else if (grid[yPos][xPos] === 71) {
-          grid[yPos][xPos] = 0;
-        }
-      }
-        
-      if (mouseButton === CENTER){
-          grid[yPos][xPos] = 70; //Interchangable to create borders or teleport blocks, just place approriate #
-        }
-      }
+//If Customizing Grid, Uncomment the following. Add repeats as needed.
+  // if (state === "grid"){
+  //   let xPos = Math.floor(mouseX/cellWidth);
+  //   let yPos = Math.floor(mouseY/cellHeight);
+  //   if (mouseButton === LEFT){
+  //     if (grid[yPos][xPos] === 0) {
+  //       grid[yPos][xPos] = 1;
+  //     }
+  //     else if (grid[yPos][xPos] === 1) {
+  //       grid[yPos][xPos] = 0;
+  //     }
+  //   }
+  //   if (mouseButton === CENTER){
+  //       grid[yPos][xPos] = 70; //Interchangable to create borders or teleport blocks, just place approriate #
+  //     }
+  //   }
   }
 
     
