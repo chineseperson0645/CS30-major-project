@@ -10,6 +10,19 @@ Honesty I just wished I would've really just hunkered down and didn't concern my
 I would also tell myself to not waste weeks on getting the movement right (transitioning between blocks while having the charcter ontop and image at the bottom).
 What a waste of time.
 
+ANOTHER HUGE THING I SHOULDVE SPENT TIME ON: Used a more efficent methods of cutting out sprite sheets and assets from the greyscale tileset.
+By using sites like https://ezgif.com/ which has a sprite cutter
+
+Another really big thing is I wished we (so both myself and probably AJ) would've found out about https://p5play.org/ sooner and used it sooner.
+
+To Sum Up:
+- Don't waste time on nice to haves. FOCUS ON NEED TO HAVES.
+- Don't focus on little details if they aren't essential.
+- Use automatic sprite cutters (Don't snip yourself, that's lame and time consuming).
+- Use https://p5play.org/ WAYYY Earlier.
+
+^Note to students next year: THIS WILL SAVE YOU SO MUCH TIME.
+
 ## AJ
 I would probably tell myself to...
 
