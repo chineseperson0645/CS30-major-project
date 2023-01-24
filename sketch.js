@@ -1,5 +1,13 @@
 // CS30 Major Project
-// Anjana Samarasinghe
+// Anjana Samarasinghe and Michael
+
+//REMEMBER. FIRST OPEN THEN HIT FULLSCREEN THEN RELOAD THE PAGE TO FIT!
+//REMEMBER. FIRST OPEN THEN HIT FULLSCREEN THEN RELOAD THE PAGE TO FIT!
+//REMEMBER. FIRST OPEN THEN HIT FULLSCREEN THEN RELOAD THE PAGE TO FIT!
+//REMEMBER. FIRST OPEN THEN HIT FULLSCREEN THEN RELOAD THE PAGE TO FIT!
+//REMEMBER. FIRST OPEN THEN HIT FULLSCREEN THEN RELOAD THE PAGE TO FIT!
+//REMEMBER. FIRST OPEN THEN HIT FULLSCREEN THEN RELOAD THE PAGE TO FIT!
+
 const gravity = 0.7;
 
 const keys = {
@@ -42,7 +50,6 @@ let cellWidth;
 let cellHeight;
 // p5.disableFriendlyErrors = true; //for performance, activate at launch
 
-// CHANGE PLAYER X AND Y TO CHANGE WHERE PLAYER SPAWS (COULD BE USEFUL FOR TELEPORTATION AND OTHERS IN FUTURE)
 let playerX = 16;
 let playerY = 14;
 let globalPlayerHealth;
@@ -56,6 +63,8 @@ let forestPath2 = false;
 
 let treeImg, zenImg, bottomtreeImg, houseTLImg, houseTMImg, houseTRImg, houseBLImg, houseBMImg, houseBRImg, path1Img, path2Img, fenceAMImg, fenceAM2Img, fenceDLImg, fenceDRImg, fenceBRImg, fenceBLImg,
 fenceTLImg, fenceTRImg, floorImg, wallImg, blackImg, openDoorImg, fridgeImg, boss1Img, boss2Img, lastImg;
+
+let walkSound, buttonSound, fireSound, gridMusic1, bossMusic;
 
 let forestPathJSON, ninjaVillageJSON, betaTestJSON, craterJSON, forestPath2JSON, bossJSON;
 
@@ -83,7 +92,7 @@ function preload() {
   
   //Background Gifs 
   bgImage = loadImage("assets/moutian-pixel.gif");
-  bgImage2 = loadImage("assets/city-pixle.gif");
+  // bgImage2 = loadImage("assets/city-pixle.gif");
  
   //Images for Grid
   treeImg = loadImage('assets(world)/bush.png');
@@ -128,7 +137,7 @@ function preload() {
   lastImg = loadImage("assets(world)/ajface.png")
 
 
-  //JSON's for Grid
+  //JSONs for Grid
   betaTestJSON = loadJSON('JSON-Maps(world)/beta.json');
   forestPathJSON = loadJSON('JSON-Maps(world)/forestpath.json');
   forestPath2JSON = loadJSON('JSON-Maps(world)/forestpath2.json');
@@ -136,18 +145,26 @@ function preload() {
   houseJSON = loadJSON('JSON-Maps(world)/house.json');
   bossJSON = loadJSON('JSON-Maps(world)/boss.json');
   craterJSON = loadJSON('JSON-Maps(world)/crater.json');
+
+  //Sounds for Grid
+  soundFormats('mp3', 'wav', "ogg");
+  walkSound = loadSound("assets(world)/sound/foot.wav");
+  buttonSound = loadSound("assets(world)/sound/buttonsound.wav");
+  fireSound = loadSound("assets(world)/sound/fire.wav");
+  gridMusic1 = loadSound("assets(world)/sound/gridmusic.wav");
+  bossMusic = loadSound("assets(world)/sound/bossmusic.wav");
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-  state = "grid"; 
+  createCanvas(windowWidth, windowHeight-4);
+  state = "start1"; 
 
   if (state === "grid"){
     gameGrid();
   } 
 
   globalPlayerHealth = random(59, 92);
-  createCanvas(1920, 1076);
+  // createCanvas(1920, 1076);
   if (state === "start1"){
     startScreen();
   }
@@ -261,7 +278,6 @@ function setup() {
 }
 
 function draw() {
-
   if (state === "grid"){
     displayGrid(grid);
   }
@@ -269,9 +285,9 @@ function draw() {
   if (state === "fight") {
     background(220);
     image(bgImage, 0, 0, width, height);
-    console.log("Aj reached");
     
     
+
     //Class Class
     playerEx.update(); 
     playerEx.display();

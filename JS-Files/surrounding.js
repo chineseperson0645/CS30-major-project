@@ -19,12 +19,24 @@
 let haventInteract1 = true;
 let haventInteractWiskers = true;
 
+// function soundCheck(){ //Not working!
+//   if (grid[playerY][playerX+1] ==! 98){ 
+//     fireSound.stop();
+//   }
+// }
+
 function keyPressed() {
   if (state === "start1"){
     startVideo.play();
   }
-  if (state === "grid"){
+
+  if (state === "grid" || state === "sound"){
     if (key === "d") { //D
+      walkSound.setVolume(0.3);
+      walkSound.play();
+      if (grid[playerY][playerX+1] === 98){ 
+        fireSound.play();
+      }
       if (grid[playerY][playerX+1] === 3){ 
         grid[playerY][playerX] = 3; 
         playerX++; 
@@ -64,6 +76,8 @@ function keyPressed() {
         haventInteractWiskers = false;
         //Place Transparent Image of Tasks and then like if potion interact xImg.remove(); or if that doesn't work, draw over with transparent img if possible
       }
+
+      //From Forestpath to Ninja Village
       if (grid[playerY][playerX+1] === 95){ //Placed some teleporting situations into one if statement of if near a path teleport block (95) to improve performance (possibly).
         if (forestPath === true){
           forestPath = false;
@@ -74,6 +88,7 @@ function keyPressed() {
           playerY = 21;
           grid[playerY][playerX] = "player";
         }
+        //From Crater (Starting Area) to Forest Path
         else if (crater === true){
           crater = false;
           forestPath = true;
@@ -83,10 +98,24 @@ function keyPressed() {
           playerY = 8;
           grid[playerY][playerX] = "player";
         }
+        if (forestPath2 === true){
+          forestPath2 = false;
+          ninjaVillage = true;
+          grid[playerY][playerX] = 3;
+          grid = ninjaVillageJSON;
+          playerX = 1;
+          playerY = 21;
+          grid[playerY][playerX] = "player";
+        }
       }
     }
     
     if (key === "a") { //A
+      walkSound.setVolume(0.3);
+      walkSound.play();
+      if (grid[playerY][playerX-1] === 98){ 
+        fireSound.play();
+      }
       if (grid[playerY][playerX-1] === 3){
         grid[playerY][playerX] = 3; 
         playerX--; 
@@ -145,6 +174,11 @@ function keyPressed() {
     }
     
       if (key === "w") { //W
+        walkSound.setVolume(0.3);
+        walkSound.play();
+        if (grid[playerY-1][playerX] === 98){ 
+          fireSound.play();
+        }
         if (grid[playerY-1][playerX] === 3){
           grid[playerY][playerX] = 3; 
           playerY--;; 
@@ -190,6 +224,11 @@ function keyPressed() {
           grid[playerY][playerX] = "player";
         }
         else if (grid[playerY-1][playerX] === 70){ 
+          gridMusic1.stop();
+          bossMusic.remove();
+          bossMusic.setVolume(0.5);
+          bossMusic.play();
+          bossMusic.loop();
           state = "fight"; 
           console.log("state should be fight");
           // creditsVideo = createVideo(['assets(world)/credit.mp4'], creditsVideoLoad);
@@ -199,6 +238,11 @@ function keyPressed() {
       }
     
       if (key === "s") { //S
+        walkSound.setVolume(0.3);
+        walkSound.play();
+        if (grid[playerY+1][playerX+1] === 98){ 
+          fireSound.play();
+        }
         if (grid[playerY+1][playerX] === 3){
           grid[playerY][playerX] = 3; 
           playerY++; 
