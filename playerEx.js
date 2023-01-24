@@ -45,7 +45,8 @@ class Player extends Sprite {
     this.gameFrame = 0;
     this.staggerFrames = 7;
     this.health = globalPlayerHealth; 
-    
+    this.dead = false; 
+
     
     for (let sprite in this.sprites) {
       sprites[sprite].image = new Image();
@@ -80,7 +81,9 @@ class Player extends Sprite {
   }
 
   update() {
-    this.animateFrames(); 
+    if (this.dead === false) {
+      this.animateFrames();
+      }
 
 
     image(this.image, this.position.x, this.position.y, this.playerWidth, this.playerHeight, this.frameX * this.playerWidth , this.frameY * this.playerHeight , this.playerWidth, this.playerHeight );
@@ -120,6 +123,14 @@ class Player extends Sprite {
   }
   
   switchSprite(sprite) {
+
+    if (this.image === this.sprites.death.imageSrc) {
+      if (this.frameX === this.sprites.death.framesMax - 1) 
+        this.dead = true; 
+        return;
+    }
+
+
     if (this.image === this.sprites.defaultAttack1.imageSrc && this.frameX < this.sprites.defaultAttack1.framesMax - 1) {
       return; 
     }

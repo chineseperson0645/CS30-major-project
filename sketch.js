@@ -74,9 +74,13 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  
   state = "fight"; 
+  
   globalPlayerHealth = 100; 
+  
   maxHP = 100;
+  
   enemyHealth = 200; 
   
   playerEx = new Player({
@@ -134,7 +138,7 @@ function setup() {
 
       death: {
         imageSrc: playerDeath, 
-        framesMax: 1
+        framesMax: 4
       },
       
 
@@ -215,11 +219,11 @@ function draw() {
     console.log(shinso.health); 
   
     // Check if the enemy or player has died
-    if (shinso.health <= 0) {
-      shinso.switchanimation("death"); 
+    if (shinso.health <= 0) { //enemy death
+      shinso.switchanimation("death");
     }
 
-    if (playerEx.health <= 0) {
+    if (playerEx.health <= 0) {//player death
       playerEx.switchSprite("death");
       shinso.dead =true; 
     }
