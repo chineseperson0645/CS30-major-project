@@ -39,6 +39,10 @@ let idleb;
 let attackstate;
 let shinso;
 let followDistance;
+let maxHp;
+let enemyHealth; 
+let attackInterval = 1000; 
+let lastAttackTime = 0;
 
 
 //Michaels Code 
@@ -81,6 +85,8 @@ function preload() {
   jumpup = loadImage("assets/Up.png");
   jumpDown = loadImage("assets/Down.png"); 
   jumpupb = loadImage("assets/Upb.png");
+  playerHit = loadImage("assets/Hurt.png");
+  playerDeath = loadImage("assets/Dead.png");
 
   //Enemy Sprite Sheets 
   enemeyIdle = loadImage("assetsE/Idle.png");
@@ -88,7 +94,9 @@ function preload() {
   enemyJump = loadImage("assetsE/Jumpup.png");
   enemyAttack1 = loadImage("assetsE/Attack_2.png");
   enemyFall = loadImage("assetsE/Fall.png");
-  enemyRunback = loadImage("assetsE/Runback.png")
+  enemyRunback = loadImage("assetsE/Runback.png"); 
+  enemyDeath = loadImage("assetsE/Dead.png");
+  enemeyHit =  loadImage("assetsE/Hurt.png");
   
   //Background Gifs 
   bgImage = loadImage("assets/moutian-pixel.gif");
@@ -165,11 +173,14 @@ function setup() {
   } 
 
   globalPlayerHealth = random(59, 92);
-  // createCanvas(1920, 1076);
   if (state === "start1"){
     startScreen();
   }
- 
+  
+  maxHP = 100;
+  
+  enemyHealth = 200; 
+  
   playerEx = new Player({
     velocity: {
       x: 0,
@@ -218,7 +229,15 @@ function setup() {
         framesMax: 1
       },
 
-     
+      hit: {
+        imageSrc: playerHit, 
+        framesMax: 2
+      },
+
+      death: {
+        imageSrc: playerDeath, 
+        framesMax: 4
+      },
       
 
     }
@@ -273,6 +292,16 @@ function setup() {
         imageSrc: enemyFall,
         framesMax: 1
       },
+
+      death: {
+        imageSrc: enemyDeath, 
+        framesMax: 5
+      },
+
+      hit: {
+        imageSrc: enemeyHit, 
+        framesMax: 2
+      },
     }
   });
 
@@ -282,25 +311,73 @@ function draw() {
   if (state === "grid"){
     displayGrid(grid);
   }
-
+  
   if (state === "fight") {
-    background(220);
-    image(bgImage, 0, 0, width, height);
-    
+  background(220);
+  image(bgImage, 0, 0, width, height);
+  
+    console.log(shinso.health); 
+  
+    // Check if the enemy or player has died
+    if (shinso.health <= 0) { //enemy death
+      shinso.switchanimation("death");
+    }
+
+    if (playerEx.health <= 0) {//player death
+      playerEx.switchSprite("death");
+      shinso.dead =true; 
+    }
     
 
-    //Class Class
+    
+    
+    // Class 
     playerEx.update(); 
     playerEx.display();
 
     shinso.update(); 
     shinso.display();
+
+    //Player Health Bar
+    healthBar(playerEx.health, maxHP, 10, 200);
+
+    //Enemy Health Bar
+    healthBar(shinso.health, maxHP, width - 410, 400); 
     
-  
+    //Enemy Movement
+    if (shinso.health > 0 && shinso.dead === false) {
+      if (getDistance(playerEx.position.x, playerEx.position.y, shinso.position.x,shinso.position.y) < 40) {
+        // shinso.attack();
+
+        if (millis() - lastAttackTime >= attackInterval) {
+          shinso.attack();
+          lastAttackTime = millis();
+      }
+        
+        
+      }
+      
+
+      if (playerEx.position.x <= shinso.position.x) {
+        shinso.position.x -= 3;
+        shinso.switchanimation('runback');
+      }
+
+      if (playerEx.position.x >= shinso.position.x) {
+        shinso.position.x += 3;
+        shinso.switchanimation('run');
+    }
+  }
+    //
+
+    // console.log(getDistance(playerEx.position.x, playerEx.position.y, shinso.position.x,shinso.position.y));
+
+    
+
 
     if (keys.a.pressed === true && lastKeys === "a") {
       playerEx.velocity.x = -5;
-      playerEx.switchSprite('runback'); 
+      playerEx.switchSprite('runback');
     
     }
     else if (keys.d.pressed === true && lastKeys === "d"){
@@ -334,12 +411,17 @@ function draw() {
     // collision detection
   if (rectCol({rectangle1: playerEx, rectangle2: shinso}) && playerEx.isAttacking) {
     playerEx.isAttacking = false; 
-    console.log("detection"); 
+    // console.log("detection");
+    // enemyHealth -= 10;
+    // shinso.switchanimation('hit');
+    shinso.takeHit(); 
   }
 
   if (rectCol({rectangle1: shinso, rectangle2: playerEx}) && shinso.isAttacking) {
     shinso.isAttacking = false;
-    console.log("hazaa"); 
+    // console.log("hazaa");
+    // playerEx.switchSprite('hit');
+    playerEx.takeHit(); 
 
     }
   }
@@ -405,11 +487,27 @@ function rectCol({rectangle1,rectangle2}) {
   return (rectangle1.attackBox.position.x + rectangle1.attackBox.width >= rectangle2.position.x && rectangle1.attackBox.position.x <= rectangle2.position.x + rectangle2.width && rectangle1.attackBox.position.y + rectangle1.attackBox.height >= rectangle2.position.y && rectangle1.attackBox.position.y <= rectangle2.position.y + rectangle2.height); 
 }
 
-function healthBar(health, maxHealth) {
+function healthBar(health, maxHealth, xOffset, widthOffset) {
   stroke(0); 
   stokeWeight(4); 
-}
+  strokeWeight(7); 
+  noFill(); 
+  rect(xOffset, 15, widthOffset, 15); 
+  noStroke(); 
+  if(health >= 80) {
+    fill("green"); 
+  }
+  if (health <= 80) {
+    fill("yellow");
+  }
 
+  if (health <= 30) {
+    fill("red"); 
+  }
+    
+  rect(xOffset, 15, map(health, 0, maxHealth,0, 200), 15);
+}
+}
 
 //Display's Grid
 function displayGrid(grid) {
@@ -558,3 +656,9 @@ function create2dArray(COLS, ROWS) {
   }
   return emptyArray;
 }
+
+
+
+
+
+

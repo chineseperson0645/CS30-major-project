@@ -44,7 +44,9 @@ class Player extends Sprite {
     this.frameY = 0;
     this.gameFrame = 0;
     this.staggerFrames = 7;
-    
+    this.health = globalPlayerHealth; 
+    this.dead = false; 
+
     
     for (let sprite in this.sprites) {
       sprites[sprite].image = new Image();
@@ -71,15 +73,17 @@ class Player extends Sprite {
   display() {
 
     if (this.isAttacking) {
-      // noStroke(); 
-      // noFill(); 
+      noStroke(); 
+      noFill(); 
       rect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
     }
      
   }
 
   update() {
-    this.animateFrames(); 
+    if (this.dead === false) {
+      this.animateFrames();
+      }
 
 
     image(this.image, this.position.x, this.position.y, this.playerWidth, this.playerHeight, this.frameX * this.playerWidth , this.frameY * this.playerHeight , this.playerWidth, this.playerHeight );
@@ -106,11 +110,35 @@ class Player extends Sprite {
       this.isAttacking = false; 
     }, 100);
   }
+
+  takeHit() {
+    this.health -= 10; 
+    if (this.health <= 0 ) {
+      this.switchSprite('death'); 
+    }
+    else {
+      this.switchSprite('hit'); 
+
+    }
+  }
   
   switchSprite(sprite) {
+
+    if (this.image === this.sprites.death.imageSrc) {
+      if (this.frameX === this.sprites.death.framesMax - 1) 
+        this.dead = true; 
+        return;
+    }
+
+
     if (this.image === this.sprites.defaultAttack1.imageSrc && this.frameX < this.sprites.defaultAttack1.framesMax - 1) {
       return; 
     }
+
+    if (this.image === this.sprites.hit.imageSrc && this.frameX < this.sprites.hit.framesMax - 1) {
+      return; 
+    }
+
     switch (sprite) {
       case 'idle':
         if (this.image !== this.sprites.idle.imageSrc) {
@@ -162,6 +190,23 @@ class Player extends Sprite {
             this.frameX = 0;
           break;
         }
+
+        case 'hit':
+          if (this.image !== this.sprites.hit.imageSrc) {
+            this.image = this.sprites.hit.imageSrc;
+            this.framesMax = this.sprites.hit.framesMax;
+            this.frameX = 0;
+          }
+          break;
+          
+          case 'death':
+            if (this.image !== this.sprites.death.imageSrc) {
+              this.image = this.sprites.death.imageSrc;
+              this.framesMax = this.sprites.death.framesMax;
+              this.frameX = 0;
+            }
+            break;
+        
 
   }
 

@@ -44,6 +44,8 @@ class Enemy extends Animations {
     this.frameY = 0;
     this.gameFrame = 0;
     this.staggerFrames = 7;
+    this.health = enemyHealth;
+    this.dead = false; 
     
     
     for (let animation in this.animations) {
@@ -79,7 +81,9 @@ class Enemy extends Animations {
   }
 
   update() {
-    this.animateFrames(); 
+    if (this.dead === false) {
+    this.animateFrames();
+    }
 
 
     image(this.image, this.position.x, this.position.y, this.playerWidth, this.playerHeight, this.frameX * this.playerWidth , this.frameY * this.playerHeight , this.playerWidth, this.playerHeight );
@@ -106,11 +110,34 @@ class Enemy extends Animations {
       this.isAttacking = false; 
     }, 100);
   }
+
+  takeHit() {
+    this.health -= 10; 
+    if (this.health <= 0 ) {
+      this.switchanimation('death'); 
+    }
+    else {
+      this.switchanimation('hit'); 
+
+    }
+  }
   
   switchanimation(animation) {
+
+    if (this.image === this.animations.death.imageSrc) {
+      if (this.frameX === this.animations.death.framesMax - 1) 
+        this.dead = true; 
+        return;
+    }
+
     if (this.image === this.animations.defaultAttack1.imageSrc && this.frameX < this.animations.defaultAttack1.framesMax - 1) {
+      return;
+    }
+
+    if (this.image === this.animations.hit.imageSrc && this.frameX < this.animations.hit.framesMax - 1) {
       return; 
     }
+
     switch (animation) {
       case 'idle':
         if (this.image !== this.animations.idle.imageSrc) {
@@ -162,6 +189,23 @@ class Enemy extends Animations {
             this.frameX = 0;
           break;
         }
+
+        case 'death':
+          if (this.image !== this.animations.death.imageSrc) {
+            this.image = this.animations.death.imageSrc;
+            this.framesMax = this.animations.death.framesMax;
+            this.frameX = 0;
+          }
+
+        case 'hit':
+          if (this.image !== this.animations.hit.imageSrc) {
+            this.image = this.animations.hit.imageSrc;
+            this.framesMax = this.animations.hit.framesMax;
+            this.frameX = 0;
+           }
+          
+          break;
+        
 
   }
 
