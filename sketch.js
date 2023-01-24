@@ -75,7 +75,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   
-  // state = "fight"; 
+  state = "fight"; 
   
   globalPlayerHealth = 100; 
   
@@ -408,3 +408,5 @@ function healthBar(health, maxHealth, xOffset, widthOffset) {
    
   rect(xOffset, 15, map(health, 0, maxHealth,0, 200), 15);
 }
+
+
