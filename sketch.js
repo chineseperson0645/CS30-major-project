@@ -40,7 +40,7 @@ let COLS = 35; //x axis (in reality)
 let grid;
 let cellWidth;
 let cellHeight;
-p5.disableFriendlyErrors = true; //for performance, activate at launch
+// p5.disableFriendlyErrors = true; //for performance, activate at launch
 
 // CHANGE PLAYER X AND Y TO CHANGE WHERE PLAYER SPAWS (COULD BE USEFUL FOR TELEPORTATION AND OTHERS IN FUTURE)
 let playerX = 16;
@@ -144,14 +144,16 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   state = "fight"; 
 
-  globalPlayerHealth = random(59, 92);
+  // if (state === "grid"){
+  //   gameGrid();
+  // } 
 
+  globalPlayerHealth = random(59, 92);
   createCanvas(1920, 1076);
   if (state === "start1"){
     startScreen();
   }
  
-  
   playerEx = new Player({
     velocity: {
       x: 0,
@@ -269,6 +271,7 @@ function draw() {
   if (state === "fight") {
     background(220);
     image(bgImage, 0, 0, width, height);
+    console.log("Aj reached");
     
     
     //Class Class
