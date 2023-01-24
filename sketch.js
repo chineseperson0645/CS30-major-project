@@ -205,12 +205,22 @@ function draw() {
     //Enemy Health Bar
     healthBar(enemyHealth, maxHP, width - 410, 400); 
     
-  
+    //Enemy Movement
     
+    if (playerEx.position.x < shinso.position.x) {
+      shinso.position.x -= 3;
+      shinso.switchanimation('runback');
+    }
+
+    else if (playerEx.position.x > shinso.position.x) {
+      shinso.position.x += 3;
+      shinso.switchanimation('run');
+
+    }
 
     if (keys.a.pressed === true && lastKeys === "a") {
       playerEx.velocity.x = -5;
-      playerEx.switchSprite('runback'); 
+      playerEx.switchSprite('runback');
     
     }
     else if (keys.d.pressed === true && lastKeys === "d"){
