@@ -75,7 +75,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   
-  state = "fight"; 
+  // state = "fight"; 
   
   globalPlayerHealth = 100; 
   
