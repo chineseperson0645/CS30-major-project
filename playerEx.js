@@ -71,8 +71,8 @@ class Player extends Sprite {
   display() {
 
     if (this.isAttacking) {
-      // noStroke(); 
-      // noFill(); 
+      noStroke(); 
+      noFill(); 
       rect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
     }
      

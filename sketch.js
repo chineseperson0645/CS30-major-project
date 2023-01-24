@@ -31,6 +31,9 @@ let idleb;
 let attackstate;
 let shinso;
 let followDistance;
+let globalPlayerHealth;
+let maxHp; 
+
 
 function preload() {
   //Player Sprite Sheets
@@ -65,8 +68,9 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  // state = "fight"; 
- 
+  state = "fight"; 
+  globalPlayerHealth = 100; 
+  maxHP = 100; 
   
   playerEx = new Player({
     velocity: {
@@ -177,19 +181,26 @@ function setup() {
 }
 
 function draw() {
+
+  
   if (state === "fight") {
-    background(220);
-    image(bgImage, 0, 0, width, height);
+  background(220);
+  image(bgImage, 0, 0, width, height);
+  
+
     
     
-    //Class Class
+    // Class 
     playerEx.update(); 
     playerEx.display();
 
     shinso.update(); 
     shinso.display();
+
+    healthBar(globalPlayerHealth, maxHP, 10); 
     
   
+    
 
     if (keys.a.pressed === true && lastKeys === "a") {
       playerEx.velocity.x = -5;
@@ -227,12 +238,14 @@ function draw() {
     // collision detection
   if (rectCol({rectangle1: playerEx, rectangle2: shinso}) && playerEx.isAttacking) {
     playerEx.isAttacking = false; 
-    console.log("detection"); 
+    console.log("detection");
+    
   }
 
   if (rectCol({rectangle1: shinso, rectangle2: playerEx}) && shinso.isAttacking) {
     shinso.isAttacking = false;
-    console.log("hazaa"); 
+    console.log("hazaa");
+    globalPlayerHealth -= 10; 
 
     }
   }
@@ -298,7 +311,32 @@ function rectCol({rectangle1,rectangle2}) {
   return (rectangle1.attackBox.position.x + rectangle1.attackBox.width >= rectangle2.position.x && rectangle1.attackBox.position.x <= rectangle2.position.x + rectangle2.width && rectangle1.attackBox.position.y + rectangle1.attackBox.height >= rectangle2.position.y && rectangle1.attackBox.position.y <= rectangle2.position.y + rectangle2.height); 
 }
 
-function healthBar(health, maxHealth) {
+// function healthBar(health, maxHealth) {
+//   stroke(0); 
+//   strokeWeight(4);
+//   noFill(); 
+//   rect(width/2 - 100, 380, 200, 15); 
+//   noStroke(); 
+//   fill("red"); 
+//   rect(width/2 - 100, 380, health, 15);
+// }
+
+function healthBar(health, maxHealth, xOffset) {
   stroke(0); 
-  stokeWeight(4); 
+  strokeWeight(7); 
+  noFill(); 
+  rect(xOffset, 15, 200, 15); 
+  noStroke(); 
+  if(health >= 80) {
+    fill("green"); 
+  }
+  if (health <= 80) {
+    fill("yellow");
+  }
+
+ if (health <= 30) {
+    fill("red"); 
+  }
+   
+  rect(xOffset, 15, map(health, 0, maxHealth,0, 200), 15);
 }
