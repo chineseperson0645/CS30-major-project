@@ -224,16 +224,16 @@ function keyPressed() {
           grid[playerY][playerX] = "player";
         }
         else if (grid[playerY-1][playerX] === 70){ 
-          gridMusic1.stop();
-          bossMusic.remove();
-          bossMusic.setVolume(0.5);
-          bossMusic.play();
-          bossMusic.loop();
-          state = "fight"; 
-          console.log("state should be fight");
-          // creditsVideo = createVideo(['assets(world)/credit.mp4'], creditsVideoLoad);
-          // creditsVideo.play();
-          // creditsVideo.onended(creditsVideoRemove); //onended calls a callback function at the end of the duration of the media.
+          // gridMusic1.stop();
+          // bossMusic.remove();
+          // bossMusic.setVolume(0.5);
+          // bossMusic.play();
+          // bossMusic.loop();
+          // state = "fight"; 
+          // console.log("state should be fight");
+          creditsVideo = createVideo(['assets(world)/credit.mp4'], creditsVideoLoad);
+          creditsVideo.play();
+          creditsVideo.onended(creditsVideoRemove); //onended calls a callback function at the end of the duration of the media.
         }
       }
     

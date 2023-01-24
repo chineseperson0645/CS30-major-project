@@ -153,6 +153,7 @@ function preload() {
   fireSound = loadSound("assets(world)/sound/fire.wav");
   gridMusic1 = loadSound("assets(world)/sound/gridmusic.wav");
   bossMusic = loadSound("assets(world)/sound/bossmusic.wav");
+  finishMusic = loadSound("assets(world)/sound/finishmusic.wav");
 }
 
 function setup() {

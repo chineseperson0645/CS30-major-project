@@ -98,9 +98,13 @@ function creditsVideoLoad() {
     creditsVideo.noLoop();
     creditsVideo.volume();
     creditsVideo.autoplay(false);
+    finishMusic.play();
 }
 function creditsVideoRemove(){
     image(lastImg, 0, 0, width, height+4);
+    //Img is being shoved into grid
+    // COLS = 1;
+    // ROWS = 1;
     creditsVideo.remove();
     console.log("be gone");
   }
