@@ -32,7 +32,8 @@ let attackstate;
 let shinso;
 let followDistance;
 let globalPlayerHealth;
-let maxHp; 
+let maxHp;
+let enemyHealth; 
 
 
 function preload() {
@@ -70,7 +71,8 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   state = "fight"; 
   globalPlayerHealth = 100; 
-  maxHP = 100; 
+  maxHP = 100;
+  enemyHealth = 200; 
   
   playerEx = new Player({
     velocity: {
@@ -197,7 +199,11 @@ function draw() {
     shinso.update(); 
     shinso.display();
 
-    healthBar(globalPlayerHealth, maxHP, 10); 
+    //Player Health Bar
+    healthBar(globalPlayerHealth, maxHP, 10, 200);
+
+    //Enemy Health Bar
+    healthBar(enemyHealth, maxHP, width - 410, 400); 
     
   
     
@@ -239,7 +245,7 @@ function draw() {
   if (rectCol({rectangle1: playerEx, rectangle2: shinso}) && playerEx.isAttacking) {
     playerEx.isAttacking = false; 
     console.log("detection");
-    
+    enemyHealth -= 10; 
   }
 
   if (rectCol({rectangle1: shinso, rectangle2: playerEx}) && shinso.isAttacking) {
@@ -321,11 +327,11 @@ function rectCol({rectangle1,rectangle2}) {
 //   rect(width/2 - 100, 380, health, 15);
 // }
 
-function healthBar(health, maxHealth, xOffset) {
+function healthBar(health, maxHealth, xOffset, widthOffset) {
   stroke(0); 
   strokeWeight(7); 
   noFill(); 
-  rect(xOffset, 15, 200, 15); 
+  rect(xOffset, 15, widthOffset, 15); 
   noStroke(); 
   if(health >= 80) {
     fill("green"); 
