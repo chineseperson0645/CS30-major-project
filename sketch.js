@@ -50,6 +50,7 @@ function preload() {
   jumpDown = loadImage("assets/Down.png"); 
   jumpupb = loadImage("assets/Upb.png");
   playerHit = loadImage("assets/Hurt.png");
+  playerDeath = loadImage("assets/Dead.png");
 
   //Enemy Sprite Sheets 
   enemeyIdle = loadImage("assetsE/Idle.png");
@@ -130,7 +131,10 @@ function setup() {
         framesMax: 2
       },
 
-     
+      death: {
+        imageSrc: playerDeath, 
+        framesMax: 4
+      },
       
 
     }

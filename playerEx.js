@@ -173,8 +173,17 @@ class Player extends Sprite {
             this.image = this.sprites.hit.imageSrc;
             this.framesMax = this.sprites.hit.framesMax;
             this.frameX = 0;
+          }
           break;
-        }
+          
+          case 'death':
+            if (this.image !== this.sprites.death.imageSrc) {
+              this.image = this.sprites.death.imageSrc;
+              this.framesMax = this.sprites.death.framesMax;
+              this.frameX = 0;
+            }
+            break;
+        
 
   }
 
