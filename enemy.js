@@ -109,8 +109,13 @@ class Enemy extends Animations {
   
   switchanimation(animation) {
     if (this.image === this.animations.defaultAttack1.imageSrc && this.frameX < this.animations.defaultAttack1.framesMax - 1) {
+      return;
+    }
+
+    if (this.image === this.animations.hit.imageSrc && this.frameX < this.animations.hit.framesMax - 1) {
       return; 
     }
+
     switch (animation) {
       case 'idle':
         if (this.image !== this.animations.idle.imageSrc) {
@@ -162,6 +167,23 @@ class Enemy extends Animations {
             this.frameX = 0;
           break;
         }
+
+        case 'death':
+          if (this.image !== this.animations.death.imageSrc) {
+            this.image = this.animations.death.imageSrc;
+            this.framesMax = this.animations.death.framesMax;
+            this.frameX = 0;
+          }
+
+        case 'hit':
+          if (this.image !== this.animations.hit.imageSrc) {
+            this.image = this.animations.hit.imageSrc;
+            this.framesMax = this.animations.hit.framesMax;
+            this.frameX = 0;
+           }
+          
+          break;
+        
 
   }
 

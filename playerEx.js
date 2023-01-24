@@ -111,6 +111,11 @@ class Player extends Sprite {
     if (this.image === this.sprites.defaultAttack1.imageSrc && this.frameX < this.sprites.defaultAttack1.framesMax - 1) {
       return; 
     }
+
+    if (this.image === this.sprites.hit.imageSrc && this.frameX < this.sprites.hit.framesMax - 1) {
+      return; 
+    }
+
     switch (sprite) {
       case 'idle':
         if (this.image !== this.sprites.idle.imageSrc) {
@@ -159,6 +164,14 @@ class Player extends Sprite {
           if (this.image !== this.sprites.defaultAttack1.imageSrc) {
             this.image = this.sprites.defaultAttack1.imageSrc;
             this.framesMax = this.sprites.defaultAttack1.framesMax;
+            this.frameX = 0;
+          break;
+        }
+
+        case 'hit':
+          if (this.image !== this.sprites.hit.imageSrc) {
+            this.image = this.sprites.hit.imageSrc;
+            this.framesMax = this.sprites.hit.framesMax;
             this.frameX = 0;
           break;
         }
