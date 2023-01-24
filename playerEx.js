@@ -44,6 +44,7 @@ class Player extends Sprite {
     this.frameY = 0;
     this.gameFrame = 0;
     this.staggerFrames = 7;
+    this.health = globalPlayerHealth; 
     
     
     for (let sprite in this.sprites) {
@@ -105,6 +106,17 @@ class Player extends Sprite {
     setTimeout(() => {
       this.isAttacking = false; 
     }, 100);
+  }
+
+  takeHit() {
+    this.health -= 10; 
+    if (this.health <= 0 ) {
+      this.switchSprite('death'); 
+    }
+    else {
+      this.switchSprite('hit'); 
+
+    }
   }
   
   switchSprite(sprite) {

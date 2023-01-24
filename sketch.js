@@ -34,7 +34,8 @@ let followDistance;
 let globalPlayerHealth;
 let maxHp;
 let enemyHealth; 
-
+let attackInterval = 1000; 
+let lastAttackTime = 0;
 
 function preload() {
   //Player Sprite Sheets
@@ -133,7 +134,7 @@ function setup() {
 
       death: {
         imageSrc: playerDeath, 
-        framesMax: 4
+        framesMax: 1
       },
       
 
@@ -211,15 +212,18 @@ function draw() {
   background(220);
   image(bgImage, 0, 0, width, height);
   
-    //Check if game ends
+    console.log(shinso.health); 
+  
+    // Check if the enemy or player has died
+    if (shinso.health <= 0) {
+      shinso.switchanimation("death"); 
+    }
 
-    if (globalPlayerHealth < 0) {
-      //loseGame()
+    if (playerEx.health <= 0) {
+      playerEx.switchSprite("death");
+      shinso.dead =true; 
     }
-    if (enemyHealth < 0) {
-      shinso.velocity.x = 0; 
-      shinso.switchanimation('death');
-    }
+    
 
     
     
@@ -231,33 +235,38 @@ function draw() {
     shinso.display();
 
     //Player Health Bar
-    healthBar(globalPlayerHealth, maxHP, 10, 200);
+    healthBar(playerEx.health, maxHP, 10, 200);
 
     //Enemy Health Bar
-    healthBar(enemyHealth, maxHP, width - 410, 400); 
+    healthBar(shinso.health, maxHP, width - 410, 400); 
     
     //Enemy Movement
-    if (enemyHealth > 0) {
-    if (getDistance(playerEx.position.x, playerEx.position.y, shinso.position.x,shinso.position.y) < 40) {
-      // shinso.attack();
-      setTimeout(() => {
-      shinso.attack() = false;
-      }, 300);
-    }
+    if (shinso.health > 0 && shinso.dead === false) {
+      if (getDistance(playerEx.position.x, playerEx.position.y, shinso.position.x,shinso.position.y) < 40) {
+        // shinso.attack();
 
-    else if (playerEx.position.x <= shinso.position.x) {
-      shinso.position.x -= 3;
-      shinso.switchanimation('runback');
-    }
+        if (millis() - lastAttackTime >= attackInterval) {
+          shinso.attack();
+          lastAttackTime = millis();
+      }
+        
+        
+      }
+      
 
-    else if (playerEx.position.x >= shinso.position.x) {
-      shinso.position.x += 3;
-      shinso.switchanimation('run');
+      if (playerEx.position.x <= shinso.position.x) {
+        shinso.position.x -= 3;
+        shinso.switchanimation('runback');
+      }
+
+      if (playerEx.position.x >= shinso.position.x) {
+        shinso.position.x += 3;
+        shinso.switchanimation('run');
     }
   }
     //
 
-    console.log(getDistance(playerEx.position.x, playerEx.position.y, shinso.position.x,shinso.position.y));
+    // console.log(getDistance(playerEx.position.x, playerEx.position.y, shinso.position.x,shinso.position.y));
 
     
 
@@ -298,16 +307,17 @@ function draw() {
     // collision detection
   if (rectCol({rectangle1: playerEx, rectangle2: shinso}) && playerEx.isAttacking) {
     playerEx.isAttacking = false; 
-    console.log("detection");
-    enemyHealth -= 10;
-    shinso.switchanimation('hit');
+    // console.log("detection");
+    // enemyHealth -= 10;
+    // shinso.switchanimation('hit');
+    shinso.takeHit(); 
   }
 
   if (rectCol({rectangle1: shinso, rectangle2: playerEx}) && shinso.isAttacking) {
     shinso.isAttacking = false;
-    console.log("hazaa");
-    playerEx.switchSprite('hit');
-    globalPlayerHealth -= 10; 
+    // console.log("hazaa");
+    // playerEx.switchSprite('hit');
+    playerEx.takeHit(); 
 
     }
   }
