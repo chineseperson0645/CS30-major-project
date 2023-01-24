@@ -1,11 +1,5 @@
 // Surrounding.JS
 
-//Health Bar
-// if (potionInteract === true){
-//   globalPlayerHealth + 20;
-//   displayImg(globalPlayerHealth)
-// }
-
 //General Explaination of Functions:
 // if (grid[playerY][playerX+1] === 3){ 
 //   grid[playerY][playerX] = 3; 

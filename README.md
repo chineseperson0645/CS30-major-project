@@ -3,7 +3,6 @@
 This entire repository is dedicated towards our CS30 Major Project.
 
 All portions of this work is dedicated towards education uses/purposes ONLY and EXCLUSIVELY.
-All portions of this work containing copyrighted material is used ONLY and EXCLUSIVELY for educational purposes within an an academic context.
 No portion of this work is intended towards any amounts of copyright infringement.
 All copyrighted material within this work belongs exclusively to the copyright owners.
 

@@ -618,6 +618,12 @@
 //   grid[playerY][playerX] = "player"; 
 // }
 
+//Health Bar
+// if (potionInteract === true){
+//   globalPlayerHealth + 20;
+//   displayImg(globalPlayerHealth)
+// }
+
 // function hopOffSYNN3(){ // S
 //   grid[playerY][playerX] = 3; 
 //   playerY++; 
