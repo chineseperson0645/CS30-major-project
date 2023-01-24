@@ -406,6 +406,22 @@
 
 //"dFirst" was implemented so that our first if statement would be called first.
 
+// function createRandom2dArray(COLS, ROWS) {
+//   let emptyArray = [];
+//   for (let y=0; y<ROWS; y++) {
+//     emptyArray.push([]);
+//     for (let x=0; x<COLS; x++) {
+//       if (random(100) < 50) {
+//         emptyArray[y].push(1);
+//       }
+//       else {
+//         emptyArray[y].push(3);
+//       }
+//     }
+//   }
+//   return emptyArray;
+// }
+
 // Orginal Design
 // else if (grid[playerY][playerX+1] === 23){
 //   grid[playerY][playerX] = 23; 
@@ -420,6 +436,116 @@
 //   console.log("nom");
 // }
 
+  //SO IF this spot is blank (0) update the player location (playerX++) draw in that direction with a horse
+  //last grid[px][py] is to make sure we can't eat a tree (or something) because this if statement is too general 
+  //(only conditions that needed to be met before were just if your ontop a path and if the right, or whatever direction, block is moveable.)
+
+  //So theortically, it's now, if your on a path block, if you can move onto the near path block... X
+  //NVM stratch that. The surroundCheck function should already do that for us...
+
+  //To save game data. We can run saveJSON(grid, "temp forest path")
+  //And if gameOver, gameDeath, or exit. Delete "temp forest path".
+  //Possibly use debug tool to see what's happening one step at a time.
+
+
+//Future Goal is to make all player related blocks just that block and the player (not player alone). i.e playerpath1 or 2. (starting charcter and drawn charcter)
+
+// SAMPLE //
+//if (grid[playerY][playerX] === "playerpath1" && nearPathDown === true){ //When we hit the key. Checks for if we have an image under us. If so, the following executes...
+
+// else if (grid[playerY][playerX+1] === 0) { //Allows walk over trees
+//   grid[playerY][playerX] = 0; //reset old location to white
+//   playerX++; //move
+//   grid[playerY][playerX] = "player"; //set new player location (current)
+// }
+
+// standingOn (swithch between values of walkable blocks everytime you move onto or off a block)
+// So if on block, standingOn === 1 (player ontop for ex.), if move off of block, standingOn === 2 (orginal block value)
+// Constantly changing 
+
+// function switcherPath1To2(){
+//   if (grid[playerX][playerY] === 1){
+//     if (dPressed === true){
+//       //That means playerX + 1
+//     }
+//   }
+// }
+
+// function whateverMoveableIsHere(){
+  //Essientially, if it's movable, allow player to move here.
+// }
+
+// check if s key is hit and if player was just on "playerpath1"
+// function advanceDetection() {
+//   for (let y=0; y<ROWS; y++) {
+//     for (let x=0; x<COLS; x++) {
+//       if (gird[y][x] === 1){
+//         walkableW = true;
+//       }
+//     }
+//   }
+// }
+
+//IMPLEMENT GRID DETECTION INTO DISPLAYGRID FUNCTION BECAUSE X AND Y ARE ALREADY PRE DEFIEINED.
+//OR MAKE a seperate function following it's format (i.e y<ROWS)
+
+//We'll also need to make a else if statement to check if we're beside other paths I think and draw other paths instead of just us ("player").
+//So when we hit the s key. I want to it to check simotaneously if we're going ontop of a path block or getting off one.
+//We may have to create another function to detect if we're off of the path block. I.e if we were just on grid[playerY+1][playerX] === "playerpath2". We need to make justOnPathBehindUs (or something) true.
+//Create another else if function where it sets the path image your on back into a normal path image (3 or 4)
+
+//Current problem is that it detects it nearTree (or near one) and adds the playerX or Y twice because it's also moving from whitespace.
+//If moved into a certain grid position. Player X and Y are still tracked.
+//But if nearTree is true. Draw a 10 instead of a 9. (10 can just be a tree ontop of a tree)
+
+//Does not go in order nessisarily. 
+//Just if this block is this (i.e 3), then if I mousePress this block will now be 4.
+//Thus, this doesn't mean it iterates through the entire time
+//Rather starts from the block you changed (mousePressed at 3 --> 4, itll start iterating with every mousePress from 4).
+
+//COMMIT DAILY WHEN THERES CLASS TIME
+//COMMIT DAILY WHEN THERES CLASS TIME
+
+//Ask why there is just a white line at the bottom?
+//Ask why there is just a white line at the bottom?
+//Ask why there is just a white line at the bottom?
+//Ask why there is just a white line at the bottom?
+//Ask why there is just a white line at the bottom?
+//Ask why there is just a white line at the bottom?
+//Ask why there is just a white line at the bottom?
+//(VIDEO)
+
+
+//GOALS FOR TONITE:
+
+//GET MOST SOUNDS AND MUSIC!
+//FINISH BOSS ROOM and BOSS DETECTION and BOSS ANIMATED ENGAGEMENT SCREEN.
+//GET ALL TO RUN PROPERLY (BE ABLE TO RUN THROUGH ALL SEQUENCES)!
+
+//PUT IN DIRT AND DETAIL AT THE START
+//POSSIBLY ADD MORE DETAIL TO MAP
+
+//Highlight everything and hit tab to move over
+//Highlight everything and hold shift then hit tab to move things in
+
+//Something to consider for viewers, we used fewer functions in our grid to improve performance and instead built them directly into the control functions (WASD)
+//So that they are only called once everytime a key is pressed instead of constantly being checked for in the draw loop. Hopefully saving performance.
+
+//Notes:
+// If near border or teleport blocks don't call not normal. Make teleport blocks just path images.
+// Keep the beta.JSON and build all other maps as modified copies. (because theres a border)
+// control + b to bring up sidebar
+//May need to make a sanity check: Check if the front of me still exists (Sanity check, example aviable on GOL ex.).
+
+// To Incorperate fight scenes. We could do, if the player is about to move onto a fight scene and keyPressed w or whatever
+// Play a transition video, and then go into the fight.
+
+//To implement interactables. We're going to have to do
+//Something like if one block away from potion or whatever
+//And if mousePressed. Consume potion (or health mushroom).
+//Well also have to be able to track player health globally
+//If we want to do health potions or mushrooms.
+//(Both in grid and in fight scene)
 
   // else if (grid[yPos][xPos] === 2) {
   //   grid[yPos][xPos] = 3;

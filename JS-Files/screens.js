@@ -1,31 +1,32 @@
 //Screens
 //turning autoplay off then calling .play in the same function is just still autoplay.
 
-let startVideo, transitionImg, startVideo2, ninjaVideo, startAfter, diedVideo, secondAttemptVideo, wiskerVideo;
-
+let transitionImg, creditsVideo, diedVideo, secondAttemptVideo, wiskerVideo, startVideo, startAfter, startVideo2;
 
 //Start Sequence
 function startVideoLoad() {
-    startVideo.size(1920, 1076);
-    startVideo.noLoop();
-    startVideo.volume();
-    startVideo.autoplay(false);
+  startVideo.size(1920, 1076);
+  startVideo.noLoop();
+  startVideo.volume();
+  startVideo.autoplay(false);
 }
+
 function startAfterLoad(){
-    startAfter.size(1920, 1076);
-    startAfter.noLoop();
-    startAfter.volume(1);
-    startAfter.autoplay(false);
+  startAfter.size(1920, 1076);
+  startAfter.noLoop();
+  startAfter.volume(1);
+  startAfter.autoplay(false);
 }
 function startImage(){
-    image(transitionImg, 0, 0, 1920, 1076);
-    startVideo.remove();
-    console.log("Image should be here");
-    //Ask why there is just a white line at the bottom?
+  state = "img";
+  image(transitionImg, 0, 0, 1920, 1076);
+  startVideo.remove();
+  console.log("Image should be here");
+  //Ask why there is just a white line at the bottom?
 }
 function startScreen(){
-    startVideo = createVideo(['assets(world)/SET.mp4'], startVideoLoad); 
-    startVideo.onended(startImage); //onended calls a callback function at the end of the duration of the media.
+  startVideo = createVideo(['assets(world)/SET.mp4'], startVideoLoad); 
+  startVideo.onended(startImage); //onended calls a callback function at the end of the duration of the media.
 }
 
 
@@ -48,7 +49,6 @@ function startImage2(){ // Loop back to startscreen
     console.log("Image should be here");
     secondTime = true;
 }
-
 function secondAttemptVideoLoad() { //Second Attempt Sequence Loader (called by mousePressed)
     attemp2Video.size(1920, 1076);
     attemp2Video.noLoop();
@@ -80,4 +80,19 @@ function ninjaVideoLoad() {
 }
 function removeNinjaVideo(){
     ninjaVideo.remove();
+  }
+
+
+
+//Boss Interaction
+function creditsVideoLoad() {
+    creditsVideo.size(1920, 1076);
+    creditsVideo.noLoop();
+    creditsVideo.volume();
+    creditsVideo.autoplay(false);
+}
+function creditsVideoRemove(){
+    image(lastImg, 0, 0, 1920, 1076);
+    creditsVideo.remove();
+    console.log("be gone")
   }

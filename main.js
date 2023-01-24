@@ -3,62 +3,18 @@
 // 11/17/2022
 
 //COMMIT DAILY WHEN THERES CLASS TIME
-//COMMIT DAILY WHEN THERES CLASS TIME
-//COMMIT DAILY WHEN THERES CLASS TIME
 
-//Ask why there is just a white line at the bottom?
-//Ask why there is just a white line at the bottom?
-//Ask why there is just a white line at the bottom?
-//Ask why there is just a white line at the bottom?
-//Ask why there is just a white line at the bottom?
-//Ask why there is just a white line at the bottom?
-//Ask why there is just a white line at the bottom?
-//(VIDEO)
-
-
-//GOALS FOR TONITE:
-
-//GET MOST SOUNDS AND MUSIC!
-//FINISH BOSS ROOM and BOSS DETECTION and BOSS ANIMATED ENGAGEMENT SCREEN.
-//GET ALL TO RUN PROPERLY (BE ABLE TO RUN THROUGH ALL SEQUENCES)!
-
-//PUT IN DIRT AND DETAIL AT THE START
-//POSSIBLY ADD MORE DETAIL TO MAP
-
-//Highlight everything and hit tab to move over
-//Highlight everything and hold shift then hit tab to move things in
-
-//Something to consider for viewers, we used fewer functions in our grid to improve performance and instead built them directly into the control functions (WASD)
-//So that they are only called once everytime a key is pressed instead of constantly being checked for in the draw loop. Hopefully saving performance.
-
-//Notes:
-// If near border or teleport blocks don't call not normal. Make teleport blocks just path images.
-// Keep the beta.JSON and build all other maps as modified copies. (because theres a border)
-// control + b to bring up sidebar
-//May need to make a sanity check: Check if the front of me still exists (Sanity check, example aviable on GOL ex.).
-
-// To Incorperate fight scenes. We could do, if the player is about to move onto a fight scene and keyPressed w or whatever
-// Play a transition video, and then go into the fight.
-
-//To implement interactables. We're going to have to do
-//Something like if one block away from potion or whatever
-//And if mousePressed. Consume potion (or health mushroom).
-//Well also have to be able to track player health globally
-//If we want to do health potions or mushrooms.
-//(Both in grid and in fight scene)
-
-const ROWS = 25; //y axis (in reality)
-const COLS = 35; //x axis (in reality)
+let ROWS = 25; //y axis (in reality)
+let COLS = 35; //x axis (in reality)
 let grid;
 let cellWidth;
 let cellHeight;
-// p5.disableFriendlyErrors = true; //for performance, activate at launch
+p5.disableFriendlyErrors = true; //for performance, activate at launch
 
 // CHANGE PLAYER X AND Y TO CHANGE WHERE PLAYER SPAWS (COULD BE USEFUL FOR TELEPORTATION AND OTHERS IN FUTURE)
 let playerX = 16;
 let playerY = 14;
 let globalPlayerHealth;
-
 
 let forestPath = false;
 let ninjaVillage = false;
@@ -68,7 +24,7 @@ let crater = false;
 let forestPath2 = false;
 
 let treeImg, zenImg, bottomtreeImg, houseTLImg, houseTMImg, houseTRImg, houseBLImg, houseBMImg, houseBRImg, path1Img, path2Img, fenceAMImg, fenceAM2Img, fenceDLImg, fenceDRImg, fenceBRImg, fenceBLImg,
-fenceTLImg, fenceTRImg, floorImg, wallImg, blackImg, openDoorImg, fridgeImg;
+fenceTLImg, fenceTRImg, floorImg, wallImg, blackImg, openDoorImg, fridgeImg, boss1Img, boss2Img, lastImg;
 
 let forestPathJSON, ninjaVillageJSON, betaTestJSON, craterJSON, forestPath2JSON, bossJSON;
 
@@ -82,6 +38,9 @@ function preload() {
   potionImg = loadImage('assets(world)/potion.gif');
   teacherImg = loadImage('assets(world)/Sensei.gif');
   whiteImg = loadImage('assets(world)/white.png');
+
+  boss1Img = loadImage('assets(world)/boss1.png');
+  boss2Img = loadImage('assets(world)/boss2.png');
 
   houseTLImg = loadImage('assets(world)/houseTL.png');
   houseTMImg = loadImage('assets(world)/houseTM.png');
@@ -115,18 +74,21 @@ function preload() {
   forestPath2JSON = loadJSON('JSON-Maps(world)/forestpath2.json');
   ninjaVillageJSON = loadJSON('JSON-Maps(world)/ninja.json');
   houseJSON = loadJSON('JSON-Maps(world)/house.json');
-  // bossJSON = loadJSON('JSON-Maps(world)/boss.json');
+  bossJSON = loadJSON('JSON-Maps(world)/boss.json');
   craterJSON = loadJSON('JSON-Maps(world)/crater.json');
 
   transitionImg = loadImage('assets(world)/SET(IMG).png');
+  lastImg = loadImage("assets(world)/ajface.png")
 }
 
-let state = "grid";
+let state = "start1";
 
 function setup() {
+globalPlayerHealth = random(59, 92);
+
   createCanvas(1920, 1076);
-  if (state === "grid"){
-    gameGrid();
+  if (state === "start1"){
+    startScreen();
   }
 }
 
@@ -222,6 +184,16 @@ function displayGrid(grid) {
 
 
 
+      if (grid[y][x] === 70) { //Boss 1
+        image(path1Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+        image(boss1Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+      if (grid[y][x] === 71) { //Boss 2
+        image(path1Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+        image(boss2Img, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
+
+      
       
       if (grid[y][x] === "player") {
         image(zenImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
@@ -279,19 +251,3 @@ function create2dArray(COLS, ROWS) {
   }
   return emptyArray;
 }
-
-// function createRandom2dArray(COLS, ROWS) {
-//   let emptyArray = [];
-//   for (let y=0; y<ROWS; y++) {
-//     emptyArray.push([]);
-//     for (let x=0; x<COLS; x++) {
-//       if (random(100) < 50) {
-//         emptyArray[y].push(1);
-//       }
-//       else {
-//         emptyArray[y].push(3);
-//       }
-//     }
-//   }
-//   return emptyArray;
-// }

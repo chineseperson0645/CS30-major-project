@@ -38,19 +38,7 @@ function surroundingCheck(){
 // 68 === D
 // Spacebar === 32
 
-  //SO IF this spot is blank (0) update the player location (playerX++) draw in that direction with a horse
-  //last grid[px][py] is to make sure we can't eat a tree (or something) because this if statement is too general 
-  //(only conditions that needed to be met before were just if your ontop a path and if the right, or whatever direction, block is moveable.)
 
-  //So theortically, it's now, if your on a path block, if you can move onto the near path block... X
-  //NVM stratch that. The surroundCheck function should already do that for us...
-
-  //To save game data. We can run saveJSON(grid, "temp forest path")
-  //And if gameOver, gameDeath, or exit. Delete "temp forest path".
-  //Possibly use debug tool to see what's happening one step at a time.
-
-
-//Future Goal is to make all player related blocks just that block and the player (not player alone). i.e playerpath1 or 2. (starting charcter and drawn charcter)
 
 // camera.x = player.x;
 
@@ -110,7 +98,6 @@ let haventInteractWiskers = true;
 function keyPressed() {
   if (state === "start1"){
     startVideo.play();
-    state = "none";
   }
   if (state === "grid"){
     surroundingCheck();
@@ -141,7 +128,7 @@ function keyPressed() {
           }
         }
         else if (grid[playerY][playerX+1] === 96 && haventInteract1 === true && crater === true){ //Ninja Interact
-          ninjaVideo = createVideo(['assets(world)/Ninja.mp4'], startAfterLoad);
+          ninjaVideo = createVideo(['assets(world)/Ninja.mp4'], ninjaVideoLoad);
           ninjaVideo.play();
           ninjaVideo.onended(removeNinjaVideo); //onended calls a callback function at the end of the duration of the media.
           haventInteract1 = false;
@@ -176,8 +163,6 @@ function keyPressed() {
           }
         }
       }
-
-
 
       //There is a tp block in front of us.
       //This should detect if I'm ontop of a playerpath and if I'm beside a Right path. If so, it'll ask if I hit my D key and also which block I'm
@@ -282,10 +267,17 @@ function keyPressed() {
           forestPath2 = false;
           bossRoom = true;
           grid[playerY][playerX] = 3;
-          // grid = bossRoomJSON;
+          grid = bossJSON;
           playerX = 17;
           playerY = 23;
           grid[playerY][playerX] = "player";
+        }
+        else if (grid[playerY-1][playerX] === 70){ 
+          state = "fight"; //Add when fully implemented
+          console.log("state should be fight");
+          creditsVideo = createVideo(['assets(world)/credit.mp4'], creditsVideoLoad);
+          creditsVideo.play();
+          creditsVideo.onended(creditsVideoRemove); //onended calls a callback function at the end of the duration of the media.
         }
       }
     
@@ -325,54 +317,19 @@ function keyPressed() {
           grid[playerY][playerX] = "player"; 
           console.log("Outside Ninja House (S)");
         }
+        if (grid[playerY+1][playerX] === 95 && bossRoom === true){ //Teleport Detection
+          bossRoom = false;
+          forestPath2 = true;
+          grid[playerY][playerX] = 3;
+          grid = forestPath2JSON; //REMEBER TO PUT JSON AT THE END!
+          playerX = 27; 
+          playerY = 2;
+          grid[playerY][playerX] = "player"; 
+          console.log("Outside Ninja House (S)");
+        }
       }
     }
   }
 
-// SAMPLE //
-//if (grid[playerY][playerX] === "playerpath1" && nearPathDown === true){ //When we hit the key. Checks for if we have an image under us. If so, the following executes...
+//Test if we can go back to ninja village and such after forestPath2
 
-// else if (grid[playerY][playerX+1] === 0) { //Allows walk over trees
-//   grid[playerY][playerX] = 0; //reset old location to white
-//   playerX++; //move
-//   grid[playerY][playerX] = "player"; //set new player location (current)
-// }
-
-// standingOn (swithch between values of walkable blocks everytime you move onto or off a block)
-// So if on block, standingOn === 1 (player ontop for ex.), if move off of block, standingOn === 2 (orginal block value)
-// Constantly changing 
-
-// function switcherPath1To2(){
-//   if (grid[playerX][playerY] === 1){
-//     if (dPressed === true){
-//       //That means playerX + 1
-//     }
-//   }
-// }
-
-// function whateverMoveableIsHere(){
-  //Essientially, if it's movable, allow player to move here.
-// }
-
-// check if s key is hit and if player was just on "playerpath1"
-// function advanceDetection() {
-//   for (let y=0; y<ROWS; y++) {
-//     for (let x=0; x<COLS; x++) {
-//       if (gird[y][x] === 1){
-//         walkableW = true;
-//       }
-//     }
-//   }
-// }
-
-//IMPLEMENT GRID DETECTION INTO DISPLAYGRID FUNCTION BECAUSE X AND Y ARE ALREADY PRE DEFIEINED.
-//OR MAKE a seperate function following it's format (i.e y<ROWS)
-
-//We'll also need to make a else if statement to check if we're beside other paths I think and draw other paths instead of just us ("player").
-//So when we hit the s key. I want to it to check simotaneously if we're going ontop of a path block or getting off one.
-//We may have to create another function to detect if we're off of the path block. I.e if we were just on grid[playerY+1][playerX] === "playerpath2". We need to make justOnPathBehindUs (or something) true.
-//Create another else if function where it sets the path image your on back into a normal path image (3 or 4)
-
-//Current problem is that it detects it nearTree (or near one) and adds the playerX or Y twice because it's also moving from whitespace.
-//If moved into a certain grid position. Player X and Y are still tracked.
-//But if nearTree is true. Draw a 10 instead of a 9. (10 can just be a tree ontop of a tree)
