@@ -1,14 +1,19 @@
 class Sprite {
-  constructor({position, imageSrc, framesMax = 1, sprites}){
+  constructor({position, imageSrc, framesMax = 1, sprites}){ //passes through everthing in the constructor to be used as variables later
+    //Where the player is located 
     this.position = position;
     this.width = 96; 
     this.height = 96;
+    //Creates new image
     this.image = new Image();
-    this.image.src = imageSrc; 
+    //Contains the image source
+    this.image.src = imageSrc;
+    //Max ammount of frames
     this.framesMax = framesMax;
     
     
   }
+  //Animates all of the frames for each sprite
   animateFrames () {
     if (this.gameFrame % this.staggerFrames === 0) {
       if (this.frameX < this.framesMax - 1) {
@@ -25,10 +30,10 @@ class Sprite {
 
 
 
-
+//Player class inherites the sprite class 
 class Player extends Sprite {
   constructor({velocity, position, offset, imageSrc, framesMax =1 , sprites}){
-    
+    //Takes varibales from sprite
     super({position, imageSrc, framesMax, sprites});
 
   
@@ -37,41 +42,47 @@ class Player extends Sprite {
     this.sprites = sprites; 
     this.width = 96; 
     this.height = 96;
+    //Checks what key was last pressed
     this.lastKeys;
     this.playerWidth = 96; 
-    this.playerHeight = 96; 
+    this.playerHeight = 96;
+    //Frames that will times the png to create an animation 
     this.frameX = 0; 
     this.frameY = 0;
+    //Increases as time goes on 
     this.gameFrame = 0;
+    //Delays the animation
     this.staggerFrames = 7;
-    this.health = globalPlayerHealth; 
+    //Player health
+    this.health = globalPlayerHealth;
+    //Part of character ending 
     this.dead = false; 
 
-    
+    //Makes object for sprites to be displayed
     for (let sprite in this.sprites) {
       sprites[sprite].image = new Image();
       sprites[sprite].image.src = sprites[sprite].imageSrc;
     }
 
 
-
+    //If another entity is in attack box will be damaged
     this.attackBox = {
       position: {
         x: this.position.x,
         y: this.position.y
       },
-      
+      //How far away from enemy
       offset,
       width: 50, 
       height: 50
     };
+    //Starts attack
     this.isAttacking; 
   
   }
  
 
   display() {
-
     if (this.isAttacking) {
       noStroke(); 
       noFill(); 
@@ -81,21 +92,23 @@ class Player extends Sprite {
   }
 
   update() {
+        //Checks and see if player is dead
     if (this.dead === false) {
       this.animateFrames();
       }
 
-
+      //Displays idle image
     image(this.image, this.position.x, this.position.y, this.playerWidth, this.playerHeight, this.frameX * this.playerWidth , this.frameY * this.playerHeight , this.playerWidth, this.playerHeight );
     
-   
+    //Makes sure to follow player
     this.attackBox.position.x = this.position.x - this.attackBox.offset.x;
     this.attackBox.position.y = this.position.y - this.attackBox.offset.y; 
 
-
+    //Position and velocity are connected
     this.position.x += this.velocity.x; 
     this.position.y += this.velocity.y;
-
+    
+    //Boundries
     if (this.position.y + this.playerHeight + this.velocity.y >= height) {
       this.velocity.y = 0; 
     }
@@ -103,6 +116,7 @@ class Player extends Sprite {
       this.velocity.y += gravity;
     }
   }
+  //Launches attack
   attack() {
     this.switchSprite('attack1'); 
     this.isAttacking = true;
@@ -111,6 +125,7 @@ class Player extends Sprite {
     }, 100);
   }
 
+  //Does damage
   takeHit() {
     this.health -= 10; 
     if (this.health <= 0 ) {
@@ -122,6 +137,7 @@ class Player extends Sprite {
     }
   }
   
+  //Switches between sprites
   switchSprite(sprite) {
 
     if (this.image === this.sprites.death.imageSrc) {

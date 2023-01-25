@@ -1,14 +1,19 @@
 class Animations {
-  constructor({position, imageSrc, framesMax = 1, animations}){
+  constructor({position, imageSrc, framesMax = 1, animations}){ //Passes through variables
+    //Sets postion 
     this.position = position;
     this.width = 128; 
     this.height = 128;
+    //Makes new image
     this.image = new Image();
+    //Grabs image source
     this.image.src = imageSrc; 
+    //Max ammount of frames
     this.framesMax = framesMax;
     
      
   }
+  //Cycles through sprites in sprite sheet
   animateFrames () {
     if (this.gameFrame % this.staggerFrames === 0) {
       if (this.frameX < this.framesMax - 1) {
@@ -25,10 +30,10 @@ class Animations {
 
 
 
-
+//Enemy class that inherites the Animation class
 class Enemy extends Animations {
   constructor({velocity, position, offset, imageSrc, framesMax =1 , animations}){
-    
+    //Grabs varibles from Animations
     super({position, imageSrc, framesMax, animations});
 
   
@@ -39,28 +44,33 @@ class Enemy extends Animations {
     this.height = 128;
     this.lastKeys;
     this.playerWidth = 128; 
-    this.playerHeight = 128; 
+    this.playerHeight = 128;
+    //Allows to cyle through sprite sheet
     this.frameX = 0; 
     this.frameY = 0;
+    //How many frames are going
     this.gameFrame = 0;
+    //Delays animation
     this.staggerFrames = 7;
+    //Health
     this.health = enemyHealth;
+    //Checks dead is true
     this.dead = false; 
     
-    
+    //Makes object for animations
     for (let animation in this.animations) {
       animations[animation].image = new Image();
       animations[animation].image.src = animations[animation].imageSrc;
     }
 
 
-
+    //Where the other players hitbox has to be in to recive damage
     this.attackBox = {
       position: {
         x: this.position.x,
         y: this.position.y
       },
-      
+      //Follows character
       offset,
       width: 50, 
       height: 50
@@ -73,6 +83,7 @@ class Enemy extends Animations {
   display() {
 
     if (this.isAttacking) {
+      //attack box
       noStroke(); 
       noFill(); 
       rect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
@@ -85,24 +96,26 @@ class Enemy extends Animations {
     this.animateFrames();
     }
 
-
+    //Draws player
     image(this.image, this.position.x, this.position.y, this.playerWidth, this.playerHeight, this.frameX * this.playerWidth , this.frameY * this.playerHeight , this.playerWidth, this.playerHeight );
     
-   
+   //Follows player but slightly off
     this.attackBox.position.x = this.position.x - this.attackBox.offset.x;
     this.attackBox.position.y = this.position.y - this.attackBox.offset.y; 
 
-
+    //Postion and velocity connected
     this.position.x += this.velocity.x; 
     this.position.y += this.velocity.y;
-
+    //Makes sure player does fall off screen
     if (this.position.y + this.playerHeight + this.velocity.y >= height) {
       this.velocity.y = 0; 
     }
     else {
+      //Pushes player down acting like actual gravity
       this.velocity.y += gravity;
     }
   }
+  //Attack function
   attack() {
     this.switchanimation('attack1'); 
     this.isAttacking = true;
@@ -110,7 +123,7 @@ class Enemy extends Animations {
       this.isAttacking = false; 
     }, 100);
   }
-
+  //Take hit function
   takeHit() {
     this.health -= 10; 
     if (this.health <= 0 ) {
@@ -121,7 +134,7 @@ class Enemy extends Animations {
 
     }
   }
-  
+  //switches through animations
   switchanimation(animation) {
 
     if (this.image === this.animations.death.imageSrc) {
