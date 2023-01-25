@@ -25,6 +25,7 @@ To Sum Up:
 
 ## AJ
 I would probably tell myself to...
+If I were to start this project from scratch again, I would stay much more organized with my code. There were many times when my code became messy and hard to locate. The second would be to trust the process instead of being hesitant to change things up when the slightest things are not going the way I want them to. Third, I would tell myself to just have fun with it, there were times when I wanted to get the basics done that would include the boring stuff too that would kill the fun in it. Fourth, I think I was very ambitious in our expectations and goals however, I greatly underestimated the time it takes to learn these functions and new concepts so I had to cut some corners. Overall I enjoyed the experience of learning new ideas accompanied by a project that I am proud to put my name beside. 
 
 
 
@@ -32,6 +33,8 @@ I would probably tell myself to...
 
 ## Michael
 I would probably tell myself to...
+-Yes
 
 ## AJ
 I would probably tell myself to...
+-Needed to add mulitple moves
