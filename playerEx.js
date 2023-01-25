@@ -137,7 +137,7 @@ class Player extends Sprite {
     }
   }
   
-  //Swithces between sprites
+  //Switches between sprites
   switchSprite(sprite) {
 
     if (this.image === this.sprites.death.imageSrc) {

@@ -80,7 +80,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   //controls what point we are in the game and activates all main code
-  state = "fight"; 
+  // state = "fight"; 
   
   //Player Health
   globalPlayerHealth = 100; 
