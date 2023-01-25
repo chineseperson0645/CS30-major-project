@@ -229,10 +229,10 @@ function keyPressed() {
           // bossMusic.setVolume(0.5);
           // bossMusic.play();
           // bossMusic.loop();
-          // state = "fight"; 
+          state = "fight"; 
           // console.log("state should be fight");
-          creditsVideo = createVideo(['assets(world)/credit.mp4'], creditsVideoLoad);
-          creditsVideo.play();
+          // creditsVideo = createVideo(['assets(world)/credit.mp4'], creditsVideoLoad);
+          // creditsVideo.play();
           creditsVideo.onended(creditsVideoRemove); //onended calls a callback function at the end of the duration of the media.
         }
       }
