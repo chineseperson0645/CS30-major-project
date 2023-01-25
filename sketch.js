@@ -362,9 +362,6 @@ function draw() {
     }
     
     
-    
-    
-    
     // Class 
     playerEx.update(); 
     playerEx.display();
