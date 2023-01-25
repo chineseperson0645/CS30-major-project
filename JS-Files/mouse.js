@@ -30,10 +30,10 @@ console.log("gameGrid, grid")
 }
 
 function mousePressed() {
-  // globalPlayerHealth = 0;
-  if (globalPlayerHealth <= 0){ //For death screen. Do like if in fight state and globalPlayerHealth === 0.
-    diedVideo.play();
-  }
+  // // globalPlayerHealth = 0;
+  // if (globalPlayerHealth <= 0){ //For death screen. Do like if in fight state and globalPlayerHealth === 0.
+  //   diedVideo.play();
+  // }
   
   if (state === "img"){
     let hit = collidePointRect(mouseX, mouseY, 580, 460, 760, 240);;

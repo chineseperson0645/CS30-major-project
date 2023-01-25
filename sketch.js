@@ -43,8 +43,9 @@ let maxHp;
 let enemyHealth; 
 let attackInterval = 1000; 
 let lastAttackTime = 0;
-
-
+let dead = false; 
+let loseScreen; 
+let winScreen; 
 //Michaels Code 
 
 let ROWS = 25; //y axis (in reality)
@@ -100,6 +101,8 @@ function preload() {
   
   //Background Gifs 
   bgImage = loadImage("assets/moutian-pixel.gif");
+  winScreen = loadImage("assets/Winner.png");
+  loseScreen = loadImage("assets/Playerdeathscreen.png");
   // bgImage2 = loadImage("assets/city-pixle.gif");
  
   //Images for Grid
@@ -321,14 +324,25 @@ function draw() {
     // Check if the enemy or player has died
     if (shinso.health <= 0) { //enemy death
       shinso.switchanimation("death");
+      image(winScreen, 0,0, width, height); 
     }
 
     if (playerEx.health <= 0) {//player death
       playerEx.switchSprite("death");
-      shinso.dead =true; 
+      shinso.dead =true;
+      image(loseScreen, 0,0, width, height); 
     }
     
+    if (shinso.health <= 0) {
+      shinso.health = 0; 
+    }
 
+    if (playerEx.health <= 0) {
+      playerEx.health = 0; 
+    }
+    
+    
+    
     
     
     // Class 
@@ -368,10 +382,7 @@ function draw() {
         shinso.switchanimation('run');
     }
   }
-    //
-
-    // console.log(getDistance(playerEx.position.x, playerEx.position.y, shinso.position.x,shinso.position.y));
-
+    
     
 
 
@@ -400,27 +411,17 @@ function draw() {
       playerEx.switchSprite('Down'); 
     }
     
-    // if (shinso.velocity.y < 0) {
-    //   shinso.switchanimation('Up'); 
-    // }
-    // else if (shinso.velocity.y > 0) {
-    //   shinso.switchanimation('Down'); 
-    // }
+    
 
 
     // collision detection
   if (rectCol({rectangle1: playerEx, rectangle2: shinso}) && playerEx.isAttacking) {
     playerEx.isAttacking = false; 
-    // console.log("detection");
-    // enemyHealth -= 10;
-    // shinso.switchanimation('hit');
     shinso.takeHit(); 
   }
 
   if (rectCol({rectangle1: shinso, rectangle2: playerEx}) && shinso.isAttacking) {
     shinso.isAttacking = false;
-    // console.log("hazaa");
-    // playerEx.switchSprite('hit');
     playerEx.takeHit(); 
 
     }
@@ -489,7 +490,7 @@ function rectCol({rectangle1,rectangle2}) {
 
 function healthBar(health, maxHealth, xOffset, widthOffset) {
   stroke(0); 
-  stokeWeight(4); 
+  strokeWeight(4); 
   strokeWeight(7); 
   noFill(); 
   rect(xOffset, 15, widthOffset, 15); 
@@ -507,7 +508,7 @@ function healthBar(health, maxHealth, xOffset, widthOffset) {
     
   rect(xOffset, 15, map(health, 0, maxHealth,0, 200), 15);
 }
-}
+
 
 //Display's Grid
 function displayGrid(grid) {
@@ -656,7 +657,6 @@ function create2dArray(COLS, ROWS) {
   }
   return emptyArray;
 }
-
 
 
 

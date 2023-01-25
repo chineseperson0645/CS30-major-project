@@ -24,6 +24,12 @@ function keyPressed() {
     startVideo.play();
   }
 
+  // if (key === "a" && globalPlayerHealth <= 0 && state === "fight"|| key === "w" && globalPlayerHealth <= 0 && state === "fight"|| key === "s" && globalPlayerHealth <= 0 && state === "fight"|| key === "d" && globalPlayerHealth <= 0 && state === "fight"){ 
+  //   died();
+  //   }
+
+
+
   if (state === "grid" || state === "sound"){
     if (key === "d") { //D
       walkSound.setVolume(0.3);
